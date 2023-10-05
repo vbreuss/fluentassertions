@@ -2097,6 +2097,9 @@ namespace FluentAssertions.Primitives
         public FluentAssertions.AndConstraint<TAssertions> Be(string expected, string because = "", params object[] becauseArgs) { }
         public FluentAssertions.AndConstraint<TAssertions> BeEmpty(string because = "", params object[] becauseArgs) { }
         public FluentAssertions.AndConstraint<TAssertions> BeEquivalentTo(string expected, string because = "", params object[] becauseArgs) { }
+        public FluentAssertions.AndConstraint<TAssertions> BeEquivalentTo(string expected, FluentAssertions.Primitives.StringComparerOptions options, string because = "", params object[] becauseArgs) { }
+        public FluentAssertions.AndConstraint<TAssertions> BeEquivalentTo(string expected, System.Action<FluentAssertions.Primitives.StringComparerOptionsBuilder> optionsBuilder, string because = "", params object[] becauseArgs) { }
+        public FluentAssertions.AndConstraint<TAssertions> BeEquivalentTo(string expected, System.Collections.Generic.IEqualityComparer<string> comparer, string because = "", params object[] becauseArgs) { }
         public FluentAssertions.AndConstraint<TAssertions> BeLowerCased(string because = "", params object[] becauseArgs) { }
         public FluentAssertions.AndConstraint<TAssertions> BeNullOrEmpty(string because = "", params object[] becauseArgs) { }
         public FluentAssertions.AndConstraint<TAssertions> BeNullOrWhiteSpace(string because = "", params object[] becauseArgs) { }
@@ -2143,6 +2146,22 @@ namespace FluentAssertions.Primitives
         public FluentAssertions.AndConstraint<TAssertions> NotStartWithEquivalentOf(string unexpected, string because = "", params object[] becauseArgs) { }
         public FluentAssertions.AndConstraint<TAssertions> StartWith(string expected, string because = "", params object[] becauseArgs) { }
         public FluentAssertions.AndConstraint<TAssertions> StartWithEquivalentOf(string expected, string because = "", params object[] becauseArgs) { }
+    }
+    public class StringComparerOptions
+    {
+        public StringComparerOptions() { }
+        public bool IgnoreCase { get; init; }
+        public bool IgnoreLeadingWhitespace { get; init; }
+        public bool IgnoreNewlines { get; init; }
+        public bool IgnoreTrailingWhitespace { get; init; }
+    }
+    public class StringComparerOptionsBuilder
+    {
+        public StringComparerOptionsBuilder() { }
+        public FluentAssertions.Primitives.StringComparerOptionsBuilder IgnoringCase() { }
+        public FluentAssertions.Primitives.StringComparerOptionsBuilder IgnoringLeadingWhitespace() { }
+        public FluentAssertions.Primitives.StringComparerOptionsBuilder IgnoringNewlines() { }
+        public FluentAssertions.Primitives.StringComparerOptionsBuilder IgnoringTrailingWhitespace() { }
     }
     public class TimeOnlyAssertions : FluentAssertions.Primitives.TimeOnlyAssertions<FluentAssertions.Primitives.TimeOnlyAssertions>
     {
