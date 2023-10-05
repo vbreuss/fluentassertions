@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Xunit;
 using Xunit.Sdk;
@@ -12,6 +13,133 @@ public partial class StringAssertionSpecs
 {
     public class BeEquivalentTo
     {
+        [Fact]
+        public void Consider_ignoring_case_on_options_builder()
+        {
+            // Arrange
+            const string actual = "test A";
+            const string expect = "test a";
+
+            // Act / Assert
+            actual.Should().BeEquivalentTo(expect, o => o.IgnoringCase());
+        }
+
+        [Fact]
+        public void Fail_for_string_differing_in_casing_when_not_ignoring_case()
+        {
+            // Arrange
+            const string actual = "test A";
+            const string expect = "test a";
+
+            // Act
+            Action act = () => actual.Should().BeEquivalentTo(expect, o => o.IgnoringLeadingWhitespace());
+
+            // Assert
+            act.Should().Throw<XunitException>();
+        }
+
+        [Fact]
+        public void Consider_ignoring_leading_whitespace_on_options_builder()
+        {
+            // Arrange
+            const string actual = "  test  ";
+            const string expect = "test  ";
+
+            // Act / Assert
+            actual.Should().BeEquivalentTo(expect, o => o.IgnoringLeadingWhitespace());
+        }
+
+        [Fact]
+        public void Fail_for_string_differing_in_leading_whitespace_when_not_ignoring_leading_whitespace()
+        {
+            // Arrange
+            const string actual = "  test  ";
+            const string expect = "test  ";
+
+            // Act
+            Action act = () => actual.Should().BeEquivalentTo(expect, o => o.IgnoringTrailingWhitespace());
+
+            // Assert
+            act.Should().Throw<XunitException>();
+        }
+
+        [Fact]
+        public void Consider_ignoring_trailing_whitespace_on_options_builder()
+        {
+            // Arrange
+            const string actual = "  test  ";
+            const string expect = "  test";
+
+            // Act / Assert
+            actual.Should().BeEquivalentTo(expect, o => o.IgnoringTrailingWhitespace());
+        }
+
+        [Fact]
+        public void Fail_for_string_differing_in_trailing_whitespace_when_not_ignoring_trailing_whitespace()
+        {
+            // Arrange
+            const string actual = "  test  ";
+            const string expect = "  test";
+
+            // Act
+            Action act = () => actual.Should().BeEquivalentTo(expect, o => o.IgnoringLeadingWhitespace());
+
+            // Assert
+            act.Should().Throw<XunitException>();
+        }
+
+        [Fact]
+        public void Consider_ignoring_newlines_on_options_builder()
+        {
+            // Arrange
+            const string actual = "test\r\n-second\n-third";
+            const string expect = "test-sec\r\nond-third";
+
+            // Act / Assert
+            actual.Should().BeEquivalentTo(expect, o => o.IgnoringNewlines());
+        }
+
+        [Fact]
+        public void Fail_for_string_differing_in_newlines_when_not_ignoring_newlines()
+        {
+            // Arrange
+            const string actual = "test\r\n-second\n-third";
+            const string expect = "test-second-third";
+
+            // Act
+            Action act = () => actual.Should().BeEquivalentTo(expect, o => o.IgnoringCase());
+
+            // Assert
+            act.Should().Throw<XunitException>();
+        }
+
+        [Fact]
+        public void Use_custom_comparer()
+        {
+            // Arrange
+            var comparer = new DummyEqualityComparer((_, _) => true);
+            string actual = "test A";
+            string expect = "test B";
+
+            // Act / Assert
+            actual.Should().BeEquivalentTo(expect, comparer);
+        }
+
+        [Fact]
+        public void Fail_for_mismatch_using_custom_comparer()
+        {
+            // Arrange
+            var comparer = new DummyEqualityComparer((_, _) => false);
+            string actual = "foo";
+            string expect = "foo";
+
+            // Act
+            Action act = () => actual.Should().BeEquivalentTo(expect, comparer);
+
+            // Assert
+            act.Should().Throw<XunitException>();
+        }
+
         [Fact]
         public void When_strings_are_the_same_while_ignoring_case_it_should_not_throw()
         {
@@ -103,6 +231,26 @@ public partial class StringAssertionSpecs
             // Assert
             act.Should().Throw<XunitException>().WithMessage(
                 "Expected string to be equivalent to \"abc\" because I say so, but it has unexpected whitespace at the end.");
+        }
+
+        private sealed class DummyEqualityComparer : IEqualityComparer<string>
+        {
+            private readonly Func<string, string, bool> callback;
+
+            public DummyEqualityComparer(Func<string, string, bool> callback)
+            {
+                this.callback = callback;
+            }
+
+            public bool Equals(string x, string y)
+            {
+                return callback(x, y);
+            }
+
+            public int GetHashCode(string obj)
+            {
+                return obj.GetHashCode();
+            }
         }
     }
 

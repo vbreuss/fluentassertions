@@ -54,7 +54,7 @@ public class StringAssertions<TAssertions> : ReferenceTypeAssertions<string, TAs
     public AndConstraint<TAssertions> Be(string expected, string because = "", params object[] becauseArgs)
     {
         var stringEqualityValidator = new StringValidator(
-            new StringEqualityStrategy(StringComparison.Ordinal),
+            new StringEqualityStrategy(StringComparer.Ordinal),
             because, becauseArgs);
 
         stringEqualityValidator.Validate(Subject, expected);
@@ -110,16 +110,124 @@ public class StringAssertions<TAssertions> : ReferenceTypeAssertions<string, TAs
     /// <param name="becauseArgs">
     /// Zero or more objects to format using the placeholders in <paramref name="because" />.
     /// </param>
-    public AndConstraint<TAssertions> BeEquivalentTo(string expected, string because = "",
-        params object[] becauseArgs)
+    public AndConstraint<TAssertions> BeEquivalentTo(string expected,
+        string because = "", params object[] becauseArgs)
     {
         var expectation = new StringValidator(
-            new StringEqualityStrategy(StringComparison.OrdinalIgnoreCase),
+            new StringEqualityStrategy(StringComparer.OrdinalIgnoreCase),
             because, becauseArgs);
 
         expectation.Validate(Subject, expected);
 
         return new AndConstraint<TAssertions>((TAssertions)this);
+    }
+
+    /// <summary>
+    /// Asserts that a string is exactly the same as another string, using the provided <paramref name="comparer"/>.
+    /// </summary>
+    /// <param name="expected">
+    /// The string that the subject is expected to be equivalent to.
+    /// </param>
+    /// <param name="comparer">
+    /// The string equality comparer.
+    /// </param>
+    /// <param name="because">
+    /// A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    /// is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    /// Zero or more objects to format using the placeholders in <paramref name="because" />.
+    /// </param>
+    public AndConstraint<TAssertions> BeEquivalentTo(string expected,
+        IEqualityComparer<string> comparer,
+        string because = "", params object[] becauseArgs)
+    {
+        var expectation = new StringValidator(
+            new StringEqualityStrategy(comparer),
+            because, becauseArgs);
+
+        expectation.Validate(Subject, expected);
+
+        return new AndConstraint<TAssertions>((TAssertions)this);
+    }
+
+    /// <summary>
+    /// Asserts that a string is exactly the same as another string, using the provided <paramref name="options"/>.
+    /// </summary>
+    /// <param name="expected">
+    /// The string that the subject is expected to be equivalent to.
+    /// </param>
+    /// <param name="options">
+    /// The options how to check for string equality.
+    /// </param>
+    /// <param name="because">
+    /// A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    /// is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    /// Zero or more objects to format using the placeholders in <paramref name="because" />.
+    /// </param>
+    public AndConstraint<TAssertions> BeEquivalentTo(string expected,
+        StringComparerOptions options,
+        string because = "", params object[] becauseArgs)
+    {
+        var expectation = new StringValidator(
+            new StringEqualityStrategy(options.IgnoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal),
+            because, becauseArgs);
+
+        var subject = Subject;
+
+        if (options.IgnoreLeadingWhitespace)
+        {
+            subject = subject.TrimStart();
+            expected = expected.TrimStart();
+        }
+
+        if (options.IgnoreTrailingWhitespace)
+        {
+            subject = subject.TrimEnd();
+            expected = expected.TrimEnd();
+        }
+
+        if (options.IgnoreNewlines)
+        {
+            subject = subject.Replace("\r", string.Empty, StringComparison.Ordinal)
+                .Replace("\n", string.Empty, StringComparison.Ordinal);
+
+            expected = expected.Replace("\r", string.Empty, StringComparison.Ordinal)
+                .Replace("\n", string.Empty, StringComparison.Ordinal);
+        }
+
+        expectation.Validate(subject, expected);
+
+        return new AndConstraint<TAssertions>((TAssertions)this);
+    }
+
+    /// <summary>
+    /// Asserts that a string is exactly the same as another string, using the options created by the <paramref name="optionsBuilder"/>.
+    /// </summary>
+    /// <param name="expected">
+    /// The string that the subject is expected to be equivalent to.
+    /// </param>
+    /// <param name="optionsBuilder">
+    /// The builder to create the <see cref="StringComparerOptions"/> via fluent syntax.
+    /// </param>
+    /// <param name="because">
+    /// A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    /// is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    /// Zero or more objects to format using the placeholders in <paramref name="because" />.
+    /// </param>
+    public AndConstraint<TAssertions> BeEquivalentTo(string expected,
+        Action<StringComparerOptionsBuilder> optionsBuilder,
+        string because = "", params object[] becauseArgs)
+    {
+        var builder = new StringComparerOptionsBuilder();
+        optionsBuilder.Invoke(builder);
+        var options = builder.Build();
+
+        return BeEquivalentTo(expected, options, because, becauseArgs);
     }
 
     /// <summary>
