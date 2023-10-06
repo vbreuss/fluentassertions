@@ -1,21 +1,40 @@
 ﻿namespace FluentAssertions.Primitives;
 
 /// <summary>
-/// Builder to create a <see cref="StringComparerOptions"/> using fluent syntax.
+/// Builder to specify string comparison options via fluent syntax.
 /// </summary>
 public class StringComparerOptionsBuilder
 {
-    private bool ignoreLeadingWhitespace;
-    private bool ignoreTrailingWhitespace;
-    private bool ignoreNewlines;
-    private bool ignoreCase;
+    internal bool IgnoreLeadingWhitespace
+    {
+        get;
+        private set;
+    }
+
+    internal bool IgnoreTrailingWhitespace
+    {
+        get;
+        private set;
+    }
+
+    internal bool IgnoreNewlines
+    {
+        get;
+        private set;
+    }
+
+    internal bool IgnoreCase
+    {
+        get;
+        private set;
+    }
 
     /// <summary>
     /// Ignore leading whitespace when comparing strings.
     /// </summary>
     public StringComparerOptionsBuilder IgnoringLeadingWhitespace()
     {
-        ignoreLeadingWhitespace = true;
+        IgnoreLeadingWhitespace = true;
         return this;
     }
 
@@ -24,7 +43,7 @@ public class StringComparerOptionsBuilder
     /// </summary>
     public StringComparerOptionsBuilder IgnoringTrailingWhitespace()
     {
-        ignoreTrailingWhitespace = true;
+        IgnoreTrailingWhitespace = true;
         return this;
     }
 
@@ -33,7 +52,7 @@ public class StringComparerOptionsBuilder
     /// </summary>
     public StringComparerOptionsBuilder IgnoringNewlines()
     {
-        ignoreNewlines = true;
+        IgnoreNewlines = true;
         return this;
     }
 
@@ -42,21 +61,7 @@ public class StringComparerOptionsBuilder
     /// </summary>
     public StringComparerOptionsBuilder IgnoringCase()
     {
-        ignoreCase = true;
+        IgnoreCase = true;
         return this;
-    }
-
-    /// <summary>
-    /// Build the <see cref="StringComparerOptions"/>.
-    /// </summary>
-    internal StringComparerOptions Build()
-    {
-        return new StringComparerOptions
-        {
-            IgnoreLeadingWhitespace = ignoreLeadingWhitespace,
-            IgnoreTrailingWhitespace = ignoreTrailingWhitespace,
-            IgnoreNewlines = ignoreNewlines,
-            IgnoreCase = ignoreCase
-        };
     }
 }
