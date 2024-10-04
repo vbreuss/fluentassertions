@@ -51,6 +51,36 @@ public class GenericCollectionAssertions<TCollection, T, TAssertions> : Referenc
     /// </summary>
     protected override string Identifier => "collection";
 
+    public GenericCollectionCountAssertions<TAssertions, TCollection, T> Have(int count)
+    {
+        return new GenericCollectionCountAssertions<TAssertions, TCollection, T>((TAssertions)this, Subject, new GenericCollectionCount.Exactly(count));
+    }
+
+    public GenericCollectionCountAssertions<TAssertions, TCollection, T> HaveZero()
+    {
+        return Have(0);
+    }
+
+    public GenericCollectionCountAssertions<TAssertions, TCollection, T> HaveOne()
+    {
+        return Have(1);
+    }
+
+    public GenericCollectionCountAssertions<TAssertions, TCollection, T> HaveAtLeast(int minimum)
+    {
+        return new GenericCollectionCountAssertions<TAssertions, TCollection, T>((TAssertions)this, Subject, new GenericCollectionCount.AtLeast(minimum));
+    }
+
+    public GenericCollectionCountAssertions<TAssertions, TCollection, T> HaveAtMost(int maximum)
+    {
+        return new GenericCollectionCountAssertions<TAssertions, TCollection, T>((TAssertions)this, Subject, new GenericCollectionCount.AtMost(maximum));
+    }
+
+    public GenericCollectionCountAssertions<TAssertions, TCollection, T> HaveBetween(int minimum, int maximum)
+    {
+        return new GenericCollectionCountAssertions<TAssertions, TCollection, T>((TAssertions)this, Subject, new GenericCollectionCount.Between(minimum, maximum));
+    }
+
     /// <summary>
     /// Asserts that all items in the collection are of the specified type <typeparamref name="TExpectation" />
     /// </summary>
