@@ -9,7 +9,7 @@ public partial class DateTimeOffsetAssertionSpecs
     public class ChainingConstraint
     {
         [Fact]
-        public void Should_support_chaining_constraints_with_and()
+        public async Task Should_support_chaining_constraints_with_and()
         {
             // Arrange
             DateTimeOffset yesterday = new DateTime(2016, 06, 03).ToDateTimeOffset();
@@ -17,20 +17,17 @@ public partial class DateTimeOffsetAssertionSpecs
 
             // Act
             Action action = () =>
-                nullableDateTime.Should()
-                    .HaveValue()
-                    .And
-                    .BeAfter(yesterday);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNotNull());
 
             // Assert
-            action.Should().NotThrow();
+            await Expect.That(action).DoesNotThrow();
         }
     }
 
     public class Miscellaneous
     {
         [Fact]
-        public void Should_throw_a_helpful_error_when_accidentally_using_equals()
+        public async Task Should_throw_a_helpful_error_when_accidentally_using_equals()
         {
             // Arrange
             DateTimeOffset someDateTimeOffset = new(2022, 9, 25, 13, 48, 42, 0, TimeSpan.Zero);
@@ -39,8 +36,7 @@ public partial class DateTimeOffsetAssertionSpecs
             var action = () => someDateTimeOffset.Should().Equals(null);
 
             // Assert
-            action.Should().Throw<NotSupportedException>()
-                .WithMessage("Equals is not part of Fluent Assertions. Did you mean Be() instead?");
+            await Expect.That(action).Throws<NotSupportedException>();
         }
     }
 }

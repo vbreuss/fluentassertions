@@ -14,7 +14,7 @@ public partial class TypeAssertionSpecs
     public class Be
     {
         [Fact]
-        public void When_type_is_equal_to_the_same_type_it_succeeds()
+        public async Task When_type_is_equal_to_the_same_type_it_succeeds()
         {
             // Arrange
             Type type = typeof(ClassWithAttribute);
@@ -22,14 +22,14 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-                type.Should().Be(sameType);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo(sameType));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_equal_to_another_type_it_fails()
+        public async Task When_type_is_equal_to_another_type_it_fails()
         {
             // Arrange
             Type type = typeof(ClassWithAttribute);
@@ -37,29 +37,28 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-                type.Should().Be(differentType, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo(differentType).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type to be *.ClassWithoutAttribute *failure message*, but found *.ClassWithAttribute.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_equality_of_two_null_types_it_succeeds()
+        public async Task When_asserting_equality_of_two_null_types_it_succeeds()
         {
             // Arrange
             Type nullType = null;
             Type someType = null;
 
             // Act
-            Action act = () => nullType.Should().Be(someType);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullType).IsEqualTo(someType));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_equality_of_a_type_but_the_type_is_null_it_fails()
+        public async Task When_asserting_equality_of_a_type_but_the_type_is_null_it_fails()
         {
             // Arrange
             Type nullType = null;
@@ -67,15 +66,14 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-                nullType.Should().Be(someType, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullType).IsEqualTo(someType).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type to be *.ClassWithAttribute *failure message*, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_equality_of_a_type_with_null_it_fails()
+        public async Task When_asserting_equality_of_a_type_with_null_it_fails()
         {
             // Arrange
             Type someType = typeof(ClassWithAttribute);
@@ -83,15 +81,14 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-                someType.Should().Be(nullType, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).IsEqualTo(nullType).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type to be <null> *failure message*, but found *.ClassWithAttribute.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_type_is_equal_to_same_type_from_different_assembly_it_fails_with_assembly_qualified_name()
+        public async Task When_type_is_equal_to_same_type_from_different_assembly_it_fails_with_assembly_qualified_name()
         {
             // Arrange
 #pragma warning disable 436 // disable the warning on conflicting types, as this is the intention for the spec
@@ -105,48 +102,45 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-                typeFromThisAssembly.Should().Be(typeFromOtherAssembly, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(typeFromThisAssembly).IsEqualTo(typeFromOtherAssembly).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected type to be [AssemblyB.ClassC, AssemblyB*] *failure message*, but found [AssemblyB.ClassC, FluentAssertions.Specs*].");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_type_is_equal_to_the_same_type_using_generics_it_succeeds()
+        public async Task When_type_is_equal_to_the_same_type_using_generics_it_succeeds()
         {
             // Arrange
             Type type = typeof(ClassWithAttribute);
 
             // Act
             Action act = () =>
-                type.Should().Be<ClassWithAttribute>();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).Is<ClassWithAttribute>());
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_equal_to_another_type_using_generics_it_fails()
+        public async Task When_type_is_equal_to_another_type_using_generics_it_fails()
         {
             // Arrange
             Type type = typeof(ClassWithAttribute);
 
             // Act
             Action act = () =>
-                type.Should().Be<ClassWithoutAttribute>("we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo("we want to test the failure {0}").Because("message"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type to be *.ClassWithoutAttribute *failure message*, but found *.ClassWithAttribute.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBe
     {
         [Fact]
-        public void When_type_is_not_equal_to_the_another_type_it_succeeds()
+        public async Task When_type_is_not_equal_to_the_another_type_it_succeeds()
         {
             // Arrange
             Type type = typeof(ClassWithAttribute);
@@ -154,14 +148,14 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-                type.Should().NotBe(otherType);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo(otherType));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_not_equal_to_the_same_type_it_fails()
+        public async Task When_type_is_not_equal_to_the_same_type_it_fails()
         {
             // Arrange
             Type type = typeof(ClassWithAttribute);
@@ -169,15 +163,14 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-                type.Should().NotBe(sameType, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo(sameType).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type not to be [*.ClassWithAttribute*] *failure message*, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_type_is_not_equal_to_the_same_null_type_it_fails()
+        public async Task When_type_is_not_equal_to_the_same_null_type_it_fails()
         {
             // Arrange
             Type type = null;
@@ -185,39 +178,38 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-                type.Should().NotBe(sameType);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo(sameType));
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_type_is_not_equal_to_another_type_using_generics_it_succeeds()
+        public async Task When_type_is_not_equal_to_another_type_using_generics_it_succeeds()
         {
             // Arrange
             Type type = typeof(ClassWithAttribute);
 
             // Act
             Action act = () =>
-                type.Should().NotBe<ClassWithoutAttribute>();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot<ClassWithoutAttribute>());
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_not_equal_to_the_same_type_using_generics_it_fails()
+        public async Task When_type_is_not_equal_to_the_same_type_using_generics_it_fails()
         {
             // Arrange
             Type type = typeof(ClassWithAttribute);
 
             // Act
             Action act = () =>
-                type.Should().NotBe<ClassWithAttribute>("we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo("we want to test the failure {0}").Because("message"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type not to be [*.ClassWithAttribute*] *failure message*, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

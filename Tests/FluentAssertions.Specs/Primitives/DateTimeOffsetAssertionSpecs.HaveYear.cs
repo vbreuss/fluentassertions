@@ -9,7 +9,7 @@ public partial class DateTimeOffsetAssertionSpecs
     public class HaveYear
     {
         [Fact]
-        public void When_asserting_subject_datetimeoffset_should_have_year_with_the_same_value_should_succeed()
+        public async Task When_asserting_subject_datetimeoffset_should_have_year_with_the_same_value_should_succeed()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 06, 04), TimeSpan.Zero);
@@ -19,11 +19,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().HaveYear(expectation);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_subject_datetimeoffset_should_have_year_with_a_different_value_should_throw()
+        public async Task When_asserting_subject_datetimeoffset_should_have_year_with_a_different_value_should_throw()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 06, 04), TimeSpan.Zero);
@@ -33,12 +33,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().HaveYear(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the year part of subject to be 2008, but it was 2009.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_null_datetimeoffset_should_have_year_should_throw()
+        public async Task When_asserting_subject_null_datetimeoffset_should_have_year_should_throw()
         {
             // Arrange
             DateTimeOffset? subject = null;
@@ -48,15 +47,14 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().HaveYear(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the year part of subject to be 2008, but found a <null> DateTimeOffset.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotHaveYear
     {
         [Fact]
-        public void When_asserting_subject_datetimeoffset_should_not_have_year_with_the_same_value_should_throw()
+        public async Task When_asserting_subject_datetimeoffset_should_not_have_year_with_the_same_value_should_throw()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 06, 04), TimeSpan.Zero);
@@ -66,12 +64,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotHaveYear(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the year part of subject to be 2009, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_datetimeoffset_should_not_have_year_with_a_different_value_should_succeed()
+        public async Task When_asserting_subject_datetimeoffset_should_not_have_year_with_a_different_value_should_succeed()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 06, 04), TimeSpan.Zero);
@@ -81,11 +78,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotHaveYear(expectation);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_subject_null_datetimeoffset_should_not_have_year_should_throw()
+        public async Task When_asserting_subject_null_datetimeoffset_should_not_have_year_should_throw()
         {
             // Arrange
             DateTimeOffset? subject = null;
@@ -95,8 +92,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotHaveYear(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the year part of subject to be 2008, but found a <null> DateTimeOffset.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

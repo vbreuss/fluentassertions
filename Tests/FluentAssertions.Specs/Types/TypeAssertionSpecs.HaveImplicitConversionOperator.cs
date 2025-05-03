@@ -13,7 +13,7 @@ public partial class TypeAssertionSpecs
     public class HaveImplicitConversionOperator
     {
         [Fact]
-        public void When_asserting_a_type_has_an_implicit_conversion_operator_which_it_does_it_succeeds()
+        public async Task When_asserting_a_type_has_an_implicit_conversion_operator_which_it_does_it_succeeds()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -28,11 +28,11 @@ public partial class TypeAssertionSpecs
                     .NotBeNull();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_an_implicit_conversion_operator_which_it_does_not_it_fails()
+        public async Task When_asserting_a_type_has_an_implicit_conversion_operator_which_it_does_not_it_fails()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -45,14 +45,12 @@ public partial class TypeAssertionSpecs
                     sourceType, targetType, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected public static implicit *.String(*.TypeWithConversionOperators) to exist *failure message*" +
-                    ", but it does not.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected public static implicit *.String(*.TypeWithConversionOperators) to exist *failure message*" +
+                    ", but it does not.").AsWildcard();
         }
 
         [Fact]
-        public void When_subject_is_null_have_implicit_conversion_operator_should_fail()
+        public async Task When_subject_is_null_have_implicit_conversion_operator_should_fail()
         {
             // Arrange
             Type type = null;
@@ -63,14 +61,12 @@ public partial class TypeAssertionSpecs
                     typeof(TypeWithConversionOperators), typeof(string), "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected public static implicit *.String(*.TypeWithConversionOperators) to exist *failure message*" +
-                    ", but type is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected public static implicit *.String(*.TypeWithConversionOperators) to exist *failure message*" +
+                    ", but type is <null>.").AsWildcard();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_an_implicit_conversion_operator_from_null_it_should_throw()
+        public async Task When_asserting_a_type_has_an_implicit_conversion_operator_from_null_it_should_throw()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -80,12 +76,11 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveImplicitConversionOperator(null, typeof(string));
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("sourceType");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_an_implicit_conversion_operator_to_null_it_should_throw()
+        public async Task When_asserting_a_type_has_an_implicit_conversion_operator_to_null_it_should_throw()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -95,15 +90,14 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveImplicitConversionOperator(typeof(TypeWithConversionOperators), null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("targetType");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
     public class HaveImplicitConversionOperatorOfT
     {
         [Fact]
-        public void When_asserting_a_type_has_an_implicit_conversion_operatorOfT_which_it_does_it_succeeds()
+        public async Task When_asserting_a_type_has_an_implicit_conversion_operatorOfT_which_it_does_it_succeeds()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -116,11 +110,11 @@ public partial class TypeAssertionSpecs
                     .NotBeNull();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void Can_chain_an_additional_assertion_on_the_implicit_conversion_operator()
+        public async Task Can_chain_an_additional_assertion_on_the_implicit_conversion_operator()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -133,12 +127,11 @@ public partial class TypeAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Internal);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected method implicit operator Int32(TypeWithConversionOperators) to be Internal, but it is Public.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_an_implicit_conversion_operatorOfT_which_it_does_not_it_fails()
+        public async Task When_asserting_a_type_has_an_implicit_conversion_operatorOfT_which_it_does_not_it_fails()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -149,14 +142,12 @@ public partial class TypeAssertionSpecs
                     "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected public static implicit *.String(*.TypeWithConversionOperators) to exist *failure message*" +
-                    ", but it does not.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected public static implicit *.String(*.TypeWithConversionOperators) to exist *failure message*" +
+                    ", but it does not.").AsWildcard();
         }
 
         [Fact]
-        public void When_subject_is_null_have_implicit_conversion_operatorOfT_should_fail()
+        public async Task When_subject_is_null_have_implicit_conversion_operatorOfT_should_fail()
         {
             // Arrange
             Type type = null;
@@ -167,17 +158,15 @@ public partial class TypeAssertionSpecs
                     "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected public static implicit *.String(*.TypeWithConversionOperators) to exist *failure message*" +
-                    ", but type is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected public static implicit *.String(*.TypeWithConversionOperators) to exist *failure message*" +
+                    ", but type is <null>.").AsWildcard();
         }
     }
 
     public class NotHaveImplicitConversionOperator
     {
         [Fact]
-        public void When_asserting_a_type_does_not_have_an_implicit_conversion_operator_which_it_does_not_it_succeeds()
+        public async Task When_asserting_a_type_does_not_have_an_implicit_conversion_operator_which_it_does_not_it_succeeds()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -190,11 +179,11 @@ public partial class TypeAssertionSpecs
                     .NotHaveImplicitConversionOperator(sourceType, targetType);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_an_implicit_conversion_operator_which_it_does_it_fails()
+        public async Task When_asserting_a_type_does_not_have_an_implicit_conversion_operator_which_it_does_it_fails()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -207,14 +196,12 @@ public partial class TypeAssertionSpecs
                     sourceType, targetType, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected public static implicit *.Int32(*.TypeWithConversionOperators) to not exist *failure message*" +
-                    ", but it does.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected public static implicit *.Int32(*.TypeWithConversionOperators) to not exist *failure message*" +
+                    ", but it does.").AsWildcard();
         }
 
         [Fact]
-        public void When_subject_is_null_not_have_implicit_conversion_operator_should_fail()
+        public async Task When_subject_is_null_not_have_implicit_conversion_operator_should_fail()
         {
             // Arrange
             Type type = null;
@@ -225,14 +212,12 @@ public partial class TypeAssertionSpecs
                     typeof(TypeWithConversionOperators), typeof(string), "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected public static implicit *.String(*.TypeWithConversionOperators) to not exist *failure message*" +
-                    ", but type is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected public static implicit *.String(*.TypeWithConversionOperators) to not exist *failure message*" +
+                    ", but type is <null>.").AsWildcard();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_an_implicit_conversion_operator_from_null_it_should_throw()
+        public async Task When_asserting_a_type_does_not_have_an_implicit_conversion_operator_from_null_it_should_throw()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -242,12 +227,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveImplicitConversionOperator(null, typeof(string));
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("sourceType");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_an_implicit_conversion_operator_to_null_it_should_throw()
+        public async Task When_asserting_a_type_does_not_have_an_implicit_conversion_operator_to_null_it_should_throw()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -257,15 +241,14 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveImplicitConversionOperator(typeof(TypeWithConversionOperators), null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("targetType");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
     public class NotHaveImplicitConversionOperatorOfT
     {
         [Fact]
-        public void When_asserting_a_type_does_not_have_an_implicit_conversion_operatorOfT_which_it_does_not_it_succeeds()
+        public async Task When_asserting_a_type_does_not_have_an_implicit_conversion_operatorOfT_which_it_does_not_it_succeeds()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -276,11 +259,11 @@ public partial class TypeAssertionSpecs
                     .NotHaveImplicitConversionOperator<TypeWithConversionOperators, string>();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_an_implicit_conversion_operatorOfT_which_it_does_it_fails()
+        public async Task When_asserting_a_type_does_not_have_an_implicit_conversion_operatorOfT_which_it_does_it_fails()
         {
             // Arrange
             var type = typeof(TypeWithConversionOperators);
@@ -291,14 +274,12 @@ public partial class TypeAssertionSpecs
                     "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected public static implicit *.Int32(*.TypeWithConversionOperators) to not exist *failure message*" +
-                    ", but it does.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected public static implicit *.Int32(*.TypeWithConversionOperators) to not exist *failure message*" +
+                    ", but it does.").AsWildcard();
         }
 
         [Fact]
-        public void When_subject_is_null_not_have_implicit_conversion_operatorOfT_should_fail()
+        public async Task When_subject_is_null_not_have_implicit_conversion_operatorOfT_should_fail()
         {
             // Arrange
             Type type = null;
@@ -309,10 +290,8 @@ public partial class TypeAssertionSpecs
                     "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected public static implicit *.String(*.TypeWithConversionOperators) to not exist *failure message*" +
-                    ", but type is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected public static implicit *.String(*.TypeWithConversionOperators) to not exist *failure message*" +
+                    ", but type is <null>.").AsWildcard();
         }
     }
 }

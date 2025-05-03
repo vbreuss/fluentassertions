@@ -8,6 +8,7 @@ namespace FluentAssertions.Specs.Primitives;
 
 public partial class ReferenceTypeAssertionsSpecs
 {
+    //TODO VAB: Check migration
     public class Satisfy
     {
         [Fact]

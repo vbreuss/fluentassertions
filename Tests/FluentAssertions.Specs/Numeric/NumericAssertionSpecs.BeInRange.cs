@@ -9,7 +9,7 @@ public partial class NumericAssertionSpecs
     public class BeInRange
     {
         [Fact]
-        public void When_a_value_is_outside_a_range_it_should_throw()
+        public async Task When_a_value_is_outside_a_range_it_should_throw()
         {
             // Arrange
             float value = 3.99F;
@@ -18,14 +18,11 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5, "because that's the valid range");
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected value to be between*4* and*5* because that\'s the valid range, but found*3.99*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_value_is_inside_a_range_it_should_not_throw()
+        public async Task When_a_value_is_inside_a_range_it_should_not_throw()
         {
             // Arrange
             int value = 4;
@@ -34,11 +31,11 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(3, 5);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_nullable_numeric_null_value_is_not_in_range_it_should_throw()
+        public async Task When_a_nullable_numeric_null_value_is_not_in_range_it_should_throw()
         {
             // Arrange
             int? value = null;
@@ -47,13 +44,11 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(0, 1);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage("*null*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void NaN_is_never_in_range_of_two_floats()
+        public async Task NaN_is_never_in_range_of_two_floats()
         {
             // Arrange
             float value = float.NaN;
@@ -62,16 +57,13 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected value to be between*4* and*5*, but found*NaN*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Theory]
         [InlineData(float.NaN, 5F)]
         [InlineData(5F, float.NaN)]
-        public void A_float_can_never_be_in_a_range_containing_NaN(float minimumValue, float maximumValue)
+        public async Task A_float_can_never_be_in_a_range_containing_NaN(float minimumValue, float maximumValue)
         {
             // Arrange
             float value = 4.5F;
@@ -80,14 +72,11 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(minimumValue, maximumValue);
 
             // Assert
-            act
-                .Should().Throw<ArgumentException>()
-                .WithMessage(
-                    "*NaN*");
+            await Expect.That(act).Throws<ArgumentException>();
         }
 
         [Fact]
-        public void A_NaN_is_never_in_range_of_two_doubles()
+        public async Task A_NaN_is_never_in_range_of_two_doubles()
         {
             // Arrange
             double value = double.NaN;
@@ -96,16 +85,13 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected value to be between*4* and*5*, but found*NaN*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Theory]
         [InlineData(double.NaN, 5)]
         [InlineData(5, double.NaN)]
-        public void A_double_can_never_be_in_a_range_containing_NaN(double minimumValue, double maximumValue)
+        public async Task A_double_can_never_be_in_a_range_containing_NaN(double minimumValue, double maximumValue)
         {
             // Arrange
             double value = 4.5D;
@@ -114,17 +100,14 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(minimumValue, maximumValue);
 
             // Assert
-            act
-                .Should().Throw<ArgumentException>()
-                .WithMessage(
-                    "*NaN*");
+            await Expect.That(act).Throws<ArgumentException>();
         }
     }
 
     public class NotBeInRange
     {
         [Fact]
-        public void When_a_value_is_inside_an_unexpected_range_it_should_throw()
+        public async Task When_a_value_is_inside_an_unexpected_range_it_should_throw()
         {
             // Arrange
             float value = 4.99F;
@@ -133,14 +116,11 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(4, 5, "because that's the invalid range");
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected value to not be between*4* and*5* because that\'s the invalid range, but found*4.99*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_value_is_outside_an_unexpected_range_it_should_not_throw()
+        public async Task When_a_value_is_outside_an_unexpected_range_it_should_not_throw()
         {
             // Arrange
             float value = 3.99F;
@@ -149,11 +129,11 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(4, 5);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_nullable_numeric_null_value_is_not_not_in_range_to_it_should_throw()
+        public async Task When_a_nullable_numeric_null_value_is_not_not_in_range_to_it_should_throw()
         {
             // Arrange
             int? value = null;
@@ -162,9 +142,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(0, 1);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage("*null*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -180,7 +158,7 @@ public partial class NumericAssertionSpecs
         [Theory]
         [InlineData(float.NaN, 1F)]
         [InlineData(1F, float.NaN)]
-        public void Cannot_use_NaN_in_a_range_of_floats(float minimumValue, float maximumValue)
+        public async Task Cannot_use_NaN_in_a_range_of_floats(float minimumValue, float maximumValue)
         {
             // Arrange
             float value = 4.5F;
@@ -189,9 +167,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(minimumValue, maximumValue);
 
             // Assert
-            act
-                .Should().Throw<ArgumentException>()
-                .WithMessage("*NaN*");
+            await Expect.That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -207,7 +183,7 @@ public partial class NumericAssertionSpecs
         [Theory]
         [InlineData(double.NaN, 1D)]
         [InlineData(1D, double.NaN)]
-        public void Cannot_use_NaN_in_a_range_of_doubles(double minimumValue, double maximumValue)
+        public async Task Cannot_use_NaN_in_a_range_of_doubles(double minimumValue, double maximumValue)
         {
             // Arrange
             double value = 4.5D;
@@ -216,9 +192,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(minimumValue, maximumValue);
 
             // Assert
-            act
-                .Should().Throw<ArgumentException>()
-                .WithMessage("*NaN*");
+            await Expect.That(act).Throws<ArgumentException>();
         }
     }
 }

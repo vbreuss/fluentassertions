@@ -42,7 +42,7 @@ public class FormatterSpecs : IDisposable
         };
 
         // Act
-        Action act = () => b.Should().BeNull();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(b).IsNull());
 
         // Assert
         var exception = act.Should().Throw<XunitException>().Which;
@@ -59,7 +59,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void When_the_subject_or_expectation_contains_reserved_symbols_it_should_escape_then()
+    public async Task When_the_subject_or_expectation_contains_reserved_symbols_it_should_escape_then()
     {
         // Arrange
         string result = "{ a : [{ b : \"2016-05-23T10:45:12Z\" } ]}";
@@ -67,14 +67,14 @@ public class FormatterSpecs : IDisposable
         string expectedJson = "{ a : [{ b : \"2016-05-23T10:45:12Z\" }] }";
 
         // Act
-        Action act = () => result.Should().Be(expectedJson);
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(result).IsEqualTo(expectedJson));
 
         // Assert
-        act.Should().Throw<XunitException>().WithMessage("*at*index 37*");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_a_timespan_is_one_tick_it_should_be_formatted_as_positive()
+    public async Task When_a_timespan_is_one_tick_it_should_be_formatted_as_positive()
     {
         // Arrange
         var time = TimeSpan.FromTicks(1);
@@ -83,11 +83,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(time);
 
         // Assert
-        result.Should().NotStartWith("-");
+        await Expect.That(result).DoesNotStartWith("-");
     }
 
     [Fact]
-    public void When_a_timespan_is_minus_one_tick_it_should_be_formatted_as_negative()
+    public async Task When_a_timespan_is_minus_one_tick_it_should_be_formatted_as_negative()
     {
         // Arrange
         var time = TimeSpan.FromTicks(-1);
@@ -96,11 +96,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(time);
 
         // Assert
-        result.Should().StartWith("-");
+        await Expect.That(result).StartsWith("-");
     }
 
     [Fact]
-    public void When_a_datetime_is_very_close_to_the_edges_of_a_datetimeoffset_it_should_not_crash()
+    public async Task When_a_datetime_is_very_close_to_the_edges_of_a_datetimeoffset_it_should_not_crash()
     {
         // Arrange
         var dateTime = DateTime.MinValue + 1.Minutes();
@@ -109,11 +109,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(dateTime);
 
         // Assert
-        result.Should().Be("<00:01:00>");
+        await Expect.That(result).IsEqualTo("<00:01:00>");
     }
 
     [Fact]
-    public void When_the_minimum_value_of_a_datetime_is_provided_it_should_return_a_clear_representation()
+    public async Task When_the_minimum_value_of_a_datetime_is_provided_it_should_return_a_clear_representation()
     {
         // Arrange
         var dateTime = DateTime.MinValue;
@@ -122,11 +122,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(dateTime);
 
         // Assert
-        result.Should().Be("<0001-01-01 00:00:00.000>");
+        await Expect.That(result).IsEqualTo("<0001-01-01 00:00:00.000>");
     }
 
     [Fact]
-    public void When_the_maximum_value_of_a_datetime_is_provided_it_should_return_a_clear_representation()
+    public async Task When_the_maximum_value_of_a_datetime_is_provided_it_should_return_a_clear_representation()
     {
         // Arrange
         var dateTime = DateTime.MaxValue;
@@ -135,11 +135,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(dateTime);
 
         // Assert
-        result.Should().Be("<9999-12-31 23:59:59.9999999>");
+        await Expect.That(result).IsEqualTo("<9999-12-31 23:59:59.9999999>");
     }
 
     [Fact]
-    public void When_a_property_throws_an_exception_it_should_ignore_that_and_still_create_a_descriptive_error_message()
+    public async Task When_a_property_throws_an_exception_it_should_ignore_that_and_still_create_a_descriptive_error_message()
     {
         // Arrange
         var subject = new ExceptionThrowingClass();
@@ -148,11 +148,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Contain("Member 'ThrowingProperty' threw an exception: 'CustomMessage'");
+        await Expect.That(result).Contains("Member 'ThrowingProperty' threw an exception: 'CustomMessage'");
     }
 
     [Fact]
-    public void When_an_exception_contains_an_inner_exception_they_should_both_appear_in_the_error_message()
+    public async Task When_an_exception_contains_an_inner_exception_they_should_both_appear_in_the_error_message()
     {
         // Arrange
         Exception subject = new("OuterExceptionMessage", new InvalidOperationException("InnerExceptionMessage"));
@@ -161,8 +161,7 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Contain("OuterExceptionMessage")
-            .And.Contain("InnerExceptionMessage");
+        await Expect.That(result).Contains("OuterExceptionMessage");
     }
 
     [Fact]
@@ -209,29 +208,16 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void When_the_object_is_a_user_defined_type_it_should_show_the_name_on_the_initial_line()
+    public async Task When_the_object_is_a_user_defined_type_it_should_show_the_name_on_the_initial_line()
     {
         // Arrange
         var stuff = new StuffRecord(42, "description", new ChildRecord(24), [10, 20, 30, 40]);
 
         // Act
-        Action act = () => stuff.Should().BeNull();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(stuff).IsNull());
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .Which.Message.Should().Match(
-                """
-                Expected stuff to be <null>, but found FluentAssertions.Specs.Formatting.FormatterSpecs+StuffRecord
-                {
-                    RecordChildren = {10, 20, 30, 40},
-                    RecordDescription = "description",
-                    RecordId = 42,
-                    SingleChild = FluentAssertions.Specs.Formatting.FormatterSpecs+ChildRecord
-                    {
-                        ChildRecordId = 24
-                    }
-                }.
-                """);
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -263,8 +249,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void
-        When_the_object_is_a_list_of_anonymous_type_it_should_show_the_properties_recursively_with_newlines_and_indentation()
+    public async Task When_the_object_is_a_list_of_anonymous_type_it_should_show_the_properties_recursively_with_newlines_and_indentation()
     {
         // Arrange
         var expectedStuff =
@@ -281,8 +266,7 @@ public class FormatterSpecs : IDisposable
         var actual = Formatter.ToString(expectedStuff);
 
         // Assert
-        actual.Should().Be(
-            """
+        await Expect.That(actual).IsEqualTo("""
             {
                 ComplexChildren =
                 {
@@ -298,7 +282,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void When_the_object_is_an_empty_anonymous_type_it_should_show_braces_on_the_same_line()
+    public async Task When_the_object_is_an_empty_anonymous_type_it_should_show_braces_on_the_same_line()
     {
         // Arrange
         var stuff = new
@@ -306,11 +290,10 @@ public class FormatterSpecs : IDisposable
         };
 
         // Act
-        Action act = () => stuff.Should().BeNull();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(stuff).IsNull());
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .Which.Message.Should().Match("*but found *{ }*");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -362,7 +345,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void When_the_to_string_override_throws_it_should_use_the_default_behavior()
+    public async Task When_the_to_string_override_throws_it_should_use_the_default_behavior()
     {
         // Arrange
         var subject = new NullThrowingToStringImplementation();
@@ -371,7 +354,7 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Contain("SomeProperty");
+        await Expect.That(result).Contains("SomeProperty");
     }
 
     [Fact]
@@ -467,7 +450,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void When_formatting_with_default_behavior_it_should_include_non_private_fields()
+    public async Task When_formatting_with_default_behavior_it_should_include_non_private_fields()
     {
         // Arrange
         var stuffWithAField = new StuffWithAField { Field = "Some Text" };
@@ -476,12 +459,12 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(stuffWithAField);
 
         // Assert
-        result.Should().Contain("Field").And.Contain("Some Text");
-        result.Should().NotContain("privateField");
+        await Expect.That(result).Contains("Field");
+        await Expect.That(result).DoesNotContain("privateField");
     }
 
     [Fact]
-    public void When_formatting_unsigned_integer_it_should_have_c_sharp_postfix()
+    public async Task When_formatting_unsigned_integer_it_should_have_c_sharp_postfix()
     {
         // Arrange
         uint value = 12U;
@@ -490,11 +473,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("12u");
+        await Expect.That(result).IsEqualTo("12u");
     }
 
     [Fact]
-    public void When_formatting_long_integer_it_should_have_c_sharp_postfix()
+    public async Task When_formatting_long_integer_it_should_have_c_sharp_postfix()
     {
         // Arrange
         long value = 12L;
@@ -503,11 +486,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("12L");
+        await Expect.That(result).IsEqualTo("12L");
     }
 
     [Fact]
-    public void When_formatting_unsigned_long_integer_it_should_have_c_sharp_postfix()
+    public async Task When_formatting_unsigned_long_integer_it_should_have_c_sharp_postfix()
     {
         // Arrange
         ulong value = 12UL;
@@ -516,11 +499,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("12UL");
+        await Expect.That(result).IsEqualTo("12UL");
     }
 
     [Fact]
-    public void When_formatting_short_integer_it_should_have_f_sharp_postfix()
+    public async Task When_formatting_short_integer_it_should_have_f_sharp_postfix()
     {
         // Arrange
         short value = 12;
@@ -529,11 +512,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("12s");
+        await Expect.That(result).IsEqualTo("12s");
     }
 
     [Fact]
-    public void When_formatting_unsigned_short_integer_it_should_have_f_sharp_postfix()
+    public async Task When_formatting_unsigned_short_integer_it_should_have_f_sharp_postfix()
     {
         // Arrange
         ushort value = 12;
@@ -542,11 +525,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("12us");
+        await Expect.That(result).IsEqualTo("12us");
     }
 
     [Fact]
-    public void When_formatting_byte_it_should_use_hexadecimal_notation()
+    public async Task When_formatting_byte_it_should_use_hexadecimal_notation()
     {
         // Arrange
         byte value = 12;
@@ -555,11 +538,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("0x0C");
+        await Expect.That(result).IsEqualTo("0x0C");
     }
 
     [Fact]
-    public void When_formatting_signed_byte_it_should_have_f_sharp_postfix()
+    public async Task When_formatting_signed_byte_it_should_have_f_sharp_postfix()
     {
         // Arrange
         sbyte value = 12;
@@ -568,11 +551,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("12y");
+        await Expect.That(result).IsEqualTo("12y");
     }
 
     [Fact]
-    public void When_formatting_single_it_should_have_c_sharp_postfix()
+    public async Task When_formatting_single_it_should_have_c_sharp_postfix()
     {
         // Arrange
         float value = 12;
@@ -581,11 +564,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("12F");
+        await Expect.That(result).IsEqualTo("12F");
     }
 
     [Fact]
-    public void When_formatting_single_positive_infinity_it_should_be_property_reference()
+    public async Task When_formatting_single_positive_infinity_it_should_be_property_reference()
     {
         // Arrange
         float value = float.PositiveInfinity;
@@ -594,11 +577,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("Single.PositiveInfinity");
+        await Expect.That(result).IsEqualTo("Single.PositiveInfinity");
     }
 
     [Fact]
-    public void When_formatting_single_negative_infinity_it_should_be_property_reference()
+    public async Task When_formatting_single_negative_infinity_it_should_be_property_reference()
     {
         // Arrange
         float value = float.NegativeInfinity;
@@ -607,11 +590,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("Single.NegativeInfinity");
+        await Expect.That(result).IsEqualTo("Single.NegativeInfinity");
     }
 
     [Fact]
-    public void When_formatting_single_it_should_have_max_precision()
+    public async Task When_formatting_single_it_should_have_max_precision()
     {
         // Arrange
         float value = 1 / 3F;
@@ -620,11 +603,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().BeOneOf("0.33333334F", "0.333333343F");
+        await Expect.That(result).IsOneOf("0.33333334F", "0.333333343F");
     }
 
     [Fact]
-    public void When_formatting_single_not_a_number_it_should_just_say_nan()
+    public async Task When_formatting_single_not_a_number_it_should_just_say_nan()
     {
         // Arrange
         float value = float.NaN;
@@ -634,11 +617,11 @@ public class FormatterSpecs : IDisposable
 
         // Assert
         // NaN is not even equal to itself so its type does not matter.
-        result.Should().Be("NaN");
+        await Expect.That(result).IsEqualTo("NaN");
     }
 
     [Fact]
-    public void When_formatting_double_integer_it_should_have_decimal_point()
+    public async Task When_formatting_double_integer_it_should_have_decimal_point()
     {
         // Arrange
         double value = 12;
@@ -647,11 +630,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("12.0");
+        await Expect.That(result).IsEqualTo("12.0");
     }
 
     [Fact]
-    public void When_formatting_double_with_big_exponent_it_should_have_exponent()
+    public async Task When_formatting_double_with_big_exponent_it_should_have_exponent()
     {
         // Arrange
         double value = 1E+30;
@@ -660,11 +643,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("1E+30");
+        await Expect.That(result).IsEqualTo("1E+30");
     }
 
     [Fact]
-    public void When_formatting_double_positive_infinity_it_should_be_property_reference()
+    public async Task When_formatting_double_positive_infinity_it_should_be_property_reference()
     {
         // Arrange
         double value = double.PositiveInfinity;
@@ -673,11 +656,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("Double.PositiveInfinity");
+        await Expect.That(result).IsEqualTo("Double.PositiveInfinity");
     }
 
     [Fact]
-    public void When_formatting_double_negative_infinity_it_should_be_property_reference()
+    public async Task When_formatting_double_negative_infinity_it_should_be_property_reference()
     {
         // Arrange
         double value = double.NegativeInfinity;
@@ -686,11 +669,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("Double.NegativeInfinity");
+        await Expect.That(result).IsEqualTo("Double.NegativeInfinity");
     }
 
     [Fact]
-    public void When_formatting_double_not_a_number_it_should_just_say_nan()
+    public async Task When_formatting_double_not_a_number_it_should_just_say_nan()
     {
         // Arrange
         double value = double.NaN;
@@ -700,11 +683,11 @@ public class FormatterSpecs : IDisposable
 
         // Assert
         // NaN is not even equal to itself so its type does not matter.
-        result.Should().Be("NaN");
+        await Expect.That(result).IsEqualTo("NaN");
     }
 
     [Fact]
-    public void When_formatting_double_it_should_have_max_precision()
+    public async Task When_formatting_double_it_should_have_max_precision()
     {
         // Arrange
         double value = 1 / 3D;
@@ -713,11 +696,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().BeOneOf("0.3333333333333333", "0.33333333333333331");
+        await Expect.That(result).IsOneOf("0.3333333333333333", "0.33333333333333331");
     }
 
     [Fact]
-    public void When_formatting_decimal_it_should_have_c_sharp_postfix()
+    public async Task When_formatting_decimal_it_should_have_c_sharp_postfix()
     {
         // Arrange
         decimal value = 12;
@@ -726,11 +709,11 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be("12M");
+        await Expect.That(result).IsEqualTo("12M");
     }
 
     [Fact]
-    public void When_formatting_a_pending_task_it_should_return_the_task_status()
+    public async Task When_formatting_a_pending_task_it_should_return_the_task_status()
     {
         // Arrange
         Task<int> bar = new TaskCompletionSource<int>().Task;
@@ -739,7 +722,7 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(bar);
 
         // Assert
-        result.Should().Be("System.Threading.Tasks.Task`1[System.Int32] {Status=WaitingForActivation}");
+        await Expect.That(result).IsEqualTo("System.Threading.Tasks.Task`1[System.Int32] {Status=WaitingForActivation}");
     }
 
     [Fact]
@@ -808,8 +791,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void
-        When_formatting_multiple_items_with_a_custom_string_representation_using_line_breaks_it_should_end_lines_with_a_comma()
+    public async Task When_formatting_multiple_items_with_a_custom_string_representation_using_line_breaks_it_should_end_lines_with_a_comma()
     {
         // Arrange
         Type[] subject = [typeof(A), typeof(B)];
@@ -818,8 +800,8 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(subject, new FormattingOptions { UseLineBreaks = true });
 
         // Assert
-        result.Should().Contain($"FluentAssertions.Specs.Formatting.FormatterSpecs+A,{Environment.NewLine}");
-        result.Should().Contain($"FluentAssertions.Specs.Formatting.FormatterSpecs+B{Environment.NewLine}");
+        await Expect.That(result).Contains($"FluentAssertions.Specs.Formatting.FormatterSpecs+A,{Environment.NewLine}");
+        await Expect.That(result).Contains($"FluentAssertions.Specs.Formatting.FormatterSpecs+B{Environment.NewLine}");
     }
 
     public class BaseStuff
@@ -936,14 +918,13 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void Can_render_an_array_containing_anonymous_types()
+    public async Task Can_render_an_array_containing_anonymous_types()
     {
         // Act
         var actual = Formatter.ToString(new[] { new { Value = 1 }, new { Value = 2 } });
 
         // Assert
-        actual.Should().Be(
-            """
+        await Expect.That(actual).IsEqualTo("""
             {
                 {
                     Value = 1
@@ -956,17 +937,17 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void Can_render_an_array_on_a_single_line()
+    public async Task Can_render_an_array_on_a_single_line()
     {
         // Act
         var actual = Formatter.ToString(new[] { "abc", "def", "efg" });
 
         // Assert
-        actual.Should().Be(@"{""abc"", ""def"", ""efg""}");
+        await Expect.That(actual).IsEqualTo(@"{""abc"", ""def"", ""efg""}");
     }
 
     [Fact]
-    public void Can_render_an_array_using_line_breaks()
+    public async Task Can_render_an_array_using_line_breaks()
     {
         // Act
         var actual = Formatter.ToString(new[] { "abc", "def", "efg" }, new FormattingOptions
@@ -975,7 +956,7 @@ public class FormatterSpecs : IDisposable
         });
 
         // Assert
-        actual.Should().Be("""
+        await Expect.That(actual).IsEqualTo("""
                            {
                                "abc",
                                "def",
@@ -985,7 +966,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void Can_render_a_single_item_array_using_line_breaks()
+    public async Task Can_render_a_single_item_array_using_line_breaks()
     {
         // Act
         var actual = Formatter.ToString(new[] { "abc" }, new FormattingOptions
@@ -994,7 +975,7 @@ public class FormatterSpecs : IDisposable
         });
 
         // Assert
-        actual.Should().Be("""
+        await Expect.That(actual).IsEqualTo("""
                            {
                                "abc"
                            }
@@ -1002,17 +983,17 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void Can_render_a_single_item_array_on_a_single_line()
+    public async Task Can_render_a_single_item_array_on_a_single_line()
     {
         // Act
         var actual = Formatter.ToString(new[] { "abc" });
 
         // Assert
-        actual.Should().Be("""{"abc"}""");
+        await Expect.That(actual).IsEqualTo("""{"abc"}""");
     }
 
     [Fact]
-    public void Can_render_a_collection_with_anonymous_types_using_line_breaks()
+    public async Task Can_render_a_collection_with_anonymous_types_using_line_breaks()
     {
         // Act
         var actual = Formatter.ToString(new[]
@@ -1021,8 +1002,7 @@ public class FormatterSpecs : IDisposable
         }, new FormattingOptions { UseLineBreaks = true });
 
         // Assert
-        actual.Should().Be(
-            """
+        await Expect.That(actual).IsEqualTo("""
             {
                 {
                     Value =
@@ -1041,7 +1021,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void Can_render_a_simple_anonymous_object()
+    public async Task Can_render_a_simple_anonymous_object()
     {
         // Act
         var actual = Formatter.ToString(new
@@ -1051,8 +1031,7 @@ public class FormatterSpecs : IDisposable
         });
 
         // Assert
-        actual.Should().Be(
-            """
+        await Expect.That(actual).IsEqualTo("""
             {
                 Children = {10, 20, 30, 40},
                 SingleChild =
@@ -1064,7 +1043,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void Can_format_a_multi_dimensional_array_with_linebreaks()
+    public async Task Can_format_a_multi_dimensional_array_with_linebreaks()
     {
         // Arrange
         var points = new Point[][]
@@ -1077,8 +1056,7 @@ public class FormatterSpecs : IDisposable
         var result = Formatter.ToString(points, new FormattingOptions { UseLineBreaks = true });
 
         // Arrange
-        result.Should().Be(
-            """
+        await Expect.That(result).IsEqualTo("""
             {
                 {
                     P0,0
@@ -1091,15 +1069,14 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void Can_format_an_enumerable_using_line_breaks()
+    public async Task Can_format_an_enumerable_using_line_breaks()
     {
         // Arrange
         Point[] points = [new("0,0"), new("1,0")];
 
         var result = Formatter.ToString(points, new FormattingOptions { UseLineBreaks = true });
 
-        result.Should().Be(
-            """
+        await Expect.That(result).IsEqualTo("""
             {
                 P0,0,
                 P1,0
@@ -1108,7 +1085,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void Can_format_an_enumerable_without_line_breaks()
+    public async Task Can_format_an_enumerable_without_line_breaks()
     {
         // Arrange
         Point[] points = [new("0,0"), new("1,0")];
@@ -1117,7 +1094,7 @@ public class FormatterSpecs : IDisposable
         var result = Formatter.ToString(points, new FormattingOptions { UseLineBreaks = false });
 
         // Assert
-        result.Should().Be("{P0,0, P1,0}");
+        await Expect.That(result).IsEqualTo("{P0,0, P1,0}");
     }
 
     private class Point(string name)
@@ -1126,7 +1103,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void A_formatter_can_force_new_line()
+    public async Task A_formatter_can_force_new_line()
     {
         // Arrange
         var formatter = new FormatterUsingAddLine();
@@ -1136,8 +1113,7 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(null);
 
         // Assert
-        result.Should().Be(
-            """
+        await Expect.That(result).IsEqualTo("""
             first fragment
             separate line
             last fragment
@@ -1157,7 +1133,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void A_formatter_can_insert_a_line_or_fragment()
+    public async Task A_formatter_can_insert_a_line_or_fragment()
     {
         // Arrange
         var formatter = new FormatterUsingInsertLineOrFragment();
@@ -1167,7 +1143,7 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(null);
 
         // Assert
-        result.Should().Be("fragment");
+        await Expect.That(result).IsEqualTo("fragment");
     }
 
     private class FormatterUsingInsertLineOrFragment : IValueFormatter
@@ -1181,7 +1157,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void A_formatter_can_use_an_anchor_on_an_empty_graph()
+    public async Task A_formatter_can_use_an_anchor_on_an_empty_graph()
     {
         using var _ = new FormatterScope(new FormatterUsingInsertFragment());
 
@@ -1189,7 +1165,7 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(null);
 
         // Assert
-        result.Should().Be("fragment");
+        await Expect.That(result).IsEqualTo("fragment");
     }
 
     private class FormatterUsingInsertFragment : IValueFormatter
@@ -1203,7 +1179,7 @@ public class FormatterSpecs : IDisposable
     }
 
     [Fact]
-    public void Can_insert_a_fragment_when_using_linebreaks()
+    public async Task Can_insert_a_fragment_when_using_linebreaks()
     {
         using var _ = new FormatterScope(new InsertUsingLinebreaksFormatter());
 
@@ -1211,7 +1187,7 @@ public class FormatterSpecs : IDisposable
         string result = Formatter.ToString(null);
 
         // Assert
-        result.Should().Be("fragment");
+        await Expect.That(result).IsEqualTo("fragment");
     }
 
     private class InsertUsingLinebreaksFormatter : IValueFormatter

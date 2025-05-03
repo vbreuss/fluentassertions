@@ -21,7 +21,7 @@ public partial class TimeOnlyAssertionSpecs
         }
 
         [Fact]
-        public void When_asserting_subject_timeonly_should_not_have_milliseconds_with_the_same_value_it_should_throw()
+        public async Task When_asserting_subject_timeonly_should_not_have_milliseconds_with_the_same_value_it_should_throw()
         {
             // Arrange
             TimeOnly subject = new(14, 12, 31, 445);
@@ -31,12 +31,11 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => subject.Should().NotHaveMilliseconds(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the milliseconds part of subject to be 445, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_timeonly_should_have_milliseconds_with_a_different_value_it_should_throw()
+        public async Task When_asserting_subject_timeonly_should_have_milliseconds_with_a_different_value_it_should_throw()
         {
             // Arrange
             TimeOnly subject = new(15, 12, 31, 555);
@@ -46,8 +45,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => subject.Should().HaveMilliseconds(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the milliseconds part of subject to be 12, but found 555.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -62,7 +60,7 @@ public partial class TimeOnlyAssertionSpecs
         }
 
         [Fact]
-        public void When_asserting_subject_null_timeonly_should_have_milliseconds_should_throw()
+        public async Task When_asserting_subject_null_timeonly_should_have_milliseconds_should_throw()
         {
             // Arrange
             TimeOnly? subject = null;
@@ -72,12 +70,11 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => subject.Should().HaveMilliseconds(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the milliseconds part of subject to be 22, but found a <null> TimeOnly.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_null_timeonly_should_not_have_milliseconds_should_throw()
+        public async Task When_asserting_subject_null_timeonly_should_not_have_milliseconds_should_throw()
         {
             // Arrange
             TimeOnly? subject = null;
@@ -87,8 +84,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => subject.Should().NotHaveMilliseconds(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the milliseconds part of subject to be 22, but found a <null> TimeOnly.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

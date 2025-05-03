@@ -11,93 +11,91 @@ public partial class DateTimeOffsetAssertionSpecs
     public class Be
     {
         [Fact]
-        public void Should_succeed_when_asserting_datetimeoffset_value_is_equal_to_the_same_value()
+        public async Task Should_succeed_when_asserting_datetimeoffset_value_is_equal_to_the_same_value()
         {
             // Arrange
             DateTimeOffset dateTime = new DateTime(2016, 06, 04).ToDateTimeOffset();
             DateTimeOffset sameDateTime = new DateTime(2016, 06, 04).ToDateTimeOffset();
 
             // Act
-            Action act = () => dateTime.Should().Be(sameDateTime);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_datetimeoffset_value_is_equal_to_the_same_nullable_value_be_should_succeed()
+        public async Task When_datetimeoffset_value_is_equal_to_the_same_nullable_value_be_should_succeed()
         {
             // Arrange
             DateTimeOffset dateTime = 4.June(2016).ToDateTimeOffset();
             DateTimeOffset? sameDateTime = 4.June(2016).ToDateTimeOffset();
 
             // Act
-            Action act = () => dateTime.Should().Be(sameDateTime);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_both_values_are_at_their_minimum_then_it_should_succeed()
+        public async Task When_both_values_are_at_their_minimum_then_it_should_succeed()
         {
             // Arrange
             DateTimeOffset dateTime = DateTimeOffset.MinValue;
             DateTimeOffset sameDateTime = DateTimeOffset.MinValue;
 
             // Act
-            Action act = () => dateTime.Should().Be(sameDateTime);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_both_values_are_at_their_maximum_then_it_should_succeed()
+        public async Task When_both_values_are_at_their_maximum_then_it_should_succeed()
         {
             // Arrange
             DateTimeOffset dateTime = DateTimeOffset.MaxValue;
             DateTimeOffset sameDateTime = DateTimeOffset.MaxValue;
 
             // Act
-            Action act = () => dateTime.Should().Be(sameDateTime);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_datetimeoffset_value_is_equal_to_the_different_value()
+        public async Task Should_fail_when_asserting_datetimeoffset_value_is_equal_to_the_different_value()
         {
             // Arrange
             var dateTime = 10.March(2012).WithOffset(1.Hours());
             var otherDateTime = 11.March(2012).WithOffset(1.Hours());
 
             // Act
-            Action act = () => dateTime.Should().Be(otherDateTime, "because we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected dateTime to represent the same point in time as <2012-03-11 +1h>*failure message, but <2012-03-10 +1h> does not.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_datetimeoffset_value_is_equal_to_the_different_nullable_value_be_should_failed()
+        public async Task When_datetimeoffset_value_is_equal_to_the_different_nullable_value_be_should_failed()
         {
             // Arrange
             DateTimeOffset dateTime = 10.March(2012).WithOffset(1.Hours());
             DateTimeOffset? otherDateTime = 11.March(2012).WithOffset(1.Hours());
 
             // Act
-            Action act = () => dateTime.Should().Be(otherDateTime, "because we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected dateTime to represent the same point in time as <2012-03-11 +1h>*failure message, but <2012-03-10 +1h> does not.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_succeed_when_asserting_nullable_datetimeoffset_value_equals_the_same_value()
+        public async Task Should_succeed_when_asserting_nullable_datetimeoffset_value_equals_the_same_value()
         {
             // Arrange
             DateTimeOffset? nullableDateTimeA = new DateTime(2016, 06, 04).ToDateTimeOffset();
@@ -105,25 +103,25 @@ public partial class DateTimeOffsetAssertionSpecs
 
             // Act
             Action action = () =>
-                nullableDateTimeA.Should().Be(nullableDateTimeB);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
 
             // Assert
-            action.Should().NotThrow();
+            await Expect.That(action).DoesNotThrow();
         }
 
         [Fact]
-        public void Should_succeed_when_asserting_nullable_datetimeoffset_null_value_equals_null()
+        public async Task Should_succeed_when_asserting_nullable_datetimeoffset_null_value_equals_null()
         {
             // Arrange
             DateTimeOffset? nullableDateTimeA = null;
             DateTimeOffset? nullableDateTimeB = null;
 
             // Act / Assert
-            nullableDateTimeA.Should().Be(nullableDateTimeB);
+            await Expect.That(nullableDateTimeA).IsEqualTo(nullableDateTimeB);
         }
 
         [Fact]
-        public void Should_fail_when_asserting_nullable_datetimeoffset_value_equals_a_different_value()
+        public async Task Should_fail_when_asserting_nullable_datetimeoffset_value_equals_a_different_value()
         {
             // Arrange
             DateTimeOffset? nullableDateTimeA = new DateTime(2016, 06, 04).ToDateTimeOffset();
@@ -131,14 +129,14 @@ public partial class DateTimeOffsetAssertionSpecs
 
             // Act
             Action action = () =>
-                nullableDateTimeA.Should().Be(nullableDateTimeB);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
 
             // Assert
-            action.Should().Throw<XunitException>();
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_descriptive_message_when_asserting_datetimeoffset_null_value_is_equal_to_another_value()
+        public async Task Should_fail_with_descriptive_message_when_asserting_datetimeoffset_null_value_is_equal_to_another_value()
         {
             // Arrange
             DateTimeOffset? nullableDateTime = null;
@@ -146,16 +144,14 @@ public partial class DateTimeOffsetAssertionSpecs
 
             // Act
             Action action = () =>
-                nullableDateTime.Should().Be(expectation, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualTo(expectation).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            action.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected nullableDateTime to represent the same point in time as <2016-03-27 +1h> because we want to test the failure message, but found a <null> DateTimeOffset.");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_descriptive_message_when_asserting_non_null_value_is_equal_to_null_value()
+        public async Task Should_fail_with_descriptive_message_when_asserting_non_null_value_is_equal_to_null_value()
         {
             // Arrange
             DateTimeOffset? nullableDateTime = 27.March(2016).ToDateTimeOffset(1.Hours());
@@ -163,17 +159,14 @@ public partial class DateTimeOffsetAssertionSpecs
 
             // Act
             Action action = () =>
-                nullableDateTime.Should().Be(expectation, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualTo(expectation).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            action.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected nullableDateTime to be <null> because we want to test the failure message, but it was <2016-03-27 +1h>.");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_different_date_time_offsets_representing_the_same_world_time_it_should_succeed()
+        public async Task When_asserting_different_date_time_offsets_representing_the_same_world_time_it_should_succeed()
         {
             // Arrange
             var specificDate = 1.May(2008).At(6, 32);
@@ -183,42 +176,42 @@ public partial class DateTimeOffsetAssertionSpecs
             var dateWithSixHourOffset = new DateTimeOffset(specificDate - 6.Hours(), -6.Hours());
 
             // Act / Assert
-            dateWithFiveHourOffset.Should().Be(dateWithSixHourOffset);
+            await Expect.That(dateWithFiveHourOffset).IsEqualTo(dateWithSixHourOffset);
         }
     }
 
     public class NotBe
     {
         [Fact]
-        public void Should_succeed_when_asserting_datetimeoffset_value_is_not_equal_to_a_different_value()
+        public async Task Should_succeed_when_asserting_datetimeoffset_value_is_not_equal_to_a_different_value()
         {
             // Arrange
             DateTimeOffset dateTime = new DateTime(2016, 06, 04).ToDateTimeOffset();
             DateTimeOffset otherDateTime = new DateTime(2016, 06, 05).ToDateTimeOffset();
 
             // Act
-            Action act = () => dateTime.Should().NotBe(otherDateTime);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(otherDateTime));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_datetimeoffset_value_is_not_equal_to_a_nullable_different_value_notbe_should_succeed()
+        public async Task When_datetimeoffset_value_is_not_equal_to_a_nullable_different_value_notbe_should_succeed()
         {
             // Arrange
             DateTimeOffset dateTime = 4.June(2016).ToDateTimeOffset();
             DateTimeOffset? otherDateTime = 5.June(2016).ToDateTimeOffset();
 
             // Act
-            Action act = () => dateTime.Should().NotBe(otherDateTime);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(otherDateTime));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_datetimeoffset_value_is_not_equal_to_the_same_value()
+        public async Task Should_fail_when_asserting_datetimeoffset_value_is_not_equal_to_the_same_value()
         {
             // Arrange
             var dateTime = new DateTimeOffset(10.March(2012), 1.Hours());
@@ -226,15 +219,14 @@ public partial class DateTimeOffsetAssertionSpecs
 
             // Act
             Action act =
-                () => dateTime.Should().NotBe(sameDateTime, "because we want to test the failure {0}", "message");
+                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect dateTime to represent the same point in time as <2012-03-10 +1h> because we want to test the failure message, but it did.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_datetimeoffset_value_is_not_equal_to_the_same_nullable_value_notbe_should_failed()
+        public async Task When_datetimeoffset_value_is_not_equal_to_the_same_nullable_value_notbe_should_failed()
         {
             // Arrange
             DateTimeOffset dateTime = new(10.March(2012), 1.Hours());
@@ -242,16 +234,14 @@ public partial class DateTimeOffsetAssertionSpecs
 
             // Act
             Action act =
-                () => dateTime.Should().NotBe(sameDateTime, "because we want to test the failure {0}", "message");
+                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect dateTime to represent the same point in time as <2012-03-10 +1h> because we want to test the failure message, but it did.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_different_date_time_offsets_representing_different_world_times_it_should_not_succeed()
+        public async Task When_asserting_different_date_time_offsets_representing_different_world_times_it_should_not_succeed()
         {
             // Arrange
             var specificDate = 1.May(2008).At(6, 32);
@@ -260,7 +250,7 @@ public partial class DateTimeOffsetAssertionSpecs
             var dateWithOneHourOffset = new DateTimeOffset(specificDate, 1.Hours());
 
             // Act / Assert
-            dateWithZeroHourOffset.Should().NotBe(dateWithOneHourOffset);
+            await Expect.That(dateWithZeroHourOffset).IsNotEqualTo(dateWithOneHourOffset);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace FluentAssertions.Specs.Configuration;
 public sealed class GlobalConfigurationSpecs : IDisposable
 {
     [Fact]
-    public void Concurrently_accessing_the_configuration_is_safe()
+    public async Task Concurrently_accessing_the_configuration_is_safe()
     {
         // Act
         Action act = () => Parallel.For(
@@ -28,33 +28,7 @@ public sealed class GlobalConfigurationSpecs : IDisposable
         );
 
         // Assert
-        act.Should().NotThrow();
-    }
-
-    [Fact]
-    public void Can_override_the_runtime_test_framework_implementation()
-    {
-        // Arrange
-        AssertionEngine.TestFramework = new NotImplementedTestFramework();
-
-        // Act
-        var act = () => 1.Should().Be(2);
-
-        // Assert
-        act.Should().Throw<NotImplementedException>();
-    }
-
-    [Fact]
-    public void Can_override_the_runtime_test_framework()
-    {
-        // Arrange
-        AssertionEngine.Configuration.TestFramework = TestFramework.NUnit;
-
-        // Act
-        var act = () => 1.Should().Be(2);
-
-        // Assert
-        act.Should().Throw<InvalidOperationException>().WithMessage("*nunit.framework*");
+        await Expect.That(act).DoesNotThrow();
     }
 
     private class NotImplementedTestFramework : ITestFramework

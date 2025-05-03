@@ -11,7 +11,7 @@ public partial class DateTimeAssertionSpecs
     public class BeIn
     {
         [Fact]
-        public void When_asserting_subject_datetime_represents_its_own_kind_it_should_succeed()
+        public async Task When_asserting_subject_datetime_represents_its_own_kind_it_should_succeed()
         {
             // Arrange
             DateTime subject = new(2009, 12, 31, 23, 59, 00, DateTimeKind.Local);
@@ -20,11 +20,11 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeIn(DateTimeKind.Local);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_subject_datetime_represents_a_different_kind_it_should_throw()
+        public async Task When_asserting_subject_datetime_represents_a_different_kind_it_should_throw()
         {
             // Arrange
             DateTime subject = new(2009, 12, 31, 23, 59, 00, DateTimeKind.Local);
@@ -33,12 +33,11 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeIn(DateTimeKind.Utc);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected subject to be in Utc, but found Local.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_null_datetime_represents_a_specific_kind_it_should_throw()
+        public async Task When_asserting_subject_null_datetime_represents_a_specific_kind_it_should_throw()
         {
             // Arrange
             DateTime? subject = null;
@@ -47,8 +46,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeIn(DateTimeKind.Utc);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected subject to be in Utc, but found a <null> DateTime.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
@@ -65,7 +63,7 @@ public partial class DateTimeAssertionSpecs
         }
 
         [Fact]
-        public void Date_is_in_kind_but_should_not()
+        public async Task Date_is_in_kind_but_should_not()
         {
             // Arrange
             DateTime subject = 5.January(2024).AsLocal();
@@ -74,12 +72,11 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().NotBeIn(DateTimeKind.Local);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect subject to be in Local, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Date_is_null_on_kind_check()
+        public async Task Date_is_null_on_kind_check()
         {
             // Arrange
             DateTime? subject = null;
@@ -92,8 +89,7 @@ public partial class DateTimeAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not*<null>*");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

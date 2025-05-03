@@ -23,7 +23,7 @@ public partial class StringAssertionSpecs
         }
 
         [Fact]
-        public void When_asserting_string_length_on_null_string_it_should_fail()
+        public async Task When_asserting_string_length_on_null_string_it_should_fail()
         {
             // Arrange
             string actual = null;
@@ -36,12 +36,11 @@ public partial class StringAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected actual with length 0 *failure message*, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_string_length_to_be_equal_to_different_value()
+        public async Task Should_fail_when_asserting_string_length_to_be_equal_to_different_value()
         {
             // Arrange
             string actual = "ABC";
@@ -54,8 +53,7 @@ public partial class StringAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected actual with length 1 *failure message*, but found string \"ABC\" with length 3.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

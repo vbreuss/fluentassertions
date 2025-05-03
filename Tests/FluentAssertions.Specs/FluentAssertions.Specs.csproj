@@ -35,7 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="aweXpect" Version="2.7.1" />
     <PackageReference Include="Bogus" Version="35.6.2" />
     <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
     <PackageReference Include="xunit" Version="2.9.3" />
@@ -49,6 +48,17 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\aweXpect\Source\aweXpect\aweXpect.csproj"/>
+    <ProjectReference Include="..\..\..\aweXpect\Source\aweXpect.Analyzers\aweXpect.Analyzers.csproj"
+                      PrivateAssets="all"
+                      ReferenceOutputAssembly="false"
+                      OutputItemType="Analyzer"
+                      SetTargetFramework="TargetFramework=netstandard2.0"/>
+    <ProjectReference Include="..\..\..\aweXpect\Source\aweXpect.Analyzers.CodeFixers\aweXpect.Analyzers.CodeFixers.csproj"
+                      PrivateAssets="all"
+                      ReferenceOutputAssembly="false"
+                      OutputItemType="Analyzer"
+                      SetTargetFramework="TargetFramework=netstandard2.0"/>
     <ProjectReference Include="..\..\..\aweXpect.Migration\Source\aweXpect.Migration.Analyzers\aweXpect.Migration.Analyzers.csproj"
                       PrivateAssets="all"
                       ReferenceOutputAssembly="false"

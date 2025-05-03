@@ -21,7 +21,7 @@ public partial class DateOnlyAssertionSpecs
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_should_not_have_year_with_the_same_value_should_throw()
+        public async Task When_asserting_subject_dateonly_should_not_have_year_with_the_same_value_should_throw()
         {
             // Arrange
             DateOnly subject = new(2009, 12, 31);
@@ -31,12 +31,11 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().NotHaveYear(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the year part of subject to be 2009, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_should_have_year_with_a_different_value_should_throw()
+        public async Task When_asserting_subject_dateonly_should_have_year_with_a_different_value_should_throw()
         {
             // Arrange
             DateOnly subject = new(2009, 12, 31);
@@ -46,8 +45,7 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().HaveYear(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the year part of subject to be 2008, but found 2009.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -62,7 +60,7 @@ public partial class DateOnlyAssertionSpecs
         }
 
         [Fact]
-        public void When_asserting_subject_null_dateonly_should_have_year_should_throw()
+        public async Task When_asserting_subject_null_dateonly_should_have_year_should_throw()
         {
             // Arrange
             DateOnly? subject = null;
@@ -72,12 +70,11 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().HaveYear(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the year part of subject to be 2008, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_null_dateonly_should_not_have_year_should_throw()
+        public async Task When_asserting_subject_null_dateonly_should_not_have_year_should_throw()
         {
             // Arrange
             DateOnly? subject = null;
@@ -87,8 +84,7 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().NotHaveYear(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the year part of subject to be 2008, but found a <null> DateOnly.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

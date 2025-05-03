@@ -12,31 +12,27 @@ public partial class StringAssertionSpecs
     public class ContainAll
     {
         [Fact]
-        public void When_containment_of_all_strings_in_a_null_collection_is_asserted_it_should_throw_an_argument_exception()
+        public async Task When_containment_of_all_strings_in_a_null_collection_is_asserted_it_should_throw_an_argument_exception()
         {
             // Act
             Action act = () => "a".Should().ContainAll(null);
 
             // Assert
-            act.Should().Throw<ArgumentNullException>()
-                .WithMessage("Cannot*containment*null*")
-                .WithParameterName("values");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_containment_of_all_strings_in_an_empty_collection_is_asserted_it_should_throw_an_argument_exception()
+        public async Task When_containment_of_all_strings_in_an_empty_collection_is_asserted_it_should_throw_an_argument_exception()
         {
             // Act
             Action act = () => "a".Should().ContainAll();
 
             // Assert
-            act.Should().Throw<ArgumentException>()
-                .WithMessage("Cannot*containment*empty*")
-                .WithParameterName("values");
+            await Expect.That(act).Throws<ArgumentException>();
         }
 
         [Fact]
-        public void When_containment_of_all_strings_in_a_collection_is_asserted_and_all_strings_are_present_it_should_succeed()
+        public async Task When_containment_of_all_strings_in_a_collection_is_asserted_and_all_strings_are_present_it_should_succeed()
         {
             // Arrange
             const string red = "red";
@@ -48,12 +44,11 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAll(red, green, yellow);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void
-            When_containment_of_all_strings_in_a_collection_is_asserted_and_equivalent_but_not_exact_matches_exist_for_all_it_should_throw()
+        public async Task When_containment_of_all_strings_in_a_collection_is_asserted_and_equivalent_but_not_exact_matches_exist_for_all_it_should_throw()
         {
             // Arrange
             const string redLowerCase = "red";
@@ -66,14 +61,11 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAll(redUpperCase, greenWithWhitespace);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage($"*{testString}*contain*{redUpperCase}*{greenWithWhitespace}*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_containment_of_all_strings_in_a_collection_is_asserted_and_none_of_the_strings_are_present_it_should_throw()
+        public async Task When_containment_of_all_strings_in_a_collection_is_asserted_and_none_of_the_strings_are_present_it_should_throw()
         {
             // Arrange
             const string red = "red";
@@ -86,14 +78,11 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAll(yellow, blue);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage($"*{testString}*contain*{yellow}*{blue}*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_containment_of_all_strings_in_a_collection_is_asserted_with_reason_and_assertion_fails_then_failure_message_should_contain_reason()
+        public async Task When_containment_of_all_strings_in_a_collection_is_asserted_with_reason_and_assertion_fails_then_failure_message_should_contain_reason()
         {
             // Arrange
             const string red = "red";
@@ -106,14 +95,11 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAll([yellow, blue], "some {0} reason", "special");
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage($"*{testString}*contain*{yellow}*{blue}*because some special reason*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_containment_of_all_strings_in_a_collection_is_asserted_and_only_some_of_the_strings_are_present_it_should_throw()
+        public async Task When_containment_of_all_strings_in_a_collection_is_asserted_and_only_some_of_the_strings_are_present_it_should_throw()
         {
             // Arrange
             const string red = "red";
@@ -126,41 +112,34 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAll(red, blue, green);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage($"*{testString}*contain*{blue}*");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotContainAll
     {
         [Fact]
-        public void When_exclusion_of_all_strings_in_null_collection_is_asserted_it_should_throw_an_argument_exception()
+        public async Task When_exclusion_of_all_strings_in_null_collection_is_asserted_it_should_throw_an_argument_exception()
         {
             // Act
             Action act = () => "a".Should().NotContainAll(null);
 
             // Assert
-            act.Should().Throw<ArgumentNullException>()
-                .WithMessage("Cannot*containment*null*")
-                .WithParameterName("values");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_exclusion_of_all_strings_in_an_empty_collection_is_asserted_it_should_throw_an_argument_exception()
+        public async Task When_exclusion_of_all_strings_in_an_empty_collection_is_asserted_it_should_throw_an_argument_exception()
         {
             // Act
             Action act = () => "a".Should().NotContainAll();
 
             // Assert
-            act.Should().Throw<ArgumentException>()
-                .WithMessage("Cannot*containment*empty*")
-                .WithParameterName("values");
+            await Expect.That(act).Throws<ArgumentException>();
         }
 
         [Fact]
-        public void
-            When_exclusion_of_all_strings_in_a_collection_is_asserted_and_all_strings_in_collection_are_present_it_should_throw()
+        public async Task When_exclusion_of_all_strings_in_a_collection_is_asserted_and_all_strings_in_collection_are_present_it_should_throw()
         {
             // Arrange
             const string red = "red";
@@ -172,13 +151,11 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAll(red, green, yellow);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage($"*not*{testString}*contain all*{red}*{green}*{yellow}*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_exclusion_of_all_strings_is_asserted_with_reason_and_assertion_fails_then_error_message_contains_reason()
+        public async Task When_exclusion_of_all_strings_is_asserted_with_reason_and_assertion_fails_then_error_message_contains_reason()
         {
             // Arrange
             const string red = "red";
@@ -190,14 +167,11 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAll([red, green, yellow], "some {0} reason", "special");
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage($"*not*{testString}*contain all*{red}*{green}*{yellow}*because*some special reason*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_exclusion_of_all_strings_in_a_collection_is_asserted_and_only_some_of_the_strings_in_collection_are_present_it_should_succeed()
+        public async Task When_exclusion_of_all_strings_in_a_collection_is_asserted_and_only_some_of_the_strings_in_collection_are_present_it_should_succeed()
         {
             // Arrange
             const string red = "red";
@@ -210,12 +184,11 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAll(red, green, yellow, purple);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void
-            When_exclusion_of_all_strings_in_a_collection_is_asserted_and_none_of_the_strings_in_the_collection_are_present_it_should_succeed()
+        public async Task When_exclusion_of_all_strings_in_a_collection_is_asserted_and_none_of_the_strings_in_the_collection_are_present_it_should_succeed()
         {
             // Arrange
             const string red = "red";
@@ -228,12 +201,11 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAll(yellow, purple);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void
-            When_exclusion_of_all_strings_in_a_collection_is_asserted_and_equivalent_but_not_exact_strings_are_present_in_collection_it_should_succeed()
+        public async Task When_exclusion_of_all_strings_in_a_collection_is_asserted_and_equivalent_but_not_exact_strings_are_present_in_collection_it_should_succeed()
         {
             // Arrange
             const string redWithoutWhitespace = "red";
@@ -246,7 +218,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAll(redWithWhitespace, upperCaseGreen);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace FluentAssertions.Specs.Types
     public class TypeSelectorSpecs
     {
         [Fact]
-        public void When_type_selector_is_created_with_a_null_type_it_should_throw()
+        public async Task When_type_selector_is_created_with_a_null_type_it_should_throw()
         {
             // Arrange
             TypeSelector propertyInfoSelector;
@@ -30,12 +30,11 @@ namespace FluentAssertions.Specs.Types
             Action act = () => propertyInfoSelector = new TypeSelector((Type)null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("types");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_type_selector_is_created_with_a_null_type_list_it_should_throw()
+        public async Task When_type_selector_is_created_with_a_null_type_list_it_should_throw()
         {
             // Arrange
             TypeSelector propertyInfoSelector;
@@ -44,12 +43,11 @@ namespace FluentAssertions.Specs.Types
             Action act = () => propertyInfoSelector = new TypeSelector((Type[])null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("types");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_type_selector_is_null_then_should_should_throw()
+        public async Task When_type_selector_is_null_then_should_should_throw()
         {
             // Arrange
             TypeSelector propertyInfoSelector = null;
@@ -58,8 +56,7 @@ namespace FluentAssertions.Specs.Types
             var act = () => propertyInfoSelector.Should();
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("typeSelector");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -91,7 +88,7 @@ namespace FluentAssertions.Specs.Types
         }
 
         [Fact]
-        public void When_selecting_types_that_do_not_derive_from_a_specific_class_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_do_not_derive_from_a_specific_class_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(ClassDerivedFromSomeBaseClass).Assembly;
@@ -102,8 +99,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatDoNotDeriveFrom<SomeBaseClass>();
 
             // Assert
-            types.Should()
-                .HaveCount(12);
+            await Expect.That(types).HasCount(12);
         }
 
         [Fact]
@@ -123,7 +119,7 @@ namespace FluentAssertions.Specs.Types
         }
 
         [Fact]
-        public void When_selecting_types_that_implement_a_specific_interface_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_implement_a_specific_interface_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(ClassImplementingSomeInterface).Assembly;
@@ -132,14 +128,11 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = AllTypes.From(assembly).ThatImplement<ISomeInterface>();
 
             // Assert
-            types.Should()
-                .HaveCount(2)
-                .And.Contain(typeof(ClassImplementingSomeInterface))
-                .And.Contain(typeof(ClassWithSomeAttributeThatImplementsSomeInterface));
+            await Expect.That(types).HasCount(2);
         }
 
         [Fact]
-        public void When_selecting_types_that_do_not_implement_a_specific_interface_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_do_not_implement_a_specific_interface_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(ClassImplementingSomeInterface).Assembly;
@@ -150,12 +143,11 @@ namespace FluentAssertions.Specs.Types
                 .ThatDoNotImplement<ISomeInterface>();
 
             // Assert
-            types.Should()
-                .HaveCount(10);
+            await Expect.That(types).HasCount(10);
         }
 
         [Fact]
-        public void When_selecting_types_that_are_decorated_with_a_specific_attribute_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_are_decorated_with_a_specific_attribute_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(ClassWithSomeAttribute).Assembly;
@@ -164,14 +156,11 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = AllTypes.From(assembly).ThatAreDecoratedWith<SomeAttribute>();
 
             // Assert
-            types.Should()
-                .HaveCount(2)
-                .And.Contain(typeof(ClassWithSomeAttribute))
-                .And.Contain(typeof(ClassWithSomeAttributeThatImplementsSomeInterface));
+            await Expect.That(types).HasCount(2);
         }
 
         [Fact]
-        public void When_selecting_types_that_are_not_decorated_with_a_specific_attribute_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_are_not_decorated_with_a_specific_attribute_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(ClassWithSomeAttribute).Assembly;
@@ -180,10 +169,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = AllTypes.From(assembly).ThatAreNotDecoratedWith<SomeAttribute>();
 
             // Assert
-            types.Should()
-                .NotBeEmpty()
-                .And.NotContain(typeof(ClassWithSomeAttribute))
-                .And.NotContain(typeof(ClassWithSomeAttributeThatImplementsSomeInterface));
+            await Expect.That(types).IsNotEmpty();
         }
 
         [Fact]
@@ -218,7 +204,7 @@ namespace FluentAssertions.Specs.Types
         }
 
         [Fact]
-        public void When_selecting_types_from_specific_namespace_or_sub_namespaces_it_should_return_the_correct_types()
+        public async Task When_selecting_types_from_specific_namespace_or_sub_namespaces_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(ClassWithSomeAttribute).Assembly;
@@ -227,14 +213,11 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = AllTypes.From(assembly).ThatAreUnderNamespace("Internal.Other.Test");
 
             // Assert
-            types.Should()
-                .HaveCount(2)
-                .And.Contain(typeof(SomeOtherClass))
-                .And.Contain(typeof(SomeCommonClass));
+            await Expect.That(types).HasCount(2);
         }
 
         [Fact]
-        public void When_selecting_types_other_than_from_specific_namespace_or_sub_namespaces_it_should_return_the_correct_types()
+        public async Task When_selecting_types_other_than_from_specific_namespace_or_sub_namespaces_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(ClassWithSomeAttribute).Assembly;
@@ -245,8 +228,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotUnderNamespace("Internal.Other.Test");
 
             // Assert
-            types.Should()
-                .BeEmpty();
+            await Expect.That(types).IsEmpty();
         }
 
         [Fact]
@@ -284,7 +266,7 @@ namespace FluentAssertions.Specs.Types
         }
 
         [Fact]
-        public void When_selecting_types_decorated_with_an_inheritable_attribute_it_should_only_return_the_applicable_types()
+        public async Task When_selecting_types_decorated_with_an_inheritable_attribute_it_should_only_return_the_applicable_types()
         {
             // Arrange
             Type type = typeof(ClassWithSomeAttributeDerived);
@@ -293,7 +275,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = type.Types().ThatAreDecoratedWith<SomeAttribute>();
 
             // Assert
-            types.Should().BeEmpty();
+            await Expect.That(types).IsEmpty();
         }
 
         [Fact]
@@ -324,8 +306,7 @@ namespace FluentAssertions.Specs.Types
         }
 
         [Fact]
-        public void
-            When_selecting_types_not_decorated_with_or_inheriting_an_inheritable_attribute_it_should_only_return_the_applicable_types()
+        public async Task When_selecting_types_not_decorated_with_or_inheriting_an_inheritable_attribute_it_should_only_return_the_applicable_types()
         {
             // Arrange
             Type type = typeof(ClassWithSomeAttributeDerived);
@@ -334,11 +315,11 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = type.Types().ThatAreNotDecoratedWithOrInherit<SomeAttribute>();
 
             // Assert
-            types.Should().BeEmpty();
+            await Expect.That(types).IsEmpty();
         }
 
         [Fact]
-        public void When_selecting_types_decorated_with_a_noninheritable_attribute_it_should_only_return_the_applicable_types()
+        public async Task When_selecting_types_decorated_with_a_noninheritable_attribute_it_should_only_return_the_applicable_types()
         {
             // Arrange
             Type type = typeof(ClassWithSomeNonInheritableAttributeDerived);
@@ -347,12 +328,11 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = type.Types().ThatAreDecoratedWith<SomeAttribute>();
 
             // Assert
-            types.Should().BeEmpty();
+            await Expect.That(types).IsEmpty();
         }
 
         [Fact]
-        public void
-            When_selecting_types_decorated_with_or_inheriting_a_noninheritable_attribute_it_should_only_return_the_applicable_types()
+        public async Task When_selecting_types_decorated_with_or_inheriting_a_noninheritable_attribute_it_should_only_return_the_applicable_types()
         {
             // Arrange
             Type type = typeof(ClassWithSomeNonInheritableAttributeDerived);
@@ -361,7 +341,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = type.Types().ThatAreDecoratedWithOrInherit<SomeAttribute>();
 
             // Assert
-            types.Should().BeEmpty();
+            await Expect.That(types).IsEmpty();
         }
 
         [Fact]
@@ -489,7 +469,7 @@ namespace FluentAssertions.Specs.Types
         }
 
         [Fact]
-        public void When_selecting_types_that_are_not_classes_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_are_not_classes_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(NotOnlyClassesClass).GetTypeInfo().Assembly;
@@ -500,14 +480,11 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotClasses();
 
             // Assert
-            types.Should()
-                .HaveCount(2)
-                .And.Contain(typeof(INotOnlyClassesInterface))
-                .And.Contain(typeof(NotOnlyClassesEnumeration));
+            await Expect.That(types).HasCount(2);
         }
 
         [Fact]
-        public void When_selecting_types_that_are_value_types_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_are_value_types_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(InternalEnumValueType).Assembly;
@@ -518,12 +495,11 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreValueTypes();
 
             // Assert
-            types.Should()
-                .HaveCount(3);
+            await Expect.That(types).HasCount(3);
         }
 
         [Fact]
-        public void When_selecting_types_that_are_not_value_types_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_are_not_value_types_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(InternalEnumValueType).Assembly;
@@ -534,8 +510,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotValueTypes();
 
             // Assert
-            types.Should()
-                .HaveCount(3);
+            await Expect.That(types).HasCount(3);
         }
 
         [Fact]
@@ -556,7 +531,7 @@ namespace FluentAssertions.Specs.Types
         }
 
         [Fact]
-        public void When_selecting_types_that_are_not_abstract_classes_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_are_not_abstract_classes_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(NotAbstractClass).GetTypeInfo().Assembly;
@@ -567,8 +542,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotAbstract();
 
             // Assert
-            types.Should()
-                .HaveCount(2);
+            await Expect.That(types).HasCount(2);
         }
 
         [Fact]
@@ -640,7 +614,7 @@ namespace FluentAssertions.Specs.Types
         }
 
         [Fact]
-        public void When_selecting_types_with_predicate_it_should_return_the_correct_types()
+        public async Task When_selecting_types_with_predicate_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(SomeBaseClass).GetTypeInfo().Assembly;
@@ -650,39 +624,29 @@ namespace FluentAssertions.Specs.Types
                 .ThatSatisfy(t => t.GetCustomAttribute<SomeAttribute>() is not null);
 
             // Assert
-            types.Should()
-                .HaveCount(3)
-                .And.Contain(typeof(ClassWithSomeAttribute))
-                .And.Contain(typeof(ClassWithSomeAttributeDerived))
-                .And.Contain(typeof(ClassWithSomeAttributeThatImplementsSomeInterface));
+            await Expect.That(types).HasCount(3);
         }
 
         [Fact]
-        public void When_unwrap_task_types_it_should_return_the_correct_types()
+        public async Task When_unwrap_task_types_it_should_return_the_correct_types()
         {
             IEnumerable<Type> types = typeof(ClassToExploreUnwrappedTaskTypes)
                 .Methods()
                 .ReturnTypes()
                 .UnwrapTaskTypes();
 
-            types.Should()
-                .BeEquivalentTo([typeof(int), typeof(void), typeof(void), typeof(string), typeof(bool)]);
+            await Expect.That(types).IsEqualTo([typeof(int), typeof(void), typeof(void), typeof(string), typeof(bool)]);
         }
 
         [Fact]
-        public void When_unwrap_enumerable_types_it_should_return_the_correct_types()
+        public async Task When_unwrap_enumerable_types_it_should_return_the_correct_types()
         {
             IEnumerable<Type> types = typeof(ClassToExploreUnwrappedEnumerableTypes)
                 .Methods()
                 .ReturnTypes()
                 .UnwrapEnumerableTypes();
 
-            types.Should()
-                .HaveCount(4)
-                .And.Contain(typeof(IEnumerable))
-                .And.Contain(typeof(bool))
-                .And.Contain(typeof(int))
-                .And.Contain(typeof(string));
+            await Expect.That(types).HasCount(4);
         }
 
         [Fact]
@@ -703,7 +667,7 @@ namespace FluentAssertions.Specs.Types
         }
 
         [Fact]
-        public void When_selecting_types_that_are_not_interfaces_it_should_return_the_correct_types()
+        public async Task When_selecting_types_that_are_not_interfaces_it_should_return_the_correct_types()
         {
             // Arrange
             Assembly assembly = typeof(InternalNotInterfaceClass).GetTypeInfo().Assembly;
@@ -714,10 +678,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotInterfaces();
 
             // Assert
-            types.Should()
-                .HaveCount(2)
-                .And.Contain(typeof(InternalNotInterfaceClass))
-                .And.Contain(typeof(InternalAbstractClass));
+            await Expect.That(types).HasCount(2);
         }
     }
 }

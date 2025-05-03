@@ -13,7 +13,7 @@ namespace FluentAssertions.Specs.Common;
 public class TypeExtensionsSpecs
 {
     [Fact]
-    public void When_comparing_types_and_types_are_same_it_should_return_true()
+    public async Task When_comparing_types_and_types_are_same_it_should_return_true()
     {
         // Arrange
         var type1 = typeof(InheritedType);
@@ -23,11 +23,11 @@ public class TypeExtensionsSpecs
         bool result = type1.IsSameOrInherits(type2);
 
         // Assert
-        result.Should().BeTrue();
+        await Expect.That(result).IsTrue();
     }
 
     [Fact]
-    public void When_comparing_types_and_first_type_inherits_second_it_should_return_true()
+    public async Task When_comparing_types_and_first_type_inherits_second_it_should_return_true()
     {
         // Arrange
         var type1 = typeof(InheritingType);
@@ -37,11 +37,11 @@ public class TypeExtensionsSpecs
         bool result = type1.IsSameOrInherits(type2);
 
         // Assert
-        result.Should().BeTrue();
+        await Expect.That(result).IsTrue();
     }
 
     [Fact]
-    public void When_comparing_types_and_second_type_inherits_first_it_should_return_false()
+    public async Task When_comparing_types_and_second_type_inherits_first_it_should_return_false()
     {
         // Arrange
         var type1 = typeof(InheritedType);
@@ -51,11 +51,11 @@ public class TypeExtensionsSpecs
         bool result = type1.IsSameOrInherits(type2);
 
         // Assert
-        result.Should().BeFalse();
+        await Expect.That(result).IsFalse();
     }
 
     [Fact]
-    public void When_comparing_types_and_types_are_different_it_should_return_false()
+    public async Task When_comparing_types_and_types_are_different_it_should_return_false()
     {
         // Arrange
         var type1 = typeof(string);
@@ -65,11 +65,11 @@ public class TypeExtensionsSpecs
         bool result = type1.IsSameOrInherits(type2);
 
         // Assert
-        result.Should().BeFalse();
+        await Expect.That(result).IsFalse();
     }
 
     [Fact]
-    public void When_getting_explicit_conversion_operator_from_a_type_with_fake_conversion_operators_it_should_not_return_any()
+    public async Task When_getting_explicit_conversion_operator_from_a_type_with_fake_conversion_operators_it_should_not_return_any()
     {
         // Arrange
         var type1 = typeof(TypeWithFakeConversionOperators);
@@ -79,11 +79,11 @@ public class TypeExtensionsSpecs
         MethodInfo result = type1.GetExplicitConversionOperator(type1, type2);
 
         // Assert
-        result.Should().BeNull();
+        await Expect.That(result).IsNull();
     }
 
     [Fact]
-    public void When_getting_implicit_conversion_operator_from_a_type_with_fake_conversion_operators_it_should_not_return_any()
+    public async Task When_getting_implicit_conversion_operator_from_a_type_with_fake_conversion_operators_it_should_not_return_any()
     {
         // Arrange
         var type1 = typeof(TypeWithFakeConversionOperators);
@@ -93,11 +93,11 @@ public class TypeExtensionsSpecs
         MethodInfo result = type1.GetImplicitConversionOperator(type1, type2);
 
         // Assert
-        result.Should().BeNull();
+        await Expect.That(result).IsNull();
     }
 
     [Fact]
-    public void When_getting_fake_explicit_conversion_operator_from_a_type_with_fake_conversion_operators_it_should_return_one()
+    public async Task When_getting_fake_explicit_conversion_operator_from_a_type_with_fake_conversion_operators_it_should_return_one()
     {
         // Arrange
         var type = typeof(TypeWithFakeConversionOperators);
@@ -109,11 +109,11 @@ public class TypeExtensionsSpecs
         MethodInfo result = GetFakeConversionOperator(type, name, bindingAttr, returnType);
 
         // Assert
-        result.Should().NotBeNull();
+        await Expect.That(result).IsNotNull();
     }
 
     [Fact]
-    public void When_getting_fake_implicit_conversion_operator_from_a_type_with_fake_conversion_operators_it_should_return_one()
+    public async Task When_getting_fake_implicit_conversion_operator_from_a_type_with_fake_conversion_operators_it_should_return_one()
     {
         // Arrange
         var type = typeof(TypeWithFakeConversionOperators);
@@ -125,7 +125,7 @@ public class TypeExtensionsSpecs
         MethodInfo result = GetFakeConversionOperator(type, name, bindingAttr, returnType);
 
         // Assert
-        result.Should().NotBeNull();
+        await Expect.That(result).IsNotNull();
     }
 
     [Theory]

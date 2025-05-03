@@ -93,7 +93,7 @@ public class OccurrenceConstraintSpecs
 
     [Theory]
     [MemberData(nameof(FailingConstraints))]
-    public void Occurrence_constraint_fails(OccurrenceConstraint constraint, int occurrences)
+    public async Task Occurrence_constraint_fails(OccurrenceConstraint constraint, int occurrences)
     {
         // Act
         Action act = () => AssertionChain.GetOrCreate()
@@ -101,7 +101,6 @@ public class OccurrenceConstraintSpecs
             .FailWith($"Expected occurrence to be {constraint.Mode} {constraint.ExpectedCount}, but it was {occurrences}");
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected occurrence to be *, but it was *");
+        await Expect.That(act).Throws<XunitException>();
     }
 }

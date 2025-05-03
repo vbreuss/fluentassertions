@@ -12,7 +12,7 @@ public partial class TypeAssertionSpecs
     public class BeDecoratedWith
     {
         [Fact]
-        public void When_type_is_decorated_with_expected_attribute_it_succeeds()
+        public async Task When_type_is_decorated_with_expected_attribute_it_succeeds()
         {
             // Arrange
             Type typeWithAttribute = typeof(ClassWithAttribute);
@@ -22,11 +22,11 @@ public partial class TypeAssertionSpecs
                 typeWithAttribute.Should().BeDecoratedWith<DummyClassAttribute>();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_decorated_with_expected_attribute_it_should_allow_chaining()
+        public async Task When_type_is_decorated_with_expected_attribute_it_should_allow_chaining()
         {
             // Arrange
             Type typeWithAttribute = typeof(ClassWithAttribute);
@@ -37,11 +37,11 @@ public partial class TypeAssertionSpecs
                     .Which.IsEnabled.Should().BeTrue();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_not_decorated_with_expected_attribute_it_fails()
+        public async Task When_type_is_not_decorated_with_expected_attribute_it_fails()
         {
             // Arrange
             Type typeWithoutAttribute = typeof(ClassWithoutAttribute);
@@ -51,14 +51,12 @@ public partial class TypeAssertionSpecs
                 typeWithoutAttribute.Should().BeDecoratedWith<DummyClassAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected type *.ClassWithoutAttribute to be decorated with *.DummyClassAttribute *failure message*" +
-                    ", but the attribute was not found.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithoutAttribute to be decorated with *.DummyClassAttribute *failure message*" +
+                    ", but the attribute was not found.").AsWildcard();
         }
 
         [Fact]
-        public void When_injecting_a_null_predicate_into_BeDecoratedWith_it_should_throw()
+        public async Task When_injecting_a_null_predicate_into_BeDecoratedWith_it_should_throw()
         {
             // Arrange
             Type typeWithAttribute = typeof(ClassWithAttribute);
@@ -68,12 +66,11 @@ public partial class TypeAssertionSpecs
                 typeWithAttribute.Should().BeDecoratedWith<DummyClassAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("isMatchingAttributePredicate");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_type_is_decorated_with_expected_attribute_with_the_expected_properties_it_succeeds()
+        public async Task When_type_is_decorated_with_expected_attribute_with_the_expected_properties_it_succeeds()
         {
             // Arrange
             Type typeWithAttribute = typeof(ClassWithAttribute);
@@ -84,11 +81,11 @@ public partial class TypeAssertionSpecs
                     .BeDecoratedWith<DummyClassAttribute>(a => a.Name == "Expected" && a.IsEnabled);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_decorated_with_expected_attribute_with_the_expected_properties_it_should_allow_chaining()
+        public async Task When_type_is_decorated_with_expected_attribute_with_the_expected_properties_it_should_allow_chaining()
         {
             // Arrange
             Type typeWithAttribute = typeof(ClassWithAttribute);
@@ -100,11 +97,11 @@ public partial class TypeAssertionSpecs
                     .Which.IsEnabled.Should().BeTrue();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_decorated_with_expected_attribute_that_has_an_unexpected_property_it_fails()
+        public async Task When_type_is_decorated_with_expected_attribute_that_has_an_unexpected_property_it_fails()
         {
             // Arrange
             Type typeWithAttribute = typeof(ClassWithAttribute);
@@ -115,17 +112,15 @@ public partial class TypeAssertionSpecs
                     .BeDecoratedWith<DummyClassAttribute>(a => a.Name == "Unexpected" && a.IsEnabled);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected type *.ClassWithAttribute to be decorated with *.DummyClassAttribute that matches " +
-                    "(a.Name == \"Unexpected\")*a.IsEnabled, but no matching attribute was found.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithAttribute to be decorated with *.DummyClassAttribute that matches " +
+                    "(a.Name == \"Unexpected\")*a.IsEnabled, but no matching attribute was found.").AsWildcard();
         }
     }
 
     public class NotBeDecoratedWith
     {
         [Fact]
-        public void When_type_is_not_decorated_with_unexpected_attribute_it_succeeds()
+        public async Task When_type_is_not_decorated_with_unexpected_attribute_it_succeeds()
         {
             // Arrange
             Type typeWithoutAttribute = typeof(ClassWithoutAttribute);
@@ -135,11 +130,11 @@ public partial class TypeAssertionSpecs
                 typeWithoutAttribute.Should().NotBeDecoratedWith<DummyClassAttribute>();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_decorated_with_unexpected_attribute_it_fails()
+        public async Task When_type_is_decorated_with_unexpected_attribute_it_fails()
         {
             // Arrange
             Type typeWithAttribute = typeof(ClassWithAttribute);
@@ -149,14 +144,12 @@ public partial class TypeAssertionSpecs
                 typeWithAttribute.Should().NotBeDecoratedWith<DummyClassAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected type *.ClassWithAttribute to not be decorated with *.DummyClassAttribute* *failure message*" +
-                    ", but the attribute was found.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithAttribute to not be decorated with *.DummyClassAttribute* *failure message*" +
+                    ", but the attribute was found.").AsWildcard();
         }
 
         [Fact]
-        public void When_injecting_a_null_predicate_into_NotBeDecoratedWith_it_should_throw()
+        public async Task When_injecting_a_null_predicate_into_NotBeDecoratedWith_it_should_throw()
         {
             // Arrange
             Type typeWithoutAttribute = typeof(ClassWithAttribute);
@@ -166,12 +159,11 @@ public partial class TypeAssertionSpecs
                 .NotBeDecoratedWith<DummyClassAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("isMatchingAttributePredicate");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_type_is_not_decorated_with_unexpected_attribute_with_the_expected_properties_it_succeeds()
+        public async Task When_type_is_not_decorated_with_unexpected_attribute_with_the_expected_properties_it_succeeds()
         {
             // Arrange
             Type typeWithoutAttribute = typeof(ClassWithAttribute);
@@ -182,11 +174,11 @@ public partial class TypeAssertionSpecs
                     .NotBeDecoratedWith<DummyClassAttribute>(a => a.Name == "Unexpected" && a.IsEnabled);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_type_is_not_decorated_with_expected_attribute_that_has_an_unexpected_property_it_fails()
+        public async Task When_type_is_not_decorated_with_expected_attribute_that_has_an_unexpected_property_it_fails()
         {
             // Arrange
             Type typeWithoutAttribute = typeof(ClassWithAttribute);
@@ -197,10 +189,8 @@ public partial class TypeAssertionSpecs
                     .NotBeDecoratedWith<DummyClassAttribute>(a => a.Name == "Expected" && a.IsEnabled);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected type *.ClassWithAttribute to not be decorated with *.DummyClassAttribute that matches " +
-                    "(a.Name == \"Expected\") * a.IsEnabled, but a matching attribute was found.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithAttribute to not be decorated with *.DummyClassAttribute that matches " +
+                    "(a.Name == \"Expected\") * a.IsEnabled, but a matching attribute was found.").AsWildcard();
         }
     }
 }

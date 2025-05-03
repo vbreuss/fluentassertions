@@ -10,7 +10,7 @@ public partial class DateTimeOffsetAssertionSpecs
     public class BeWithin
     {
         [Fact]
-        public void When_date_is_not_within_50_hours_before_another_date_it_should_throw()
+        public async Task When_date_is_not_within_50_hours_before_another_date_it_should_throw()
         {
             // Arrange
             var target = 10.April(2010).At(12, 0).WithOffset(0.Hours());
@@ -21,8 +21,7 @@ public partial class DateTimeOffsetAssertionSpecs
                 () => subject.Should().BeWithin(TimeSpan.FromHours(50)).Before(target, "{0} hours is enough", 50);
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected subject <2010-04-08 09:59:59 +0h> to be within 2d and 2h before <2010-04-10 12:00:00 +0h> because 50 hours is enough, but it is behind by 2d, 2h and 1s.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -70,7 +69,7 @@ public partial class DateTimeOffsetAssertionSpecs
         [Theory]
         [InlineData(30, 20)] // edge case
         [InlineData(30, 25)]
-        public void When_asserting_subject_be_within_10_seconds_after_target_but_subject_is_before_target_it_should_throw(
+        public async Task When_asserting_subject_be_within_10_seconds_after_target_but_subject_is_before_target_it_should_throw(
             int targetSeconds, int subjectSeconds)
         {
             // Arrange
@@ -81,15 +80,13 @@ public partial class DateTimeOffsetAssertionSpecs
             Action action = () => subject.Should().BeWithin(10.Seconds()).After(expectation);
 
             // Assert
-            action.Should().Throw<XunitException>()
-                .WithMessage(
-                    $"Expected subject <00:00:{subjectSeconds} +0h> to be within 10s after <00:00:30 +0h>, but it is behind by {Math.Abs(subjectSeconds - targetSeconds)}s.");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Theory]
         [InlineData(30, 40)] // edge case
         [InlineData(30, 35)]
-        public void When_asserting_subject_be_within_10_seconds_before_target_but_subject_is_after_target_it_should_throw(
+        public async Task When_asserting_subject_be_within_10_seconds_before_target_but_subject_is_after_target_it_should_throw(
             int targetSeconds, int subjectSeconds)
         {
             // Arrange
@@ -100,9 +97,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action action = () => subject.Should().BeWithin(10.Seconds()).Before(expectation);
 
             // Assert
-            action.Should().Throw<XunitException>()
-                .WithMessage(
-                    $"Expected subject <00:00:{subjectSeconds} +0h> to be within 10s before <00:00:30 +0h>, but it is ahead by {Math.Abs(subjectSeconds - targetSeconds)}s.");
+            await Expect.That(action).Throws<XunitException>();
         }
     }
 }

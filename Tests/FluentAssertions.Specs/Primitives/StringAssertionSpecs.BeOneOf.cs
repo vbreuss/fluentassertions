@@ -12,45 +12,42 @@ public partial class StringAssertionSpecs
     public class BeOneOf
     {
         [Fact]
-        public void When_a_value_is_not_one_of_the_specified_values_it_should_throw()
+        public async Task When_a_value_is_not_one_of_the_specified_values_it_should_throw()
         {
             // Arrange
             string value = "abc";
 
             // Act
-            Action action = () => value.Should().BeOneOf("def", "xyz");
+            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf("def", "xyz"));
 
             // Assert
-            action.Should().Throw<XunitException>()
-                .WithMessage("Expected value to be one of {\"def\", \"xyz\"}, but found \"abc\".");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_value_is_not_one_of_the_specified_values_it_should_throw_with_descriptive_message()
+        public async Task When_a_value_is_not_one_of_the_specified_values_it_should_throw_with_descriptive_message()
         {
             // Arrange
             string value = "abc";
 
             // Act
-            Action action = () => value.Should().BeOneOf(["def", "xyz"], "because those are the valid values");
+            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(["def", "xyz"], "because those are the valid values"));
 
             // Assert
-            action.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected value to be one of {\"def\", \"xyz\"} because those are the valid values, but found \"abc\".");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_value_is_one_of_the_specified_values_it_should_succeed()
+        public async Task When_a_value_is_one_of_the_specified_values_it_should_succeed()
         {
             // Arrange
             string value = "abc";
 
             // Act
-            Action action = () => value.Should().BeOneOf("abc", "def", "xyz");
+            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf("abc", "def", "xyz"));
 
             // Assert
-            action.Should().NotThrow();
+            await Expect.That(action).DoesNotThrow();
         }
     }
 }

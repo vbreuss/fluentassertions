@@ -13,19 +13,19 @@ namespace FluentAssertions.Specs.Configuration;
 public sealed class FormattingOptionsSpecs : IDisposable
 {
     [Fact]
-    public void When_global_formatting_settings_are_modified()
+    public async Task When_global_formatting_settings_are_modified()
     {
         AssertionConfiguration.Current.Formatting.UseLineBreaks = true;
         AssertionConfiguration.Current.Formatting.MaxDepth = 123;
         AssertionConfiguration.Current.Formatting.MaxLines = 33;
 
-        AssertionScope.Current.FormattingOptions.UseLineBreaks.Should().BeTrue();
-        AssertionScope.Current.FormattingOptions.MaxDepth.Should().Be(123);
-        AssertionScope.Current.FormattingOptions.MaxLines.Should().Be(33);
+        await Expect.That(AssertionScope.Current.FormattingOptions.UseLineBreaks).IsTrue();
+        await Expect.That(AssertionScope.Current.FormattingOptions.MaxDepth).IsEqualTo(123);
+        await Expect.That(AssertionScope.Current.FormattingOptions.MaxLines).IsEqualTo(33);
     }
 
     [Fact]
-    public void When_a_custom_formatter_exists_in_any_loaded_assembly_it_should_override_the_default_formatters()
+    public async Task When_a_custom_formatter_exists_in_any_loaded_assembly_it_should_override_the_default_formatters()
     {
         // Arrange
         AssertionConfiguration.Current.Formatting.ValueFormatterDetectionMode = ValueFormatterDetectionMode.Scan;
@@ -39,11 +39,11 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Be("Property = SomeValue", "it should use my custom formatter");
+        await Expect.That(result).IsEqualTo("Property = SomeValue").Because("it should use my custom formatter");
     }
 
     [Fact]
-    public void When_a_base_class_has_a_custom_formatter_it_should_override_the_default_formatters()
+    public async Task When_a_base_class_has_a_custom_formatter_it_should_override_the_default_formatters()
     {
         // Arrange
         AssertionConfiguration.Current.Formatting.ValueFormatterDetectionMode = ValueFormatterDetectionMode.Scan;
@@ -57,11 +57,11 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Be("Property = SomeValue", "it should use my custom formatter");
+        await Expect.That(result).IsEqualTo("Property = SomeValue").Because("it should use my custom formatter");
     }
 
     [Fact]
-    public void When_there_are_multiple_custom_formatters_it_should_select_a_more_specific_one()
+    public async Task When_there_are_multiple_custom_formatters_it_should_select_a_more_specific_one()
     {
         // Arrange
         AssertionConfiguration.Current.Formatting.ValueFormatterDetectionMode = ValueFormatterDetectionMode.Scan;
@@ -75,11 +75,11 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Be("Property is SomeValue", "it should use my custom formatter");
+        await Expect.That(result).IsEqualTo("Property is SomeValue").Because("it should use my custom formatter");
     }
 
     [Fact]
-    public void When_a_base_class_has_multiple_custom_formatters_it_should_work_the_same_as_for_the_base_class()
+    public async Task When_a_base_class_has_multiple_custom_formatters_it_should_work_the_same_as_for_the_base_class()
     {
         // Arrange
         AssertionConfiguration.Current.Formatting.ValueFormatterDetectionMode = ValueFormatterDetectionMode.Scan;
@@ -93,11 +93,11 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Be("Property is SomeValue", "it should use my custom formatter");
+        await Expect.That(result).IsEqualTo("Property is SomeValue").Because("it should use my custom formatter");
     }
 
     [Fact]
-    public void When_no_custom_formatter_exists_in_the_specified_assembly_it_should_use_the_default()
+    public async Task When_no_custom_formatter_exists_in_the_specified_assembly_it_should_use_the_default()
     {
         // Arrange
         AssertionConfiguration.Current.Formatting.ValueFormatterAssembly = "FluentAssertions";
@@ -111,11 +111,11 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Be(subject.ToString());
+        await Expect.That(result).IsEqualTo(subject.ToString());
     }
 
     [Fact]
-    public void When_formatter_scanning_is_disabled_it_should_use_the_default_formatters()
+    public async Task When_formatter_scanning_is_disabled_it_should_use_the_default_formatters()
     {
         // Arrange
         AssertionConfiguration.Current.Formatting.ValueFormatterDetectionMode = ValueFormatterDetectionMode.Disabled;
@@ -129,11 +129,11 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Be(subject.ToString());
+        await Expect.That(result).IsEqualTo(subject.ToString());
     }
 
     [Fact]
-    public void When_no_formatter_scanning_is_configured_it_should_use_the_default_formatters()
+    public async Task When_no_formatter_scanning_is_configured_it_should_use_the_default_formatters()
     {
         // Arrange
         AssertionConfiguration.Current.Formatting.ValueFormatterDetectionMode = ValueFormatterDetectionMode.Disabled;
@@ -147,7 +147,7 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        result.Should().Be(subject.ToString());
+        await Expect.That(result).IsEqualTo(subject.ToString());
     }
 
     public class SomeClassWithCustomFormatter

@@ -12,78 +12,75 @@ public partial class StringAssertionSpecs
     public class BeNullOrEmpty
     {
         [Fact]
-        public void When_a_null_string_is_expected_to_be_null_or_empty_it_should_not_throw()
+        public async Task When_a_null_string_is_expected_to_be_null_or_empty_it_should_not_throw()
         {
             // Arrange
             string str = null;
 
             // Act / Assert
-            str.Should().BeNullOrEmpty();
+            await Expect.That(str).IsNullOrEmpty();
         }
 
         [Fact]
-        public void When_an_empty_string_is_expected_to_be_null_or_empty_it_should_not_throw()
+        public async Task When_an_empty_string_is_expected_to_be_null_or_empty_it_should_not_throw()
         {
             // Arrange
             string str = "";
 
             // Act / Assert
-            str.Should().BeNullOrEmpty();
+            await Expect.That(str).IsNullOrEmpty();
         }
 
         [Fact]
-        public void When_a_valid_string_is_expected_to_be_null_or_empty_it_should_throw()
+        public async Task When_a_valid_string_is_expected_to_be_null_or_empty_it_should_throw()
         {
             // Arrange
             string str = "hello";
 
             // Act
-            Action act = () => str.Should().BeNullOrEmpty("it was not initialized {0}", "yet");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(str).IsNullOrEmpty().Because($"it was not initialized {"yet"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected str to be <null> or empty because it was not initialized yet, but found \"hello\".");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeNullOrEmpty
     {
         [Fact]
-        public void When_a_valid_string_is_expected_to_be_not_null_or_empty_it_should_not_throw()
+        public async Task When_a_valid_string_is_expected_to_be_not_null_or_empty_it_should_not_throw()
         {
             // Arrange
             string str = "Hello World";
 
             // Act / Assert
-            str.Should().NotBeNullOrEmpty();
+            await Expect.That(str).IsNotNullOrEmpty();
         }
 
         [Fact]
-        public void When_an_empty_string_is_not_expected_to_be_null_or_empty_it_should_throw()
+        public async Task When_an_empty_string_is_not_expected_to_be_null_or_empty_it_should_throw()
         {
             // Arrange
             string str = "";
 
             // Act
-            Action act = () => str.Should().NotBeNullOrEmpty("a valid string is expected for {0}", "str");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(str).IsNotNullOrEmpty().Because($"a valid string is expected for {"str"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected str not to be <null> or empty because a valid string is expected for str, but found \"\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_null_string_is_not_expected_to_be_null_or_empty_it_should_throw()
+        public async Task When_a_null_string_is_not_expected_to_be_null_or_empty_it_should_throw()
         {
             // Arrange
             string str = null;
 
             // Act
-            Action act = () => str.Should().NotBeNullOrEmpty("a valid string is expected for {0}", "str");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(str).IsNotNullOrEmpty().Because($"a valid string is expected for {"str"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected str not to be <null> or empty because a valid string is expected for str, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

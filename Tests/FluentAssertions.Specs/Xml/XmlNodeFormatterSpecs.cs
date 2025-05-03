@@ -8,7 +8,7 @@ namespace FluentAssertions.Specs.Xml;
 public class XmlNodeFormatterSpecs
 {
     [Fact]
-    public void When_a_node_is_20_chars_long_it_should_not_be_trimmed()
+    public async Task When_a_node_is_20_chars_long_it_should_not_be_trimmed()
     {
         // Arrange
         var xmlDoc = new XmlDocument();
@@ -18,11 +18,11 @@ public class XmlNodeFormatterSpecs
         string result = Formatter.ToString(xmlDoc);
 
         // Assert
-        result.Should().Be(@"<xml attr=""01234"" />");
+        await Expect.That(result).IsEqualTo(@"<xml attr=""01234"" />");
     }
 
     [Fact]
-    public void When_a_node_is_longer_then_20_chars_it_should_be_trimmed()
+    public async Task When_a_node_is_longer_then_20_chars_it_should_be_trimmed()
     {
         // Arrange
         var xmlDoc = new XmlDocument();
@@ -32,6 +32,6 @@ public class XmlNodeFormatterSpecs
         string result = Formatter.ToString(xmlDoc);
 
         // Assert
-        result.Should().Be(@"<xml attr=""012345"" /…");
+        await Expect.That(result).IsEqualTo(@"<xml attr=""012345"" /…");
     }
 }

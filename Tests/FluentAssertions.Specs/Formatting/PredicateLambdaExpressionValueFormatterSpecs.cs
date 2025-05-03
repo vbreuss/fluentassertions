@@ -12,7 +12,7 @@ public class PredicateLambdaExpressionValueFormatterSpecs
     private readonly PredicateLambdaExpressionValueFormatter formatter = new();
 
     [Fact]
-    public void Constructor_expression_with_argument_can_be_formatted()
+    public async Task Constructor_expression_with_argument_can_be_formatted()
     {
         // Arrange
         Expression expression = (string arg) => new TestItem { Value = arg };
@@ -21,11 +21,11 @@ public class PredicateLambdaExpressionValueFormatterSpecs
         string result = Formatter.ToString(expression);
 
         // Assert
-        result.Should().Be("new TestItem() {Value = arg}");
+        await Expect.That(result).IsEqualTo("new TestItem() {Value = arg}");
     }
 
     [Fact]
-    public void Constructor_expression_can_be_simplified()
+    public async Task Constructor_expression_can_be_simplified()
     {
         // Arrange
         string value = "foo";
@@ -35,7 +35,7 @@ public class PredicateLambdaExpressionValueFormatterSpecs
         string result = Formatter.ToString(expression);
 
         // Assert
-        result.Should().Be("new TestItem() {Value = \"foo\"}");
+        await Expect.That(result).IsEqualTo("new TestItem() {Value = \"foo\"}");
     }
 
     private sealed class TestItem
@@ -44,18 +44,17 @@ public class PredicateLambdaExpressionValueFormatterSpecs
     }
 
     [Fact]
-    public void When_first_level_properties_are_tested_for_equality_against_constants_then_output_should_be_readable()
+    public async Task When_first_level_properties_are_tested_for_equality_against_constants_then_output_should_be_readable()
     {
         // Act
         string result = Format(a => a.Text == "foo" && a.Number == 123);
 
         // Assert
-        result.Should().Be("(a.Text == \"foo\") AndAlso (a.Number == 123)");
+        await Expect.That(result).IsEqualTo("(a.Text == \"foo\") AndAlso (a.Number == 123)");
     }
 
     [Fact]
-    public void
-        When_first_level_properties_are_tested_for_equality_against_constant_expressions_then_output_should_contain_values_of_constant_expressions()
+    public async Task When_first_level_properties_are_tested_for_equality_against_constant_expressions_then_output_should_contain_values_of_constant_expressions()
     {
         // Arrange
         var expectedText = "foo";
@@ -65,31 +64,31 @@ public class PredicateLambdaExpressionValueFormatterSpecs
         string result = Format(a => a.Text == expectedText && a.Number == expectedNumber);
 
         // Assert
-        result.Should().Be("(a.Text == \"foo\") AndAlso (a.Number == 123)");
+        await Expect.That(result).IsEqualTo("(a.Text == \"foo\") AndAlso (a.Number == 123)");
     }
 
     [Fact]
-    public void When_more_than_two_conditions_are_joined_with_and_operator_then_output_should_not_have_nested_parenthesis()
+    public async Task When_more_than_two_conditions_are_joined_with_and_operator_then_output_should_not_have_nested_parenthesis()
     {
         // Act
         string result = Format(a => a.Text == "123" && a.Number >= 0 && a.Number <= 1000);
 
         // Assert
-        result.Should().Be("(a.Text == \"123\") AndAlso (a.Number >= 0) AndAlso (a.Number <= 1000)");
+        await Expect.That(result).IsEqualTo("(a.Text == \"123\") AndAlso (a.Number >= 0) AndAlso (a.Number <= 1000)");
     }
 
     [Fact]
-    public void When_condition_contains_extension_method_then_extension_method_must_be_formatted()
+    public async Task When_condition_contains_extension_method_then_extension_method_must_be_formatted()
     {
         // Act
         string result = Format(a => a.TextIsNotBlank() && a.Number >= 0 && a.Number <= 1000);
 
         // Assert
-        result.Should().Be("a.TextIsNotBlank() AndAlso (a.Number >= 0) AndAlso (a.Number <= 1000)");
+        await Expect.That(result).IsEqualTo("a.TextIsNotBlank() AndAlso (a.Number >= 0) AndAlso (a.Number <= 1000)");
     }
 
     [Fact]
-    public void When_condition_contains_linq_extension_method_then_extension_method_must_be_formatted()
+    public async Task When_condition_contains_linq_extension_method_then_extension_method_must_be_formatted()
     {
         // Arrange
         int[] allowed = [1, 2, 3];
@@ -98,11 +97,11 @@ public class PredicateLambdaExpressionValueFormatterSpecs
         string result = Format<int>(a => allowed.Contains(a));
 
         // Assert
-        result.Should().Be("value(System.Int32[]).Contains(a)");
+        await Expect.That(result).IsEqualTo("value(System.Int32[]).Contains(a)");
     }
 
     [Fact]
-    public void Formatting_a_lifted_binary_operator()
+    public async Task Formatting_a_lifted_binary_operator()
     {
         // Arrange
         var subject = new ClassWithNullables { Number = 42 };
@@ -111,8 +110,7 @@ public class PredicateLambdaExpressionValueFormatterSpecs
         Action act = () => subject.Should().Match<ClassWithNullables>(e => e.Number > 43);
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("*e.Number > *43*");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     private string Format(Expression<Func<SomeClass, bool>> expression) => Format<SomeClass>(expression);

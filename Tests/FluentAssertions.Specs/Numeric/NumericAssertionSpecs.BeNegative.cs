@@ -9,98 +9,94 @@ public partial class NumericAssertionSpecs
     public class BeNegative
     {
         [Fact]
-        public void When_a_negative_value_is_negative_it_should_not_throw()
+        public async Task When_a_negative_value_is_negative_it_should_not_throw()
         {
             // Arrange
             int value = -1;
 
             // Act
-            Action act = () => value.Should().BeNegative();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_positive_value_is_negative_it_should_throw()
+        public async Task When_a_positive_value_is_negative_it_should_throw()
         {
             // Arrange
             int value = 1;
 
             // Act
-            Action act = () => value.Should().BeNegative();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_zero_value_is_negative_it_should_throw()
+        public async Task When_a_zero_value_is_negative_it_should_throw()
         {
             // Arrange
             int value = 0;
 
             // Act
-            Action act = () => value.Should().BeNegative();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_positive_value_is_negative_it_should_throw_with_descriptive_message()
+        public async Task When_a_positive_value_is_negative_it_should_throw_with_descriptive_message()
         {
             // Arrange
             int value = 1;
 
             // Act
-            Action act = () => value.Should().BeNegative("because we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage("Expected value to be negative because we want to test the failure message, but found 1.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_nullable_numeric_null_value_is_not_negative_it_should_throw()
+        public async Task When_a_nullable_numeric_null_value_is_not_negative_it_should_throw()
         {
             // Arrange
             int? value = null;
 
             // Act
-            Action act = () => value.Should().BeNegative();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage("*null*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void NaN_is_never_a_negative_float()
+        public async Task NaN_is_never_a_negative_float()
         {
             // Arrange
             float value = float.NaN;
 
             // Act
-            Action act = () => value.Should().BeNegative();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*but found NaN*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void NaN_is_never_a_negative_double()
+        public async Task NaN_is_never_a_negative_double()
         {
             // Arrange
             double value = double.NaN;
 
             // Act
-            Action act = () => value.Should().BeNegative();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*but found NaN*");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

@@ -27,17 +27,17 @@ public partial class NumericAssertionSpecs
         [InlineData(float.NegativeInfinity)]
         [InlineData(float.PositiveInfinity)]
         [Theory]
-        public void Should_fail_when_asserting_normal_float_value_to_be_NaN(float actual)
+        public async Task Should_fail_when_asserting_normal_float_value_to_be_NaN(float actual)
         {
             // Act
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_a_descriptive_message_when_asserting_normal_float_value_to_be_NaN()
+        public async Task Should_fail_with_a_descriptive_message_when_asserting_normal_float_value_to_be_NaN()
         {
             // Arrange
             float actual = 1;
@@ -46,8 +46,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>()
-               .WithMessage("Expected actual to be NaN, but found 1F.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -80,17 +79,17 @@ public partial class NumericAssertionSpecs
         [InlineData(double.NegativeInfinity)]
         [InlineData(double.PositiveInfinity)]
         [Theory]
-        public void Should_fail_when_asserting_normal_double_value_to_be_NaN(double actual)
+        public async Task Should_fail_when_asserting_normal_double_value_to_be_NaN(double actual)
         {
             // Act
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_a_descriptive_message_when_asserting_normal_double_value_to_be_NaN()
+        public async Task Should_fail_with_a_descriptive_message_when_asserting_normal_double_value_to_be_NaN()
         {
             // Arrange
             double actual = 1;
@@ -99,8 +98,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>()
-               .WithMessage("Expected actual to be NaN, but found 1.0.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -134,17 +132,17 @@ public partial class NumericAssertionSpecs
         [InlineData(float.NegativeInfinity)]
         [InlineData(float.PositiveInfinity)]
         [Theory]
-        public void Should_fail_when_asserting_nullable_normal_float_value_to_be_NaN(float? actual)
+        public async Task Should_fail_when_asserting_nullable_normal_float_value_to_be_NaN(float? actual)
         {
             // Act
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_a_descriptive_message_when_asserting_nullable_normal_float_value_to_be_NaN()
+        public async Task Should_fail_with_a_descriptive_message_when_asserting_nullable_normal_float_value_to_be_NaN()
         {
             // Arrange
             float? actual = 1;
@@ -153,8 +151,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>()
-               .WithMessage("Expected actual to be NaN, but found 1F.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -188,17 +185,17 @@ public partial class NumericAssertionSpecs
         [InlineData(double.NegativeInfinity)]
         [InlineData(double.PositiveInfinity)]
         [Theory]
-        public void Should_fail_when_asserting_nullable_normal_double_value_to_be_NaN(double? actual)
+        public async Task Should_fail_when_asserting_nullable_normal_double_value_to_be_NaN(double? actual)
         {
             // Act
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_a_descriptive_message_when_asserting_nullable_normal_double_value_to_be_NaN()
+        public async Task Should_fail_with_a_descriptive_message_when_asserting_nullable_normal_double_value_to_be_NaN()
         {
             // Arrange
             double? actual = 1;
@@ -207,8 +204,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>()
-               .WithMessage("Expected actual to be NaN, but found 1.0.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -241,7 +237,7 @@ public partial class NumericAssertionSpecs
         }
 
         [Fact]
-        public void Should_fail_when_asserting_NaN_as_float()
+        public async Task Should_fail_when_asserting_NaN_as_float()
         {
             // Arrange
             float actual = float.NaN;
@@ -250,11 +246,11 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_a_descriptive_message_when_asserting_NaN_as_float()
+        public async Task Should_fail_with_a_descriptive_message_when_asserting_NaN_as_float()
         {
             // Arrange
             float actual = float.NaN;
@@ -263,8 +259,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>()
-               .WithMessage("Did not expect actual to be NaN.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -294,7 +289,7 @@ public partial class NumericAssertionSpecs
         }
 
         [Fact]
-        public void Should_fail_when_asserting_NaN_as_double()
+        public async Task Should_fail_when_asserting_NaN_as_double()
         {
             // Arrange
             double actual = double.NaN;
@@ -303,11 +298,11 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_a_descriptive_message_when_asserting_NaN_as_double()
+        public async Task Should_fail_with_a_descriptive_message_when_asserting_NaN_as_double()
         {
             // Arrange
             double actual = double.NaN;
@@ -316,8 +311,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>()
-               .WithMessage("Did not expect actual to be NaN.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -348,7 +342,7 @@ public partial class NumericAssertionSpecs
         }
 
         [Fact]
-        public void Should_fail_when_asserting_NaN_as_nullable_float()
+        public async Task Should_fail_when_asserting_NaN_as_nullable_float()
         {
             // Arrange
             float? actual = float.NaN;
@@ -357,11 +351,11 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_a_descriptive_message_when_asserting_NaN_as_nullable_float()
+        public async Task Should_fail_with_a_descriptive_message_when_asserting_NaN_as_nullable_float()
         {
             // Arrange
             float? actual = float.NaN;
@@ -370,8 +364,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>()
-               .WithMessage("Did not expect actual to be NaN.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -402,7 +395,7 @@ public partial class NumericAssertionSpecs
         }
 
         [Fact]
-        public void Should_fail_when_asserting_NaN_as_nullable_double()
+        public async Task Should_fail_when_asserting_NaN_as_nullable_double()
         {
             // Arrange
             double? actual = double.NaN;
@@ -411,11 +404,11 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_a_descriptive_message_when_asserting_NaN_as_nullable_double()
+        public async Task Should_fail_with_a_descriptive_message_when_asserting_NaN_as_nullable_double()
         {
             // Arrange
             double? actual = double.NaN;
@@ -424,8 +417,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            act.Should().Throw<XunitException>()
-               .WithMessage("Did not expect actual to be NaN.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]

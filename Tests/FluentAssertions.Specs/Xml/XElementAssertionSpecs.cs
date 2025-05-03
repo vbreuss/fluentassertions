@@ -11,7 +11,7 @@ public class XElementAssertionSpecs
     public class Be
     {
         [Fact]
-        public void When_asserting_an_xml_element_is_equal_to_the_same_xml_element_it_should_succeed()
+        public async Task When_asserting_an_xml_element_is_equal_to_the_same_xml_element_it_should_succeed()
         {
             // Arrange
             var theElement = new XElement("element");
@@ -19,14 +19,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().Be(sameElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEqualTo(sameElement));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_an_xml_element_is_equal_to_a_different_xml_element_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_an_xml_element_is_equal_to_a_different_xml_element_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = new XElement("element");
@@ -34,15 +34,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().Be(otherElement, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEqualTo(otherElement).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to be*other*because we want to test the failure message, but found *element*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_an_xml_element_is_equal_to_an_xml_element_with_a_deep_difference_it_should_fail()
+        public async Task When_asserting_an_xml_element_is_equal_to_an_xml_element_with_a_deep_difference_it_should_fail()
         {
             // Arrange
             var theElement =
@@ -56,60 +55,57 @@ public class XElementAssertionSpecs
                         new XElement("grandChild")));
 
             // Act
-            Action act = () => theElement.Should().Be(expected);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEqualTo(expected));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to be <parent>…</parent>, but found <parent>…</parent>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_the_expected_element_is_null_it_fails()
+        public async Task When_the_expected_element_is_null_it_fails()
         {
             // Arrange
             XElement theElement = null;
 
             // Act
             Action act = () =>
-                theElement.Should().Be(new XElement("other"), "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEqualTo(new XElement("other")).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected theElement to be <other /> *failure message*, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_element_is_expected_to_equal_null_it_fails()
+        public async Task When_element_is_expected_to_equal_null_it_fails()
         {
             // Arrange
             XElement theElement = new("element");
 
             // Act
-            Action act = () => theElement.Should().Be(null, "we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEqualTo(null).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected theElement to be <null> *failure message*, but found <element />.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_both_subject_and_expected_are_null_it_succeeds()
+        public async Task When_both_subject_and_expected_are_null_it_succeeds()
         {
             // Arrange
             XElement theElement = null;
 
             // Act
-            Action act = () => theElement.Should().Be(null);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEqualTo(null));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
     }
 
     public class NotBe
     {
         [Fact]
-        public void When_asserting_an_xml_element_is_not_equal_to_a_different_xml_element_it_should_succeed()
+        public async Task When_asserting_an_xml_element_is_not_equal_to_a_different_xml_element_it_should_succeed()
         {
             // Arrange
             var element = new XElement("element");
@@ -117,14 +113,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                element.Should().NotBe(otherElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsNotEqualTo(otherElement));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_deep_xml_element_is_not_equal_to_a_different_xml_element_it_should_succeed()
+        public async Task When_asserting_a_deep_xml_element_is_not_equal_to_a_different_xml_element_it_should_succeed()
         {
             // Arrange
             var differentElement =
@@ -138,14 +134,14 @@ public class XElementAssertionSpecs
                         new XElement("grandChild2")));
 
             // Act
-            Action act = () => element.Should().NotBe(differentElement);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsNotEqualTo(differentElement));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_an_xml_element_is_not_equal_to_the_same_xml_element_it_should_fail()
+        public async Task When_asserting_an_xml_element_is_not_equal_to_the_same_xml_element_it_should_fail()
         {
             // Arrange
             var theElement = new XElement("element");
@@ -153,151 +149,146 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().NotBe(sameElement, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEqualTo(sameElement).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect theElement to be <element /> because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_an_element_is_not_supposed_to_be_null_it_succeeds()
+        public async Task When_an_element_is_not_supposed_to_be_null_it_succeeds()
         {
             // Arrange
             XElement theElement = new("element");
 
             // Act
-            Action act = () => theElement.Should().NotBe(null);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEqualTo(null));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_null_element_is_not_supposed_to_be_an_element_it_succeeds()
+        public async Task When_a_null_element_is_not_supposed_to_be_an_element_it_succeeds()
         {
             // Arrange
             XElement theElement = null;
 
             // Act
-            Action act = () => theElement.Should().NotBe(new XElement("other"));
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEqualTo(new XElement("other")));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_null_element_is_not_supposed_to_be_null_it_fails()
+        public async Task When_a_null_element_is_not_supposed_to_be_null_it_fails()
         {
             // Arrange
             XElement theElement = null;
 
             // Act
-            Action act = () => theElement.Should().NotBe(null, "we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEqualTo(null).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect theElement to be <null> *failure message*.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class BeNull
     {
         [Fact]
-        public void When_asserting_an_xml_element_is_null_and_it_is_it_should_succeed()
+        public async Task When_asserting_an_xml_element_is_null_and_it_is_it_should_succeed()
         {
             // Arrange
             XElement element = null;
 
             // Act
             Action act = () =>
-                element.Should().BeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsNull());
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_an_xml_element_is_null_but_it_is_not_it_should_fail()
+        public async Task When_asserting_an_xml_element_is_null_but_it_is_not_it_should_fail()
         {
             // Arrange
             var theElement = new XElement("element");
 
             // Act
             Action act = () =>
-                theElement.Should().BeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNull());
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to be <null>, but found <element />.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_an_xml_element_is_null_but_it_is_not_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_an_xml_element_is_null_but_it_is_not_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = new XElement("element");
 
             // Act
             Action act = () =>
-                theElement.Should().BeNull("because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to be <null> because we want to test the failure message, but found <element />.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeNull
     {
         [Fact]
-        public void When_asserting_a_non_null_xml_element_is_not_null_it_should_succeed()
+        public async Task When_asserting_a_non_null_xml_element_is_not_null_it_should_succeed()
         {
             // Arrange
             var element = new XElement("element");
 
             // Act
             Action act = () =>
-                element.Should().NotBeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsNotNull());
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_null_xml_element_is_not_null_it_should_fail()
+        public async Task When_asserting_a_null_xml_element_is_not_null_it_should_fail()
         {
             // Arrange
             XElement theElement = null;
 
             // Act
             Action act = () =>
-                theElement.Should().NotBeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotNull());
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("Expected theElement not to be <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_null_xml_element_is_not_null_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_a_null_xml_element_is_not_null_it_should_fail_with_descriptive_message()
         {
             // Arrange
             XElement theElement = null;
 
             // Act
             Action act = () =>
-                theElement.Should().NotBeNull("because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement not to be <null> because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class BeEquivalentTo
     {
         [Fact]
-        public void When_asserting_a_xml_element_is_equivalent_to_the_same_xml_element_it_should_succeed()
+        public async Task When_asserting_a_xml_element_is_equivalent_to_the_same_xml_element_it_should_succeed()
         {
             // Arrange
             var element = new XElement("element");
@@ -305,14 +296,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                element.Should().BeEquivalentTo(sameXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEquivalentTo(sameXElement));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_xml_element_is_equivalent_to_a_different_xml_element_with_same_structure_it_should_succeed()
+        public async Task When_asserting_a_xml_element_is_equivalent_to_a_different_xml_element_with_same_structure_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse("<parent><child /></parent>");
@@ -320,14 +311,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                element.Should().BeEquivalentTo(otherXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEquivalentTo(otherXElement));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_an_empty_xml_element_is_equivalent_to_a_different_selfclosing_xml_element_it_should_succeed()
+        public async Task When_asserting_an_empty_xml_element_is_equivalent_to_a_different_selfclosing_xml_element_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse("<parent><child></child></parent>");
@@ -335,14 +326,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                element.Should().BeEquivalentTo(otherElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEquivalentTo(otherElement));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_selfclosing_xml_element_is_equivalent_to_a_different_empty_xml_element_it_should_succeed()
+        public async Task When_asserting_a_selfclosing_xml_element_is_equivalent_to_a_different_empty_xml_element_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse("<parent><child /></parent>");
@@ -350,14 +341,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                element.Should().BeEquivalentTo(otherElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEquivalentTo(otherElement));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_xml_element_is_equivalent_to_a_xml_element_with_elements_missing_it_should_fail()
+        public async Task When_asserting_a_xml_element_is_equivalent_to_a_xml_element_with_elements_missing_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse("<parent><child /><child2 /></parent>");
@@ -365,15 +356,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(otherXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(otherXElement));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected EndElement \"parent\" in theElement at \"/parent\", but found Element \"child2\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_xml_element_is_equivalent_to_a_different_xml_element_with_extra_elements_it_should_fail()
+        public async Task When_asserting_a_xml_element_is_equivalent_to_a_different_xml_element_with_extra_elements_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse("<parent><child /></parent>");
@@ -381,16 +371,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(otherXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(otherXElement));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected Element \"child2\" in theElement at \"/parent\", but found EndElement \"parent\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_a_xml_element_is_equivalent_to_a_different_xml_element_elements_missing_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_a_xml_element_is_equivalent_to_a_different_xml_element_elements_missing_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<parent><child /><child2 /></parent>");
@@ -398,16 +386,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(otherXElement, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(otherXElement).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected EndElement \"parent\" in theElement at \"/parent\" because we want to test the failure message, but found Element \"child2\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_a_xml_element_is_equivalent_to_a_different_xml_element_with_extra_elements_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_a_xml_element_is_equivalent_to_a_different_xml_element_with_extra_elements_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<parent><child /></parent>");
@@ -415,16 +401,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(otherXElement, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(otherXElement).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected Element \"child2\" in theElement at \"/parent\" because we want to test the failure message, but found EndElement \"parent\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_an_empty_xml_element_is_equivalent_to_a_different_xml_element_with_text_content_it_should_fail()
+        public async Task When_asserting_an_empty_xml_element_is_equivalent_to_a_different_xml_element_with_text_content_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse("<parent><child /></parent>");
@@ -432,56 +416,27 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(otherXElement, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(otherXElement).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected content \"text\" in theElement at \"/parent/child\" because we want to test the failure message, but found EndElement \"parent\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_an_element_is_null_then_be_equivalent_to_null_succeeds()
-        {
-            XElement theElement = null;
-
-            // Act
-            Action act = () => theElement.Should().BeEquivalentTo(null);
-
-            // Assert
-            act.Should().NotThrow();
-        }
-
-        [Fact]
-        public void When_an_element_is_null_then_be_equivalent_to_an_element_fails()
+        public async Task When_an_element_is_null_then_be_equivalent_to_an_element_fails()
         {
             XElement theElement = null;
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(new XElement("element"), "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(new XElement("element")).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected theElement to be equivalent to <null> *failure message*, but found \"<element />\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_an_element_is_equivalent_to_null_it_fails()
-        {
-            XElement theElement = new("element");
-
-            // Act
-            Action act = () =>
-                theElement.Should().BeEquivalentTo(null, "we want to test the failure {0}", "message");
-
-            // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected theElement to be equivalent to \"<element />\" *failure message*, but found <null>.");
-        }
-
-        [Fact]
-        public void
-            When_asserting_an_xml_element_is_equivalent_to_a_different_xml_element_with_different_namespace_prefix_it_should_succeed()
+        public async Task When_asserting_an_xml_element_is_equivalent_to_a_different_xml_element_with_different_namespace_prefix_it_should_succeed()
         {
             // Arrange
             var subject = XElement.Parse("<xml xmlns=\"urn:a\"/>");
@@ -489,15 +444,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                subject.Should().BeEquivalentTo(expected);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEquivalentTo(expected));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void
-            When_asserting_an_xml_element_is_equivalent_to_a_different_xml_element_which_differs_only_on_unused_namespace_declaration_it_should_succeed()
+        public async Task When_asserting_an_xml_element_is_equivalent_to_a_different_xml_element_which_differs_only_on_unused_namespace_declaration_it_should_succeed()
         {
             // Arrange
             var subject = XElement.Parse("<xml xmlns:a=\"urn:a\"/>");
@@ -505,15 +459,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                subject.Should().BeEquivalentTo(expected);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEquivalentTo(expected));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void
-            When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_lacks_attributes_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_lacks_attributes_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<xml><element b=\"1\"/></xml>");
@@ -521,16 +474,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(expected, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected attribute \"a\" in theElement at \"/xml/element\" because we want to test the failure message, but found none.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_has_extra_attributes_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_has_extra_attributes_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<xml><element a=\"b\"/></xml>");
@@ -538,16 +489,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(expected, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect to find attribute \"a\" in theElement at \"/xml/element\" because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_has_different_attribute_values_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_has_different_attribute_values_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<xml><element a=\"b\"/></xml>");
@@ -555,16 +504,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(expected, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected attribute \"a\" in theElement at \"/xml/element\" to have value \"c\" because we want to test the failure message, but found \"b\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_has_attribute_with_different_namespace_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_has_attribute_with_different_namespace_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<xml><element xmlns:ns=\"urn:a\" ns:a=\"b\"/></xml>");
@@ -572,16 +519,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(expected, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect to find attribute \"ns:a\" in theElement at \"/xml/element\" because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_has_different_text_contents_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_an_xml_element_is_equivalent_to_different_xml_element_which_has_different_text_contents_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<xml>a</xml>");
@@ -589,34 +534,31 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().BeEquivalentTo(expected, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsEquivalentTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected content to be \"b\" in theElement at \"/xml\" because we want to test the failure message, but found \"a\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_an_xml_element_is_equivalent_to_different_xml_element_with_different_comments_it_should_succeed()
+        public async Task When_asserting_an_xml_element_is_equivalent_to_different_xml_element_with_different_comments_it_should_succeed()
         {
             // Arrange
             var subject = XElement.Parse("<xml><!--Comment--><a/></xml>");
             var expected = XElement.Parse("<xml><a/><!--Comment--></xml>");
 
             // Act
-            Action act = () => subject.Should().BeEquivalentTo(expected);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEquivalentTo(expected));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
     }
 
     public class NotBeEquivalentTo
     {
         [Fact]
-        public void
-            When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_elements_missing_it_should_succeed()
+        public async Task When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_elements_missing_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse("<parent><child /><child2 /></parent>");
@@ -624,15 +566,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                element.Should().NotBeEquivalentTo(otherXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsNotEquivalentTo(otherXElement));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void
-            When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_extra_elements_it_should_succeed()
+        public async Task When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_extra_elements_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse("<parent><child /></parent>");
@@ -640,14 +581,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                element.Should().NotBeEquivalentTo(otherXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsNotEquivalentTo(otherXElement));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_same_structure_it_should_fail()
+        public async Task When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_same_structure_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse("<parent><child /></parent>");
@@ -655,16 +596,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().NotBeEquivalentTo(otherXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEquivalentTo(otherXElement));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to be equivalent, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_same_contents_but_different_ns_prefixes_it_should_fail()
+        public async Task When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_same_contents_but_different_ns_prefixes_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse("""<parent xmlns:ns1="a"><ns1:child /></parent>""");
@@ -672,16 +611,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().NotBeEquivalentTo(otherXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEquivalentTo(otherXElement));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to be equivalent, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_same_contents_but_extra_unused_xmlns_declaration_it_should_fail()
+        public async Task When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_same_contents_but_extra_unused_xmlns_declaration_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse(@"<xml xmlns:ns1=""a"" />");
@@ -689,15 +626,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().NotBeEquivalentTo(otherXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEquivalentTo(otherXElement));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to be equivalent, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_xml_element_is_not_equivalent_to_the_same_xml_element_it_should_fail()
+        public async Task When_asserting_a_xml_element_is_not_equivalent_to_the_same_xml_element_it_should_fail()
         {
             // Arrange
             var theElement = new XElement("element");
@@ -705,16 +641,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().NotBeEquivalentTo(sameXElement);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEquivalentTo(sameXElement));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to be equivalent, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_same_structure_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_a_xml_element_is_not_equivalent_to_a_different_xml_element_with_same_structure_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<parent><child /></parent>");
@@ -722,16 +656,14 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().NotBeEquivalentTo(otherXElement, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEquivalentTo(otherXElement).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to be equivalent because we want to test the failure message, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_a_xml_element_is_not_equivalent_to_the_same_xml_element_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_a_xml_element_is_not_equivalent_to_the_same_xml_element_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<parent><child /></parent>");
@@ -739,110 +671,80 @@ public class XElementAssertionSpecs
 
             // Act
             Action act = () =>
-                theElement.Should().NotBeEquivalentTo(sameXElement, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEquivalentTo(sameXElement).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to be equivalent because we want to test the failure message, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_null_element_is_unexpected_equivalent_to_null_it_fails()
+        public async Task When_a_null_element_is_not_equivalent_to_an_element_it_succeeds()
         {
             XElement theElement = null;
 
             // Act
-            Action act = () => theElement.Should().NotBeEquivalentTo(null, "we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotEquivalentTo(new XElement("element")));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect theElement to be equivalent *failure message*, but it is.");
-        }
-
-        [Fact]
-        public void When_a_null_element_is_not_equivalent_to_an_element_it_succeeds()
-        {
-            XElement theElement = null;
-
-            // Act
-            Action act = () => theElement.Should().NotBeEquivalentTo(new XElement("element"));
-
-            // Assert
-            act.Should().NotThrow();
-        }
-
-        [Fact]
-        public void When_an_element_is_not_equivalent_to_null_it_succeeds()
-        {
-            XElement theElement = new("element");
-
-            // Act
-            Action act = () => theElement.Should().NotBeEquivalentTo(null);
-
-            // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
     }
 
     public class HaveValue
     {
         [Fact]
-        public void When_asserting_element_has_a_specific_value_and_it_does_it_should_succeed()
+        public async Task When_asserting_element_has_a_specific_value_and_it_does_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse("<user>grega</user>");
 
             // Act
             Action act = () =>
-                element.Should().HaveValue("grega");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsNotNull().Because("grega"));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_element_has_a_specific_value_but_it_has_a_different_value_it_should_throw()
+        public async Task When_asserting_element_has_a_specific_value_but_it_has_a_different_value_it_should_throw()
         {
             // Arrange
             var theElement = XElement.Parse("<user>grega</user>");
 
             // Act
             Action act = () =>
-                theElement.Should().HaveValue("stamac");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotNull().Because("stamac"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement 'user' to have value \"stamac\", but found \"grega\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_element_has_a_specific_value_but_it_has_a_different_value_it_should_throw_with_descriptive_message()
+        public async Task When_asserting_element_has_a_specific_value_but_it_has_a_different_value_it_should_throw_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("<user>grega</user>");
 
             // Act
             Action act = () =>
-                theElement.Should().HaveValue("stamac", "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotNull().Because($"stamac"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement 'user' to have value \"stamac\" because we want to test the failure message, but found \"grega\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_xml_element_is_null_then_have_value_should_fail()
+        public async Task When_xml_element_is_null_then_have_value_should_fail()
         {
             XElement theElement = null;
 
             // Act
             Action act = () =>
-                theElement.Should().HaveValue("value", "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theElement).IsNotNull().Because($"value"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the element to have value \"value\" *failure message*, but theElement is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
@@ -869,7 +771,7 @@ public class XElementAssertionSpecs
         }
 
         [Fact]
-        public void Throws_when_attribute_is_not_found()
+        public async Task Throws_when_attribute_is_not_found()
         {
             // Arrange
             var theElement = XElement.Parse("""<user name="martin" />""");
@@ -879,12 +781,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttribute("age", "because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have attribute \"age\"*failure message*, but found no such attribute in <user name=\"martin\" />*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_attribute_is_not_found_with_namespace()
+        public async Task Throws_when_attribute_is_not_found_with_namespace()
         {
             // Arrange
             var theElement = XElement.Parse("""<user xmlns:a="http://www.example.com/2012/test" a:name="martin" />""");
@@ -895,13 +796,12 @@ public class XElementAssertionSpecs
                     "because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have attribute \"{http://www.example.com/2012/test}age\""
-                + "*failure message*but found no such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />*");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have attribute \"{http://www.example.com/2012/test}age\""
+                + "*failure message*but found no such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />*").AsWildcard();
         }
 
         [Fact]
-        public void Throws_when_xml_element_is_null()
+        public async Task Throws_when_xml_element_is_null()
         {
             XElement theElement = null;
 
@@ -910,14 +810,12 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttribute("name", "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected attribute \"name\" in element *failure message*" +
-                    ", but theElement is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected attribute \"name\" in element *failure message*" +
+                    ", but theElement is <null>.").AsWildcard();
         }
 
         [Fact]
-        public void Throws_when_xml_element_is_null_with_namespace()
+        public async Task Throws_when_xml_element_is_null_with_namespace()
         {
             XElement theElement = null;
 
@@ -926,14 +824,12 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttribute((XName)"name", "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected attribute \"name\" in element*failure message*" +
-                    ", but theElement is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected attribute \"name\" in element*failure message*" +
+                    ", but theElement is <null>.").AsWildcard();
         }
 
         [Fact]
-        public void Throws_when_expectation_is_null()
+        public async Task Throws_when_expectation_is_null()
         {
             XElement theElement = new("element");
 
@@ -942,12 +838,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttribute(null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("expectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expectation_is_null_with_namespace()
+        public async Task Throws_when_expectation_is_null_with_namespace()
         {
             XElement theElement = new("element");
 
@@ -956,12 +851,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttribute((XName)null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("expectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expectation_is_empty()
+        public async Task Throws_when_expectation_is_empty()
         {
             XElement theElement = new("element");
 
@@ -970,8 +864,7 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttribute(string.Empty);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentException>()
-                .WithParameterName("expectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
@@ -998,7 +891,7 @@ public class XElementAssertionSpecs
         }
 
         [Fact]
-        public void Throws_when_attribute_is_found()
+        public async Task Throws_when_attribute_is_found()
         {
             // Arrange
             var theElement = XElement.Parse("""<user name="martin" />""");
@@ -1008,12 +901,11 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttribute("name", "because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to have attribute \"name\"*failure message*, but found such attribute in <user name=\"martin\" />*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_attribute_is_found_with_namespace()
+        public async Task Throws_when_attribute_is_found_with_namespace()
         {
             // Arrange
             var theElement = XElement.Parse("""<user xmlns:a="http://www.example.com/2012/test" a:name="martin" />""");
@@ -1024,13 +916,12 @@ public class XElementAssertionSpecs
                     "because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to have attribute \"{http://www.example.com/2012/test}name\""
-                + "*failure message*but found such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />*");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect theElement to have attribute \"{http://www.example.com/2012/test}name\""
+                + "*failure message*but found such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />*").AsWildcard();
         }
 
         [Fact]
-        public void Throws_when_xml_element_is_null()
+        public async Task Throws_when_xml_element_is_null()
         {
             XElement theElement = null;
 
@@ -1039,14 +930,12 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttribute("name", "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Did not expect attribute \"name\" in element *failure message*" +
-                    ", but theElement is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect attribute \"name\" in element *failure message*" +
+                    ", but theElement is <null>.").AsWildcard();
         }
 
         [Fact]
-        public void Throws_when_xml_element_is_null_with_namespace()
+        public async Task Throws_when_xml_element_is_null_with_namespace()
         {
             XElement theElement = null;
 
@@ -1055,14 +944,12 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttribute((XName)"name", "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Did not expect attribute \"name\" in element*failure message*" +
-                    ", but theElement is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect attribute \"name\" in element*failure message*" +
+                    ", but theElement is <null>.").AsWildcard();
         }
 
         [Fact]
-        public void Throws_when_expectation_is_null()
+        public async Task Throws_when_expectation_is_null()
         {
             XElement theElement = new("element");
 
@@ -1071,12 +958,11 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttribute(null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("unexpectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expectation_is_null_with_namespace()
+        public async Task Throws_when_expectation_is_null_with_namespace()
         {
             XElement theElement = new("element");
 
@@ -1085,12 +971,11 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttribute((XName)null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("unexpectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expectation_is_empty()
+        public async Task Throws_when_expectation_is_empty()
         {
             XElement theElement = new("element");
 
@@ -1099,15 +984,14 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttribute(string.Empty);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentException>()
-                .WithParameterName("unexpectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
     public class HaveAttributeWithValue
     {
         [Fact]
-        public void When_asserting_element_has_attribute_with_specific_value_and_it_does_it_should_succeed()
+        public async Task When_asserting_element_has_attribute_with_specific_value_and_it_does_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse(@"<user name=""martin"" />");
@@ -1117,11 +1001,11 @@ public class XElementAssertionSpecs
                 element.Should().HaveAttributeWithValue("name", "martin");
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_element_has_attribute_with_ns_and_specific_value_and_it_does_it_should_succeed()
+        public async Task When_asserting_element_has_attribute_with_ns_and_specific_value_and_it_does_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse("""<user xmlns:a="http://www.example.com/2012/test" a:name="martin" />""");
@@ -1131,11 +1015,11 @@ public class XElementAssertionSpecs
                 element.Should().HaveAttributeWithValue(XName.Get("name", "http://www.example.com/2012/test"), "martin");
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_element_has_attribute_with_specific_value_but_attribute_does_not_exist_it_should_fail()
+        public async Task When_asserting_element_has_attribute_with_specific_value_but_attribute_does_not_exist_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse("""<user name="martin" />""");
@@ -1145,12 +1029,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttributeWithValue("age", "36");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have attribute \"age\" with value \"36\", but found no such attribute in <user name=\"martin\" />");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_element_has_attribute_with_ns_and_specific_value_but_attribute_does_not_exist_it_should_fail()
+        public async Task When_asserting_element_has_attribute_with_ns_and_specific_value_but_attribute_does_not_exist_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse("""<user xmlns:a="http://www.example.com/2012/test" a:name="martin" />""");
@@ -1160,14 +1043,12 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttributeWithValue(XName.Get("age", "http://www.example.com/2012/test"), "36");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have attribute \"{http://www.example.com/2012/test}age\" with value \"36\","
-                + " but found no such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have attribute \"{http://www.example.com/2012/test}age\" with value \"36\","
+                + " but found no such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />").AsWildcard();
         }
 
         [Fact]
-        public void
-            When_asserting_element_has_attribute_with_specific_value_but_attribute_does_not_exist_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_element_has_attribute_with_specific_value_but_attribute_does_not_exist_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("""<user name="martin" />""");
@@ -1180,14 +1061,12 @@ public class XElementAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have attribute \"age\" with value \"36\" because we want to test the failure message,"
-                + " but found no such attribute in <user name=\"martin\" />");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have attribute \"age\" with value \"36\" because we want to test the failure message,"
+                + " but found no such attribute in <user name=\"martin\" />").AsWildcard();
         }
 
         [Fact]
-        public void
-            When_asserting_element_has_attribute_with_ns_and_specific_value_but_attribute_does_not_exist_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_element_has_attribute_with_ns_and_specific_value_but_attribute_does_not_exist_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("""<user xmlns:a="http://www.example.com/2012/test" a:name="martin" />""");
@@ -1198,14 +1077,13 @@ public class XElementAssertionSpecs
                     "because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have attribute \"{http://www.example.com/2012/test}age\" with value \"36\""
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have attribute \"{http://www.example.com/2012/test}age\" with value \"36\""
                 + " because we want to test the failure message,"
-                + " but found no such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />");
+                + " but found no such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />").AsWildcard();
         }
 
         [Fact]
-        public void When_asserting_element_has_attribute_with_specific_value_but_attribute_has_different_value_it_should_fail()
+        public async Task When_asserting_element_has_attribute_with_specific_value_but_attribute_has_different_value_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse("""<user name="martin" />""");
@@ -1215,13 +1093,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttributeWithValue("name", "dennis");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected attribute \"name\" in theElement to have value \"dennis\", but found \"martin\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_element_has_attribute_with_ns_and_specific_value_but_attribute_has_different_value_it_should_fail()
+        public async Task When_asserting_element_has_attribute_with_ns_and_specific_value_but_attribute_has_different_value_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse("""<user xmlns:a="http://www.example.com/2012/test" a:name="martin" />""");
@@ -1231,13 +1107,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttributeWithValue(XName.Get("name", "http://www.example.com/2012/test"), "dennis");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected attribute \"{http://www.example.com/2012/test}name\" in theElement to have value \"dennis\", but found \"martin\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_element_has_attribute_with_specific_value_but_attribute_has_different_value_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_element_has_attribute_with_specific_value_but_attribute_has_different_value_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("""<user name="martin" />""");
@@ -1248,14 +1122,12 @@ public class XElementAssertionSpecs
                     .HaveAttributeWithValue("name", "dennis", "because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected attribute \"name\" in theElement to have value \"dennis\""
-                + " because we want to test the failure message, but found \"martin\".");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected attribute \"name\" in theElement to have value \"dennis\""
+                + " because we want to test the failure message, but found \"martin\".").AsWildcard();
         }
 
         [Fact]
-        public void
-            When_asserting_element_has_attribute_with_ns_and_specific_value_but_attribute_has_different_value_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_element_has_attribute_with_ns_and_specific_value_but_attribute_has_different_value_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse("""<user xmlns:a="http://www.example.com/2012/test" a:name="martin" />""");
@@ -1266,13 +1138,12 @@ public class XElementAssertionSpecs
                     "because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected attribute \"{http://www.example.com/2012/test}name\" in theElement to have value \"dennis\""
-                + " because we want to test the failure message, but found \"martin\".");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected attribute \"{http://www.example.com/2012/test}name\" in theElement to have value \"dennis\""
+                + " because we want to test the failure message, but found \"martin\".").AsWildcard();
         }
 
         [Fact]
-        public void When_xml_element_is_null_then_have_attribute_should_fail()
+        public async Task When_xml_element_is_null_then_have_attribute_should_fail()
         {
             XElement theElement = null;
 
@@ -1281,14 +1152,12 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttributeWithValue("name", "value", "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected attribute \"name\" in element to have value \"value\" *failure message*" +
-                    ", but theElement is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected attribute \"name\" in element to have value \"value\" *failure message*" +
+                    ", but theElement is <null>.").AsWildcard();
         }
 
         [Fact]
-        public void When_xml_element_is_null_then_have_attribute_with_XName_should_fail()
+        public async Task When_xml_element_is_null_then_have_attribute_with_XName_should_fail()
         {
             XElement theElement = null;
 
@@ -1297,14 +1166,12 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttributeWithValue((XName)"name", "value", "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected attribute \"name\" in element to have value \"value\" *failure message*" +
-                    ", but theElement is <null>.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected attribute \"name\" in element to have value \"value\" *failure message*" +
+                    ", but theElement is <null>.").AsWildcard();
         }
 
         [Fact]
-        public void When_asserting_element_has_an_attribute_with_a_null_name_it_should_throw()
+        public async Task When_asserting_element_has_an_attribute_with_a_null_name_it_should_throw()
         {
             XElement theElement = new("element");
 
@@ -1313,12 +1180,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttributeWithValue(null, "value");
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("expectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_element_has_an_attribute_with_a_null_XName_it_should_throw()
+        public async Task When_asserting_element_has_an_attribute_with_a_null_XName_it_should_throw()
         {
             XElement theElement = new("element");
 
@@ -1327,12 +1193,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttributeWithValue((XName)null, "value");
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("expectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_element_has_an_attribute_with_an_empty_name_it_should_throw()
+        public async Task When_asserting_element_has_an_attribute_with_an_empty_name_it_should_throw()
         {
             XElement theElement = new("element");
 
@@ -1341,8 +1206,7 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveAttributeWithValue(string.Empty, "value");
 
             // Assert
-            act.Should().ThrowExactly<ArgumentException>()
-                .WithParameterName("expectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
@@ -1409,7 +1273,7 @@ public class XElementAssertionSpecs
         }
 
         [Fact]
-        public void Throws_when_attribute_and_name_fits()
+        public async Task Throws_when_attribute_and_name_fits()
         {
             // Arrange
             var theElement = XElement.Parse("""<user name="martin" />""");
@@ -1424,13 +1288,12 @@ public class XElementAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to have attribute \"name\" with value \"martin\" because we want to test the failure message,"
-                + " but found such attribute in <user name=\"martin\" />*");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect theElement to have attribute \"name\" with value \"martin\" because we want to test the failure message,"
+                + " but found such attribute in <user name=\"martin\" />*").AsWildcard();
         }
 
         [Fact]
-        public void Throws_when_attribute_and_name_fits_with_namespace()
+        public async Task Throws_when_attribute_and_name_fits_with_namespace()
         {
             // Arrange
             var theElement = XElement.Parse("""<user xmlns:a="http://www.example.com/2012/test" a:name="martin" />""");
@@ -1441,14 +1304,13 @@ public class XElementAssertionSpecs
                     "because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theElement to have attribute \"{http://www.example.com/2012/test}name\" with value \"martin\""
+            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect theElement to have attribute \"{http://www.example.com/2012/test}name\" with value \"martin\""
                 + " because we want to test the failure message,"
-                + " but found such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />*");
+                + " but found such attribute in <user xmlns:a=\"http://www.example.com/2012/test\" a:name=\"martin\" />*").AsWildcard();
         }
 
         [Fact]
-        public void Throws_when_element_is_null()
+        public async Task Throws_when_element_is_null()
         {
             XElement theElement = null;
 
@@ -1457,13 +1319,11 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttributeWithValue("name", "value", "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Did not expect attribute \"name\" in element to have value \"value\"*failure message*, but theElement is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_element_is_null_with_namespace()
+        public async Task Throws_when_element_is_null_with_namespace()
         {
             XElement theElement = null;
 
@@ -1473,13 +1333,11 @@ public class XElementAssertionSpecs
                     .NotHaveAttributeWithValue((XName)"name", "value", "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Did not expect attribute \"name\" in element to have value \"value\"*failure message*, but theElement is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_expected_is_null()
+        public async Task Throws_when_expected_is_null()
         {
             XElement theElement = new("element");
 
@@ -1488,12 +1346,11 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttributeWithValue(null, "value");
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("unexpectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_is_null_with_namespace()
+        public async Task Throws_when_expected_is_null_with_namespace()
         {
             XElement theElement = new("element");
 
@@ -1502,12 +1359,11 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttributeWithValue((XName)null, "value");
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("unexpectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_attribute_is_something_but_value_is_null()
+        public async Task Throws_when_expected_attribute_is_something_but_value_is_null()
         {
             XElement theElement = new("element");
 
@@ -1516,12 +1372,11 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttributeWithValue("some", null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("unexpectedValue");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_attribute_is_something_but_value_is_null_with_namespace()
+        public async Task Throws_when_expected_attribute_is_something_but_value_is_null_with_namespace()
         {
             XElement theElement = new("element");
 
@@ -1530,12 +1385,11 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttributeWithValue((XName)"some", null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("unexpectedValue");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_is_empty()
+        public async Task Throws_when_expected_is_empty()
         {
             XElement theElement = new("element");
 
@@ -1544,15 +1398,14 @@ public class XElementAssertionSpecs
                 theElement.Should().NotHaveAttributeWithValue(string.Empty, "value");
 
             // Assert
-            act.Should().ThrowExactly<ArgumentException>()
-                .WithParameterName("unexpectedName");
+            await Expect.That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
     public class HaveElement
     {
         [Fact]
-        public void When_asserting_element_has_child_element_and_it_does_it_should_succeed()
+        public async Task When_asserting_element_has_child_element_and_it_does_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1567,11 +1420,11 @@ public class XElementAssertionSpecs
                 element.Should().HaveElement("child");
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_element_has_child_element_with_ns_and_it_does_it_should_succeed()
+        public async Task When_asserting_element_has_child_element_with_ns_and_it_does_it_should_succeed()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1586,11 +1439,11 @@ public class XElementAssertionSpecs
                 element.Should().HaveElement(XName.Get("child", "http://www.example.com/2012/test"));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_element_has_child_element_but_it_does_not_it_should_fail()
+        public async Task When_asserting_element_has_child_element_but_it_does_not_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse(
@@ -1605,12 +1458,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveElement("unknown");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have child element \"unknown\", but no such child element was found.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_element_has_child_element_with_ns_but_it_does_not_it_should_fail()
+        public async Task When_asserting_element_has_child_element_with_ns_but_it_does_not_it_should_fail()
         {
             // Arrange
             var theElement = XElement.Parse(
@@ -1625,12 +1477,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveElement(XName.Get("unknown", "http://www.example.com/2012/test"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have child element \"{{http://www.example.com/2012/test}}unknown\", but no such child element was found.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_element_has_child_element_but_it_does_not_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_element_has_child_element_but_it_does_not_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse(
@@ -1645,13 +1496,12 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveElement("unknown", "because we want to test the failure message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have child element \"unknown\" because we want to test the failure message,"
-                + " but no such child element was found.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have child element \"unknown\" because we want to test the failure message,"
+                + " but no such child element was found.").AsWildcard();
         }
 
         [Fact]
-        public void When_asserting_element_has_child_element_with_ns_but_it_does_not_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_element_has_child_element_with_ns_but_it_does_not_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theElement = XElement.Parse(
@@ -1667,13 +1517,12 @@ public class XElementAssertionSpecs
                     "because we want to test the failure message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theElement to have child element \"{{http://www.example.com/2012/test}}unknown\""
-                + " because we want to test the failure message, but no such child element was found.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have child element \"{{http://www.example.com/2012/test}}unknown\""
+                + " because we want to test the failure message, but no such child element was found.").AsWildcard();
         }
 
         [Fact]
-        public void When_asserting_element_has_child_element_it_should_return_the_matched_element_in_the_which_property()
+        public async Task When_asserting_element_has_child_element_it_should_return_the_matched_element_in_the_which_property()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1687,14 +1536,13 @@ public class XElementAssertionSpecs
             var matchedElement = element.Should().HaveElement("child").Subject;
 
             // Assert
-            matchedElement.Should().BeOfType<XElement>()
-                .And.HaveAttributeWithValue("attr", "1");
+            await Expect.That(matchedElement).IsExactly<XElement>();
 
-            matchedElement.Name.Should().Be(XName.Get("child"));
+            await Expect.That(matchedElement.Name).IsEqualTo(XName.Get("child"));
         }
 
         [Fact]
-        public void When_asserting_element_has_a_child_element_with_a_null_name_it_should_throw()
+        public async Task When_asserting_element_has_a_child_element_with_a_null_name_it_should_throw()
         {
             XElement theElement = new("element");
 
@@ -1703,12 +1551,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveElement(null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("expected");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_element_has_a_child_element_with_a_null_XName_it_should_throw()
+        public async Task When_asserting_element_has_a_child_element_with_a_null_XName_it_should_throw()
         {
             XElement theElement = new("element");
 
@@ -1717,12 +1564,11 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveElement((XName)null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("expected");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_element_has_a_child_element_with_an_empty_name_it_should_throw()
+        public async Task When_asserting_element_has_a_child_element_with_an_empty_name_it_should_throw()
         {
             XElement theElement = new("element");
 
@@ -1731,8 +1577,7 @@ public class XElementAssertionSpecs
                 theElement.Should().HaveElement(string.Empty);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentException>()
-                .WithParameterName("expected");
+            await Expect.That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
@@ -1755,7 +1600,7 @@ public class XElementAssertionSpecs
         }
 
         [Fact]
-        public void Asserting_element_inside_an_assertion_scope_it_checks_the_whole_assertion_scope_before_failing()
+        public async Task Asserting_element_inside_an_assertion_scope_it_checks_the_whole_assertion_scope_before_failing()
         {
             // Arrange
             XElement element = null;
@@ -1771,11 +1616,11 @@ public class XElementAssertionSpecs
             };
 
             // Assert
-            act.Should().NotThrow<NullReferenceException>();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void Element_has_two_child_elements_and_three_expected_it_fails()
+        public async Task Element_has_two_child_elements_and_three_expected_it_fails()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1791,12 +1636,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElement("child", Exactly.Twice());
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected element to have an element \"child\"*exactly*2 times, but found it 3 times.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Element_is_valid_and_expected_null_with_string_overload_it_fails()
+        public async Task Element_is_valid_and_expected_null_with_string_overload_it_fails()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1812,12 +1656,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElement(null, Exactly.Twice());
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage(
-                "Cannot assert the element has an element if the expected name is <null>.*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void Element_is_valid_and_expected_null_with_x_name_overload_it_fails()
+        public async Task Element_is_valid_and_expected_null_with_x_name_overload_it_fails()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1833,8 +1676,7 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElement((XName)null, Exactly.Twice());
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage(
-                "Cannot assert the element has an element count if the element name is <null>.*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -1856,7 +1698,7 @@ public class XElementAssertionSpecs
         }
 
         [Fact]
-        public void Chaining_after_a_non_successful_occurrence_check_does_not_continue_the_assertion()
+        public async Task Chaining_after_a_non_successful_occurrence_check_does_not_continue_the_assertion()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1873,12 +1715,11 @@ public class XElementAssertionSpecs
                 .Which.Should().NotBeNull();
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected element to have an element \"child\"*exactly*1 time, but found it 3 times.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Null_element_is_expected_to_have_an_element_count_it_should_fail()
+        public async Task Null_element_is_expected_to_have_an_element_count_it_should_fail()
         {
             // Arrange
             XElement xElement = null;
@@ -1887,15 +1728,14 @@ public class XElementAssertionSpecs
             Action act = () => xElement.Should().HaveElement("child", AtLeast.Once());
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected* to have an element with count of *, but the element itself is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class HaveElementWithValue
     {
         [Fact]
-        public void The_element_cannot_be_null()
+        public async Task The_element_cannot_be_null()
         {
             // Arrange
             XElement element = null;
@@ -1904,7 +1744,7 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElementWithValue("child", "b");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*child*b*element itself is <null>*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1924,7 +1764,7 @@ public class XElementAssertionSpecs
         }
 
         [Fact]
-        public void Throws_when_element_is_not_found()
+        public async Task Throws_when_element_is_not_found()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1939,11 +1779,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElementWithValue("c", "f");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*c*f*element*isn't found*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_element_found_but_value_does_not_match()
+        public async Task Throws_when_element_found_but_value_does_not_match()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1958,11 +1798,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElementWithValue("child", "c");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*child*c*element*does not have such a value*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_expected_element_is_null()
+        public async Task Throws_when_expected_element_is_null()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1977,11 +1817,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElementWithValue(null, "a");
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*expectedElement*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_element_is_null_with_namespace()
+        public async Task Throws_when_expected_element_is_null_with_namespace()
         {
             // Arrange
             var element = XElement.Parse(
@@ -1996,11 +1836,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElementWithValue((XName)null, "a");
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*expectedElement*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_value_is_null()
+        public async Task Throws_when_expected_value_is_null()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2015,11 +1855,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElementWithValue("child", null);
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*expectedValue*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_value_is_null_with_namespace()
+        public async Task Throws_when_expected_value_is_null_with_namespace()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2034,11 +1874,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElementWithValue(XNamespace.None + "child", null);
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*expectedValue*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void The_element_cannot_be_null_and_searching_with_namespace()
+        public async Task The_element_cannot_be_null_and_searching_with_namespace()
         {
             // Arrange
             XElement element = null;
@@ -2049,7 +1889,7 @@ public class XElementAssertionSpecs
                     .HaveElementWithValue(XNamespace.None + "child", "b", "we want to test the {0} message", "failure");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*child*b*failure message*element itself is <null>*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -2069,7 +1909,7 @@ public class XElementAssertionSpecs
         }
 
         [Fact]
-        public void Throws_when_element_with_namespace_not_found()
+        public async Task Throws_when_element_with_namespace_not_found()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2088,11 +1928,11 @@ public class XElementAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*c*f*element*isn't found*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_element_with_namespace_found_but_value_does_not_match()
+        public async Task Throws_when_element_with_namespace_found_but_value_does_not_match()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2107,14 +1947,14 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().HaveElementWithValue(XNamespace.None + "child", "c");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*child*c*element*does not have such a value*");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotHaveElement
     {
         [Fact]
-        public void The_element_cannot_be_null()
+        public async Task The_element_cannot_be_null()
         {
             // Arrange
             XElement element = null;
@@ -2123,7 +1963,7 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElement("child");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*child*b*element itself is <null>*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -2143,7 +1983,7 @@ public class XElementAssertionSpecs
         }
 
         [Fact]
-        public void Throws_when_element_found_but_expected_to_be_absent()
+        public async Task Throws_when_element_found_but_expected_to_be_absent()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2158,11 +1998,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElement("child");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*Did not*child*element*was found*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_unexpected_element_is_null()
+        public async Task Throws_when_unexpected_element_is_null()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2177,11 +2017,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElement(null);
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*unexpectedElement*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_unexpected_element_is_null_with_namespace()
+        public async Task Throws_when_unexpected_element_is_null_with_namespace()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2196,11 +2036,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElement((XName)null);
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*unexpectedElement*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void The_element_cannot_be_null_and_searching_with_namespace()
+        public async Task The_element_cannot_be_null_and_searching_with_namespace()
         {
             // Arrange
             XElement element = null;
@@ -2211,7 +2051,7 @@ public class XElementAssertionSpecs
                     .NotHaveElement(XNamespace.None + "child", "we want to test the {0} message", "failure");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*child*failure message*element itself is <null>*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -2234,7 +2074,7 @@ public class XElementAssertionSpecs
     public class NotHaveElementWithValue
     {
         [Fact]
-        public void The_element_cannot_be_null()
+        public async Task The_element_cannot_be_null()
         {
             // Arrange
             XElement element = null;
@@ -2243,11 +2083,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElementWithValue("child", "b");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*child*b*element itself is <null>*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_element_with_specified_value_is_found()
+        public async Task Throws_when_element_with_specified_value_is_found()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2262,7 +2102,7 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElementWithValue("child", "b");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("Did not*element*child*value*b*does have this value*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -2298,7 +2138,7 @@ public class XElementAssertionSpecs
         }
 
         [Fact]
-        public void Throws_when_expected_element_is_null()
+        public async Task Throws_when_expected_element_is_null()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2313,11 +2153,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElementWithValue(null, "a");
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*expectedElement*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_element_is_null_with_namespace()
+        public async Task Throws_when_expected_element_is_null_with_namespace()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2332,11 +2172,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElementWithValue((XName)null, "a");
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*expectedElement*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_value_is_null()
+        public async Task Throws_when_expected_value_is_null()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2351,11 +2191,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElementWithValue("child", null);
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*expectedValue*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void Throws_when_expected_value_is_null_with_namespace()
+        public async Task Throws_when_expected_value_is_null_with_namespace()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2370,11 +2210,11 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElementWithValue(XNamespace.None + "child", null);
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage("*expectedValue*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void The_element_cannot_be_null_and_searching_with_namespace()
+        public async Task The_element_cannot_be_null_and_searching_with_namespace()
         {
             // Arrange
             XElement element = null;
@@ -2385,11 +2225,11 @@ public class XElementAssertionSpecs
                     "failure");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*child*b*failure message*element itself is <null>*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Throws_when_element_with_specified_value_is_found_with_namespace()
+        public async Task Throws_when_element_with_specified_value_is_found_with_namespace()
         {
             // Arrange
             var element = XElement.Parse(
@@ -2404,7 +2244,7 @@ public class XElementAssertionSpecs
             Action act = () => element.Should().NotHaveElementWithValue(XNamespace.None + "child", "b");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("Did not expect*element*child*value*b*does have this value*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]

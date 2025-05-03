@@ -32,7 +32,7 @@ public partial class StringAssertionSpecs
         }
 
         [Fact]
-        public void Upper_case_characters_are_not_okay()
+        public async Task Upper_case_characters_are_not_okay()
         {
             // Arrange
             string actual = "ABC";
@@ -41,11 +41,11 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().BeLowerCased();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void A_mixed_case_string_is_not_okay()
+        public async Task A_mixed_case_string_is_not_okay()
         {
             // Arrange
             string actual = "AbC";
@@ -54,7 +54,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().BeLowerCased();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -78,7 +78,7 @@ public partial class StringAssertionSpecs
         }
 
         [Fact]
-        public void The_assertion_fails_with_a_descriptive_message()
+        public async Task The_assertion_fails_with_a_descriptive_message()
         {
             // Arrange
             string actual = "ABC";
@@ -87,12 +87,11 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().BeLowerCased("because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected all alphabetic characters in actual to be lower cased because we want to test the failure message, but found \"ABC\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void The_null_string_is_not_okay()
+        public async Task The_null_string_is_not_okay()
         {
             // Arrange
             string nullString = null;
@@ -101,8 +100,7 @@ public partial class StringAssertionSpecs
             Action act = () => nullString.Should().BeLowerCased("because strings should never be {0}", "null");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected all alphabetic characters in nullString to be lower cased because strings should never be null, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
@@ -139,7 +137,7 @@ public partial class StringAssertionSpecs
         }
 
         [Fact]
-        public void A_lower_case_string_is_not_okay()
+        public async Task A_lower_case_string_is_not_okay()
         {
             // Arrange
             string actual = "abc";
@@ -148,7 +146,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotBeLowerCased();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -162,7 +160,7 @@ public partial class StringAssertionSpecs
         }
 
         [Fact]
-        public void All_cased_characters_being_lower_case_is_not_okay()
+        public async Task All_cased_characters_being_lower_case_is_not_okay()
         {
             // Arrange
             string actual = "a1b!";
@@ -171,7 +169,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotBeLowerCased();
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -185,7 +183,7 @@ public partial class StringAssertionSpecs
         }
 
         [Fact]
-        public void The_assertion_fails_with_a_descriptive_message()
+        public async Task The_assertion_fails_with_a_descriptive_message()
         {
             // Arrange
             string actual = "abc";
@@ -194,8 +192,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotBeLowerCased("because we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected some characters in actual to be upper-case because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

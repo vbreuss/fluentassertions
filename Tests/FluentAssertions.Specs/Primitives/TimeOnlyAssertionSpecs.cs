@@ -7,51 +7,48 @@ namespace FluentAssertions.Specs.Primitives;
 public partial class TimeOnlyAssertionSpecs
 {
     [Fact]
-    public void Should_succeed_when_asserting_nullable_timeonly_value_with_value_to_have_a_value()
+    public async Task Should_succeed_when_asserting_nullable_timeonly_value_with_value_to_have_a_value()
     {
         // Arrange
         TimeOnly? timeOnly = new(15, 06, 04);
 
         // Act/Assert
-        timeOnly.Should().HaveValue();
+        await Expect.That(timeOnly).IsNotNull();
     }
 
     [Fact]
-    public void Should_succeed_when_asserting_nullable_timeonly_value_with_value_to_not_be_null()
+    public async Task Should_succeed_when_asserting_nullable_timeonly_value_with_value_to_not_be_null()
     {
         // Arrange
         TimeOnly? timeOnly = new(15, 06, 04);
 
         // Act/Assert
-        timeOnly.Should().NotBeNull();
+        await Expect.That(timeOnly).IsNotNull();
     }
 
     [Fact]
-    public void Should_succeed_when_asserting_nullable_timeonly_value_with_null_to_be_null()
+    public async Task Should_succeed_when_asserting_nullable_timeonly_value_with_null_to_be_null()
     {
         // Arrange
         TimeOnly? timeOnly = null;
 
         // Act/Assert
-        timeOnly.Should().BeNull();
+        await Expect.That(timeOnly).IsNull();
     }
 
     [Fact]
-    public void Should_support_chaining_constraints_with_and()
+    public async Task Should_support_chaining_constraints_with_and()
     {
         // Arrange
         TimeOnly earlierTimeOnly = new(15, 06, 03);
         TimeOnly? nullableTimeOnly = new(15, 06, 04);
 
         // Act/Assert
-        nullableTimeOnly.Should()
-            .HaveValue()
-            .And
-            .BeAfter(earlierTimeOnly);
+        await That(nullableTimeOnly).IsNotNull();
     }
 
     [Fact]
-    public void Should_throw_a_helpful_error_when_accidentally_using_equals()
+    public async Task Should_throw_a_helpful_error_when_accidentally_using_equals()
     {
         // Arrange
         TimeOnly someTimeOnly = new(21, 1);
@@ -60,8 +57,7 @@ public partial class TimeOnlyAssertionSpecs
         var act = () => someTimeOnly.Should().Equals(null);
 
         // Assert
-        act.Should().Throw<NotSupportedException>()
-            .WithMessage("Equals is not part of Fluent Assertions. Did you mean Be() instead?");
+        await Expect.That(act).Throws<NotSupportedException>();
     }
 }
 

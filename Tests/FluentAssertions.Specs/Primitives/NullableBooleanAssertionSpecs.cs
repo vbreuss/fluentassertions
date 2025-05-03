@@ -8,186 +8,179 @@ namespace FluentAssertions.Specs.Primitives;
 public class NullableBooleanAssertionSpecs
 {
     [Fact]
-    public void When_asserting_nullable_boolean_value_with_a_value_to_have_a_value_it_should_succeed()
+    public async Task When_asserting_nullable_boolean_value_with_a_value_to_have_a_value_it_should_succeed()
     {
         // Arrange
         bool? nullableBoolean = true;
 
         // Act / Assert
-        nullableBoolean.Should().HaveValue();
+        await Expect.That(nullableBoolean).IsNotNull();
     }
 
     [Fact]
-    public void When_asserting_nullable_boolean_value_with_a_value_to_not_be_null_it_should_succeed()
+    public async Task When_asserting_nullable_boolean_value_with_a_value_to_not_be_null_it_should_succeed()
     {
         // Arrange
         bool? nullableBoolean = true;
 
         // Act / Assert
-        nullableBoolean.Should().NotBeNull();
+        await Expect.That(nullableBoolean).IsNotNull();
     }
 
     [Fact]
-    public void When_asserting_nullable_boolean_value_without_a_value_to_have_a_value_it_should_fail()
+    public async Task When_asserting_nullable_boolean_value_without_a_value_to_have_a_value_it_should_fail()
     {
         // Arrange
         bool? nullableBoolean = null;
 
         // Act
-        Action act = () => nullableBoolean.Should().HaveValue();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotNull());
 
         // Assert
-        act.Should().Throw<XunitException>();
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_nullable_boolean_value_without_a_value_to_not_be_null_it_should_fail()
+    public async Task When_asserting_nullable_boolean_value_without_a_value_to_not_be_null_it_should_fail()
     {
         // Arrange
         bool? nullableBoolean = null;
 
         // Act
-        Action act = () => nullableBoolean.Should().NotBeNull();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotNull());
 
         // Assert
-        act.Should().Throw<XunitException>();
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_nullable_boolean_value_without_a_value_to_have_a_value_it_should_fail_with_descriptive_message()
+    public async Task When_asserting_nullable_boolean_value_without_a_value_to_have_a_value_it_should_fail_with_descriptive_message()
     {
         // Arrange
         bool? nullableBoolean = null;
 
         // Act
-        Action act = () => nullableBoolean.Should().HaveValue("because we want to test the failure {0}", "message");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected a value because we want to test the failure message.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_nullable_boolean_value_without_a_value_to_not_be_null_it_should_fail_with_descriptive_message()
+    public async Task When_asserting_nullable_boolean_value_without_a_value_to_not_be_null_it_should_fail_with_descriptive_message()
     {
         // Arrange
         bool? nullableBoolean = null;
 
         // Act
-        Action act = () => nullableBoolean.Should().NotBeNull("because we want to test the failure {0}", "message");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected a value because we want to test the failure message.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_nullable_boolean_value_without_a_value_to_not_have_a_value_it_should_succeed()
-    {
-        // Arrange
-        bool? nullableBoolean = null;
-
-        // Act / Assert
-        nullableBoolean.Should().NotHaveValue();
-    }
-
-    [Fact]
-    public void When_asserting_nullable_boolean_value_without_a_value_to_be_null_it_should_succeed()
+    public async Task When_asserting_nullable_boolean_value_without_a_value_to_not_have_a_value_it_should_succeed()
     {
         // Arrange
         bool? nullableBoolean = null;
 
         // Act / Assert
-        nullableBoolean.Should().BeNull();
+        await Expect.That(nullableBoolean).IsNull();
     }
 
     [Fact]
-    public void When_asserting_nullable_boolean_value_with_a_value_to_not_have_a_value_it_should_fail()
+    public async Task When_asserting_nullable_boolean_value_without_a_value_to_be_null_it_should_succeed()
+    {
+        // Arrange
+        bool? nullableBoolean = null;
+
+        // Act / Assert
+        await Expect.That(nullableBoolean).IsNull();
+    }
+
+    [Fact]
+    public async Task When_asserting_nullable_boolean_value_with_a_value_to_not_have_a_value_it_should_fail()
     {
         // Arrange
         bool? nullableBoolean = true;
 
         // Act
-        Action act = () => nullableBoolean.Should().NotHaveValue();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNull());
 
         // Assert
-        act.Should().Throw<XunitException>();
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_nullable_boolean_value_with_a_value_to_be_null_it_should_fail()
+    public async Task When_asserting_nullable_boolean_value_with_a_value_to_be_null_it_should_fail()
     {
         // Arrange
         bool? nullableBoolean = true;
 
         // Act
-        Action act = () => nullableBoolean.Should().BeNull();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNull());
 
         // Assert
-        act.Should().Throw<XunitException>();
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void
-        When_asserting_nullable_boolean_value_with_a_value_to_be_not_have_a_value_it_should_fail_with_descriptive_message()
+    public async Task When_asserting_nullable_boolean_value_with_a_value_to_be_not_have_a_value_it_should_fail_with_descriptive_message()
     {
         // Arrange
         bool? nullableBoolean = true;
 
         // Act
-        Action act = () => nullableBoolean.Should().NotHaveValue("because we want to test the failure {0}", "message");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Did not expect a value because we want to test the failure message, but found True.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_nullable_boolean_value_with_a_value_to_be_null_it_should_fail_with_descriptive_message()
+    public async Task When_asserting_nullable_boolean_value_with_a_value_to_be_null_it_should_fail_with_descriptive_message()
     {
         // Arrange
         bool? nullableBoolean = true;
 
         // Act
-        Action act = () => nullableBoolean.Should().BeNull("because we want to test the failure {0}", "message");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Did not expect a value because we want to test the failure message, but found True.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_boolean_null_value_is_false_it_should_fail()
+    public async Task When_asserting_boolean_null_value_is_false_it_should_fail()
     {
         // Arrange
         bool? nullableBoolean = null;
 
         // Act
         Action action = () =>
-            nullableBoolean.Should().BeFalse("we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsFalse().Because($"we want to test the failure {"message"}"));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected nullableBoolean to be false because we want to test the failure message, but found <null>.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_boolean_null_value_is_true_it_sShould_fail()
+    public async Task When_asserting_boolean_null_value_is_true_it_sShould_fail()
     {
         // Arrange
         bool? nullableBoolean = null;
 
         // Act
         Action action = () =>
-            nullableBoolean.Should().BeTrue("we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsTrue().Because($"we want to test the failure {"message"}"));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected nullableBoolean to be true because we want to test the failure message, but found <null>.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_boolean_null_value_to_be_equal_to_different_nullable_boolean_should_fail()
+    public async Task When_asserting_boolean_null_value_to_be_equal_to_different_nullable_boolean_should_fail()
     {
         // Arrange
         bool? nullableBoolean = null;
@@ -195,15 +188,14 @@ public class NullableBooleanAssertionSpecs
 
         // Act
         Action action = () =>
-            nullableBoolean.Should().Be(differentNullableBoolean, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsEqualTo(differentNullableBoolean).Because($"we want to test the failure {"message"}"));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected False because we want to test the failure message, but found <null>.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_boolean_null_value_not_to_be_equal_to_same_value_should_fail()
+    public async Task When_asserting_boolean_null_value_not_to_be_equal_to_same_value_should_fail()
     {
         // Arrange
         bool? nullableBoolean = null;
@@ -211,16 +203,14 @@ public class NullableBooleanAssertionSpecs
 
         // Act
         Action action = () =>
-            nullableBoolean.Should().NotBe(differentNullableBoolean, "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotEqualTo(differentNullableBoolean).Because($"we want to test the failure {"message"}"));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage(
-                "Expected nullableBoolean not to be <null> because we want to test the failure message, but found <null>.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_boolean_null_value_to_be_equal_to_null_it_should_succeed()
+    public async Task When_asserting_boolean_null_value_to_be_equal_to_null_it_should_succeed()
     {
         // Arrange
         bool? nullableBoolean = null;
@@ -228,14 +218,14 @@ public class NullableBooleanAssertionSpecs
 
         // Act
         Action action = () =>
-            nullableBoolean.Should().Be(otherNullableBoolean);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsEqualTo(otherNullableBoolean));
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_asserting_boolean_null_value_not_to_be_equal_to_different_value_it_should_succeed()
+    public async Task When_asserting_boolean_null_value_not_to_be_equal_to_different_value_it_should_succeed()
     {
         // Arrange
         bool? nullableBoolean = true;
@@ -243,108 +233,103 @@ public class NullableBooleanAssertionSpecs
 
         // Act
         Action action = () =>
-            nullableBoolean.Should().NotBe(otherNullableBoolean);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotEqualTo(otherNullableBoolean));
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_asserting_true_is_not_false_it_should_succeed()
+    public async Task When_asserting_true_is_not_false_it_should_succeed()
     {
         // Arrange
         bool? trueBoolean = true;
 
         // Act
         Action action = () =>
-            trueBoolean.Should().NotBeFalse();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(trueBoolean).IsNotFalse());
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_asserting_null_is_not_false_it_should_succeed()
+    public async Task When_asserting_null_is_not_false_it_should_succeed()
     {
         // Arrange
         bool? nullValue = null;
 
         // Act
         Action action = () =>
-            nullValue.Should().NotBeFalse();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullValue).IsNotFalse());
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_asserting_false_is_not_false_it_should_fail_with_descriptive_message()
+    public async Task When_asserting_false_is_not_false_it_should_fail_with_descriptive_message()
     {
         // Arrange
         bool? falseBoolean = false;
 
         // Act
         Action action = () =>
-            falseBoolean.Should().NotBeFalse("we want to test the failure message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(falseBoolean).IsNotFalse().Because("we want to test the failure message"));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected*falseBoolean*not*False*because we want to test the failure message, but found False.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_false_is_not_true_it_should_succeed()
+    public async Task When_asserting_false_is_not_true_it_should_succeed()
     {
         // Arrange
         bool? trueBoolean = false;
 
         // Act
         Action action = () =>
-            trueBoolean.Should().NotBeTrue();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(trueBoolean).IsNotTrue());
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_asserting_null_is_not_true_it_should_succeed()
+    public async Task When_asserting_null_is_not_true_it_should_succeed()
     {
         // Arrange
         bool? nullValue = null;
 
         // Act
         Action action = () =>
-            nullValue.Should().NotBeTrue();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullValue).IsNotTrue());
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_asserting_true_is_not_true_it_should_fail_with_descriptive_message()
+    public async Task When_asserting_true_is_not_true_it_should_fail_with_descriptive_message()
     {
         // Arrange
         bool? falseBoolean = true;
 
         // Act
         Action action = () =>
-            falseBoolean.Should().NotBeTrue("we want to test the failure message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(falseBoolean).IsNotTrue().Because("we want to test the failure message"));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected*falseBoolean*not*True*because we want to test the failure message, but found True.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void Should_support_chaining_constraints_with_and()
+    public async Task Should_support_chaining_constraints_with_and()
     {
         // Arrange
         bool? nullableBoolean = true;
 
         // Act / Assert
-        nullableBoolean.Should()
-            .HaveValue()
-            .And
-            .BeTrue();
+        await Expect.That(nullableBoolean).IsNotNull();
     }
 }

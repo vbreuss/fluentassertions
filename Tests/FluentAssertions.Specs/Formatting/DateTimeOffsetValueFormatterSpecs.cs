@@ -9,27 +9,27 @@ namespace FluentAssertions.Specs.Formatting;
 public class DateTimeOffsetValueFormatterSpecs
 {
     [Fact]
-    public void When_time_is_not_relevant_it_should_not_be_included_in_the_output()
+    public async Task When_time_is_not_relevant_it_should_not_be_included_in_the_output()
     {
         // Act
         string result = Formatter.ToString(new DateTime(1973, 9, 20));
 
         // Assert
-        result.Should().Be("<1973-09-20>");
+        await Expect.That(result).IsEqualTo("<1973-09-20>");
     }
 
     [Fact]
-    public void When_the_offset_is_not_relevant_it_should_not_be_included_in_the_output()
+    public async Task When_the_offset_is_not_relevant_it_should_not_be_included_in_the_output()
     {
         // Act
         string result = Formatter.ToString(new DateTime(1973, 9, 20, 12, 59, 59));
 
         // Assert
-        result.Should().Be("<1973-09-20 12:59:59>");
+        await Expect.That(result).IsEqualTo("<1973-09-20 12:59:59>");
     }
 
     [Fact]
-    public void When_the_offset_is_negative_it_should_include_it_in_the_output()
+    public async Task When_the_offset_is_negative_it_should_include_it_in_the_output()
     {
         // Arrange
         DateTimeOffset date = new(1973, 9, 20, 12, 59, 59, -3.Hours());
@@ -38,21 +38,21 @@ public class DateTimeOffsetValueFormatterSpecs
         string result = Formatter.ToString(date);
 
         // Assert
-        result.Should().Be("<1973-09-20 12:59:59 -3h>");
+        await Expect.That(result).IsEqualTo("<1973-09-20 12:59:59 -3h>");
     }
 
     [Fact]
-    public void When_the_offset_is_positive_it_should_include_it_in_the_output()
+    public async Task When_the_offset_is_positive_it_should_include_it_in_the_output()
     {
         // Arrange / Act
         string result = Formatter.ToString(new DateTimeOffset(1973, 9, 20, 12, 59, 59, 3.Hours()));
 
         // Assert
-        result.Should().Be("<1973-09-20 12:59:59 +3h>");
+        await Expect.That(result).IsEqualTo("<1973-09-20 12:59:59 +3h>");
     }
 
     [Fact]
-    public void When_date_is_not_relevant_it_should_not_be_included_in_the_output()
+    public async Task When_date_is_not_relevant_it_should_not_be_included_in_the_output()
     {
         // Act
         DateTime emptyDate = 1.January(0001);
@@ -60,7 +60,7 @@ public class DateTimeOffsetValueFormatterSpecs
         string result = Formatter.ToString(dateTime);
 
         // Assert
-        result.Should().Be("<08:20:01>");
+        await Expect.That(result).IsEqualTo("<08:20:01>");
     }
 
     [InlineData("0001-01-02 04:05:06", "<0001-01-02 04:05:06>")]
@@ -71,7 +71,7 @@ public class DateTimeOffsetValueFormatterSpecs
     [InlineData("0002-02-01 04:05:06", "<0002-02-01 04:05:06>")]
     [InlineData("0002-02-02 04:05:06", "<0002-02-02 04:05:06>")]
     [Theory]
-    public void When_date_is_relevant_it_should_be_included_in_the_output(string actual, string expected)
+    public async Task When_date_is_relevant_it_should_be_included_in_the_output(string actual, string expected)
     {
         // Arrange
         var value = DateTime.Parse(actual, CultureInfo.InvariantCulture);
@@ -80,18 +80,18 @@ public class DateTimeOffsetValueFormatterSpecs
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be(expected);
+        await Expect.That(result).IsEqualTo(expected);
     }
 
     [Fact]
-    public void When_a_full_date_and_time_is_specified_all_parts_should_be_included_in_the_output()
+    public async Task When_a_full_date_and_time_is_specified_all_parts_should_be_included_in_the_output()
     {
         // Act
         var dateTime = 1.May(2012).At(20, 15, 30, 318);
         string result = Formatter.ToString(dateTime);
 
         // Assert
-        result.Should().Be("<2012-05-01 20:15:30.318>");
+        await Expect.That(result).IsEqualTo("<2012-05-01 20:15:30.318>");
     }
 
     [Theory]
@@ -110,7 +110,7 @@ public class DateTimeOffsetValueFormatterSpecs
     [InlineData("0001-02-03 00:00:00.0000100", "<0001-02-03 00:00:00.000010>")]
     [InlineData("0001-02-03 00:00:00.0000010", "<0001-02-03 00:00:00.000001>")]
     [InlineData("0001-02-03 00:00:00.0000001", "<0001-02-03 00:00:00.0000001>")]
-    public void When_datetime_components_are_not_relevant_they_should_not_be_included_in_the_output(string actual,
+    public async Task When_datetime_components_are_not_relevant_they_should_not_be_included_in_the_output(string actual,
         string expected)
     {
         // Arrange
@@ -120,7 +120,7 @@ public class DateTimeOffsetValueFormatterSpecs
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be(expected);
+        await Expect.That(result).IsEqualTo(expected);
     }
 
     [Theory]
@@ -139,7 +139,7 @@ public class DateTimeOffsetValueFormatterSpecs
     [InlineData("0001-02-03 00:00:00.0000100 +1", "<0001-02-03 00:00:00.000010 +1h>")]
     [InlineData("0001-02-03 00:00:00.0000010 +1", "<0001-02-03 00:00:00.000001 +1h>")]
     [InlineData("0001-02-03 00:00:00.0000001 +1", "<0001-02-03 00:00:00.0000001 +1h>")]
-    public void When_datetimeoffset_components_are_not_relevant_they_should_not_be_included_in_the_output(string actual,
+    public async Task When_datetimeoffset_components_are_not_relevant_they_should_not_be_included_in_the_output(string actual,
         string expected)
     {
         // Arrange
@@ -149,6 +149,6 @@ public class DateTimeOffsetValueFormatterSpecs
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be(expected);
+        await Expect.That(result).IsEqualTo(expected);
     }
 }

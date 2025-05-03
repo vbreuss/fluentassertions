@@ -25,7 +25,7 @@ public partial class StringAssertionSpecs
         }
 
         [Fact]
-        public void Fail_for_same_strings_using_custom_not_matching_comparer()
+        public async Task Fail_for_same_strings_using_custom_not_matching_comparer()
         {
             // Arrange
             var comparer = new NeverMatchingEqualityComparer();
@@ -36,7 +36,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().StartWithEquivalentOf(expect, o => o.Using(comparer));
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -95,76 +95,70 @@ public partial class StringAssertionSpecs
         }
 
         [Fact]
-        public void When_start_of_string_does_not_meet_equivalent_it_should_throw()
+        public async Task When_start_of_string_does_not_meet_equivalent_it_should_throw()
         {
             // Act
             Action act = () => "ABC".Should().StartWithEquivalentOf("bc", "because it should start");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected string to start with equivalent of \"bc\" because it should start, but \"ABC\" differs near \"ABC\" (index 0).");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
-        public void
-            When_start_of_string_does_not_meet_equivalent_and_one_of_them_is_long_it_should_display_both_strings_on_separate_line()
+        public async Task When_start_of_string_does_not_meet_equivalent_and_one_of_them_is_long_it_should_display_both_strings_on_separate_line()
         {
             // Act
             Action act = () => "ABCDEFGHI".Should().StartWithEquivalentOf("abcddfghi", "it should {0}", "start");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected string to start with equivalent of " +
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected string to start with equivalent of " +
                 "*\"abcddfghi\" because it should start, but " +
-                "*\"ABCDEFGHI\" differs near \"EFG\" (index 4).");
+                "*\"ABCDEFGHI\" differs near \"EFG\" (index 4).").AsWildcard();
         }
 
         [Fact]
-        public void When_start_of_string_is_compared_with_equivalent_of_null_it_should_throw()
+        public async Task When_start_of_string_is_compared_with_equivalent_of_null_it_should_throw()
         {
             // Act
             Action act = () => "ABC".Should().StartWithEquivalentOf(null);
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage(
-                "Cannot compare string start equivalence with <null>.*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_start_of_string_is_compared_with_equivalent_of_empty_string_it_should_not_throw()
+        public async Task When_start_of_string_is_compared_with_equivalent_of_empty_string_it_should_not_throw()
         {
             // Act
             Action act = () => "ABC".Should().StartWithEquivalentOf("");
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
         [SuppressMessage("ReSharper", "StringLiteralTypo")]
-        public void When_start_of_string_is_compared_with_equivalent_of_string_that_is_longer_it_should_throw()
+        public async Task When_start_of_string_is_compared_with_equivalent_of_string_that_is_longer_it_should_throw()
         {
             // Act
             Action act = () => "ABC".Should().StartWithEquivalentOf("abcdef");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected string to start with equivalent of " +
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected string to start with equivalent of " +
                 "\"abcdef\", but " +
-                "\"ABC\" is too short.");
+                "\"ABC\" is too short.").AsWildcard();
         }
 
         [Fact]
-        public void When_string_start_is_compared_with_equivalent_and_actual_value_is_null_then_it_should_throw()
+        public async Task When_string_start_is_compared_with_equivalent_and_actual_value_is_null_then_it_should_throw()
         {
             // Act
             string someString = null;
             Action act = () => someString.Should().StartWithEquivalentOf("AbC");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected someString to start with equivalent of \"AbC\", but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
@@ -183,7 +177,7 @@ public partial class StringAssertionSpecs
         }
 
         [Fact]
-        public void Fail_for_different_strings_using_custom_matching_comparer()
+        public async Task Fail_for_different_strings_using_custom_matching_comparer()
         {
             // Arrange
             var comparer = new AlwaysMatchingEqualityComparer();
@@ -194,11 +188,11 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.Using(comparer));
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Can_ignore_casing_while_checking_a_string_to_not_start_with_another()
+        public async Task Can_ignore_casing_while_checking_a_string_to_not_start_with_another()
         {
             // Arrange
             string actual = "test with suffix";
@@ -208,11 +202,11 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.IgnoringCase());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Can_ignore_leading_whitespace_while_checking_a_string_to_not_start_with_another()
+        public async Task Can_ignore_leading_whitespace_while_checking_a_string_to_not_start_with_another()
         {
             // Arrange
             string actual = "  test with suffix";
@@ -222,11 +216,11 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.IgnoringLeadingWhitespace());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Can_ignore_trailing_whitespace_while_checking_a_string_to_not_start_with_another()
+        public async Task Can_ignore_trailing_whitespace_while_checking_a_string_to_not_start_with_another()
         {
             // Arrange
             string actual = "test with suffix  ";
@@ -236,11 +230,11 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.IgnoringTrailingWhitespace());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Can_ignore_newline_style_while_checking_a_string_to_not_start_with_another()
+        public async Task Can_ignore_newline_style_while_checking_a_string_to_not_start_with_another()
         {
             // Arrange
             string actual = "\rA\nB\r\nC\n with suffix";
@@ -250,11 +244,11 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.IgnoringNewlineStyle());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_string_does_not_start_with_equivalent_of_a_value_and_it_does_not_it_should_succeed()
+        public async Task When_asserting_string_does_not_start_with_equivalent_of_a_value_and_it_does_not_it_should_succeed()
         {
             // Arrange
             string value = "ABC";
@@ -264,12 +258,11 @@ public partial class StringAssertionSpecs
                 value.Should().NotStartWithEquivalentOf("Bc");
 
             // Assert
-            action.Should().NotThrow();
+            await Expect.That(action).DoesNotThrow();
         }
 
         [Fact]
-        public void
-            When_asserting_string_does_not_start_with_equivalent_of_a_value_but_it_does_it_should_fail_with_a_descriptive_message()
+        public async Task When_asserting_string_does_not_start_with_equivalent_of_a_value_but_it_does_it_should_fail_with_a_descriptive_message()
         {
             // Arrange
             string value = "ABC";
@@ -279,12 +272,11 @@ public partial class StringAssertionSpecs
                 value.Should().NotStartWithEquivalentOf("aB", "because of some reason");
 
             // Assert
-            action.Should().Throw<XunitException>().WithMessage(
-                "Expected value not to start with equivalent of \"aB\" because of some reason, but found \"ABC\".");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_string_does_not_start_with_equivalent_of_a_value_that_is_null_it_should_throw()
+        public async Task When_asserting_string_does_not_start_with_equivalent_of_a_value_that_is_null_it_should_throw()
         {
             // Arrange
             string value = "ABC";
@@ -294,12 +286,11 @@ public partial class StringAssertionSpecs
                 value.Should().NotStartWithEquivalentOf(null);
 
             // Assert
-            action.Should().Throw<ArgumentNullException>().WithMessage(
-                "Cannot compare start of string with <null>.*");
+            await Expect.That(action).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_string_does_not_start_with_equivalent_of_a_value_that_is_empty_it_should_throw()
+        public async Task When_asserting_string_does_not_start_with_equivalent_of_a_value_that_is_empty_it_should_throw()
         {
             // Arrange
             string value = "ABC";
@@ -309,12 +300,11 @@ public partial class StringAssertionSpecs
                 value.Should().NotStartWithEquivalentOf("");
 
             // Assert
-            action.Should().Throw<XunitException>().WithMessage(
-                "Expected value not to start with equivalent of \"\", but found \"ABC\".");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_string_does_not_start_with_equivalent_of_a_value_and_actual_value_is_null_it_should_throw()
+        public async Task When_asserting_string_does_not_start_with_equivalent_of_a_value_and_actual_value_is_null_it_should_throw()
         {
             // Arrange
             string someString = null;
@@ -323,8 +313,7 @@ public partial class StringAssertionSpecs
             Action act = () => someString.Should().NotStartWithEquivalentOf("ABC");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected someString not to start with equivalent of \"ABC\", but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

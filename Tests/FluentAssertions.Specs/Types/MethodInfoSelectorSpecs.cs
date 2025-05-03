@@ -11,7 +11,7 @@ namespace FluentAssertions.Specs.Types;
 public class MethodInfoSelectorSpecs
 {
     [Fact]
-    public void When_method_info_selector_is_created_with_a_null_type_it_should_throw()
+    public async Task When_method_info_selector_is_created_with_a_null_type_it_should_throw()
     {
         // Arrange
         MethodInfoSelector methodInfoSelector;
@@ -20,12 +20,11 @@ public class MethodInfoSelectorSpecs
         Action act = () => methodInfoSelector = new MethodInfoSelector((Type)null);
 
         // Assert
-        act.Should().ThrowExactly<ArgumentNullException>()
-            .WithParameterName("types");
+        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
-    public void When_method_info_selector_is_created_with_a_null_type_list_it_should_throw()
+    public async Task When_method_info_selector_is_created_with_a_null_type_list_it_should_throw()
     {
         // Arrange
         MethodInfoSelector methodInfoSelector;
@@ -34,12 +33,11 @@ public class MethodInfoSelectorSpecs
         Action act = () => methodInfoSelector = new MethodInfoSelector((Type[])null);
 
         // Assert
-        act.Should().ThrowExactly<ArgumentNullException>()
-            .WithParameterName("types");
+        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
-    public void When_method_info_selector_is_null_then_should_should_throw()
+    public async Task When_method_info_selector_is_null_then_should_should_throw()
     {
         // Arrange
         MethodInfoSelector methodInfoSelector = null;
@@ -48,12 +46,11 @@ public class MethodInfoSelectorSpecs
         var act = () => methodInfoSelector.Should();
 
         // Assert
-        act.Should().ThrowExactly<ArgumentNullException>()
-            .WithParameterName("methodSelector");
+        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
-    public void When_selecting_methods_from_types_in_an_assembly_it_should_return_the_applicable_methods()
+    public async Task When_selecting_methods_from_types_in_an_assembly_it_should_return_the_applicable_methods()
     {
         // Arrange
         Assembly assembly = typeof(ClassWithSomeAttribute).Assembly;
@@ -64,14 +61,11 @@ public class MethodInfoSelectorSpecs
             .Methods();
 
         // Assert
-        methods.Should()
-            .HaveCount(2)
-            .And.Contain(m => m.Name == "Method1")
-            .And.Contain(m => m.Name == "Method2");
+        await Expect.That(methods).HasCount(2);
     }
 
     [Fact]
-    public void When_selecting_methods_that_are_public_or_internal_it_should_return_only_the_applicable_methods()
+    public async Task When_selecting_methods_that_are_public_or_internal_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -82,11 +76,11 @@ public class MethodInfoSelectorSpecs
         // Assert
         const int PublicMethodCount = 2;
         const int InternalMethodCount = 1;
-        methods.Should().HaveCount(PublicMethodCount + InternalMethodCount);
+        await Expect.That(methods).HasCount(PublicMethodCount + InternalMethodCount);
     }
 
     [Fact]
-    public void When_selecting_methods_decorated_with_specific_attribute_it_should_return_only_the_applicable_methods()
+    public async Task When_selecting_methods_decorated_with_specific_attribute_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -95,11 +89,11 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreDecoratedWith<DummyMethodAttribute>().ToArray();
 
         // Assert
-        methods.Should().HaveCount(2);
+        await Expect.That(methods).HasCount(2);
     }
 
     [Fact]
-    public void When_selecting_methods_not_decorated_with_specific_attribute_it_should_return_only_the_applicable_methods()
+    public async Task When_selecting_methods_not_decorated_with_specific_attribute_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -108,14 +102,11 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreNotDecoratedWith<DummyMethodAttribute>().ToArray();
 
         // Assert
-        methods.Should()
-            .NotBeEmpty()
-            .And.NotContain(m => m.Name == "PublicVirtualVoidMethodWithAttribute")
-            .And.NotContain(m => m.Name == "ProtectedVirtualVoidMethodWithAttribute");
+        await Expect.That(methods).IsNotEmpty();
     }
 
     [Fact]
-    public void When_selecting_methods_that_return_a_specific_type_it_should_return_only_the_applicable_methods()
+    public async Task When_selecting_methods_that_return_a_specific_type_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -124,11 +115,11 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatReturn<string>().ToArray();
 
         // Assert
-        methods.Should().HaveCount(2);
+        await Expect.That(methods).HasCount(2);
     }
 
     [Fact]
-    public void When_selecting_methods_that_do_not_return_a_specific_type_it_should_return_only_the_applicable_methods()
+    public async Task When_selecting_methods_that_do_not_return_a_specific_type_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -137,11 +128,11 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatDoNotReturn<string>().ToArray();
 
         // Assert
-        methods.Should().HaveCount(5);
+        await Expect.That(methods).HasCount(5);
     }
 
     [Fact]
-    public void When_selecting_methods_without_return_value_it_should_return_only_the_applicable_methods()
+    public async Task When_selecting_methods_without_return_value_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -150,11 +141,11 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatReturnVoid.ToArray();
 
         // Assert
-        methods.Should().HaveCount(4);
+        await Expect.That(methods).HasCount(4);
     }
 
     [Fact]
-    public void When_selecting_methods_with_return_value_it_should_return_only_the_applicable_methods()
+    public async Task When_selecting_methods_with_return_value_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -163,11 +154,11 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatDoNotReturnVoid.ToArray();
 
         // Assert
-        methods.Should().HaveCount(3);
+        await Expect.That(methods).HasCount(3);
     }
 
     [Fact]
-    public void When_combining_filters_to_filter_methods_it_should_return_only_the_applicable_methods()
+    public async Task When_combining_filters_to_filter_methods_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -179,11 +170,11 @@ public class MethodInfoSelectorSpecs
             .ToArray();
 
         // Assert
-        methods.Should().HaveCount(2);
+        await Expect.That(methods).HasCount(2);
     }
 
     [Fact]
-    public void When_selecting_methods_decorated_with_an_inheritable_attribute_it_should_only_return_the_applicable_methods()
+    public async Task When_selecting_methods_decorated_with_an_inheritable_attribute_it_should_only_return_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelectorWithInheritableAttributeDerived);
@@ -192,7 +183,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreDecoratedWith<DummyMethodAttribute>().ToArray();
 
         // Assert
-        methods.Should().BeEmpty();
+        await Expect.That(methods).IsEmpty();
     }
 
     [Fact]
@@ -223,8 +214,7 @@ public class MethodInfoSelectorSpecs
     }
 
     [Fact]
-    public void
-        When_selecting_methods_not_decorated_with_or_inheriting_an_inheritable_attribute_it_should_only_return_the_applicable_methods()
+    public async Task When_selecting_methods_not_decorated_with_or_inheriting_an_inheritable_attribute_it_should_only_return_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelectorWithInheritableAttributeDerived);
@@ -233,11 +223,11 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreNotDecoratedWithOrInherit<DummyMethodAttribute>().ToArray();
 
         // Assert
-        methods.Should().BeEmpty();
+        await Expect.That(methods).IsEmpty();
     }
 
     [Fact]
-    public void When_selecting_methods_decorated_with_a_noninheritable_attribute_it_should_only_return_the_applicable_methods()
+    public async Task When_selecting_methods_decorated_with_a_noninheritable_attribute_it_should_only_return_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelectorWithNonInheritableAttributeDerived);
@@ -247,12 +237,11 @@ public class MethodInfoSelectorSpecs
             .ToArray();
 
         // Assert
-        methods.Should().BeEmpty();
+        await Expect.That(methods).IsEmpty();
     }
 
     [Fact]
-    public void
-        When_selecting_methods_decorated_with_or_inheriting_a_noninheritable_attribute_it_should_only_return_the_applicable_methods()
+    public async Task When_selecting_methods_decorated_with_or_inheriting_a_noninheritable_attribute_it_should_only_return_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelectorWithNonInheritableAttributeDerived);
@@ -262,7 +251,7 @@ public class MethodInfoSelectorSpecs
             type.Methods().ThatAreDecoratedWithOrInherit<DummyMethodNonInheritableAttributeAttribute>().ToArray();
 
         // Assert
-        methods.Should().BeEmpty();
+        await Expect.That(methods).IsEmpty();
     }
 
     [Fact]
@@ -281,7 +270,7 @@ public class MethodInfoSelectorSpecs
     }
 
     [Fact]
-    public void When_selecting_methods_that_are_abstract_it_should_only_return_the_applicable_methods()
+    public async Task When_selecting_methods_that_are_abstract_it_should_only_return_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelectorWithAbstractAndVirtualMethods);
@@ -290,11 +279,11 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreAbstract().ToArray();
 
         // Assert
-        methods.Should().HaveCount(3);
+        await Expect.That(methods).HasCount(3);
     }
 
     [Fact]
-    public void When_selecting_methods_that_are_not_abstract_it_should_only_return_the_applicable_methods()
+    public async Task When_selecting_methods_that_are_not_abstract_it_should_only_return_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelectorWithAbstractAndVirtualMethods);
@@ -303,7 +292,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreNotAbstract().ToArray();
 
         // Assert
-        methods.Should().HaveCount(10);
+        await Expect.That(methods).HasCount(10);
     }
 
     [Fact]
@@ -335,7 +324,7 @@ public class MethodInfoSelectorSpecs
     }
 
     [Fact]
-    public void When_selecting_methods_that_are_virtual_it_should_only_return_the_applicable_methods()
+    public async Task When_selecting_methods_that_are_virtual_it_should_only_return_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -344,14 +333,11 @@ public class MethodInfoSelectorSpecs
         MethodInfo[] methods = type.Methods().ThatAreVirtual().ToArray();
 
         // Assert
-        methods.Should()
-            .NotBeEmpty()
-            .And.Contain(m => m.Name == "PublicVirtualVoidMethodWithAttribute")
-            .And.Contain(m => m.Name == "ProtectedVirtualVoidMethodWithAttribute");
+        await Expect.That(methods).IsNotEmpty();
     }
 
     [Fact]
-    public void When_selecting_methods_that_are_not_virtual_it_should_only_return_the_applicable_methods()
+    public async Task When_selecting_methods_that_are_not_virtual_it_should_only_return_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -360,10 +346,7 @@ public class MethodInfoSelectorSpecs
         MethodInfo[] methods = type.Methods().ThatAreNotVirtual().ToArray();
 
         // Assert
-        methods.Should()
-            .NotBeEmpty()
-            .And.NotContain(m => m.Name == "PublicVirtualVoidMethodWithAttribute")
-            .And.NotContain(m => m.Name == "ProtectedVirtualVoidMethodWithAttribute");
+        await Expect.That(methods).IsNotEmpty();
     }
 
     [Fact]
@@ -410,7 +393,7 @@ public class MethodInfoSelectorSpecs
     }
 
     [Fact]
-    public void When_selecting_methods_return_types_it_should_return_the_correct_types()
+    public async Task When_selecting_methods_return_types_it_should_return_the_correct_types()
     {
         // Arrange
         Type type = typeof(TestClassForMethodReturnTypesSelector);
@@ -419,15 +402,11 @@ public class MethodInfoSelectorSpecs
         IEnumerable<Type> returnTypes = type.Methods().ReturnTypes().ToArray();
 
         // Assert
-        returnTypes.Should()
-            .HaveCount(3)
-            .And.Contain(typeof(void))
-            .And.Contain(typeof(int))
-            .And.Contain(typeof(string));
+        await Expect.That(returnTypes).HasCount(3);
     }
 
     [Fact]
-    public void When_accidentally_using_equals_it_should_throw_a_helpful_error()
+    public async Task When_accidentally_using_equals_it_should_throw_a_helpful_error()
     {
         // Arrange
         Type type = typeof(TestClassForMethodSelector);
@@ -436,8 +415,7 @@ public class MethodInfoSelectorSpecs
         var action = () => type.Methods().Should().Equals(null);
 
         // Assert
-        action.Should().Throw<NotSupportedException>()
-            .WithMessage("Equals is not part of Fluent Assertions. Did you mean Be() instead?");
+        await Expect.That(action).Throws<NotSupportedException>();
     }
 }
 

@@ -10,103 +10,101 @@ public partial class TimeOnlyAssertionSpecs
     public class Be
     {
         [Fact]
-        public void Should_succeed_when_asserting_timeonly_value_is_equal_to_the_same_value()
+        public async Task Should_succeed_when_asserting_timeonly_value_is_equal_to_the_same_value()
         {
             // Arrange
             TimeOnly timeOnly = new(15, 06, 04, 146);
             TimeOnly sameTimeOnly = new(15, 06, 04, 146);
 
             // Act/Assert
-            timeOnly.Should().Be(sameTimeOnly);
+            await Expect.That(timeOnly).IsEqualTo(sameTimeOnly);
         }
 
         [Fact]
-        public void When_timeonly_value_is_equal_to_the_same_nullable_value_be_should_succeed()
+        public async Task When_timeonly_value_is_equal_to_the_same_nullable_value_be_should_succeed()
         {
             // Arrange
             TimeOnly timeOnly = new(15, 06, 04, 146);
             TimeOnly? sameTimeOnly = new(15, 06, 04, 146);
 
             // Act/Assert
-            timeOnly.Should().Be(sameTimeOnly);
+            await Expect.That(timeOnly).IsEqualTo(sameTimeOnly);
         }
 
         [Fact]
-        public void When_both_values_are_at_their_minimum_then_it_should_succeed()
+        public async Task When_both_values_are_at_their_minimum_then_it_should_succeed()
         {
             // Arrange
             TimeOnly timeOnly = TimeOnly.MinValue;
             TimeOnly sameTimeOnly = TimeOnly.MinValue;
 
             // Act/Assert
-            timeOnly.Should().Be(sameTimeOnly);
+            await Expect.That(timeOnly).IsEqualTo(sameTimeOnly);
         }
 
         [Fact]
-        public void When_both_values_are_at_their_maximum_then_it_should_succeed()
+        public async Task When_both_values_are_at_their_maximum_then_it_should_succeed()
         {
             // Arrange
             TimeOnly timeOnly = TimeOnly.MaxValue;
             TimeOnly sameTimeOnly = TimeOnly.MaxValue;
 
             // Act/Assert
-            timeOnly.Should().Be(sameTimeOnly);
+            await Expect.That(timeOnly).IsEqualTo(sameTimeOnly);
         }
 
         [Fact]
-        public void Should_fail_when_asserting_timeonly_value_is_equal_to_the_different_value()
+        public async Task Should_fail_when_asserting_timeonly_value_is_equal_to_the_different_value()
         {
             // Arrange
             var timeOnly = new TimeOnly(15, 03, 10);
             var otherTimeOnly = new TimeOnly(15, 03, 11);
 
             // Act
-            Action act = () => timeOnly.Should().Be(otherTimeOnly, "because we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(timeOnly).IsEqualTo(otherTimeOnly).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected timeOnly to be <15:03:11.000>*failure message, but found <15:03:10.000>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_timeonly_value_is_equal_to_the_different_value_by_milliseconds()
+        public async Task Should_fail_when_asserting_timeonly_value_is_equal_to_the_different_value_by_milliseconds()
         {
             // Arrange
             var timeOnly = new TimeOnly(15, 03, 10, 556);
             var otherTimeOnly = new TimeOnly(15, 03, 10, 175);
 
             // Act
-            Action act = () => timeOnly.Should().Be(otherTimeOnly, "because we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(timeOnly).IsEqualTo(otherTimeOnly).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected timeOnly to be <15:03:10.175>*failure message, but found <15:03:10.556>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_succeed_when_asserting_nullable_numeric_value_equals_the_same_value()
+        public async Task Should_succeed_when_asserting_nullable_numeric_value_equals_the_same_value()
         {
             // Arrange
             TimeOnly? nullableTimeOnlyA = new TimeOnly(15, 06, 04, 123);
             TimeOnly? nullableTimeOnlyB = new TimeOnly(15, 06, 04, 123);
 
             // Act/Assert
-            nullableTimeOnlyA.Should().Be(nullableTimeOnlyB);
+            await Expect.That(nullableTimeOnlyA).IsEqualTo(nullableTimeOnlyB);
         }
 
         [Fact]
-        public void Should_succeed_when_asserting_nullable_numeric_null_value_equals_null()
+        public async Task Should_succeed_when_asserting_nullable_numeric_null_value_equals_null()
         {
             // Arrange
             TimeOnly? nullableTimeOnlyA = null;
             TimeOnly? nullableTimeOnlyB = null;
 
             // Act/Assert
-            nullableTimeOnlyA.Should().Be(nullableTimeOnlyB);
+            await Expect.That(nullableTimeOnlyA).IsEqualTo(nullableTimeOnlyB);
         }
 
         [Fact]
-        public void Should_fail_when_asserting_nullable_numeric_value_equals_a_different_value()
+        public async Task Should_fail_when_asserting_nullable_numeric_value_equals_a_different_value()
         {
             // Arrange
             TimeOnly? nullableTimeOnlyA = new TimeOnly(15, 06, 04);
@@ -114,67 +112,64 @@ public partial class TimeOnlyAssertionSpecs
 
             // Act
             Action action = () =>
-                nullableTimeOnlyA.Should().Be(nullableTimeOnlyB);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnlyA).IsEqualTo(nullableTimeOnlyB));
 
             // Assert
-            action.Should().Throw<XunitException>();
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_descriptive_message_when_asserting_timeonly_null_value_is_equal_to_another_value()
+        public async Task Should_fail_with_descriptive_message_when_asserting_timeonly_null_value_is_equal_to_another_value()
         {
             // Arrange
             TimeOnly? nullableTimeOnly = null;
 
             // Act
             Action action = () =>
-                nullableTimeOnly.Should().Be(new TimeOnly(15, 06, 04), "because we want to test the failure {0}",
-                    "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnly).IsEqualTo(new TimeOnly(15, 06, 04)).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            action.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected nullableTimeOnly to be <15:06:04.000> because we want to test the failure message, but found <null>.");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_succeed_when_asserting_timeonly_value_is_not_equal_to_a_different_value()
+        public async Task Should_succeed_when_asserting_timeonly_value_is_not_equal_to_a_different_value()
         {
             // Arrange
             TimeOnly timeOnly = new(15, 06, 04);
             TimeOnly otherTimeOnly = new(15, 06, 05);
 
             // Act/Assert
-            timeOnly.Should().NotBe(otherTimeOnly);
+            await Expect.That(timeOnly).IsNotEqualTo(otherTimeOnly);
         }
     }
 
     public class NotBe
     {
         [Fact]
-        public void Different_timeonly_values_are_valid()
+        public async Task Different_timeonly_values_are_valid()
         {
             // Arrange
             TimeOnly time = new(19, 06, 04);
             TimeOnly otherTime = new(20, 06, 05);
 
             // Act & Assert
-            time.Should().NotBe(otherTime);
+            await Expect.That(time).IsNotEqualTo(otherTime);
         }
 
         [Fact]
-        public void Different_timeonly_values_with_different_nullability_are_valid()
+        public async Task Different_timeonly_values_with_different_nullability_are_valid()
         {
             // Arrange
             TimeOnly time = new(19, 06, 04);
             TimeOnly? otherTime = new(19, 07, 05);
 
             // Act & Assert
-            time.Should().NotBe(otherTime);
+            await Expect.That(time).IsNotEqualTo(otherTime);
         }
 
         [Fact]
-        public void Same_timeonly_values_are_invalid()
+        public async Task Same_timeonly_values_are_invalid()
         {
             // Arrange
             TimeOnly time = new(19, 06, 04);
@@ -182,16 +177,14 @@ public partial class TimeOnlyAssertionSpecs
 
             // Act
             Action act =
-                () => time.Should().NotBe(sameTime, "because we want to test the failure {0}", "message");
+                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(time).IsNotEqualTo(sameTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected time not to be <19:06:04.000> because we want to test the failure message, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Same_timeonly_values_with_different_nullability_are_invalid()
+        public async Task Same_timeonly_values_with_different_nullability_are_invalid()
         {
             // Arrange
             TimeOnly time = new(19, 06, 04);
@@ -199,12 +192,10 @@ public partial class TimeOnlyAssertionSpecs
 
             // Act
             Action act =
-                () => time.Should().NotBe(sameTime, "because we want to test the failure {0}", "message");
+                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(time).IsNotEqualTo(sameTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected time not to be <19:06:04.000> because we want to test the failure message, but it is.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

@@ -10,7 +10,7 @@ public class XAttributeAssertionSpecs
     public class Be
     {
         [Fact]
-        public void When_asserting_an_xml_attribute_is_equal_to_the_same_xml_attribute_it_should_succeed()
+        public async Task When_asserting_an_xml_attribute_is_equal_to_the_same_xml_attribute_it_should_succeed()
         {
             // Arrange
             var attribute = new XAttribute("name", "value");
@@ -18,15 +18,14 @@ public class XAttributeAssertionSpecs
 
             // Act
             Action act = () =>
-                attribute.Should().Be(sameXAttribute);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(attribute).IsEqualTo(sameXAttribute));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void
-            When_asserting_an_xml_attribute_is_equal_to_a_different_xml_attribute_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_an_xml_attribute_is_equal_to_a_different_xml_attribute_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theAttribute = new XAttribute("name", "value");
@@ -34,57 +33,54 @@ public class XAttributeAssertionSpecs
 
             // Act
             Action act = () =>
-                theAttribute.Should().Be(otherAttribute, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsEqualTo(otherAttribute).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                $"Expected theAttribute to be {otherAttribute} because we want to test the failure message, but found {theAttribute}.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_both_subject_and_expected_are_null_it_succeeds()
+        public async Task When_both_subject_and_expected_are_null_it_succeeds()
         {
             XAttribute theAttribute = null;
 
             // Act
-            Action act = () => theAttribute.Should().Be(null);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsEqualTo(null));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_the_expected_attribute_is_null_then_it_fails()
+        public async Task When_the_expected_attribute_is_null_then_it_fails()
         {
             XAttribute theAttribute = null;
 
             // Act
             Action act = () =>
-                theAttribute.Should().Be(new XAttribute("name", "value"), "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsEqualTo(new XAttribute("name", "value")).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected theAttribute to be name=\"value\" *failure message*, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_the_attribute_is_expected_to_equal_null_it_fails()
+        public async Task When_the_attribute_is_expected_to_equal_null_it_fails()
         {
             XAttribute theAttribute = new("name", "value");
 
             // Act
-            Action act = () => theAttribute.Should().Be(null, "we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsEqualTo(null).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected theAttribute to be <null> *failure message*, but found name=\"value\".");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBe
     {
         [Fact]
-        public void When_asserting_an_xml_attribute_is_not_equal_to_a_different_xml_attribute_it_should_succeed()
+        public async Task When_asserting_an_xml_attribute_is_not_equal_to_a_different_xml_attribute_it_should_succeed()
         {
             // Arrange
             var attribute = new XAttribute("name", "value");
@@ -92,14 +88,14 @@ public class XAttributeAssertionSpecs
 
             // Act
             Action act = () =>
-                attribute.Should().NotBe(otherXAttribute);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(attribute).IsNotEqualTo(otherXAttribute));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_an_xml_attribute_is_not_equal_to_the_same_xml_attribute_it_should_throw()
+        public async Task When_asserting_an_xml_attribute_is_not_equal_to_the_same_xml_attribute_it_should_throw()
         {
             // Arrange
             var theAttribute = new XAttribute("name", "value");
@@ -107,16 +103,14 @@ public class XAttributeAssertionSpecs
 
             // Act
             Action act = () =>
-                theAttribute.Should().NotBe(sameXAttribute);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotEqualTo(sameXAttribute));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect theAttribute to be name=\"value\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_an_xml_attribute_is_not_equal_to_the_same_xml_attribute_it_should_throw_with_descriptive_message()
+        public async Task When_asserting_an_xml_attribute_is_not_equal_to_the_same_xml_attribute_it_should_throw_with_descriptive_message()
         {
             // Arrange
             var theAttribute = new XAttribute("name", "value");
@@ -124,207 +118,197 @@ public class XAttributeAssertionSpecs
 
             // Act
             Action act = () =>
-                theAttribute.Should().NotBe(sameAttribute, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotEqualTo(sameAttribute).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                $"Did not expect theAttribute to be {sameAttribute} because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_null_attribute_is_not_supposed_to_be_an_attribute_it_succeeds()
+        public async Task When_a_null_attribute_is_not_supposed_to_be_an_attribute_it_succeeds()
         {
             // Arrange
             XAttribute theAttribute = null;
 
             // Act
-            Action act = () => theAttribute.Should().NotBe(new XAttribute("name", "value"));
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotEqualTo(new XAttribute("name", "value")));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_an_attribute_is_not_supposed_to_be_null_it_succeeds()
+        public async Task When_an_attribute_is_not_supposed_to_be_null_it_succeeds()
         {
             // Arrange
             XAttribute theAttribute = new("name", "value");
 
             // Act
-            Action act = () => theAttribute.Should().NotBe(null);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotEqualTo(null));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_null_attribute_is_not_supposed_to_be_null_it_fails()
+        public async Task When_a_null_attribute_is_not_supposed_to_be_null_it_fails()
         {
             // Arrange
             XAttribute theAttribute = null;
 
             // Act
-            Action act = () => theAttribute.Should().NotBe(null, "we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotEqualTo(null).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect theAttribute to be <null> *failure message*.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class BeNull
     {
         [Fact]
-        public void When_asserting_a_null_xml_attribute_is_null_it_should_succeed()
+        public async Task When_asserting_a_null_xml_attribute_is_null_it_should_succeed()
         {
             // Arrange
             XAttribute attribute = null;
 
             // Act
             Action act = () =>
-                attribute.Should().BeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(attribute).IsNull());
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_non_null_xml_attribute_is_null_it_should_fail()
+        public async Task When_asserting_a_non_null_xml_attribute_is_null_it_should_fail()
         {
             // Arrange
             var theAttribute = new XAttribute("name", "value");
 
             // Act
             Action act = () =>
-                theAttribute.Should().BeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNull());
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theAttribute to be <null>, but found name=\"value\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_non_null_xml_attribute_is_null_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_a_non_null_xml_attribute_is_null_it_should_fail_with_descriptive_message()
         {
             // Arrange
             var theAttribute = new XAttribute("name", "value");
 
             // Act
             Action act = () =>
-                theAttribute.Should().BeNull("because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                $"Expected theAttribute to be <null> because we want to test the failure message, but found {theAttribute}.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeNull
     {
         [Fact]
-        public void When_asserting_a_non_null_xml_attribute_is_not_null_it_should_succeed()
+        public async Task When_asserting_a_non_null_xml_attribute_is_not_null_it_should_succeed()
         {
             // Arrange
             var attribute = new XAttribute("name", "value");
 
             // Act
             Action act = () =>
-                attribute.Should().NotBeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(attribute).IsNotNull());
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_null_xml_attribute_is_not_null_it_should_fail()
+        public async Task When_asserting_a_null_xml_attribute_is_not_null_it_should_fail()
         {
             // Arrange
             XAttribute theAttribute = null;
 
             // Act
             Action act = () =>
-                theAttribute.Should().NotBeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotNull());
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theAttribute not to be <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_null_xml_attribute_is_not_null_it_should_fail_with_descriptive_message()
+        public async Task When_asserting_a_null_xml_attribute_is_not_null_it_should_fail_with_descriptive_message()
         {
             // Arrange
             XAttribute theAttribute = null;
 
             // Act
             Action act = () =>
-                theAttribute.Should().NotBeNull("because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theAttribute not to be <null> because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class HaveValue
     {
         [Fact]
-        public void When_asserting_attribute_has_a_specific_value_and_it_does_it_should_succeed()
+        public async Task When_asserting_attribute_has_a_specific_value_and_it_does_it_should_succeed()
         {
             // Arrange
             var attribute = new XAttribute("age", "36");
 
             // Act
             Action act = () =>
-                attribute.Should().HaveValue("36");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(attribute).IsNotNull().Because("36"));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_attribute_has_a_specific_value_but_it_has_a_different_value_it_should_throw()
+        public async Task When_asserting_attribute_has_a_specific_value_but_it_has_a_different_value_it_should_throw()
         {
             // Arrange
             var theAttribute = new XAttribute("age", "36");
 
             // Act
             Action act = () =>
-                theAttribute.Should().HaveValue("16");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotNull().Because("16"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theAttribute \"age\" to have value \"16\", but found \"36\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_attribute_has_a_specific_value_but_it_has_a_different_value_it_should_throw_with_descriptive_message()
+        public async Task When_asserting_attribute_has_a_specific_value_but_it_has_a_different_value_it_should_throw_with_descriptive_message()
         {
             // Arrange
             var theAttribute = new XAttribute("age", "36");
 
             // Act
             Action act = () =>
-                theAttribute.Should().HaveValue("16", "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotNull().Because($"16"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected theAttribute \"age\" to have value \"16\" because we want to test the failure message, but found \"36\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_an_attribute_is_null_then_have_value_should_fail()
+        public async Task When_an_attribute_is_null_then_have_value_should_fail()
         {
             XAttribute theAttribute = null;
 
             // Act
             Action act = () =>
-                theAttribute.Should().HaveValue("value", "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(theAttribute).IsNotNull().Because($"value"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the attribute to have value \"value\" *failure message*, but theAttribute is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

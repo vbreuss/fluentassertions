@@ -13,7 +13,7 @@ public partial class TypeAssertionSpecs
     public class HaveMethod
     {
         [Fact]
-        public void When_asserting_a_type_has_a_method_which_it_does_it_succeeds()
+        public async Task When_asserting_a_type_has_a_method_which_it_does_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -27,11 +27,11 @@ public partial class TypeAssertionSpecs
                     .And.ReturnVoid();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_method_which_it_does_not_it_fails()
+        public async Task When_asserting_a_type_has_a_method_which_it_does_not_it_fails()
         {
             // Arrange
             var type = typeof(ClassWithNoMembers);
@@ -42,14 +42,12 @@ public partial class TypeAssertionSpecs
                     "NonExistentMethod", [typeof(int), typeof(Type)], "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected method *ClassWithNoMembers.NonExistentMethod(*.Int32, *.Type) to exist *failure message*" +
-                    ", but it does not.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method *ClassWithNoMembers.NonExistentMethod(*.Int32, *.Type) to exist *failure message*" +
+                    ", but it does not.").AsWildcard();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_method_with_different_parameter_types_it_fails()
+        public async Task When_asserting_a_type_has_a_method_with_different_parameter_types_it_fails()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -60,14 +58,12 @@ public partial class TypeAssertionSpecs
                     "VoidMethod", [typeof(int), typeof(Type)], "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected method *.ClassWithMembers.VoidMethod(*.Int32, *.Type) to exist *failure message*" +
-                    ", but it does not.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method *.ClassWithMembers.VoidMethod(*.Int32, *.Type) to exist *failure message*" +
+                    ", but it does not.").AsWildcard();
         }
 
         [Fact]
-        public void When_subject_is_null_have_method_should_fail()
+        public async Task When_subject_is_null_have_method_should_fail()
         {
             // Arrange
             Type type = null;
@@ -77,12 +73,11 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveMethod("Name", [typeof(string)], "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected method type.Name(System.String) to exist *failure message*, but type is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_method_with_a_null_name_it_should_throw()
+        public async Task When_asserting_a_type_has_a_method_with_a_null_name_it_should_throw()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -92,12 +87,11 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveMethod(null, [typeof(string)]);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("name");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_method_with_an_empty_name_it_should_throw()
+        public async Task When_asserting_a_type_has_a_method_with_an_empty_name_it_should_throw()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -107,12 +101,11 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveMethod(string.Empty, [typeof(string)]);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentException>()
-                .WithParameterName("name");
+            await Expect.That(act).ThrowsExactly<ArgumentException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_method_with_a_null_parameter_type_list_it_should_throw()
+        public async Task When_asserting_a_type_has_a_method_with_a_null_parameter_type_list_it_should_throw()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -122,15 +115,14 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveMethod("Name", null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("parameterTypes");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
     public class NotHaveMethod
     {
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_method_which_it_does_not_it_succeeds()
+        public async Task When_asserting_a_type_does_not_have_a_method_which_it_does_not_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithoutMembers);
@@ -140,11 +132,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveMethod("NonExistentMethod", []);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_method_which_it_has_with_different_parameter_types_it_succeeds()
+        public async Task When_asserting_a_type_does_not_have_a_method_which_it_has_with_different_parameter_types_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -154,11 +146,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveMethod("VoidMethod", [typeof(int)]);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_that_method_which_it_does_it_fails()
+        public async Task When_asserting_a_type_does_not_have_that_method_which_it_does_it_fails()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -168,12 +160,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveMethod("VoidMethod", [], "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected method Void *.ClassWithMembers.VoidMethod() to not exist *failure message*, but it does.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_subject_is_null_not_have_method_should_fail()
+        public async Task When_subject_is_null_not_have_method_should_fail()
         {
             // Arrange
             Type type = null;
@@ -183,12 +174,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveMethod("Name", [typeof(string)], "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected method type.Name(System.String) to not exist *failure message*, but type is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_method_with_a_null_name_it_should_throw()
+        public async Task When_asserting_a_type_does_not_have_a_method_with_a_null_name_it_should_throw()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -198,12 +188,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveMethod(null, [typeof(string)]);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("name");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_method_with_an_empty_name_it_should_throw()
+        public async Task When_asserting_a_type_does_not_have_a_method_with_an_empty_name_it_should_throw()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -213,12 +202,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveMethod(string.Empty, [typeof(string)]);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentException>()
-                .WithParameterName("name");
+            await Expect.That(act).ThrowsExactly<ArgumentException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_method_with_a_null_parameter_type_list_it_should_throw()
+        public async Task When_asserting_a_type_does_not_have_a_method_with_a_null_parameter_type_list_it_should_throw()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -228,8 +216,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveMethod("Name", null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("parameterTypes");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 }

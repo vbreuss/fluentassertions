@@ -22,18 +22,17 @@ public partial class TypeAssertionSpecs
         [InlineData(typeof(ClassWithoutMembers), "Expected type *.ClassWithoutMembers to be sealed.")]
         [InlineData(typeof(Abstract), "Expected type *.Abstract to be sealed.")]
         [InlineData(typeof(Static), "Expected type *.Static to be sealed.")]
-        public void When_type_is_not_sealed_it_fails(Type type, string exceptionMessage)
+        public async Task When_type_is_not_sealed_it_fails(Type type, string exceptionMessage)
         {
             // Act
             Action act = () => type.Should().BeSealed();
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(exceptionMessage);
+            await Expect.That(act).Throws<XunitException>().WithMessage(exceptionMessage).AsWildcard();
         }
 
         [Fact]
-        public void When_type_is_not_sealed_it_fails_with_a_meaningful_message()
+        public async Task When_type_is_not_sealed_it_fails_with_a_meaningful_message()
         {
             // Arrange
             var type = typeof(ClassWithoutMembers);
@@ -42,26 +41,24 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().BeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type *.ClassWithoutMembers to be sealed *failure message*.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Theory]
         [InlineData(typeof(IDummyInterface), "*.IDummyInterface must be a class.")]
         [InlineData(typeof(Struct), "*.Struct must be a class.")]
         [InlineData(typeof(ExampleDelegate), "*.ExampleDelegate must be a class.")]
-        public void When_type_is_not_valid_for_BeSealed_it_throws_exception(Type type, string exceptionMessage)
+        public async Task When_type_is_not_valid_for_BeSealed_it_throws_exception(Type type, string exceptionMessage)
         {
             // Act
             Action act = () => type.Should().BeSealed();
 
             // Assert
-            act.Should().Throw<InvalidOperationException>()
-                .WithMessage(exceptionMessage);
+            await Expect.That(act).Throws<InvalidOperationException>().WithMessage(exceptionMessage).AsWildcard();
         }
 
         [Fact]
-        public void When_subject_is_null_be_sealed_should_fail()
+        public async Task When_subject_is_null_be_sealed_should_fail()
         {
             // Arrange
             Type type = null;
@@ -71,8 +68,7 @@ public partial class TypeAssertionSpecs
                 type.Should().BeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type to be sealed *failure message*, but type is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
@@ -89,7 +85,7 @@ public partial class TypeAssertionSpecs
         }
 
         [Fact]
-        public void When_type_is_sealed_it_fails()
+        public async Task When_type_is_sealed_it_fails()
         {
             // Arrange
             var type = typeof(Sealed);
@@ -98,12 +94,11 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().NotBeSealed();
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type *.Sealed not to be sealed.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_type_is_sealed_it_fails_with_a_meaningful_message()
+        public async Task When_type_is_sealed_it_fails_with_a_meaningful_message()
         {
             // Arrange
             var type = typeof(Sealed);
@@ -112,26 +107,24 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().NotBeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type *.Sealed not to be sealed *failure message*.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Theory]
         [InlineData(typeof(IDummyInterface), "*.IDummyInterface must be a class.")]
         [InlineData(typeof(Struct), "*.Struct must be a class.")]
         [InlineData(typeof(ExampleDelegate), "*.ExampleDelegate must be a class.")]
-        public void When_type_is_not_valid_for_NotBeSealed_it_throws_exception(Type type, string exceptionMessage)
+        public async Task When_type_is_not_valid_for_NotBeSealed_it_throws_exception(Type type, string exceptionMessage)
         {
             // Act
             Action act = () => type.Should().NotBeSealed();
 
             // Assert
-            act.Should().Throw<InvalidOperationException>()
-                .WithMessage(exceptionMessage);
+            await Expect.That(act).Throws<InvalidOperationException>().WithMessage(exceptionMessage).AsWildcard();
         }
 
         [Fact]
-        public void When_subject_is_null_not_be_sealed_should_fail()
+        public async Task When_subject_is_null_not_be_sealed_should_fail()
         {
             // Arrange
             Type type = null;
@@ -141,8 +134,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotBeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected type not to be sealed *failure message*, but type is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

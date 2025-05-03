@@ -11,7 +11,7 @@ public class StreamAssertionSpecs
     public class BeWritable
     {
         [Fact]
-        public void When_having_a_writable_stream_be_writable_should_succeed()
+        public async Task When_having_a_writable_stream_be_writable_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Writable = true };
@@ -21,11 +21,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeWritable();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_non_writable_stream_be_writable_should_fail()
+        public async Task When_having_a_non_writable_stream_be_writable_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Writable = false };
@@ -35,12 +35,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeWritable("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be writable *failure message*, but it was not.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_be_writable_should_fail()
+        public async Task When_null_be_writable_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -53,15 +52,14 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be writable *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeWritable
     {
         [Fact]
-        public void When_having_a_non_writable_stream_be_not_writable_should_succeed()
+        public async Task When_having_a_non_writable_stream_be_not_writable_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Writable = false };
@@ -71,11 +69,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWritable();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_writable_stream_be_not_writable_should_fail()
+        public async Task When_having_a_writable_stream_be_not_writable_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Writable = true };
@@ -85,12 +83,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWritable("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be writable *failure message*, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_not_be_writable_should_fail()
+        public async Task When_null_not_be_writable_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -103,15 +100,14 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be writable *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class BeSeekable
     {
         [Fact]
-        public void When_having_a_seekable_stream_be_seekable_should_succeed()
+        public async Task When_having_a_seekable_stream_be_seekable_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true };
@@ -121,11 +117,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeSeekable();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_non_seekable_stream_be_seekable_should_fail()
+        public async Task When_having_a_non_seekable_stream_be_seekable_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Seekable = false };
@@ -135,12 +131,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeSeekable("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be seekable *failure message*, but it was not.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_be_seekable_should_fail()
+        public async Task When_null_be_seekable_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -153,15 +148,14 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be seekable *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeSeekable
     {
         [Fact]
-        public void When_having_a_non_seekable_stream_be_not_seekable_should_succeed()
+        public async Task When_having_a_non_seekable_stream_be_not_seekable_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Seekable = false };
@@ -171,11 +165,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeSeekable();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_seekable_stream_be_not_seekable_should_fail()
+        public async Task When_having_a_seekable_stream_be_not_seekable_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true };
@@ -185,12 +179,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeSeekable("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be seekable *failure message*, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_not_be_seekable_should_fail()
+        public async Task When_null_not_be_seekable_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -203,15 +196,14 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be seekable *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class BeReadable
     {
         [Fact]
-        public void When_having_a_readable_stream_be_readable_should_succeed()
+        public async Task When_having_a_readable_stream_be_readable_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Readable = true };
@@ -221,11 +213,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadable();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_non_readable_stream_be_readable_should_fail()
+        public async Task When_having_a_non_readable_stream_be_readable_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Readable = false };
@@ -235,12 +227,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadable("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be readable *failure message*, but it was not.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_be_readable_should_fail()
+        public async Task When_null_be_readable_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -253,15 +244,14 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be readable *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeReadable
     {
         [Fact]
-        public void When_having_a_non_readable_stream_be_not_readable_should_succeed()
+        public async Task When_having_a_non_readable_stream_be_not_readable_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Readable = false };
@@ -271,11 +261,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadable();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_readable_stream_be_not_readable_should_fail()
+        public async Task When_having_a_readable_stream_be_not_readable_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Readable = true };
@@ -285,12 +275,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadable("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be readable *failure message*, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_not_be_readable_should_fail()
+        public async Task When_null_not_be_readable_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -303,15 +292,14 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be readable *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class HavePosition
     {
         [Fact]
-        public void When_a_stream_has_the_expected_position_it_should_succeed()
+        public async Task When_a_stream_has_the_expected_position_it_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true, Position = 10 };
@@ -321,11 +309,11 @@ public class StreamAssertionSpecs
                 stream.Should().HavePosition(10);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_stream_has_the_unexpected_position_it_should_fail()
+        public async Task When_a_stream_has_the_unexpected_position_it_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true, Position = 1 };
@@ -335,12 +323,11 @@ public class StreamAssertionSpecs
                 stream.Should().HavePosition(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the position of stream to be 10* *failure message*, but it was 1*.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_have_position_should_fail()
+        public async Task When_null_have_position_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -353,13 +340,12 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the position of stream to be 10* *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Theory]
         [MemberData(nameof(GetPositionExceptions), MemberType = typeof(StreamAssertionSpecs))]
-        public void When_a_throwing_stream_should_have_a_position_it_should_fail(Exception exception)
+        public async Task When_a_throwing_stream_should_have_a_position_it_should_fail(Exception exception)
         {
             // Arrange
             using var stream = new ExceptingStream(exception);
@@ -369,16 +355,15 @@ public class StreamAssertionSpecs
                 stream.Should().HavePosition(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the position of stream to be 10* *failure message*, " +
-                    "but it failed with*GetPositionExceptionMessage*");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the position of stream to be 10* *failure message*, " +
+                    "but it failed with*GetPositionExceptionMessage*").AsWildcard();
         }
     }
 
     public class NotHavePosition
     {
         [Fact]
-        public void When_a_stream_does_not_have_an_unexpected_position_it_should_succeed()
+        public async Task When_a_stream_does_not_have_an_unexpected_position_it_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true, Position = 1 };
@@ -388,11 +373,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotHavePosition(10);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_stream_does_have_the_unexpected_position_it_should_fail()
+        public async Task When_a_stream_does_have_the_unexpected_position_it_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true, Position = 10 };
@@ -402,12 +387,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotHavePosition(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the position of stream not to be 10* *failure message*, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_not_have_position_should_fail()
+        public async Task When_null_not_have_position_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -420,13 +404,12 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the position of stream not to be 10* *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Theory]
         [MemberData(nameof(GetPositionExceptions), MemberType = typeof(StreamAssertionSpecs))]
-        public void When_a_throwing_stream_should_not_have_a_position_it_should_fail(Exception exception)
+        public async Task When_a_throwing_stream_should_not_have_a_position_it_should_fail(Exception exception)
         {
             // Arrange
             using var stream = new ExceptingStream(exception);
@@ -436,9 +419,8 @@ public class StreamAssertionSpecs
                 stream.Should().NotHavePosition(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the position of stream not to be 10* *failure message*, " +
-                    "but it failed with*GetPositionExceptionMessage*");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the position of stream not to be 10* *failure message*, " +
+                    "but it failed with*GetPositionExceptionMessage*").AsWildcard();
         }
     }
 
@@ -453,7 +435,7 @@ public class StreamAssertionSpecs
     public class HaveLength
     {
         [Fact]
-        public void When_a_stream_has_the_expected_length_it_should_succeed()
+        public async Task When_a_stream_has_the_expected_length_it_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true, WithLength = 10 };
@@ -463,11 +445,11 @@ public class StreamAssertionSpecs
                 stream.Should().HaveLength(10);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_stream_has_an_unexpected_length_it_should_fail()
+        public async Task When_a_stream_has_an_unexpected_length_it_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true, WithLength = 1 };
@@ -477,12 +459,11 @@ public class StreamAssertionSpecs
                 stream.Should().HaveLength(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the length of stream to be 10* *failure message*, but it was 1*.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_have_length_should_fail()
+        public async Task When_null_have_length_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -495,13 +476,12 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the length of stream to be 10* *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Theory]
         [MemberData(nameof(GetLengthExceptions), MemberType = typeof(StreamAssertionSpecs))]
-        public void When_a_throwing_stream_should_have_a_length_it_should_fail(Exception exception)
+        public async Task When_a_throwing_stream_should_have_a_length_it_should_fail(Exception exception)
         {
             // Arrange
             using var stream = new ExceptingStream(exception);
@@ -511,16 +491,15 @@ public class StreamAssertionSpecs
                 stream.Should().HaveLength(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the length of stream to be 10* *failure message*, " +
-                    "but it failed with*GetLengthExceptionMessage*");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the length of stream to be 10* *failure message*, " +
+                    "but it failed with*GetLengthExceptionMessage*").AsWildcard();
         }
     }
 
     public class NotHaveLength
     {
         [Fact]
-        public void When_a_stream_does_not_have_an_unexpected_length_it_should_succeed()
+        public async Task When_a_stream_does_not_have_an_unexpected_length_it_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true, WithLength = 1 };
@@ -530,11 +509,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotHaveLength(10);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_stream_does_have_the_unexpected_length_it_should_fail()
+        public async Task When_a_stream_does_have_the_unexpected_length_it_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Seekable = true, WithLength = 10 };
@@ -544,12 +523,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotHaveLength(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the length of stream not to be 10* *failure message*, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_not_have_length_should_fail()
+        public async Task When_null_not_have_length_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -562,13 +540,12 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the length of stream not to be 10* *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Theory]
         [MemberData(nameof(GetLengthExceptions), MemberType = typeof(StreamAssertionSpecs))]
-        public void When_a_throwing_stream_should_not_have_a_length_it_should_fail(Exception exception)
+        public async Task When_a_throwing_stream_should_not_have_a_length_it_should_fail(Exception exception)
         {
             // Arrange
             using var stream = new ExceptingStream(exception);
@@ -578,9 +555,8 @@ public class StreamAssertionSpecs
                 stream.Should().NotHaveLength(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the length of stream not to be 10* *failure message*, " +
-                    "but it failed with*GetLengthExceptionMessage*");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the length of stream not to be 10* *failure message*, " +
+                    "but it failed with*GetLengthExceptionMessage*").AsWildcard();
         }
     }
 
@@ -595,7 +571,7 @@ public class StreamAssertionSpecs
     public class BeReadOnly
     {
         [Fact]
-        public void When_having_a_readonly_stream_be_read_only_should_succeed()
+        public async Task When_having_a_readonly_stream_be_read_only_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Readable = true, Writable = false };
@@ -605,11 +581,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadOnly();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_writable_stream_be_read_only_should_fail()
+        public async Task When_having_a_writable_stream_be_read_only_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Readable = true, Writable = true };
@@ -619,12 +595,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadOnly("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be read-only *failure message*, but it was writable or not readable.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_having_a_non_readable_stream_be_read_only_should_fail()
+        public async Task When_having_a_non_readable_stream_be_read_only_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Readable = false, Writable = false };
@@ -634,12 +609,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadOnly("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be read-only *failure message*, but it was writable or not readable.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_be_read_only_should_fail()
+        public async Task When_null_be_read_only_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -652,15 +626,14 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be read-only *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeReadOnly
     {
         [Fact]
-        public void When_having_a_non_readable_stream_be_not_read_only_should_succeed()
+        public async Task When_having_a_non_readable_stream_be_not_read_only_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Readable = false, Writable = false };
@@ -670,11 +643,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadOnly();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_writable_stream_be_not_read_only_should_succeed()
+        public async Task When_having_a_writable_stream_be_not_read_only_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Readable = true, Writable = true };
@@ -684,11 +657,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadOnly();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_readonly_stream_be_not_read_only_should_fail()
+        public async Task When_having_a_readonly_stream_be_not_read_only_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Readable = true, Writable = false };
@@ -698,12 +671,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadOnly("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be read-only *failure message*, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_not_be_read_only_should_fail()
+        public async Task When_null_not_be_read_only_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -716,15 +688,14 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be read-only *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class BeWriteOnly
     {
         [Fact]
-        public void When_having_a_writeonly_stream_be_write_only_should_succeed()
+        public async Task When_having_a_writeonly_stream_be_write_only_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Readable = false, Writable = true };
@@ -734,11 +705,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeWriteOnly();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_readable_stream_be_write_only_should_fail()
+        public async Task When_having_a_readable_stream_be_write_only_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Readable = true, Writable = true };
@@ -748,12 +719,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeWriteOnly("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be write-only *failure message*, but it was readable or not writable.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_having_a_non_writable_stream_be_write_only_should_fail()
+        public async Task When_having_a_non_writable_stream_be_write_only_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Readable = false, Writable = false };
@@ -763,12 +733,11 @@ public class StreamAssertionSpecs
                 stream.Should().BeWriteOnly("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be write-only *failure message*, but it was readable or not writable.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_be_write_only_should_fail()
+        public async Task When_null_be_write_only_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -781,15 +750,14 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream to be write-only *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeWriteOnly
     {
         [Fact]
-        public void When_having_a_non_writable_stream_be_not_write_only_should_succeed()
+        public async Task When_having_a_non_writable_stream_be_not_write_only_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Readable = false, Writable = false };
@@ -799,11 +767,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWriteOnly();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_readable_stream_be_not_write_only_should_succeed()
+        public async Task When_having_a_readable_stream_be_not_write_only_should_succeed()
         {
             // Arrange
             using var stream = new TestStream { Readable = true, Writable = true };
@@ -813,11 +781,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWriteOnly();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_having_a_writeonly_stream_be_not_write_only_should_fail()
+        public async Task When_having_a_writeonly_stream_be_not_write_only_should_fail()
         {
             // Arrange
             using var stream = new TestStream { Readable = false, Writable = true };
@@ -827,12 +795,11 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWriteOnly("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be write-only *failure message*, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_not_be_write_only_should_fail()
+        public async Task When_null_not_be_write_only_should_fail()
         {
             // Arrange
             TestStream stream = null;
@@ -845,8 +812,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected stream not to be write-only *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

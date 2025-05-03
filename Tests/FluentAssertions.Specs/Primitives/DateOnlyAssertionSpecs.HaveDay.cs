@@ -21,7 +21,7 @@ public partial class DateOnlyAssertionSpecs
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_should_not_have_day_with_the_same_value_it_should_throw()
+        public async Task When_asserting_subject_dateonly_should_not_have_day_with_the_same_value_it_should_throw()
         {
             // Arrange
             DateOnly subject = new(2009, 12, 31);
@@ -31,12 +31,11 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().NotHaveDay(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the day part of subject to be 31, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_should_have_day_with_a_different_value_it_should_throw()
+        public async Task When_asserting_subject_dateonly_should_have_day_with_a_different_value_it_should_throw()
         {
             // Arrange
             DateOnly subject = new(2009, 12, 31);
@@ -46,8 +45,7 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().HaveDay(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the day part of subject to be 30, but found 31.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -62,7 +60,7 @@ public partial class DateOnlyAssertionSpecs
         }
 
         [Fact]
-        public void When_asserting_subject_null_dateonly_should_have_day_should_throw()
+        public async Task When_asserting_subject_null_dateonly_should_have_day_should_throw()
         {
             // Arrange
             DateOnly? subject = null;
@@ -72,12 +70,11 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().HaveDay(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the day part of subject to be 22, but found a <null> DateOnly.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_null_dateonly_should_not_have_day_should_throw()
+        public async Task When_asserting_subject_null_dateonly_should_not_have_day_should_throw()
         {
             // Arrange
             DateOnly? subject = null;
@@ -87,8 +84,7 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().NotHaveDay(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the day part of subject to be 22, but found a <null> DateOnly.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

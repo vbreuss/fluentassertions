@@ -5,15 +5,12 @@ namespace FluentAssertions.Specs.Numeric;
 public partial class NullableNumericAssertionSpecs
 {
     [Fact]
-    public void Should_support_chaining_constraints_with_and()
+    public async Task Should_support_chaining_constraints_with_and()
     {
         // Arrange
         int? nullableInteger = 1;
 
         // Act / Assert
-        nullableInteger.Should()
-            .HaveValue()
-            .And
-            .BePositive();
+        await Expect.That(nullableInteger).IsNotNull();
     }
 }

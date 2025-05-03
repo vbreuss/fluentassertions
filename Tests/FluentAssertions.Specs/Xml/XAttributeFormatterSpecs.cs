@@ -7,7 +7,7 @@ namespace FluentAssertions.Specs.Xml;
 public class XAttributeFormatterSpecs
 {
     [Fact]
-    public void When_formatting_an_attribute_it_should_return_the_name_and_value()
+    public async Task When_formatting_an_attribute_it_should_return_the_name_and_value()
     {
         // Act
         var element = XElement.Parse(@"<person name=""Martin"" age=""36"" />");
@@ -15,6 +15,6 @@ public class XAttributeFormatterSpecs
         string result = Formatter.ToString(attribute);
 
         // Assert
-        result.Should().Be(@"name=""Martin""");
+        await Expect.That(result).IsEqualTo(@"name=""Martin""");
     }
 }

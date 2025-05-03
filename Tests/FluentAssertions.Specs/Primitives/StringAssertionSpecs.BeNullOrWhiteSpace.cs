@@ -16,73 +16,69 @@ public partial class StringAssertionSpecs
         [InlineData(" ")]
         [InlineData("\n\r")]
         [Theory]
-        public void When_correctly_asserting_null_or_whitespace_it_should_not_throw(string actual)
+        public async Task When_correctly_asserting_null_or_whitespace_it_should_not_throw(string actual)
         {
             // Assert
-            actual.Should().BeNullOrWhiteSpace();
+            await Expect.That(actual).IsNullOrWhiteSpace();
         }
 
         [InlineData("a")]
         [InlineData(" a ")]
         [Theory]
-        public void When_correctly_asserting_not_null_or_whitespace_it_should_not_throw(string actual)
+        public async Task When_correctly_asserting_not_null_or_whitespace_it_should_not_throw(string actual)
         {
             // Assert
-            actual.Should().NotBeNullOrWhiteSpace();
+            await Expect.That(actual).IsNotNullOrWhiteSpace();
         }
 
         [Fact]
-        public void When_a_valid_string_is_expected_to_be_null_or_whitespace_it_should_throw()
+        public async Task When_a_valid_string_is_expected_to_be_null_or_whitespace_it_should_throw()
         {
             // Act
             Action act = () =>
-                " abc  ".Should().BeNullOrWhiteSpace();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(" abc  ").IsNullOrWhiteSpace());
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected string to be <null> or whitespace, but found \" abc  \".");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeNullOrWhitespace
     {
         [Fact]
-        public void When_a_null_string_is_expected_to_not_be_null_or_whitespace_it_should_throw()
+        public async Task When_a_null_string_is_expected_to_not_be_null_or_whitespace_it_should_throw()
         {
             // Arrange
             string nullString = null;
 
             // Act
             Action act = () =>
-                nullString.Should().NotBeNullOrWhiteSpace();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullString).IsNotNullOrWhiteSpace());
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected nullString not to be <null> or whitespace, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_an_empty_string_is_expected_to_not_be_null_or_whitespace_it_should_throw()
+        public async Task When_an_empty_string_is_expected_to_not_be_null_or_whitespace_it_should_throw()
         {
             // Act
             Action act = () =>
-                "".Should().NotBeNullOrWhiteSpace();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That("").IsNotNullOrWhiteSpace());
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected string not to be <null> or whitespace, but found \"\".");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_whitespace_string_is_expected_to_not_be_null_or_whitespace_it_should_throw()
+        public async Task When_a_whitespace_string_is_expected_to_not_be_null_or_whitespace_it_should_throw()
         {
             // Act
             Action act = () =>
-                "   ".Should().NotBeNullOrWhiteSpace();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That("   ").IsNotNullOrWhiteSpace());
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected string not to be <null> or whitespace, but found \"   \".");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

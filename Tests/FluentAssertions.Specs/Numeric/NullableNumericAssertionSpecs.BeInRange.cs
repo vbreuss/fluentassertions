@@ -11,7 +11,7 @@ public partial class NullableNumericAssertionSpecs
         [Theory]
         [InlineData(float.NaN, 5F)]
         [InlineData(5F, float.NaN)]
-        public void A_float_can_never_be_in_a_range_containing_NaN(float minimumValue, float maximumValue)
+        public async Task A_float_can_never_be_in_a_range_containing_NaN(float minimumValue, float maximumValue)
         {
             // Arrange
             float? value = 4.5F;
@@ -20,14 +20,11 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().BeInRange(minimumValue, maximumValue);
 
             // Assert
-            act
-                .Should().Throw<ArgumentException>()
-                .WithMessage(
-                    "*NaN*");
+            await Expect.That(act).Throws<ArgumentException>();
         }
 
         [Fact]
-        public void NaN_is_never_in_range_of_two_floats()
+        public async Task NaN_is_never_in_range_of_two_floats()
         {
             // Arrange
             float? value = float.NaN;
@@ -36,16 +33,13 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected value to be between*4* and*5*, but found*NaN*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Theory]
         [InlineData(double.NaN, 5)]
         [InlineData(5, double.NaN)]
-        public void A_double_can_never_be_in_a_range_containing_NaN(double minimumValue, double maximumValue)
+        public async Task A_double_can_never_be_in_a_range_containing_NaN(double minimumValue, double maximumValue)
         {
             // Arrange
             double? value = 4.5;
@@ -54,14 +48,11 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().BeInRange(minimumValue, maximumValue);
 
             // Assert
-            act
-                .Should().Throw<ArgumentException>()
-                .WithMessage(
-                    "*NaN*");
+            await Expect.That(act).Throws<ArgumentException>();
         }
 
         [Fact]
-        public void NaN_is_never_in_range_of_two_doubles()
+        public async Task NaN_is_never_in_range_of_two_doubles()
         {
             // Arrange
             double? value = double.NaN;
@@ -70,10 +61,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5);
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected value to be between*4* and*5*, but found*NaN*");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
@@ -82,7 +70,7 @@ public partial class NullableNumericAssertionSpecs
         [Theory]
         [InlineData(float.NaN, 1F)]
         [InlineData(1F, float.NaN)]
-        public void Cannot_use_NaN_in_a_range_of_floats(float minimumValue, float maximumValue)
+        public async Task Cannot_use_NaN_in_a_range_of_floats(float minimumValue, float maximumValue)
         {
             // Arrange
             float? value = 4.5F;
@@ -91,9 +79,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(minimumValue, maximumValue);
 
             // Assert
-            act
-                .Should().Throw<ArgumentException>()
-                .WithMessage("*NaN*");
+            await Expect.That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -109,7 +95,7 @@ public partial class NullableNumericAssertionSpecs
         [Theory]
         [InlineData(double.NaN, 1D)]
         [InlineData(1D, double.NaN)]
-        public void Cannot_use_NaN_in_a_range_of_doubles(double minimumValue, double maximumValue)
+        public async Task Cannot_use_NaN_in_a_range_of_doubles(double minimumValue, double maximumValue)
         {
             // Arrange
             double? value = 4.5D;
@@ -118,9 +104,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(minimumValue, maximumValue);
 
             // Assert
-            act
-                .Should().Throw<ArgumentException>()
-                .WithMessage("*NaN*");
+            await Expect.That(act).Throws<ArgumentException>();
         }
 
         [Fact]

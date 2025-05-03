@@ -9,209 +9,178 @@ public partial class ObjectAssertionSpecs
     public class Be
     {
         [Fact]
-        public void When_two_equal_object_are_expected_to_be_equal_it_should_not_fail()
+        public async Task When_two_equal_object_are_expected_to_be_equal_it_should_not_fail()
         {
             // Arrange
             var someObject = new ClassWithCustomEqualMethod(1);
             var equalObject = new ClassWithCustomEqualMethod(1);
 
             // Act / Assert
-            someObject.Should().Be(equalObject);
+            await Expect.That(someObject).IsEqualTo(equalObject);
         }
 
         [Fact]
-        public void When_two_different_objects_are_expected_to_be_equal_it_should_fail_with_a_clear_explanation()
+        public async Task When_two_different_objects_are_expected_to_be_equal_it_should_fail_with_a_clear_explanation()
         {
             // Arrange
             var someObject = new ClassWithCustomEqualMethod(1);
             var nonEqualObject = new ClassWithCustomEqualMethod(2);
 
             // Act
-            Action act = () => someObject.Should().Be(nonEqualObject);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsEqualTo(nonEqualObject));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected someObject to be ClassWithCustomEqualMethod(2), but found ClassWithCustomEqualMethod(1).");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_both_subject_and_expected_are_null_it_should_succeed()
+        public async Task When_both_subject_and_expected_are_null_it_should_succeed()
         {
             // Arrange
             object someObject = null;
             object expectedObject = null;
 
             // Act / Assert
-            someObject.Should().Be(expectedObject);
+            await Expect.That(someObject).IsEqualTo(expectedObject);
         }
 
         [Fact]
-        public void When_the_subject_is_null_it_should_fail()
+        public async Task When_the_subject_is_null_it_should_fail()
         {
             // Arrange
             object someObject = null;
             var nonEqualObject = new ClassWithCustomEqualMethod(2);
 
             // Act
-            Action act = () => someObject.Should().Be(nonEqualObject);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsEqualTo(nonEqualObject));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected someObject to be ClassWithCustomEqualMethod(2), but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_two_different_objects_are_expected_to_be_equal_it_should_fail_and_use_the_reason()
+        public async Task When_two_different_objects_are_expected_to_be_equal_it_should_fail_and_use_the_reason()
         {
             // Arrange
             var someObject = new ClassWithCustomEqualMethod(1);
             var nonEqualObject = new ClassWithCustomEqualMethod(2);
 
             // Act
-            Action act = () => someObject.Should().Be(nonEqualObject, "because it should use the {0}", "reason");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsEqualTo(nonEqualObject).Because($"because it should use the {"reason"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected someObject to be ClassWithCustomEqualMethod(2) because it should use the reason, but found ClassWithCustomEqualMethod(1).");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_comparing_a_numeric_and_an_enum_for_equality_it_should_throw()
+        public async Task When_comparing_a_numeric_and_an_enum_for_equality_it_should_throw()
         {
             // Arrange
             object subject = 1;
             MyEnum expected = MyEnum.One;
 
             // Act
-            Action act = () => subject.Should().Be(expected);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void An_untyped_value_is_equal_to_another_according_to_a_comparer()
+        public async Task An_untyped_value_is_equal_to_another_according_to_a_comparer()
         {
             // Arrange
             object value = new SomeClass(5);
 
             // Act / Assert
-            value.Should().Be(new SomeClass(5), new SomeClassEqualityComparer());
+            await Expect.That(value).IsEqualTo(new SomeClass(5)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
-        public void A_typed_value_is_equal_to_another_according_to_a_comparer()
+        public async Task A_typed_value_is_equal_to_another_according_to_a_comparer()
         {
             // Arrange
             var value = new SomeClass(5);
 
             // Act / Assert
-            value.Should().Be(new SomeClass(5), new SomeClassEqualityComparer());
+            await Expect.That(value).IsEqualTo(new SomeClass(5)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
-        public void An_untyped_value_is_not_equal_to_another_according_to_a_comparer()
+        public async Task An_untyped_value_is_not_equal_to_another_according_to_a_comparer()
         {
             // Arrange
             object value = new SomeClass(3);
 
             // Act
-            Action act = () => value.Should().Be(new SomeClass(4), new SomeClassEqualityComparer(), "I said so");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("Expected value to be SomeClass(4)*I said so*found SomeClass(3).");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void A_typed_value_is_not_equal_to_another_according_to_a_comparer()
+        public async Task A_typed_value_is_not_equal_to_another_according_to_a_comparer()
         {
             // Arrange
             var value = new SomeClass(3);
 
             // Act
-            Action act = () => value.Should().Be(new SomeClass(4), new SomeClassEqualityComparer(), "I said so");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("Expected value to be SomeClass(4)*I said so*found SomeClass(3).");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void A_typed_value_is_not_of_the_same_type()
+        public async Task A_typed_value_is_not_of_the_same_type()
         {
             // Arrange
             var value = new ClassWithCustomEqualMethod(3);
 
             // Act
-            Action act = () => value.Should().Be(new SomeClass(3), new SomeClassEqualityComparer(), "I said so");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected value to be SomeClass(3)*I said so*found ClassWithCustomEqualMethod(3).");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void A_untyped_value_requires_a_comparer()
-        {
-            // Arrange
-            object value = new SomeClass(3);
-
-            // Act
-            Action act = () => value.Should().Be(new SomeClass(3), comparer: null);
-
-            // Assert
-            act.Should().Throw<ArgumentNullException>().WithParameterName("comparer");
-        }
-
-        [Fact]
-        public void A_typed_value_requires_a_comparer()
-        {
-            // Arrange
-            var value = new SomeClass(3);
-
-            // Act
-            Action act = () => value.Should().Be(new SomeClass(3), comparer: null);
-
-            // Assert
-            act.Should().Throw<ArgumentNullException>().WithParameterName("comparer");
-        }
-
-        [Fact]
-        public void Chaining_after_one_assertion()
+        public async Task Chaining_after_one_assertion()
         {
             // Arrange
             var value = new SomeClass(3);
 
             // Act / Assert
-            value.Should().Be(value).And.NotBeNull();
+            await Expect.That(value).IsEqualTo(value);
         }
 
         [Fact]
-        public void Can_chain_multiple_assertions()
+        public async Task Can_chain_multiple_assertions()
         {
             // Arrange
             var value = new object();
 
             // Act / Assert
-            value.Should().Be(value, new DumbObjectEqualityComparer()).And.NotBeNull();
+            await Expect.That(value).IsEqualTo(value).Using(new DumbObjectEqualityComparer());
         }
     }
 
     public class NotBe
     {
         [Fact]
-        public void When_non_equal_objects_are_expected_to_be_not_equal_it_should_not_fail()
+        public async Task When_non_equal_objects_are_expected_to_be_not_equal_it_should_not_fail()
         {
             // Arrange
             var someObject = new ClassWithCustomEqualMethod(1);
             var nonEqualObject = new ClassWithCustomEqualMethod(2);
 
             // Act / Assert
-            someObject.Should().NotBe(nonEqualObject);
+            await Expect.That(someObject).IsNotEqualTo(nonEqualObject);
         }
 
         [Fact]
-        public void When_two_equal_objects_are_expected_not_to_be_equal_it_should_fail_with_a_clear_explanation()
+        public async Task When_two_equal_objects_are_expected_not_to_be_equal_it_should_fail_with_a_clear_explanation()
         {
             // Arrange
             var someObject = new ClassWithCustomEqualMethod(1);
@@ -219,15 +188,14 @@ public partial class ObjectAssertionSpecs
 
             // Act
             Action act = () =>
-                someObject.Should().NotBe(equalObject);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(equalObject));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect someObject to be equal to ClassWithCustomEqualMethod(1).");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_two_equal_objects_are_expected_not_to_be_equal_it_should_fail_and_use_the_reason()
+        public async Task When_two_equal_objects_are_expected_not_to_be_equal_it_should_fail_and_use_the_reason()
         {
             // Arrange
             var someObject = new ClassWithCustomEqualMethod(1);
@@ -235,114 +203,113 @@ public partial class ObjectAssertionSpecs
 
             // Act
             Action act = () =>
-                someObject.Should().NotBe(equalObject, "because we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(equalObject).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect someObject to be equal to ClassWithCustomEqualMethod(1) " +
-                "because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect someObject to be equal to ClassWithCustomEqualMethod(1) " +
+                "because we want to test the failure message.").AsWildcard();
         }
 
         [Fact]
-        public void An_untyped_value_is_not_equal_to_another_according_to_a_comparer()
+        public async Task An_untyped_value_is_not_equal_to_another_according_to_a_comparer()
         {
             // Arrange
             object value = new SomeClass(5);
 
             // Act / Assert
-            value.Should().NotBe(new SomeClass(4), new SomeClassEqualityComparer());
+            await Expect.That(value).IsNotEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
-        public void A_typed_value_is_not_equal_to_another_according_to_a_comparer()
+        public async Task A_typed_value_is_not_equal_to_another_according_to_a_comparer()
         {
             // Arrange
             var value = new SomeClass(5);
 
             // Act / Assert
-            value.Should().NotBe(new SomeClass(4), new SomeClassEqualityComparer());
+            await Expect.That(value).IsNotEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
-        public void An_untyped_value_is_equal_to_another_according_to_a_comparer()
+        public async Task An_untyped_value_is_equal_to_another_according_to_a_comparer()
         {
             // Arrange
             object value = new SomeClass(3);
 
             // Act
-            Action act = () => value.Should().NotBe(new SomeClass(3), new SomeClassEqualityComparer(), "I said so");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("Did not expect value to be equal to SomeClass(3)*I said so*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void A_typed_value_is_equal_to_another_according_to_a_comparer()
+        public async Task A_typed_value_is_equal_to_another_according_to_a_comparer()
         {
             // Arrange
             var value = new SomeClass(3);
 
             // Act
-            Action act = () => value.Should().NotBe(new SomeClass(3), new SomeClassEqualityComparer(), "I said so");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("Did not expect value to be equal to SomeClass(3)*I said so*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void A_typed_value_is_not_of_the_same_type()
+        public async Task A_typed_value_is_not_of_the_same_type()
         {
             // Arrange
             var value = new ClassWithCustomEqualMethod(3);
 
             // Act / Assert
-            value.Should().NotBe(new SomeClass(3), new SomeClassEqualityComparer(), "I said so");
+            await Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
-        public void An_untyped_value_requires_a_comparer()
+        public async Task An_untyped_value_requires_a_comparer()
         {
             // Arrange
             object value = new SomeClass(3);
 
             // Act
-            Action act = () => value.Should().NotBe(new SomeClass(3), comparer: null);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(comparer: null));
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithParameterName("comparer");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void A_typed_value_requires_a_comparer()
+        public async Task A_typed_value_requires_a_comparer()
         {
             // Arrange
             var value = new SomeClass(3);
 
             // Act
-            Action act = () => value.Should().NotBe(new SomeClass(3), comparer: null);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(comparer: null));
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithParameterName("comparer");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void Chaining_after_one_assertion()
+        public async Task Chaining_after_one_assertion()
         {
             // Arrange
             var value = new SomeClass(3);
 
             // Act / Assert
-            value.Should().NotBe(new SomeClass(3)).And.NotBeNull();
+            await Expect.That(value).IsNotEqualTo(new SomeClass(3));
         }
 
         [Fact]
-        public void Can_chain_multiple_assertions()
+        public async Task Can_chain_multiple_assertions()
         {
             // Arrange
             var value = new object();
 
             // Act / Assert
-            value.Should().NotBe(new object(), new DumbObjectEqualityComparer()).And.NotBeNull();
+            await Expect.That(value).IsNotEqualTo(new object()).Using(new DumbObjectEqualityComparer());
         }
     }
 

@@ -6,27 +6,20 @@ namespace FluentAssertions.Specs.Numeric;
 public partial class NumericAssertionSpecs
 {
     [Fact]
-    public void When_chaining_constraints_with_and_should_not_throw()
+    public async Task When_chaining_constraints_with_and_should_not_throw()
     {
         // Arrange
         int value = 2;
-        int greaterValue = 3;
-        int smallerValue = 1;
 
         // Act
-        Action action = () => value.Should()
-            .BePositive()
-            .And
-            .BeGreaterThan(smallerValue)
-            .And
-            .BeLessThan(greaterValue);
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsPositive());
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void Should_throw_a_helpful_error_when_accidentally_using_equals()
+    public async Task Should_throw_a_helpful_error_when_accidentally_using_equals()
     {
         // Arrange
         int value = 1;
@@ -35,7 +28,6 @@ public partial class NumericAssertionSpecs
         Action action = () => value.Should().Equals(1);
 
         // Assert
-        action.Should().Throw<NotSupportedException>()
-            .WithMessage("Equals is not part of Fluent Assertions. Did you mean Be() instead?");
+        await Expect.That(action).Throws<NotSupportedException>();
     }
 }

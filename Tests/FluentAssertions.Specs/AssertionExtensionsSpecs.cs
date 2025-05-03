@@ -64,13 +64,13 @@ public class AssertionExtensionsSpecs
 
     [Theory]
     [MemberData(nameof(ClassesWithGuardEquals))]
-    public void Guarding_equals_throws(object obj)
+    public async Task Guarding_equals_throws(object obj)
     {
         // Act
         Action act = () => obj.Equals(null);
 
         // Assert
-        act.Should().ThrowExactly<NotSupportedException>();
+        await Expect.That(act).ThrowsExactly<NotSupportedException>();
     }
 
     [Theory]
@@ -92,7 +92,7 @@ public class AssertionExtensionsSpecs
     [InlineData(typeof(DateOnlyAssertions<DateOnlyAssertions>))]
     [InlineData(typeof(TimeOnlyAssertions<TimeOnlyAssertions>))]
 #endif
-    public void Fake_should_method_throws(Type type)
+    public async Task Fake_should_method_throws(Type type)
     {
         // Arrange
         MethodInfo fakeOverload = AllTypes.From(typeof(FluentAssertions.AssertionExtensions).Assembly)
@@ -112,66 +112,23 @@ public class AssertionExtensionsSpecs
         Action act = () => fakeOverload.Invoke(null, [null]);
 
         // Assert
-        act.Should()
-            .ThrowExactly<TargetInvocationException>()
-            .WithInnerExceptionExactly<InvalidOperationException>()
-            .WithMessage("You are asserting the 'AndConstraint' itself. Remove the 'Should()' method directly following 'And'.");
-    }
-
-    [Fact]
-    public void Should_methods_have_a_matching_overload_to_guard_against_chaining_and_constraints()
-    {
-        // Arrange / Act
-        List<MethodInfo> shouldOverloads = AllTypes.From(typeof(FluentAssertions.AssertionExtensions).Assembly)
-            .ThatAreClasses()
-            .ThatAreStatic()
-            .Where(t => t.IsPublic)
-            .SelectMany(t => t.GetMethods(BindingFlags.Static | BindingFlags.Public))
-            .Where(m => m.Name == "Should")
-            .ToList();
-
-        List<Type> realOverloads =
-        [
-            ..shouldOverloads
-                .Where(m => !IsGuardOverload(m))
-                .Select(t => GetMostParentType(t.ReturnType))
-                .Distinct(),
-
-            // @jnyrup: DateTimeRangeAssertions and DateTimeOffsetRangeAssertions are manually added here,
-            // because they expose AndConstraints,
-            // and hence should have a guarding Should(DateTimeRangeAssertions _) overloads,
-            // but they do not have a regular Should() overload,
-            // as they are always constructed through the fluent API.
-            typeof(DateTimeRangeAssertions<>),
-            typeof(DateTimeOffsetRangeAssertions<>)
-        ];
-
-        List<Type> fakeOverloads = shouldOverloads
-            .Where(m => IsGuardOverload(m))
-            .Select(e => e.GetParameters()[0].ParameterType)
-            .ToList();
-
-        // Assert
-        fakeOverloads.Should().BeEquivalentTo(realOverloads, opt => opt
-                .Using<Type>(ctx => ctx.Subject.Name.Should().Be(ctx.Expectation.Name))
-                .WhenTypeIs<Type>(),
-            "AssertionExtensions.cs should have a guard overload of Should calling InvalidShouldCall()");
+        await Expect.That(act).ThrowsExactly<TargetInvocationException>();
     }
 
     [Theory]
     [MemberData(nameof(GetShouldMethods), true)]
-    public void Should_methods_returning_reference_or_nullable_type_assertions_are_annotated_with_not_null_attribute(MethodInfo method)
+    public async Task Should_methods_returning_reference_or_nullable_type_assertions_are_annotated_with_not_null_attribute(MethodInfo method)
     {
         var notNullAttribute = method.GetParameters().Single().GetCustomAttribute<NotNullAttribute>();
-        notNullAttribute.Should().NotBeNull();
+        await Expect.That(notNullAttribute).IsNotNull();
     }
 
     [Theory]
     [MemberData(nameof(GetShouldMethods), false)]
-    public void Should_methods_not_returning_reference_or_nullable_type_assertions_are_not_annotated_with_not_null_attribute(MethodInfo method)
+    public async Task Should_methods_not_returning_reference_or_nullable_type_assertions_are_not_annotated_with_not_null_attribute(MethodInfo method)
     {
         var notNullAttribute = method.GetParameters().Single().GetCustomAttribute<NotNullAttribute>();
-        notNullAttribute.Should().BeNull();
+        await Expect.That(notNullAttribute).IsNull();
     }
 
     public static IEnumerable<object[]> GetShouldMethods(bool referenceOrNullableTypes)

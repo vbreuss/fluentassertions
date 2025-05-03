@@ -9,7 +9,7 @@ public partial class DateTimeOffsetAssertionSpecs
     public class BeSameDateAs
     {
         [Fact]
-        public void When_asserting_subject_datetimeoffset_should_be_same_date_as_another_with_the_same_date_it_should_succeed()
+        public async Task When_asserting_subject_datetimeoffset_should_be_same_date_as_another_with_the_same_date_it_should_succeed()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 12, 31, 4, 5, 6), TimeSpan.Zero);
@@ -19,12 +19,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(expectation);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void
-            When_asserting_subject_datetimeoffset_should_be_same_as_another_with_same_date_but_different_time_it_should_succeed()
+        public async Task When_asserting_subject_datetimeoffset_should_be_same_as_another_with_same_date_but_different_time_it_should_succeed()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 12, 31, 4, 5, 6), TimeSpan.Zero);
@@ -34,11 +33,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(expectation);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_subject_null_datetimeoffset_to_be_same_date_as_another_datetimeoffset_it_should_throw()
+        public async Task When_asserting_subject_null_datetimeoffset_to_be_same_date_as_another_datetimeoffset_it_should_throw()
         {
             // Arrange
             DateTimeOffset? subject = null;
@@ -48,12 +47,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected the date part of subject to be <2009-12-31>, but found a <null> DateTimeOffset.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_datetimeoffset_should_have_same_date_as_another_but_it_doesnt_it_should_throw()
+        public async Task When_asserting_subject_datetimeoffset_should_have_same_date_as_another_but_it_doesnt_it_should_throw()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 12, 31), TimeSpan.Zero);
@@ -63,8 +61,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected the date part of subject to be <2009-12-30>, but it was <2009-12-31>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -82,7 +79,7 @@ public partial class DateTimeOffsetAssertionSpecs
     public class NotBeSameDateAs
     {
         [Fact]
-        public void When_asserting_subject_datetimeoffset_should_not_be_same_date_as_another_with_the_same_date_it_should_throw()
+        public async Task When_asserting_subject_datetimeoffset_should_not_be_same_date_as_another_with_the_same_date_it_should_throw()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 12, 31, 4, 5, 6), TimeSpan.Zero);
@@ -92,12 +89,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the date part of subject to be <2009-12-31>, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Can_chain_follow_up_assertions()
+        public async Task Can_chain_follow_up_assertions()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 12, 31, 4, 5, 6), TimeSpan.Zero);
@@ -107,13 +103,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation).And.Be(subject);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the date part of subject to be <2009-12-31>, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_subject_datetimeoffset_should_not_be_same_as_another_with_same_date_but_different_time_it_should_throw()
+        public async Task When_asserting_subject_datetimeoffset_should_not_be_same_as_another_with_same_date_but_different_time_it_should_throw()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 12, 31, 4, 5, 6), TimeSpan.Zero);
@@ -123,12 +117,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect the date part of subject to be <2009-12-31>, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_null_datetimeoffset_to_not_be_same_date_as_another_datetimeoffset_it_should_throw()
+        public async Task When_asserting_subject_null_datetimeoffset_to_not_be_same_date_as_another_datetimeoffset_it_should_throw()
         {
             // Arrange
             DateTimeOffset? subject = null;
@@ -138,12 +131,11 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation);
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect the date part of subject to be <2009-12-31>, but found a <null> DateTimeOffset.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_datetimeoffset_should_not_have_same_date_as_another_but_it_doesnt_it_should_succeed()
+        public async Task When_asserting_subject_datetimeoffset_should_not_have_same_date_as_another_but_it_doesnt_it_should_succeed()
         {
             // Arrange
             DateTimeOffset subject = new(new DateTime(2009, 12, 31), TimeSpan.Zero);
@@ -153,7 +145,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
     }
 }

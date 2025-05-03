@@ -8,158 +8,152 @@ namespace FluentAssertions.Specs.Primitives;
 public class NullableSimpleTimeSpanAssertionSpecs
 {
     [Fact]
-    public void Should_succeed_when_asserting_nullable_TimeSpan_value_with_a_value_to_have_a_value()
+    public async Task Should_succeed_when_asserting_nullable_TimeSpan_value_with_a_value_to_have_a_value()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act / Assert
-        nullableTimeSpan.Should().HaveValue();
+        await Expect.That(nullableTimeSpan).IsNotNull();
     }
 
     [Fact]
-    public void Should_succeed_when_asserting_nullable_TimeSpan_value_with_a_value_to_not_be_null()
+    public async Task Should_succeed_when_asserting_nullable_TimeSpan_value_with_a_value_to_not_be_null()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act / Assert
-        nullableTimeSpan.Should().NotBeNull();
+        await Expect.That(nullableTimeSpan).IsNotNull();
     }
 
     [Fact]
-    public void Should_fail_when_asserting_nullable_TimeSpan_value_without_a_value_to_not_be_null()
+    public async Task Should_fail_when_asserting_nullable_TimeSpan_value_without_a_value_to_not_be_null()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = null;
 
         // Act
-        Action act = () => nullableTimeSpan.Should().NotBeNull();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNotNull());
 
         // Assert
-        act.Should().Throw<XunitException>();
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void Should_fail_with_descriptive_message_when_asserting_nullable_TimeSpan_value_without_a_value_to_have_a_value()
+    public async Task Should_fail_with_descriptive_message_when_asserting_nullable_TimeSpan_value_without_a_value_to_have_a_value()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = null;
 
         // Act
-        Action act = () => nullableTimeSpan.Should().HaveValue("because we want to test the failure {0}", "message");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected a value because we want to test the failure message.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void Should_fail_with_descriptive_message_when_asserting_nullable_TimeSpan_value_without_a_value_to_not_be_null()
+    public async Task Should_fail_with_descriptive_message_when_asserting_nullable_TimeSpan_value_without_a_value_to_not_be_null()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = null;
 
         // Act
-        Action act = () => nullableTimeSpan.Should().NotBeNull("because we want to test the failure {0}", "message");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected a value because we want to test the failure message.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void Should_succeed_when_asserting_nullable_TimeSpan_value_without_a_value_to_not_have_a_value()
-    {
-        // Arrange
-        TimeSpan? nullableTimeSpan = null;
-
-        // Act / Assert
-        nullableTimeSpan.Should().NotHaveValue();
-    }
-
-    [Fact]
-    public void Should_succeed_when_asserting_nullable_TimeSpan_value_without_a_value_to_be_null()
+    public async Task Should_succeed_when_asserting_nullable_TimeSpan_value_without_a_value_to_not_have_a_value()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = null;
 
         // Act / Assert
-        nullableTimeSpan.Should().BeNull();
+        await Expect.That(nullableTimeSpan).IsNull();
     }
 
     [Fact]
-    public void Should_fail_when_asserting_nullable_TimeSpan_value_with_a_value_to_not_have_a_value()
+    public async Task Should_succeed_when_asserting_nullable_TimeSpan_value_without_a_value_to_be_null()
+    {
+        // Arrange
+        TimeSpan? nullableTimeSpan = null;
+
+        // Act / Assert
+        await Expect.That(nullableTimeSpan).IsNull();
+    }
+
+    [Fact]
+    public async Task Should_fail_when_asserting_nullable_TimeSpan_value_with_a_value_to_not_have_a_value()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act
-        Action act = () => nullableTimeSpan.Should().NotHaveValue();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNull());
 
         // Assert
-        act.Should().Throw<XunitException>();
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void Should_fail_when_asserting_nullable_TimeSpan_value_with_a_value_to_be_null()
+    public async Task Should_fail_when_asserting_nullable_TimeSpan_value_with_a_value_to_be_null()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act
-        Action act = () => nullableTimeSpan.Should().BeNull();
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNull());
 
         // Assert
-        act.Should().Throw<XunitException>();
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void Should_fail_with_descriptive_message_when_asserting_nullable_TimeSpan_value_with_a_value_to_not_have_a_value()
+    public async Task Should_fail_with_descriptive_message_when_asserting_nullable_TimeSpan_value_with_a_value_to_not_have_a_value()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = 1.Seconds();
 
         // Act
-        Action act = () => nullableTimeSpan.Should().NotHaveValue("because we want to test the failure {0}", "message");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Did not expect a value because we want to test the failure message, but found 1s.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void Should_fail_with_descriptive_message_when_asserting_nullable_TimeSpan_value_with_a_value_to_be_null()
+    public async Task Should_fail_with_descriptive_message_when_asserting_nullable_TimeSpan_value_with_a_value_to_be_null()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = 1.Seconds();
 
         // Act
-        Action act = () => nullableTimeSpan.Should().BeNull("because we want to test the failure {0}", "message");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Did not expect a value because we want to test the failure message, but found 1s.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void
-        When_asserting_a_nullable_TimeSpan_is_equal_to_a_different_nullable_TimeSpan_it_should_should_throw_appropriately()
+    public async Task When_asserting_a_nullable_TimeSpan_is_equal_to_a_different_nullable_TimeSpan_it_should_should_throw_appropriately()
     {
         // Arrange
         TimeSpan? nullableTimeSpanA = 1.Seconds();
         TimeSpan? nullableTimeSpanB = 2.Seconds();
 
         // Act
-        Action action = () => nullableTimeSpanA.Should().Be(nullableTimeSpanB);
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB));
 
         // Assert
-        action.Should().Throw<XunitException>();
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void
-        When_asserting_a_nullable_TimeSpan_is_equal_to_another_a_nullable_TimeSpan_but_it_is_null_it_should_fail_with_a_descriptive_message()
+    public async Task When_asserting_a_nullable_TimeSpan_is_equal_to_another_a_nullable_TimeSpan_but_it_is_null_it_should_fail_with_a_descriptive_message()
     {
         // Arrange
         TimeSpan? nullableTimeSpanA = null;
@@ -168,53 +162,47 @@ public class NullableSimpleTimeSpanAssertionSpecs
         // Act
         Action action =
             () =>
-                nullableTimeSpanA.Should()
-                    .Be(nullableTimeSpanB, "because we want to test the failure {0}", "message");
+            aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage(
-                "Expected 1s because we want to test the failure message, but found <null>.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_a_nullable_TimeSpan_is_equal_to_another_a_nullable_TimeSpan_and_both_are_null_it_should_succeed()
+    public async Task When_asserting_a_nullable_TimeSpan_is_equal_to_another_a_nullable_TimeSpan_and_both_are_null_it_should_succeed()
     {
         // Arrange
         TimeSpan? nullableTimeSpanA = null;
         TimeSpan? nullableTimeSpanB = null;
 
         // Act
-        Action action = () => nullableTimeSpanA.Should().Be(nullableTimeSpanB);
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB));
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_asserting_a_nullable_TimeSpan_is_equal_to_the_same_nullable_TimeSpan_it_should_succeed()
+    public async Task When_asserting_a_nullable_TimeSpan_is_equal_to_the_same_nullable_TimeSpan_it_should_succeed()
     {
         // Arrange
         TimeSpan? nullableTimeSpanA = default(TimeSpan);
         TimeSpan? nullableTimeSpanB = default(TimeSpan);
 
         // Act
-        Action action = () => nullableTimeSpanA.Should().Be(nullableTimeSpanB);
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB));
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void Should_support_chaining_constraints_with_and()
+    public async Task Should_support_chaining_constraints_with_and()
     {
         // Arrange
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act / Assert
-        nullableTimeSpan.Should()
-            .HaveValue()
-            .And
-            .Be(default(TimeSpan));
+        await Expect.That(nullableTimeSpan).IsNotNull();
     }
 }

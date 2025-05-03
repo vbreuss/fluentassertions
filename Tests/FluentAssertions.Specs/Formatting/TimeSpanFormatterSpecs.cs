@@ -8,33 +8,33 @@ namespace FluentAssertions.Specs.Formatting;
 public class TimeSpanFormatterSpecs
 {
     [Fact]
-    public void When_zero_time_span_it_should_return_a_literal()
+    public async Task When_zero_time_span_it_should_return_a_literal()
     {
         // Act
         string result = Formatter.ToString(TimeSpan.Zero);
 
         // Assert
-        result.Should().Be("default");
+        await Expect.That(result).IsEqualTo("default");
     }
 
     [Fact]
-    public void When_max_time_span_it_should_return_a_literal()
+    public async Task When_max_time_span_it_should_return_a_literal()
     {
         // Act
         string result = Formatter.ToString(TimeSpan.MaxValue);
 
         // Assert
-        result.Should().Be("max time span");
+        await Expect.That(result).IsEqualTo("max time span");
     }
 
     [Fact]
-    public void When_min_time_span_it_should_return_a_literal()
+    public async Task When_min_time_span_it_should_return_a_literal()
     {
         // Act
         string result = Formatter.ToString(TimeSpan.MinValue);
 
         // Assert
-        result.Should().Be("min time span");
+        await Expect.That(result).IsEqualTo("min time span");
     }
 
     [Theory]
@@ -64,7 +64,7 @@ public class TimeSpanFormatterSpecs
     [InlineData("-01:02:03.123456", "-1h, 2m, 3s, 123ms and 456.0µs")]
     [InlineData("01:02:03.1234567", "1h, 2m, 3s, 123ms and 456.7µs")]
     [InlineData("-01:02:03.1234567", "-1h, 2m, 3s, 123ms and 456.7µs")]
-    public void When_timespan_components_are_not_relevant_they_should_not_be_included_in_the_output(string actual,
+    public async Task When_timespan_components_are_not_relevant_they_should_not_be_included_in_the_output(string actual,
         string expected)
     {
         // Arrange
@@ -74,6 +74,6 @@ public class TimeSpanFormatterSpecs
         string result = Formatter.ToString(value);
 
         // Assert
-        result.Should().Be(expected);
+        await Expect.That(result).IsEqualTo(expected);
     }
 }

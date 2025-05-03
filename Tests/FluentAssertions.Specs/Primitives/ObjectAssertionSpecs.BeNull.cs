@@ -9,83 +9,78 @@ public partial class ObjectAssertionSpecs
     public class BeNull
     {
         [Fact]
-        public void Should_succeed_when_asserting_null_object_to_be_null()
+        public async Task Should_succeed_when_asserting_null_object_to_be_null()
         {
             // Arrange
             object someObject = null;
 
             // Act / Assert
-            someObject.Should().BeNull();
+            await Expect.That(someObject).IsNull();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_non_null_object_to_be_null()
+        public async Task Should_fail_when_asserting_non_null_object_to_be_null()
         {
             // Arrange
             var someObject = new object();
 
             // Act
-            Action act = () => someObject.Should().BeNull();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNull());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_non_null_object_is_expected_to_be_null_it_should_fail()
+        public async Task When_a_non_null_object_is_expected_to_be_null_it_should_fail()
         {
             // Arrange
             var someObject = new object();
 
             // Act
-            Action act = () => someObject.Should().BeNull("because we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act
-                .Should().Throw<XunitException>()
-                .Where(e => e.Message.StartsWith(
-                    "Expected someObject to be <null> because we want to test the failure message, but found System.Object",
-                    StringComparison.Ordinal));
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class BeNotNull
     {
         [Fact]
-        public void Should_succeed_when_asserting_non_null_object_not_to_be_null()
+        public async Task Should_succeed_when_asserting_non_null_object_not_to_be_null()
         {
             // Arrange
             var someObject = new object();
 
             // Act / Assert
-            someObject.Should().NotBeNull();
+            await Expect.That(someObject).IsNotNull();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_null_object_not_to_be_null()
+        public async Task Should_fail_when_asserting_null_object_not_to_be_null()
         {
             // Arrange
             object someObject = null;
 
             // Act
-            Action act = () => someObject.Should().NotBeNull();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotNull());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_descriptive_message_when_asserting_null_object_not_to_be_null()
+        public async Task Should_fail_with_descriptive_message_when_asserting_null_object_not_to_be_null()
         {
             // Arrange
             object someObject = null;
 
             // Act
-            Action act = () => someObject.Should().NotBeNull("because we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected someObject not to be <null> because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

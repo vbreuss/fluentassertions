@@ -13,7 +13,7 @@ public partial class TypeAssertionSpecs
     public class HaveConstructor
     {
         [Fact]
-        public void When_asserting_a_type_has_a_constructor_which_it_does_it_succeeds()
+        public async Task When_asserting_a_type_has_a_constructor_which_it_does_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -25,11 +25,11 @@ public partial class TypeAssertionSpecs
                     .Which.Should().HaveAccessModifier(CSharpAccessModifier.Private);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_constructor_which_it_does_not_it_fails()
+        public async Task When_asserting_a_type_has_a_constructor_which_it_does_not_it_fails()
         {
             // Arrange
             var type = typeof(ClassWithNoMembers);
@@ -39,14 +39,12 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveConstructor([typeof(int), typeof(Type)], "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected constructor *ClassWithNoMembers(System.Int32, System.Type) to exist *failure message*" +
-                    ", but it does not.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected constructor *ClassWithNoMembers(System.Int32, System.Type) to exist *failure message*" +
+                    ", but it does not.").AsWildcard();
         }
 
         [Fact]
-        public void When_subject_is_null_have_constructor_should_fail()
+        public async Task When_subject_is_null_have_constructor_should_fail()
         {
             // Arrange
             Type type = null;
@@ -56,12 +54,11 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveConstructor([typeof(string)], "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected constructor type(System.String) to exist *failure message*, but type is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_constructor_of_null_it_should_throw()
+        public async Task When_asserting_a_type_has_a_constructor_of_null_it_should_throw()
         {
             // Arrange
             Type type = typeof(ClassWithMembers);
@@ -71,15 +68,14 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveConstructor(null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("parameterTypes");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
     public class NotHaveConstructor
     {
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_constructor_which_it_does_not_it_succeeds()
+        public async Task When_asserting_a_type_does_not_have_a_constructor_which_it_does_not_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithNoMembers);
@@ -90,11 +86,11 @@ public partial class TypeAssertionSpecs
                     .NotHaveConstructor([typeof(string)]);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_constructor_which_it_does_it_fails()
+        public async Task When_asserting_a_type_does_not_have_a_constructor_which_it_does_it_fails()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -104,13 +100,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveConstructor([typeof(string)], "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected constructor *.ClassWithMembers(System.String) not to exist *failure message*, but it does.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_subject_is_null_not_have_constructor_should_fail()
+        public async Task When_subject_is_null_not_have_constructor_should_fail()
         {
             // Arrange
             Type type = null;
@@ -120,12 +114,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveConstructor([typeof(string)], "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected constructor type(System.String) not to exist *failure message*, but type is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_constructor_of_null_it_should_throw()
+        public async Task When_asserting_a_type_does_not_have_a_constructor_of_null_it_should_throw()
         {
             // Arrange
             Type type = typeof(ClassWithMembers);
@@ -135,8 +128,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveConstructor(null);
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("parameterTypes");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 }

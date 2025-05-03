@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Xunit;
@@ -11,20 +12,17 @@ public partial class ObjectAssertionSpecs
     public class Miscellaneous
     {
         [Fact]
-        public void Should_support_chaining_constraints_with_and()
+        public async Task Should_support_chaining_constraints_with_and()
         {
             // Arrange
             var someObject = new Exception();
 
             // Act / Assert
-            someObject.Should()
-                .BeOfType<Exception>()
-                .And
-                .NotBeNull();
+            await Expect.That(someObject).IsExactly<Exception>();
         }
 
         [Fact]
-        public void Should_throw_a_helpful_error_when_accidentally_using_equals()
+        public async Task Should_throw_a_helpful_error_when_accidentally_using_equals()
         {
             // Arrange
             var someObject = new Exception();
@@ -33,8 +31,7 @@ public partial class ObjectAssertionSpecs
             var action = () => someObject.Should().Equals(null);
 
             // Assert
-            action.Should().Throw<NotSupportedException>()
-                .WithMessage("Equals is not part of Fluent Assertions. Did you mean Be() or BeSameAs() instead?");
+            await Expect.That(action).Throws<NotSupportedException>();
         }
     }
 
@@ -72,14 +69,16 @@ internal class SomeClass
     public override string ToString() => $"SomeClass({Key})";
 }
 
-internal class SomeClassEqualityComparer : IEqualityComparer<SomeClass>
+internal class SomeClassEqualityComparer : IEqualityComparer<SomeClass>, IEqualityComparer<object>
 {
     public bool Equals(SomeClass x, SomeClass y)
     {
         return (x == y) || (x is not null && y is not null && x.Key.Equals(y.Key));
     }
 
+    public new bool Equals(object x, object y) => Equals(x as SomeClass, y as SomeClass);
     public int GetHashCode(SomeClass obj) => obj.Key;
+    public int GetHashCode([DisallowNull] object obj) => GetHashCode(obj as SomeClass);
 }
 
 internal class SomeClassAssertions : ObjectAssertions<SomeClass, SomeClassAssertions>

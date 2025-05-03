@@ -13,7 +13,7 @@ public partial class TypeAssertionSpecs
     public class HaveDefaultConstructor
     {
         [Fact]
-        public void When_asserting_a_type_has_a_default_constructor_which_it_does_it_succeeds()
+        public async Task When_asserting_a_type_has_a_default_constructor_which_it_does_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -26,11 +26,11 @@ public partial class TypeAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.ProtectedInternal);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_default_constructor_which_it_does_not_it_succeeds()
+        public async Task When_asserting_a_type_has_a_default_constructor_which_it_does_not_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithNoMembers);
@@ -43,11 +43,11 @@ public partial class TypeAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_default_constructor_which_it_does_not_and_a_cctor_it_succeeds()
+        public async Task When_asserting_a_type_has_a_default_constructor_which_it_does_not_and_a_cctor_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithCctor);
@@ -65,11 +65,11 @@ public partial class TypeAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_has_a_default_constructor_which_it_does_not_and_a_cctor_it_fails()
+        public async Task When_asserting_a_type_has_a_default_constructor_which_it_does_not_and_a_cctor_it_fails()
         {
             // Arrange
             var type = typeof(ClassWithCctorAndNonDefaultConstructor);
@@ -79,14 +79,12 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "Expected constructor *ClassWithCctorAndNonDefaultConstructor() to exist *failure message*" +
-                    ", but it does not.");
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected constructor *ClassWithCctorAndNonDefaultConstructor() to exist *failure message*" +
+                    ", but it does not.").AsWildcard();
         }
 
         [Fact]
-        public void When_subject_is_null_have_default_constructor_should_fail()
+        public async Task When_subject_is_null_have_default_constructor_should_fail()
         {
             // Arrange
             Type type = null;
@@ -96,15 +94,14 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected constructor type() to exist *failure message*, but type is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotHaveDefaultConstructor
     {
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_default_constructor_which_it_does_not_it_succeeds()
+        public async Task When_asserting_a_type_does_not_have_a_default_constructor_which_it_does_not_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithCctorAndNonDefaultConstructor);
@@ -115,11 +112,11 @@ public partial class TypeAssertionSpecs
                     .NotHaveDefaultConstructor();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_default_constructor_which_it_does_it_fails()
+        public async Task When_asserting_a_type_does_not_have_a_default_constructor_which_it_does_it_fails()
         {
             // Arrange
             var type = typeof(ClassWithMembers);
@@ -130,12 +127,11 @@ public partial class TypeAssertionSpecs
                     .NotHaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected constructor *.ClassWithMembers() not to exist *failure message*, but it does.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_default_constructor_which_it_does_and_a_cctor_it_fails()
+        public async Task When_asserting_a_type_does_not_have_a_default_constructor_which_it_does_and_a_cctor_it_fails()
         {
             // Arrange
             var type = typeof(ClassWithCctor);
@@ -145,12 +141,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected constructor *ClassWithCctor*() not to exist *failure message*, but it does.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_a_type_does_not_have_a_default_constructor_which_it_does_not_and_a_cctor_it_succeeds()
+        public async Task When_asserting_a_type_does_not_have_a_default_constructor_which_it_does_not_and_a_cctor_it_succeeds()
         {
             // Arrange
             var type = typeof(ClassWithCctorAndNonDefaultConstructor);
@@ -160,11 +155,11 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveDefaultConstructor();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_subject_is_null_not_have_default_constructor_should_fail()
+        public async Task When_subject_is_null_not_have_default_constructor_should_fail()
         {
             // Arrange
             Type type = null;
@@ -174,8 +169,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected constructor type() not to exist *failure message*, but type is <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 

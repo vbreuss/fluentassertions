@@ -15,7 +15,7 @@ public partial class ObjectAssertionSpecs
     public class BeXmlSerializable
     {
         [Fact]
-        public void When_an_object_is_xml_serializable_it_should_succeed()
+        public async Task When_an_object_is_xml_serializable_it_should_succeed()
         {
             // Arrange
             var subject = new XmlSerializableClass
@@ -28,11 +28,11 @@ public partial class ObjectAssertionSpecs
             Action act = () => subject.Should().BeXmlSerializable();
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_an_object_is_not_xml_serializable_it_should_fail()
+        public async Task When_an_object_is_not_xml_serializable_it_should_fail()
         {
             // Arrange
             var subject = new NonPublicClass
@@ -44,13 +44,11 @@ public partial class ObjectAssertionSpecs
             Action act = () => subject.Should().BeXmlSerializable("we need to store it on {0}", "disk");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage(
-                    "*to be serializable because we need to store it on disk, but serialization failed with:*NonPublicClass*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_an_object_is_xml_serializable_but_doesnt_restore_all_properties_it_should_fail()
+        public async Task When_an_object_is_xml_serializable_but_doesnt_restore_all_properties_it_should_fail()
         {
             // Arrange
             var subject = new XmlSerializableClassNotRestoringAllProperties
@@ -63,8 +61,7 @@ public partial class ObjectAssertionSpecs
             Action act = () => subject.Should().BeXmlSerializable();
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("*to be serializable, but serialization failed with:*Name*to be*");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 

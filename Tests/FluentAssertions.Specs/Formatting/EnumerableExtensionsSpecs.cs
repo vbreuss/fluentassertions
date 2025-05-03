@@ -16,12 +16,12 @@ public class EnumerableExtensionsSpecs
 
     [Theory]
     [MemberData(nameof(JoinUsingWritingStyleTestCases))]
-    public void JoinUsingWritingStyle_should_format_correctly(string[] input, string expectation)
+    public async Task JoinUsingWritingStyle_should_format_correctly(string[] input, string expectation)
     {
         // Act
         var result = input.JoinUsingWritingStyle();
 
         // Assert
-        result.Should().Be(expectation);
+        await Expect.That(result).IsEqualTo(expectation);
     }
 }

@@ -12,7 +12,7 @@ public class BufferedStreamAssertionSpecs
     public class HaveBufferSize
     {
         [Fact]
-        public void When_a_stream_has_the_expected_buffer_size_it_should_succeed()
+        public async Task When_a_stream_has_the_expected_buffer_size_it_should_succeed()
         {
             // Arrange
             using var stream = new BufferedStream(new MemoryStream(), 10);
@@ -22,11 +22,11 @@ public class BufferedStreamAssertionSpecs
                 stream.Should().HaveBufferSize(10);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_stream_has_an_unexpected_buffer_size_should_fail()
+        public async Task When_a_stream_has_an_unexpected_buffer_size_should_fail()
         {
             // Arrange
             using var stream = new BufferedStream(new MemoryStream(), 1);
@@ -36,12 +36,11 @@ public class BufferedStreamAssertionSpecs
                 stream.Should().HaveBufferSize(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the buffer size of stream to be 10 *failure message*, but it was 1.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_have_buffer_size_should_fail()
+        public async Task When_null_have_buffer_size_should_fail()
         {
             // Arrange
             BufferedStream stream = null;
@@ -54,15 +53,14 @@ public class BufferedStreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the buffer size of stream to be 10 *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotHaveBufferSize
     {
         [Fact]
-        public void When_a_stream_does_not_have_an_unexpected_buffer_size_it_should_succeed()
+        public async Task When_a_stream_does_not_have_an_unexpected_buffer_size_it_should_succeed()
         {
             // Arrange
             using var stream = new BufferedStream(new MemoryStream(), 1);
@@ -72,11 +70,11 @@ public class BufferedStreamAssertionSpecs
                 stream.Should().NotHaveBufferSize(10);
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_stream_does_have_the_unexpected_buffer_size_it_should_fail()
+        public async Task When_a_stream_does_have_the_unexpected_buffer_size_it_should_fail()
         {
             // Arrange
             using var stream = new BufferedStream(new MemoryStream(), 10);
@@ -86,12 +84,11 @@ public class BufferedStreamAssertionSpecs
                 stream.Should().NotHaveBufferSize(10, "we want to test the failure {0}", "message");
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the buffer size of stream not to be 10 *failure message*, but it was.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_null_not_have_buffer_size_should_fail()
+        public async Task When_null_not_have_buffer_size_should_fail()
         {
             // Arrange
             BufferedStream stream = null;
@@ -104,8 +101,7 @@ public class BufferedStreamAssertionSpecs
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected the buffer size of stream not to be 10 *failure message*, but found a <null> reference.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

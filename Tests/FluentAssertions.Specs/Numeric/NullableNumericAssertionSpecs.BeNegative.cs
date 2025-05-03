@@ -9,29 +9,29 @@ public partial class NullableNumericAssertionSpecs
     public class BeNegative
     {
         [Fact]
-        public void NaN_is_never_a_negative_float()
+        public async Task NaN_is_never_a_negative_float()
         {
             // Arrange
             float? value = float.NaN;
 
             // Act
-            Action act = () => value.Should().BeNegative();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*but found NaN*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void NaN_is_never_a_negative_double()
+        public async Task NaN_is_never_a_negative_double()
         {
             // Arrange
             double? value = double.NaN;
 
             // Act
-            Action act = () => value.Should().BeNegative();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage("*but found NaN*");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

@@ -9,60 +9,60 @@ public partial class DateTimeAssertionSpecs
     public class BeNull
     {
         [Fact]
-        public void Should_succeed_when_asserting_nullable_datetime_value_without_a_value_to_be_null()
+        public async Task Should_succeed_when_asserting_nullable_datetime_value_without_a_value_to_be_null()
         {
             // Arrange
             DateTime? nullableDateTime = null;
 
             // Act
             Action action = () =>
-                nullableDateTime.Should().BeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNull());
 
             // Assert
-            action.Should().NotThrow();
+            await Expect.That(action).DoesNotThrow();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_nullable_datetime_value_with_a_value_to_be_null()
+        public async Task Should_fail_when_asserting_nullable_datetime_value_with_a_value_to_be_null()
         {
             // Arrange
             DateTime? nullableDateTime = new DateTime(2016, 06, 04);
 
             // Act
             Action action = () =>
-                nullableDateTime.Should().BeNull();
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNull());
 
             // Assert
-            action.Should().Throw<XunitException>();
+            await Expect.That(action).Throws<XunitException>();
         }
     }
 
     public class NotBeNull
     {
         [Fact]
-        public void Should_succeed_when_asserting_nullable_datetime_value_with_a_value_to_not_be_null()
+        public async Task Should_succeed_when_asserting_nullable_datetime_value_with_a_value_to_not_be_null()
         {
             // Arrange
             DateTime? nullableDateTime = new DateTime(2016, 06, 04);
 
             // Act
-            Action action = () => nullableDateTime.Should().NotBeNull();
+            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNotNull());
 
             // Assert
-            action.Should().NotThrow();
+            await Expect.That(action).DoesNotThrow();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_nullable_datetime_value_without_a_value_to_not_be_null()
+        public async Task Should_fail_when_asserting_nullable_datetime_value_without_a_value_to_not_be_null()
         {
             // Arrange
             DateTime? nullableDateTime = null;
 
             // Act
-            Action action = () => nullableDateTime.Should().NotBeNull();
+            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNotNull());
 
             // Assert
-            action.Should().Throw<XunitException>();
+            await Expect.That(action).Throws<XunitException>();
         }
     }
 }

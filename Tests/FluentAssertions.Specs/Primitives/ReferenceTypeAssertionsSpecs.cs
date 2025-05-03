@@ -11,18 +11,18 @@ namespace FluentAssertions.Specs.Primitives;
 public partial class ReferenceTypeAssertionsSpecs
 {
     [Fact]
-    public void When_the_same_objects_are_expected_to_be_the_same_it_should_not_fail()
+    public async Task When_the_same_objects_are_expected_to_be_the_same_it_should_not_fail()
     {
         // Arrange
         var subject = new ClassWithCustomEqualMethod(1);
         var referenceToSubject = subject;
 
         // Act / Assert
-        subject.Should().BeSameAs(referenceToSubject);
+        await Expect.That(subject).IsSameAs(referenceToSubject);
     }
 
     [Fact]
-    public void When_two_different_objects_are_expected_to_be_the_same_it_should_fail_with_a_clear_explanation()
+    public async Task When_two_different_objects_are_expected_to_be_the_same_it_should_fail_with_a_clear_explanation()
     {
         // Arrange
         var subject = new
@@ -36,265 +36,247 @@ public partial class ReferenceTypeAssertionsSpecs
         };
 
         // Act
-        Action act = () => subject.Should().BeSameAs(otherObject, "they are {0} {1}", "the", "same");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsSameAs(otherObject).Because($"they are {"the"} {"same"}"));
 
         // Assert
-        act
-            .Should().Throw<XunitException>()
-            .WithMessage(
-            """
+        await Expect.That(act).Throws<XunitException>().WithMessage("""
             Expected subject to refer to {
                 UserName = "JohnDoe"
             } because they are the same, but found {
                 Name = "John Doe"
             }.
-            """);
+            """).AsWildcard();
     }
 
     [Fact]
-    public void When_a_derived_class_has_longer_formatting_than_the_base_class()
+    public async Task When_a_derived_class_has_longer_formatting_than_the_base_class()
     {
         var subject = new SimpleComplexBase[] { new Complex("goodbye"), new Simple() };
-        Action act = () => subject.Should().BeEmpty();
-        act.Should().Throw<XunitException>()
-            .WithMessage(
-            """
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEmpty());
+        await Expect.That(act).Throws<XunitException>().WithMessage("""
             Expected subject to be empty, but found at least one item {
                 FluentAssertions.Specs.Primitives.Complex
                 {
                     Statement = "goodbye"
                 }
             }.
-            """);
+            """).AsWildcard();
     }
 
     [Fact]
-    public void When_two_different_objects_are_expected_not_to_be_the_same_it_should_not_fail()
+    public async Task When_two_different_objects_are_expected_not_to_be_the_same_it_should_not_fail()
     {
         // Arrange
         var someObject = new ClassWithCustomEqualMethod(1);
         var notSameObject = new ClassWithCustomEqualMethod(1);
 
         // Act / Assert
-        someObject.Should().NotBeSameAs(notSameObject);
+        await Expect.That(someObject).IsNotSameAs(notSameObject);
     }
 
     [Fact]
-    public void When_two_equal_object_are_expected_not_to_be_the_same_it_should_fail()
+    public async Task When_two_equal_object_are_expected_not_to_be_the_same_it_should_fail()
     {
         // Arrange
         var someObject = new ClassWithCustomEqualMethod(1);
         ClassWithCustomEqualMethod sameObject = someObject;
 
         // Act
-        Action act = () => someObject.Should().NotBeSameAs(sameObject, "they are {0} {1}", "the", "same");
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotSameAs(sameObject).Because($"they are {"the"} {"same"}"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Did not expect someObject to refer to*ClassWithCustomEqualMethod(1) because they are the same.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_object_is_of_the_expected_type_it_should_not_throw()
+    public async Task When_object_is_of_the_expected_type_it_should_not_throw()
     {
         // Arrange
         string aString = "blah";
 
         // Act
-        Action action = () => aString.Should().BeOfType(typeof(string));
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aString).IsExactly(typeof(string)));
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_object_is_of_the_expected_open_generic_type_it_should_not_throw()
+    public async Task When_object_is_of_the_expected_open_generic_type_it_should_not_throw()
     {
         // Arrange
         var aList = new List<string>();
 
         // Act
-        Action action = () => aList.Should().BeOfType(typeof(List<>));
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aList).IsExactly(typeof(List<>)));
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_object_is_not_of_the_expected_open_generic_type_it_should_throw()
+    public async Task When_object_is_not_of_the_expected_open_generic_type_it_should_throw()
     {
         // Arrange
         var aList = new List<string>();
 
         // Act
-        Action action = () => aList.Should().BeOfType(typeof(Dictionary<,>));
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aList).IsExactly(typeof(Dictionary<,>)));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage($"Expected type to be {typeof(Dictionary<,>).FullName}, but found {typeof(List<>).FullName}.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_object_is_null_it_should_throw()
+    public async Task When_object_is_null_it_should_throw()
     {
         // Arrange
         string aString = null;
 
         // Act
-        Action action = () =>
+        Func<Task> action = async () =>
         {
-            using var _ = new AssertionScope();
-            aString.Should().BeOfType(typeof(string));
+            await Expect.That(aString).IsExactly(typeof(string));
         };
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected aString to be System.String, but found <null>.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_object_is_not_of_the_expected_type_it_should_throw()
+    public async Task When_object_is_not_of_the_expected_type_it_should_throw()
     {
         // Arrange
         string aString = "blah";
 
         // Act
-        Action action = () => aString.Should().BeOfType(typeof(int));
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aString).IsExactly(typeof(int)));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected type to be System.Int32, but found System.String.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_an_assertion_fails_on_BeOfType_succeeding_message_should_be_included()
+    public async Task When_an_assertion_fails_on_BeOfType_succeeding_message_should_be_included()
     {
         // Act
-        Action act = () =>
+        Func<Task> act = async () =>
         {
-            using var _ = new AssertionScope();
             var item = string.Empty;
-            item.Should().BeOfType<int>();
-            item.Should().BeOfType<long>();
+            await Expect.That(item).IsExactly<int>();
+            await Expect.That(item).IsExactly<long>();
         };
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage(
-                "Expected type to be System.Int32, but found System.String.*" +
-                "Expected type to be System.Int64, but found System.String.");
+        await Expect.That(act).Throws<XunitException>().WithMessage("Expected type to be System.Int32, but found System.String.*" +
+                "Expected type to be System.Int64, but found System.String.").AsWildcard();
     }
 
     [Fact]
-    public void When_object_is_of_the_unexpected_type_it_should_throw()
+    public async Task When_object_is_of_the_unexpected_type_it_should_throw()
     {
         // Arrange
         string aString = "blah";
 
         // Act
-        Action action = () => aString.Should().NotBeOfType(typeof(string));
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aString).IsNotExactly(typeof(string)));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected type not to be [" + typeof(string).AssemblyQualifiedName + "], but it is.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_object_is_of_the_unexpected_generic_type_it_should_throw()
+    public async Task When_object_is_of_the_unexpected_generic_type_it_should_throw()
     {
         // Arrange
         string aString = "blah";
 
         // Act
-        Action action = () => aString.Should().NotBeOfType<string>();
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aString).IsNotExactly<string>());
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected type not to be [" + typeof(string).AssemblyQualifiedName + "], but it is.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_object_is_of_the_unexpected_open_generic_type_it_should_throw()
+    public async Task When_object_is_of_the_unexpected_open_generic_type_it_should_throw()
     {
         // Arrange
         var aList = new List<string>();
 
         // Act
-        Action action = () => aList.Should().NotBeOfType(typeof(List<>));
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aList).IsNotExactly(typeof(List<>)));
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected type not to be [" + typeof(List<>).AssemblyQualifiedName + "], but it is.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_object_is_not_of_the_expected_type_it_should_not_throw()
+    public async Task When_object_is_not_of_the_expected_type_it_should_not_throw()
     {
         // Arrange
         string aString = "blah";
 
         // Act
-        Action action = () => aString.Should().NotBeOfType(typeof(int));
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aString).IsNotExactly(typeof(int)));
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_object_is_not_of_the_unexpected_open_generic_type_it_should_not_throw()
+    public async Task When_object_is_not_of_the_unexpected_open_generic_type_it_should_not_throw()
     {
         // Arrange
         var aList = new List<string>();
 
         // Act
-        Action action = () => aList.Should().NotBeOfType(typeof(Dictionary<,>));
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aList).IsNotExactly(typeof(Dictionary<,>)));
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_generic_object_is_not_of_the_unexpected_type_it_should_not_throw()
+    public async Task When_generic_object_is_not_of_the_unexpected_type_it_should_not_throw()
     {
         // Arrange
         var aList = new List<string>();
 
         // Act
-        Action action = () => aList.Should().NotBeOfType<string>();
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aList).IsNotExactly<string>());
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_non_generic_object_is_not_of_the_unexpected_open_generic_type_it_should_not_throw()
+    public async Task When_non_generic_object_is_not_of_the_unexpected_open_generic_type_it_should_not_throw()
     {
         // Arrange
         var aString = "blah";
 
         // Act
-        Action action = () => aString.Should().NotBeOfType(typeof(Dictionary<,>));
+        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(aString).IsNotExactly(typeof(Dictionary<,>)));
 
         // Assert
-        action.Should().NotThrow();
+        await Expect.That(action).DoesNotThrow();
     }
 
     [Fact]
-    public void When_asserting_object_is_not_of_type_and_it_is_null_it_should_throw()
+    public async Task When_asserting_object_is_not_of_type_and_it_is_null_it_should_throw()
     {
         // Arrange
         string aString = null;
 
         // Act
-        Action action = () =>
+        Func<Task> action = async () =>
         {
-            using var _ = new AssertionScope();
-            aString.Should().NotBeOfType(typeof(string));
+            await Expect.That(aString).IsNotExactly(typeof(string));
         };
 
         // Assert
-        action.Should().Throw<XunitException>()
-            .WithMessage("Expected aString not to be System.String, but found <null>.");
+        await Expect.That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -323,7 +305,7 @@ public partial class ReferenceTypeAssertionsSpecs
     }
 
     [Fact]
-    public void When_object_does_not_match_the_predicate_it_should_throw()
+    public async Task When_object_does_not_match_the_predicate_it_should_throw()
     {
         // Arrange
         var someObject = new object();
@@ -332,12 +314,11 @@ public partial class ReferenceTypeAssertionsSpecs
         Action act = () => someObject.Should().Match(o => o == null, "it is not initialized yet");
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected someObject to match (o == null) because it is not initialized yet*");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_a_typed_object_does_not_match_the_predicate_it_should_throw()
+    public async Task When_a_typed_object_does_not_match_the_predicate_it_should_throw()
     {
         // Arrange
         var someObject = new SomeDto
@@ -351,12 +332,11 @@ public partial class ReferenceTypeAssertionsSpecs
         Action act = () => someObject.Should().Match((SomeDto d) => d.Name.Length == 0, "it is not initialized yet");
 
         // Assert
-        act.Should().Throw<XunitException>().WithMessage(
-            "Expected someObject to match (d.Name.Length == 0) because it is not initialized yet*");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_object_is_matched_against_a_null_it_should_throw()
+    public async Task When_object_is_matched_against_a_null_it_should_throw()
     {
         // Arrange
         var someObject = new object();
@@ -365,14 +345,13 @@ public partial class ReferenceTypeAssertionsSpecs
         Action act = () => someObject.Should().Match(null);
 
         // Assert
-        act.Should().Throw<ArgumentNullException>().WithMessage(
-            "Cannot match an object against a <null> predicate.*");
+        await Expect.That(act).Throws<ArgumentNullException>();
     }
 
     #region Structure Reporting
 
     [Fact]
-    public void When_an_assertion_on_two_objects_fails_it_should_show_the_properties_of_the_class()
+    public async Task When_an_assertion_on_two_objects_fails_it_should_show_the_properties_of_the_class()
     {
         // Arrange
         var subject = new SomeDto
@@ -390,44 +369,41 @@ public partial class ReferenceTypeAssertionsSpecs
         };
 
         // Act
-        Action act = () => subject.Should().Be(other);
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(other));
 
         // Assert
-        act.Should().Throw<XunitException>().WithMessage(
-            "Expected subject to be*FluentAssertions*SomeDto*{*Age = 2*Birthdate = <2009-02-22>*" +
+        await Expect.That(act).Throws<XunitException>().WithMessage("Expected subject to be*FluentAssertions*SomeDto*{*Age = 2*Birthdate = <2009-02-22>*" +
             "  Name = \"Teddie\"*}, but found*FluentAssertions*SomeDto*{*Age = 37*" +
-            "  Birthdate = <1973-09-20>*Name = \"Dennis\"*}.");
+            "  Birthdate = <1973-09-20>*Name = \"Dennis\"*}.").AsWildcard();
     }
 
     [Fact]
-    public void When_an_assertion_on_two_objects_fails_and_they_implement_tostring_it_should_show_their_string_representation()
+    public async Task When_an_assertion_on_two_objects_fails_and_they_implement_tostring_it_should_show_their_string_representation()
     {
         // Arrange
         object subject = 3;
         object other = 4;
 
         // Act
-        Action act = () => subject.Should().Be(other);
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(other));
 
         // Assert
-        act.Should().Throw<XunitException>().WithMessage(
-            "Expected subject to be 4, but found 3.");
+        await Expect.That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_an_assertion_on_two_unknown_objects_fails_it_should_report_the_type_name()
+    public async Task When_an_assertion_on_two_unknown_objects_fails_it_should_report_the_type_name()
     {
         // Arrange
         var subject = new object();
         var other = new object();
 
         // Act
-        Action act = () => subject.Should().Be(other);
+        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(other));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage($"Expected subject to be System.Object (HashCode={other.GetHashCode()}), " +
-                $"but found System.Object (HashCode={subject.GetHashCode()}).");
+        await Expect.That(act).Throws<XunitException>().WithMessage($"Expected subject to be System.Object (HashCode={other.GetHashCode()}), " +
+                $"but found System.Object (HashCode={subject.GetHashCode()}).").AsWildcard();
     }
 
     #endregion
@@ -435,7 +411,7 @@ public partial class ReferenceTypeAssertionsSpecs
     public class Miscellaneous
     {
         [Fact]
-        public void Should_throw_a_helpful_error_when_accidentally_using_equals()
+        public async Task Should_throw_a_helpful_error_when_accidentally_using_equals()
         {
             // Arrange
             var subject = new ReferenceTypeAssertionsDummy(null);
@@ -444,8 +420,7 @@ public partial class ReferenceTypeAssertionsSpecs
             Action action = () => subject.Equals(subject);
 
             // Assert
-            action.Should().Throw<NotSupportedException>()
-                .WithMessage("Equals is not part of Fluent Assertions. Did you mean BeSameAs() instead?");
+            await Expect.That(action).Throws<NotSupportedException>();
         }
 
         public class ReferenceTypeAssertionsDummy : ReferenceTypeAssertions<object, ReferenceTypeAssertionsDummy>

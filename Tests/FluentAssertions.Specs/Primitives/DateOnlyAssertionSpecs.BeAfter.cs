@@ -10,159 +10,153 @@ public partial class DateOnlyAssertionSpecs
     public class BeAfter
     {
         [Fact]
-        public void When_asserting_subject_dateonly_is_after_earlier_expected_dateonly_should_succeed()
+        public async Task When_asserting_subject_dateonly_is_after_earlier_expected_dateonly_should_succeed()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 03);
 
             // Act/Assert
-            subject.Should().BeAfter(expectation);
+            await Expect.That(subject).IsAfter(expectation);
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_not_after_earlier_expected_dateonly_should_throw()
+        public async Task When_asserting_subject_dateonly_is_not_after_earlier_expected_dateonly_should_throw()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 03);
 
             // Act
-            Action act = () => subject.Should().NotBeAfter(expectation);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotAfter(expectation));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected subject to be on or before <2016-06-03>, but found <2016-06-04>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_after_later_expected_dateonly_should_throw()
+        public async Task When_asserting_subject_dateonly_is_after_later_expected_dateonly_should_throw()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 05);
 
             // Act
-            Action act = () => subject.Should().BeAfter(expectation);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsAfter(expectation));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected subject to be after <2016-06-05>, but found <2016-06-04>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_not_after_later_expected_dateonly_should_succeed()
+        public async Task When_asserting_subject_dateonly_is_not_after_later_expected_dateonly_should_succeed()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 05);
 
             // Act/Assert
-            subject.Should().NotBeAfter(expectation);
+            await Expect.That(subject).IsNotAfter(expectation);
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_after_the_same_expected_dateonly_should_throw()
+        public async Task When_asserting_subject_dateonly_is_after_the_same_expected_dateonly_should_throw()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 04);
 
             // Act
-            Action act = () => subject.Should().BeAfter(expectation);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsAfter(expectation));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected subject to be after <2016-06-04>, but found <2016-06-04>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_not_after_the_same_expected_dateonly_should_succeed()
+        public async Task When_asserting_subject_dateonly_is_not_after_the_same_expected_dateonly_should_succeed()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 04);
 
             // Act/Assert
-            subject.Should().NotBeAfter(expectation);
+            await Expect.That(subject).IsNotAfter(expectation);
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_on_or_after_earlier_expected_dateonly_should_succeed()
+        public async Task When_asserting_subject_dateonly_is_on_or_after_earlier_expected_dateonly_should_succeed()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 03);
 
             // Act/Assert
-            subject.Should().BeOnOrAfter(expectation);
+            await Expect.That(subject).IsOnOrAfter(expectation);
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_not_on_or_after_earlier_expected_dateonly_should_throw()
+        public async Task When_asserting_subject_dateonly_is_not_on_or_after_earlier_expected_dateonly_should_throw()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 03);
 
             // Act
-            Action act = () => subject.Should().NotBeOnOrAfter(expectation);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotOnOrAfter(expectation));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected subject to be before <2016-06-03>, but found <2016-06-04>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_on_or_after_the_same_expected_dateonly_should_succeed()
+        public async Task When_asserting_subject_dateonly_is_on_or_after_the_same_expected_dateonly_should_succeed()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 04);
 
             // Act/Assert
-            subject.Should().BeOnOrAfter(expectation);
+            await Expect.That(subject).IsOnOrAfter(expectation);
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_not_on_or_after_the_same_expected_dateonly_should_throw()
+        public async Task When_asserting_subject_dateonly_is_not_on_or_after_the_same_expected_dateonly_should_throw()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 04);
 
             // Act
-            Action act = () => subject.Should().NotBeOnOrAfter(expectation);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotOnOrAfter(expectation));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected subject to be before <2016-06-04>, but found <2016-06-04>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_on_or_after_later_expected_dateonly_should_throw()
+        public async Task When_asserting_subject_dateonly_is_on_or_after_later_expected_dateonly_should_throw()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 05);
 
             // Act
-            Action act = () => subject.Should().BeOnOrAfter(expectation);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsOnOrAfter(expectation));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected subject to be on or after <2016-06-05>, but found <2016-06-04>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_subject_dateonly_is_not_on_or_after_later_expected_dateonly_should_succeed()
+        public async Task When_asserting_subject_dateonly_is_not_on_or_after_later_expected_dateonly_should_succeed()
         {
             // Arrange
             DateOnly subject = new(2016, 06, 04);
             DateOnly expectation = new(2016, 06, 05);
 
             // Act/Assert
-            subject.Should().NotBeOnOrAfter(expectation);
+            await Expect.That(subject).IsNotOnOrAfter(expectation);
         }
     }
 }

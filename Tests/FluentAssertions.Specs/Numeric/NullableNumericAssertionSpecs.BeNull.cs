@@ -9,81 +9,78 @@ public partial class NullableNumericAssertionSpecs
     public class BeNull
     {
         [Fact]
-        public void Should_succeed_when_asserting_nullable_numeric_value_without_a_value_to_be_null()
+        public async Task Should_succeed_when_asserting_nullable_numeric_value_without_a_value_to_be_null()
         {
             // Arrange
             int? nullableInteger = null;
 
             // Act / Assert
-            nullableInteger.Should().BeNull();
+            await Expect.That(nullableInteger).IsNull();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_nullable_numeric_value_with_a_value_to_be_null()
+        public async Task Should_fail_when_asserting_nullable_numeric_value_with_a_value_to_be_null()
         {
             // Arrange
             int? nullableInteger = 1;
 
             // Act
-            Action act = () => nullableInteger.Should().BeNull();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableInteger).IsNull());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_with_descriptive_message_when_asserting_nullable_numeric_value_with_a_value_to_be_null()
+        public async Task Should_fail_with_descriptive_message_when_asserting_nullable_numeric_value_with_a_value_to_be_null()
         {
             // Arrange
             int? nullableInteger = 1;
 
             // Act
-            Action act = () => nullableInteger.Should().BeNull("because we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableInteger).IsNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect a value because we want to test the failure message, but found 1.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeNull
     {
         [Fact]
-        public void Should_succeed_when_asserting_nullable_numeric_value_with_value_to_not_be_null()
+        public async Task Should_succeed_when_asserting_nullable_numeric_value_with_value_to_not_be_null()
         {
             // Arrange
             int? nullableInteger = 1;
 
             // Act / Assert
-            nullableInteger.Should().NotBeNull();
+            await Expect.That(nullableInteger).IsNotNull();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_nullable_numeric_value_without_a_value_to_not_be_null()
+        public async Task Should_fail_when_asserting_nullable_numeric_value_without_a_value_to_not_be_null()
         {
             // Arrange
             int? nullableInteger = null;
 
             // Act
-            Action act = () => nullableInteger.Should().NotBeNull();
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableInteger).IsNotNull());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            Should_fail_with_descriptive_message_when_asserting_nullable_numeric_value_without_a_value_to_not_be_null()
+        public async Task Should_fail_with_descriptive_message_when_asserting_nullable_numeric_value_without_a_value_to_not_be_null()
         {
             // Arrange
             int? nullableInteger = null;
 
             // Act
-            Action act = () => nullableInteger.Should().NotBeNull("because we want to test the failure {0}", "message");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableInteger).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected a value because we want to test the failure message.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

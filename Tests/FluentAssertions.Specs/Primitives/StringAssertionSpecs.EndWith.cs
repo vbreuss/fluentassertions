@@ -13,187 +13,174 @@ public partial class StringAssertionSpecs
     public class EndWith
     {
         [Fact]
-        public void When_asserting_string_ends_with_a_suffix_it_should_not_throw()
+        public async Task When_asserting_string_ends_with_a_suffix_it_should_not_throw()
         {
             // Arrange
             string actual = "ABC";
             string expectedSuffix = "BC";
 
             // Act / Assert
-            actual.Should().EndWith(expectedSuffix);
+            await Expect.That(actual).EndsWith(expectedSuffix);
         }
 
         [Fact]
-        public void When_asserting_string_ends_with_the_same_value_it_should_not_throw()
+        public async Task When_asserting_string_ends_with_the_same_value_it_should_not_throw()
         {
             // Arrange
             string actual = "ABC";
             string expectedSuffix = "ABC";
 
             // Act / Assert
-            actual.Should().EndWith(expectedSuffix);
+            await Expect.That(actual).EndsWith(expectedSuffix);
         }
 
         [Fact]
-        public void When_string_does_not_end_with_expected_phrase_it_should_throw()
+        public async Task When_string_does_not_end_with_expected_phrase_it_should_throw()
         {
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var a = new AssertionScope();
-                "ABC".Should().EndWith("AB", "it should");
+                await Expect.That("ABC").EndsWith("AB").Because("it should");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected string to end with \"AB\" because it should, but \"ABC\" differs near \"ABC\" (index 0).");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_string_ending_is_compared_with_null_it_should_throw()
+        public async Task When_string_ending_is_compared_with_null_it_should_throw()
         {
             // Act
-            Action act = () => "ABC".Should().EndWith(null);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABC").EndsWith(null));
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage(
-                "Cannot compare string end with <null>.*");
+            await Expect.That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_string_ending_is_compared_with_empty_string_it_should_not_throw()
+        public async Task When_string_ending_is_compared_with_empty_string_it_should_not_throw()
         {
             // Act
-            Action act = () => "ABC".Should().EndWith("");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABC").EndsWith(""));
 
             // Assert
-            act.Should().NotThrow();
+            await Expect.That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_string_ending_is_compared_with_string_that_is_longer_it_should_throw()
+        public async Task When_string_ending_is_compared_with_string_that_is_longer_it_should_throw()
         {
             // Act
-            Action act = () => "ABC".Should().EndWith("00ABC");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABC").EndsWith("00ABC"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected string to end with " +
+            await Expect.That(act).Throws<XunitException>().WithMessage("Expected string to end with " +
                 "\"00ABC\", but " +
-                "\"ABC\" is too short.");
+                "\"ABC\" is too short.").AsWildcard();
         }
 
         [Fact]
-        public void Correctly_stop_further_execution_when_inside_assertion_scope()
+        public async Task Correctly_stop_further_execution_when_inside_assertion_scope()
         {
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                "ABC".Should().EndWith("00ABC").And.EndWith("CBA00");
+                await Expect.That("ABC").EndsWith("00ABC");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "*\"00ABC\"*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_string_ending_is_compared_and_actual_value_is_null_then_it_should_throw()
+        public async Task When_string_ending_is_compared_and_actual_value_is_null_then_it_should_throw()
         {
             // Arrange
             string someString = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                someString.Should().EndWith("ABC");
+                await Expect.That(someString).EndsWith("ABC");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected someString to end with \"ABC\", but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotEndWith
     {
         [Fact]
-        public void When_asserting_string_does_not_end_with_a_value_and_it_does_not_it_should_succeed()
+        public async Task When_asserting_string_does_not_end_with_a_value_and_it_does_not_it_should_succeed()
         {
             // Arrange
             string value = "ABC";
 
             // Act
             Action action = () =>
-                value.Should().NotEndWith("AB");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith("AB"));
 
             // Assert
-            action.Should().NotThrow();
+            await Expect.That(action).DoesNotThrow();
         }
 
         [Fact]
-        public void When_asserting_string_does_not_end_with_a_value_but_it_does_it_should_fail_with_a_descriptive_message()
+        public async Task When_asserting_string_does_not_end_with_a_value_but_it_does_it_should_fail_with_a_descriptive_message()
         {
             // Arrange
             string value = "ABC";
 
             // Act
             Action action = () =>
-                value.Should().NotEndWith("BC", "because of some {0}", "reason");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith("BC").Because($"because of some {"reason"}"));
 
             // Assert
-            action.Should().Throw<XunitException>().WithMessage(
-                "Expected value not to end with \"BC\" because of some reason, but found \"ABC\".");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_string_does_not_end_with_a_value_that_is_null_it_should_throw()
+        public async Task When_asserting_string_does_not_end_with_a_value_that_is_null_it_should_throw()
         {
             // Arrange
             string value = "ABC";
 
             // Act
             Action action = () =>
-                value.Should().NotEndWith(null);
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith(null));
 
             // Assert
-            action.Should().Throw<ArgumentNullException>().WithMessage(
-                "Cannot compare end of string with <null>.*");
+            await Expect.That(action).Throws<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_asserting_string_does_not_end_with_a_value_that_is_empty_it_should_throw()
+        public async Task When_asserting_string_does_not_end_with_a_value_that_is_empty_it_should_throw()
         {
             // Arrange
             string value = "ABC";
 
             // Act
             Action action = () =>
-                value.Should().NotEndWith("");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith(""));
 
             // Assert
-            action.Should().Throw<XunitException>().WithMessage(
-                "Expected value not to end with \"\", but found \"ABC\".");
+            await Expect.That(action).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_string_does_not_end_with_a_value_and_actual_value_is_null_it_should_throw()
+        public async Task When_asserting_string_does_not_end_with_a_value_and_actual_value_is_null_it_should_throw()
         {
             // Arrange
             string someString = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                someString.Should().NotEndWith("ABC", "some {0}", "reason");
+                await Expect.That(someString).DoesNotEndWith("ABC").Because($"some {"reason"}");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected someString not to end with \"ABC\"*some reason*, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

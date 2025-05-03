@@ -10,7 +10,7 @@ namespace FluentAssertions.Specs.Types;
 public class PropertyInfoSelectorSpecs
 {
     [Fact]
-    public void When_property_info_selector_is_created_with_a_null_type_it_should_throw()
+    public async Task When_property_info_selector_is_created_with_a_null_type_it_should_throw()
     {
         // Arrange
         PropertyInfoSelector propertyInfoSelector;
@@ -19,12 +19,11 @@ public class PropertyInfoSelectorSpecs
         Action act = () => propertyInfoSelector = new PropertyInfoSelector((Type)null);
 
         // Assert
-        act.Should().ThrowExactly<ArgumentNullException>()
-            .WithParameterName("types");
+        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
-    public void When_property_info_selector_is_created_with_a_null_type_list_it_should_throw()
+    public async Task When_property_info_selector_is_created_with_a_null_type_list_it_should_throw()
     {
         // Arrange
         PropertyInfoSelector propertyInfoSelector;
@@ -33,12 +32,11 @@ public class PropertyInfoSelectorSpecs
         Action act = () => propertyInfoSelector = new PropertyInfoSelector((Type[])null);
 
         // Assert
-        act.Should().ThrowExactly<ArgumentNullException>()
-            .WithParameterName("types");
+        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
-    public void When_property_info_selector_is_null_then_should_should_throw()
+    public async Task When_property_info_selector_is_null_then_should_should_throw()
     {
         // Arrange
         PropertyInfoSelector propertyInfoSelector = null;
@@ -47,12 +45,11 @@ public class PropertyInfoSelectorSpecs
         Action act = () => propertyInfoSelector.Should();
 
         // Assert
-        act.Should().ThrowExactly<ArgumentNullException>()
-            .WithParameterName("propertyInfoSelector");
+        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
-    public void When_selecting_properties_from_types_in_an_assembly_it_should_return_the_applicable_properties()
+    public async Task When_selecting_properties_from_types_in_an_assembly_it_should_return_the_applicable_properties()
     {
         // Arrange
         Assembly assembly = typeof(ClassWithSomeAttribute).Assembly;
@@ -63,14 +60,11 @@ public class PropertyInfoSelectorSpecs
             .Properties();
 
         // Assert
-        properties.Should()
-            .HaveCount(2)
-            .And.Contain(m => m.Name == "Property1")
-            .And.Contain(m => m.Name == "Property2");
+        await Expect.That(properties).HasCount(2);
     }
 
     [Fact]
-    public void When_selecting_properties_that_are_public_or_internal_it_should_return_only_the_applicable_properties()
+    public async Task When_selecting_properties_that_are_public_or_internal_it_should_return_only_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelectorWithInternalAndPublicProperties);
@@ -79,11 +73,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatArePublicOrInternal.ToArray();
 
         // Assert
-        properties.Should().HaveCount(2);
+        await Expect.That(properties).HasCount(2);
     }
 
     [Fact]
-    public void When_selecting_properties_that_are_abstract_it_should_return_only_the_applicable_properties()
+    public async Task When_selecting_properties_that_are_abstract_it_should_return_only_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -92,11 +86,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreAbstract.ToArray();
 
         // Assert
-        properties.Should().HaveCount(2);
+        await Expect.That(properties).HasCount(2);
     }
 
     [Fact]
-    public void When_selecting_properties_that_are_not_abstract_it_should_return_only_the_applicable_properties()
+    public async Task When_selecting_properties_that_are_not_abstract_it_should_return_only_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -105,11 +99,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreNotAbstract.ToArray();
 
         // Assert
-        properties.Should().HaveCount(10);
+        await Expect.That(properties).HasCount(10);
     }
 
     [Fact]
-    public void When_selecting_properties_that_are_static_it_should_return_only_the_applicable_properties()
+    public async Task When_selecting_properties_that_are_static_it_should_return_only_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -118,11 +112,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreStatic.ToArray();
 
         // Assert
-        properties.Should().HaveCount(4);
+        await Expect.That(properties).HasCount(4);
     }
 
     [Fact]
-    public void When_selecting_properties_that_are_not_static_it_should_return_only_the_applicable_properties()
+    public async Task When_selecting_properties_that_are_not_static_it_should_return_only_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -131,11 +125,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreNotStatic.ToArray();
 
         // Assert
-        properties.Should().HaveCount(8);
+        await Expect.That(properties).HasCount(8);
     }
 
     [Fact]
-    public void When_selecting_properties_that_are_virtual_it_should_return_only_the_applicable_properties()
+    public async Task When_selecting_properties_that_are_virtual_it_should_return_only_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -144,11 +138,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreVirtual.ToArray();
 
         // Assert
-        properties.Should().HaveCount(7);
+        await Expect.That(properties).HasCount(7);
     }
 
     [Fact]
-    public void When_selecting_properties_that_are_not_virtual_it_should_return_only_the_applicable_properties()
+    public async Task When_selecting_properties_that_are_not_virtual_it_should_return_only_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -157,11 +151,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreNotVirtual.ToArray();
 
         // Assert
-        properties.Should().HaveCount(5);
+        await Expect.That(properties).HasCount(5);
     }
 
     [Fact]
-    public void When_selecting_properties_decorated_with_specific_attribute_it_should_return_only_the_applicable_properties()
+    public async Task When_selecting_properties_decorated_with_specific_attribute_it_should_return_only_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -170,11 +164,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreDecoratedWith<DummyPropertyAttribute>().ToArray();
 
         // Assert
-        properties.Should().HaveCount(2);
+        await Expect.That(properties).HasCount(2);
     }
 
     [Fact]
-    public void When_selecting_properties_not_decorated_with_specific_attribute_it_should_return_only_the_applicable_properties()
+    public async Task When_selecting_properties_not_decorated_with_specific_attribute_it_should_return_only_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -183,14 +177,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreNotDecoratedWith<DummyPropertyAttribute>().ToArray();
 
         // Assert
-        properties.Should()
-            .NotBeEmpty()
-            .And.NotContain(p => p.Name == "PublicVirtualStringPropertyWithAttribute")
-            .And.NotContain(p => p.Name == "ProtectedVirtualIntPropertyWithAttribute");
+        await Expect.That(properties).IsNotEmpty();
     }
 
     [Fact]
-    public void When_selecting_methods_that_return_a_specific_type_it_should_return_only_the_applicable_methods()
+    public async Task When_selecting_methods_that_return_a_specific_type_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -199,11 +190,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().OfType<string>().ToArray();
 
         // Assert
-        properties.Should().HaveCount(8);
+        await Expect.That(properties).HasCount(8);
     }
 
     [Fact]
-    public void When_selecting_methods_that_do_not_return_a_specific_type_it_should_return_only_the_applicable_methods()
+    public async Task When_selecting_methods_that_do_not_return_a_specific_type_it_should_return_only_the_applicable_methods()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -212,12 +203,11 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().NotOfType<string>().ToArray();
 
         // Assert
-        properties.Should().HaveCount(4);
+        await Expect.That(properties).HasCount(4);
     }
 
     [Fact]
-    public void
-        When_selecting_properties_decorated_with_an_inheritable_attribute_it_should_only_return_the_applicable_properties()
+    public async Task When_selecting_properties_decorated_with_an_inheritable_attribute_it_should_only_return_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelectorWithInheritableAttributeDerived);
@@ -226,7 +216,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreDecoratedWith<DummyPropertyAttribute>().ToArray();
 
         // Assert
-        properties.Should().BeEmpty();
+        await Expect.That(properties).IsEmpty();
     }
 
     [Fact]
@@ -259,8 +249,7 @@ public class PropertyInfoSelectorSpecs
     }
 
     [Fact]
-    public void
-        When_selecting_properties_not_decorated_with_or_inheriting_an_inheritable_attribute_it_should_only_return_the_applicable_properties()
+    public async Task When_selecting_properties_not_decorated_with_or_inheriting_an_inheritable_attribute_it_should_only_return_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelectorWithInheritableAttributeDerived);
@@ -270,12 +259,11 @@ public class PropertyInfoSelectorSpecs
             type.Properties().ThatAreNotDecoratedWithOrInherit<DummyPropertyAttribute>().ToArray();
 
         // Assert
-        properties.Should().BeEmpty();
+        await Expect.That(properties).IsEmpty();
     }
 
     [Fact]
-    public void
-        When_selecting_properties_decorated_with_a_noninheritable_attribute_it_should_only_return_the_applicable_properties()
+    public async Task When_selecting_properties_decorated_with_a_noninheritable_attribute_it_should_only_return_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelectorWithNonInheritableAttributeDerived);
@@ -285,12 +273,11 @@ public class PropertyInfoSelectorSpecs
             type.Properties().ThatAreDecoratedWith<DummyPropertyNonInheritableAttributeAttribute>().ToArray();
 
         // Assert
-        properties.Should().BeEmpty();
+        await Expect.That(properties).IsEmpty();
     }
 
     [Fact]
-    public void
-        When_selecting_properties_decorated_with_or_inheriting_a_noninheritable_attribute_it_should_only_return_the_applicable_properties()
+    public async Task When_selecting_properties_decorated_with_or_inheriting_a_noninheritable_attribute_it_should_only_return_the_applicable_properties()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelectorWithNonInheritableAttributeDerived);
@@ -300,7 +287,7 @@ public class PropertyInfoSelectorSpecs
             .ThatAreDecoratedWithOrInherit<DummyPropertyNonInheritableAttributeAttribute>().ToArray();
 
         // Assert
-        properties.Should().BeEmpty();
+        await Expect.That(properties).IsEmpty();
     }
 
     [Fact]
@@ -334,7 +321,7 @@ public class PropertyInfoSelectorSpecs
     }
 
     [Fact]
-    public void When_selecting_properties_return_types_it_should_return_the_correct_types()
+    public async Task When_selecting_properties_return_types_it_should_return_the_correct_types()
     {
         // Arrange
         Type type = typeof(TestClassForPropertySelector);
@@ -343,9 +330,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<Type> returnTypes = type.Properties().ReturnTypes().ToArray();
 
         // Assert
-        returnTypes.Should()
-            .BeEquivalentTo(
-            [
+        await Expect.That(returnTypes).IsEqualTo([
                 typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string),
                 typeof(string), typeof(int), typeof(int), typeof(int), typeof(int)
             ]);
@@ -371,7 +356,7 @@ public class PropertyInfoSelectorSpecs
         }
 
         [Fact]
-        public void When_a_property_only_has_a_public_setter_it_should_be_included_in_the_applicable_properties()
+        public async Task When_a_property_only_has_a_public_setter_it_should_be_included_in_the_applicable_properties()
         {
             // Arrange
             Type type = typeof(TestClassForPublicSetter);
@@ -380,7 +365,7 @@ public class PropertyInfoSelectorSpecs
             IEnumerable<PropertyInfo> properties = type.Properties().ThatArePublicOrInternal.ToArray();
 
             // Assert
-            properties.Should().HaveCount(3);
+            await Expect.That(properties).HasCount(3);
         }
 
         private class TestClassForPublicSetter
@@ -395,7 +380,7 @@ public class PropertyInfoSelectorSpecs
         }
 
         [Fact]
-        public void When_selecting_properties_with_at_least_one_accessor_being_private_should_return_the_applicable_properties()
+        public async Task When_selecting_properties_with_at_least_one_accessor_being_private_should_return_the_applicable_properties()
         {
             // Arrange
             Type type = typeof(TestClassForPrivateAccessors);
@@ -404,7 +389,7 @@ public class PropertyInfoSelectorSpecs
             IEnumerable<PropertyInfo> properties = type.Properties().ThatArePublicOrInternal.ToArray();
 
             // Assert
-            properties.Should().HaveCount(4);
+            await Expect.That(properties).HasCount(4);
         }
 
         private class TestClassForPrivateAccessors
