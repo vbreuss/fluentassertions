@@ -26,7 +26,7 @@ public partial class TypeAssertionSpecs
                     .HaveExplicitProperty(interfaceType, "ExplicitStringProperty");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -43,7 +43,7 @@ public partial class TypeAssertionSpecs
                     .HaveExplicitProperty(interfaceType, "ExplicitImplicitStringProperty");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -60,7 +60,7 @@ public partial class TypeAssertionSpecs
                     .HaveExplicitProperty(interfaceType, "ImplicitStringProperty");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to explicitly implement " +
+            await That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to explicitly implement " +
                     "*.IExplicitInterface.ImplicitStringProperty, but it does not.").AsWildcard();
         }
 
@@ -78,7 +78,7 @@ public partial class TypeAssertionSpecs
                     .HaveExplicitProperty(interfaceType, "NonExistentProperty");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to explicitly implement " +
+            await That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to explicitly implement " +
                     "*.IExplicitInterface.NonExistentProperty, but it does not.").AsWildcard();
         }
 
@@ -96,7 +96,7 @@ public partial class TypeAssertionSpecs
                     .HaveExplicitProperty(interfaceType, "NonExistentProperty");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassExplicitlyImplementingInterface to implement interface *.IDummyInterface" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.ClassExplicitlyImplementingInterface to implement interface *.IDummyInterface" +
                     ", but it does not.").AsWildcard();
         }
 
@@ -112,7 +112,7 @@ public partial class TypeAssertionSpecs
                     typeof(IExplicitInterface), "ExplicitStringProperty", "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type to explicitly implement *.IExplicitInterface.ExplicitStringProperty *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type to explicitly implement *.IExplicitInterface.ExplicitStringProperty *failure message*" +
                     ", but type is <null>.").AsWildcard();
         }
 
@@ -127,7 +127,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveExplicitProperty(null, "ExplicitStringProperty");
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -141,7 +141,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveExplicitProperty(typeof(IExplicitInterface), null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -155,7 +155,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveExplicitProperty(typeof(IExplicitInterface), string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
 
         [Fact]
@@ -167,7 +167,7 @@ public partial class TypeAssertionSpecs
                 typeof(int).Should().HaveExplicitProperty(typeof(IExplicitInterface), "Foo");
             };
 
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -185,7 +185,7 @@ public partial class TypeAssertionSpecs
                     .HaveExplicitProperty<IExplicitInterface>("ExplicitStringProperty");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -199,7 +199,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveExplicitProperty<IExplicitInterface>(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -213,7 +213,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveExplicitProperty<IExplicitInterface>(string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
 
         [Fact]
@@ -228,7 +228,7 @@ public partial class TypeAssertionSpecs
                     "ExplicitStringProperty", "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type to explicitly implement *.IExplicitInterface.ExplicitStringProperty *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type to explicitly implement *.IExplicitInterface.ExplicitStringProperty *failure message*" +
                     ", but type is <null>.").AsWildcard();
         }
     }
@@ -249,7 +249,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveExplicitProperty(interfaceType, "ExplicitStringProperty");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to not explicitly implement " +
+            await That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to not explicitly implement " +
                     "*.IExplicitInterface.ExplicitStringProperty, but it does.").AsWildcard();
         }
 
@@ -267,7 +267,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveExplicitProperty(interfaceType, "ExplicitImplicitStringProperty");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to not explicitly implement " +
+            await That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to not explicitly implement " +
                     "*.IExplicitInterface.ExplicitImplicitStringProperty, but it does.").AsWildcard();
         }
 
@@ -285,7 +285,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveExplicitProperty(interfaceType, "ImplicitStringProperty");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -302,7 +302,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveExplicitProperty(interfaceType, "NonExistentProperty");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -319,7 +319,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveExplicitProperty(interfaceType, "NonExistentProperty");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassExplicitlyImplementingInterface to implement interface *.IDummyInterface" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.ClassExplicitlyImplementingInterface to implement interface *.IDummyInterface" +
                     ", but it does not.").AsWildcard();
         }
 
@@ -335,7 +335,7 @@ public partial class TypeAssertionSpecs
                     typeof(IExplicitInterface), "ExplicitStringProperty", "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type to not explicitly implement *IExplicitInterface.ExplicitStringProperty *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type to not explicitly implement *IExplicitInterface.ExplicitStringProperty *failure message*" +
                     ", but type is <null>.").AsWildcard();
         }
 
@@ -350,7 +350,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveExplicitProperty(null, "ExplicitStringProperty");
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -364,7 +364,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveExplicitProperty(typeof(IExplicitInterface), null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -378,10 +378,10 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveExplicitProperty(typeof(IExplicitInterface), string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task Does_not_continue_assertion_on_explicit_interface_implementation_if_implemented()
         {
             var act = () =>
@@ -391,7 +391,7 @@ public partial class TypeAssertionSpecs
                     .Should().NotHaveExplicitProperty(typeof(IExplicitInterface), "ExplicitStringProperty");
             };
 
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected *ClassExplicitlyImplementingInterface* to*implement " +
+            await That(act).Throws<XunitException>().WithMessage("Expected *ClassExplicitlyImplementingInterface* to*implement " +
                     "*IExplicitInterface.ExplicitStringProperty, but it does.").AsWildcard();
         }
     }
@@ -410,7 +410,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveExplicitProperty<IExplicitInterface>("ExplicitStringProperty");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to not explicitly implement " +
+            await That(act).Throws<XunitException>().WithMessage("Expected *.ClassExplicitlyImplementingInterface to not explicitly implement " +
                     "*.IExplicitInterface.ExplicitStringProperty, but it does.").AsWildcard();
         }
 
@@ -426,7 +426,7 @@ public partial class TypeAssertionSpecs
                     "ExplicitStringProperty", "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type to not explicitly implement *.IExplicitInterface.ExplicitStringProperty *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type to not explicitly implement *.IExplicitInterface.ExplicitStringProperty *failure message*" +
                     ", but type is <null>.").AsWildcard();
         }
 
@@ -441,7 +441,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveExplicitProperty<IExplicitInterface>(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -455,7 +455,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveExplicitProperty<IExplicitInterface>(string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
     }
 }

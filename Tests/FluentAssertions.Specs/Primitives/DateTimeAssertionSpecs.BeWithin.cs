@@ -21,7 +21,7 @@ public partial class DateTimeAssertionSpecs
                 () => subject.Should().BeWithin(TimeSpan.FromHours(50)).Before(target, "{0} hours is enough", 50);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -80,7 +80,7 @@ public partial class DateTimeAssertionSpecs
             Action action = () => subject.Should().BeWithin(10.Seconds()).After(expectation);
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Theory]
@@ -97,7 +97,7 @@ public partial class DateTimeAssertionSpecs
             Action action = () => subject.Should().BeWithin(10.Seconds()).Before(expectation);
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -114,7 +114,7 @@ public partial class DateTimeAssertionSpecs
                     .Before(target);
 
             // Assert
-            await Expect.That(action).Throws<Exception>();
+            await That(action).Throws<Exception>();
         }
 
         [Fact]
@@ -131,7 +131,7 @@ public partial class DateTimeAssertionSpecs
                     .After(target);
 
             // Assert
-            await Expect.That(action).Throws<Exception>();
+            await That(action).Throws<Exception>();
         }
     }
 }

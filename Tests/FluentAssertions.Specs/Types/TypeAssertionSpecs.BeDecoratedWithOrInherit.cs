@@ -22,7 +22,7 @@ public partial class TypeAssertionSpecs
                 typeWithAttribute.Should().BeDecoratedWithOrInherit<DummyClassAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -37,7 +37,7 @@ public partial class TypeAssertionSpecs
                     .Which.IsEnabled.Should().BeTrue();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -51,7 +51,7 @@ public partial class TypeAssertionSpecs
                 type.Should().BeDecoratedWithOrInherit<DummyClassAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithoutAttribute to be decorated with or inherit *.DummyClassAttribute " +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithoutAttribute to be decorated with or inherit *.DummyClassAttribute " +
                     "*failure message*, but the attribute was not found.").AsWildcard();
         }
 
@@ -66,7 +66,7 @@ public partial class TypeAssertionSpecs
                 .BeDecoratedWithOrInherit<DummyClassAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -81,7 +81,7 @@ public partial class TypeAssertionSpecs
                     .BeDecoratedWithOrInherit<DummyClassAttribute>(a => a.Name == "Expected" && a.IsEnabled);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -97,7 +97,7 @@ public partial class TypeAssertionSpecs
                     .Which.IsEnabled.Should().BeTrue();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -112,7 +112,7 @@ public partial class TypeAssertionSpecs
                     .BeDecoratedWithOrInherit<DummyClassAttribute>(a => a.Name == "Unexpected" && a.IsEnabled);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithInheritedAttribute to be decorated with or inherit *.DummyClassAttribute " +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithInheritedAttribute to be decorated with or inherit *.DummyClassAttribute " +
                     "that matches (a.Name == \"Unexpected\")*a.IsEnabled, but no matching attribute was found.").AsWildcard();
         }
     }
@@ -130,7 +130,7 @@ public partial class TypeAssertionSpecs
                 typeWithoutAttribute.Should().NotBeDecoratedWithOrInherit<DummyClassAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -145,7 +145,7 @@ public partial class TypeAssertionSpecs
                     .NotBeDecoratedWithOrInherit<DummyClassAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithInheritedAttribute to not be decorated with or inherit *.DummyClassAttribute " +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithInheritedAttribute to not be decorated with or inherit *.DummyClassAttribute " +
                     "*failure message* attribute was found.").AsWildcard();
         }
 
@@ -160,7 +160,7 @@ public partial class TypeAssertionSpecs
                 .NotBeDecoratedWithOrInherit<DummyClassAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -175,7 +175,7 @@ public partial class TypeAssertionSpecs
                     .NotBeDecoratedWithOrInherit<DummyClassAttribute>(a => a.Name == "Unexpected" && a.IsEnabled);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -190,7 +190,7 @@ public partial class TypeAssertionSpecs
                     .NotBeDecoratedWithOrInherit<DummyClassAttribute>(a => a.Name == "Expected" && a.IsEnabled);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithInheritedAttribute to not be decorated with or inherit *.DummyClassAttribute " +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithInheritedAttribute to not be decorated with or inherit *.DummyClassAttribute " +
                     "that matches (a.Name == \"Expected\") * a.IsEnabled, but a matching attribute was found.").AsWildcard();
         }
     }

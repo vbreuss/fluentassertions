@@ -22,7 +22,7 @@ public class BufferedStreamAssertionSpecs
                 stream.Should().HaveBufferSize(10);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -36,7 +36,7 @@ public class BufferedStreamAssertionSpecs
                 stream.Should().HaveBufferSize(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -53,7 +53,7 @@ public class BufferedStreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -70,7 +70,7 @@ public class BufferedStreamAssertionSpecs
                 stream.Should().NotHaveBufferSize(10);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -84,7 +84,7 @@ public class BufferedStreamAssertionSpecs
                 stream.Should().NotHaveBufferSize(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -101,7 +101,7 @@ public class BufferedStreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

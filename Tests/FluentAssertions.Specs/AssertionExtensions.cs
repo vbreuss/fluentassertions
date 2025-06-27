@@ -22,7 +22,7 @@ internal static class AssertionExtensions
 
     public static ActionAssertions Should(this Action action, IClock clock)
     {
-        return new ActionAssertions(action, Extractor, AssertionChain.GetOrCreate(),  clock);
+        return new ActionAssertions(action, Extractor, AssertionChain.GetOrCreate(), clock);
     }
 
     public static FunctionAssertions<T> Should<T>(this Func<T> func, IClock clock)

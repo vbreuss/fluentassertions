@@ -15,10 +15,10 @@ public partial class NullableNumericAssertionSpecs
             float? value = float.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
+            Action act = () => Synchronously.Verify(That(value).IsNegative());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -28,10 +28,10 @@ public partial class NullableNumericAssertionSpecs
             double? value = double.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNegative());
+            Action act = () => Synchronously.Verify(That(value).IsNegative());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

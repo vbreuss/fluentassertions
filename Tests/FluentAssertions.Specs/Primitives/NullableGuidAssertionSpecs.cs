@@ -13,7 +13,7 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = Guid.NewGuid();
 
         // Act / Assert
-        await Expect.That(nullableGuid).IsNotNull();
+        await That(nullableGuid).IsNotNull();
     }
 
     [Fact]
@@ -23,7 +23,7 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = Guid.NewGuid();
 
         // Act / Assert
-        await Expect.That(nullableGuid).IsNotNull();
+        await That(nullableGuid).IsNotNull();
     }
 
     [Fact]
@@ -33,10 +33,10 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsNotNull());
+        Action act = () => Synchronously.Verify(That(nullableGuid).IsNotNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -46,10 +46,10 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsNotNull());
+        Action act = () => Synchronously.Verify(That(nullableGuid).IsNotNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -59,10 +59,10 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsNotNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableGuid).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -72,10 +72,10 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsNotNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableGuid).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -85,7 +85,7 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = null;
 
         // Act / Assert
-        await Expect.That(nullableGuid).IsNull();
+        await That(nullableGuid).IsNull();
     }
 
     [Fact]
@@ -95,7 +95,7 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = null;
 
         // Act / Assert
-        await Expect.That(nullableGuid).IsNull();
+        await That(nullableGuid).IsNull();
     }
 
     [Fact]
@@ -105,10 +105,10 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = Guid.NewGuid();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsNull());
+        Action act = () => Synchronously.Verify(That(nullableGuid).IsNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -118,10 +118,10 @@ public class NullableGuidAssertionSpecs
         Guid? nullableGuid = Guid.NewGuid();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsNull());
+        Action act = () => Synchronously.Verify(That(nullableGuid).IsNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -133,10 +133,10 @@ public class NullableGuidAssertionSpecs
 
         // Act
         Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(guid).IsEqualTo(someGuid).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(guid).IsEqualTo(someGuid).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -148,10 +148,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(guid).IsEqualTo(someGuid).
 
         // Act
         Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullGuid).IsEqualTo(otherNullGuid));
+Synchronously.Verify(That(nullGuid).IsEqualTo(otherNullGuid));
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [Fact]
@@ -161,10 +161,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullGuid).IsEqualTo(otherN
         Guid? nullableGuid = new Guid("11111111-aaaa-bbbb-cccc-999999999999");
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableGuid).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -174,10 +174,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullGuid).IsEqualTo(otherN
         Guid? nullableGuid = new Guid("11111111-aaaa-bbbb-cccc-999999999999");
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableGuid).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -189,10 +189,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullGuid).IsEqualTo(otherN
 
         // Act
         Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsEqualTo(someGuid).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableGuid).IsEqualTo(someGuid).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -202,6 +202,6 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableGuid).IsEqualTo(so
         Guid? nullableGuid = Guid.NewGuid();
 
         // Act / Assert
-        await Expect.That(nullableGuid).IsNotNull();
+        await That(nullableGuid).IsNotNull();
     }
 }

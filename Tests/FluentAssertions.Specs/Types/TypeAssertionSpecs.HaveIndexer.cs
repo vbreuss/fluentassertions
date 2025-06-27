@@ -27,7 +27,7 @@ public partial class TypeAssertionSpecs
                     .And.BeReadable(CSharpAccessModifier.Private);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -42,7 +42,7 @@ public partial class TypeAssertionSpecs
                     typeof(string), [typeof(int), typeof(Type)], "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected String *ClassWithNoMembers[System.Int32, System.Type] to exist *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected String *ClassWithNoMembers[System.Int32, System.Type] to exist *failure message*" +
                     ", but it does not.").AsWildcard();
         }
 
@@ -58,7 +58,7 @@ public partial class TypeAssertionSpecs
                     typeof(string), [typeof(int), typeof(Type)], "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -72,7 +72,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveIndexer(typeof(string), [typeof(string)], "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -86,7 +86,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveIndexer(null, [typeof(string)]);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -100,7 +100,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveIndexer(typeof(string), null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -117,7 +117,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveIndexer([typeof(string)]);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -131,7 +131,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveIndexer([typeof(string)], "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -145,7 +145,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveIndexer([typeof(string)], "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -159,7 +159,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveIndexer(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 }

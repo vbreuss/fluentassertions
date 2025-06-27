@@ -41,7 +41,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().BeLowerCased();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -54,7 +54,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().BeLowerCased();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -87,7 +87,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().BeLowerCased("because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -100,7 +100,7 @@ public partial class StringAssertionSpecs
             Action act = () => nullString.Should().BeLowerCased("because strings should never be {0}", "null");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -146,7 +146,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotBeLowerCased();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -169,7 +169,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotBeLowerCased();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -192,7 +192,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotBeLowerCased("because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

@@ -22,10 +22,10 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo(sameType));
+Synchronously.Verify(That(type).IsEqualTo(sameType));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -37,10 +37,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo(sameType))
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo(differentType).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsEqualTo(differentType).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -51,10 +51,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo(differentT
             Type someType = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullType).IsEqualTo(someType));
+            Action act = () => Synchronously.Verify(That(nullType).IsEqualTo(someType));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -66,10 +66,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo(differentT
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullType).IsEqualTo(someType).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullType).IsEqualTo(someType).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -81,10 +81,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullType).IsEqualTo(someTy
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).IsEqualTo(nullType).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(someType).IsEqualTo(nullType).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -102,13 +102,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).IsEqualTo(nullTy
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(typeFromThisAssembly).IsEqualTo(typeFromOtherAssembly).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(typeFromThisAssembly).IsEqualTo(typeFromOtherAssembly).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_type_is_equal_to_the_same_type_using_generics_it_succeeds()
         {
             // Arrange
@@ -116,10 +116,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(typeFromThisAssembly).IsEq
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).Is<ClassWithAttribute>());
+Synchronously.Verify(That(type).Is<ClassWithAttribute>());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -130,10 +130,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).Is<ClassWithAttribut
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo("we want to test the failure {0}").Because("message"));
+Synchronously.Verify(That(type).IsEqualTo("we want to test the failure {0}").Because("message"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -148,10 +148,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsEqualTo("we want t
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo(otherType));
+Synchronously.Verify(That(type).IsNotEqualTo(otherType));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -163,10 +163,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo(otherTy
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo(sameType).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsNotEqualTo(sameType).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -178,10 +178,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo(sameTyp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo(sameType));
+Synchronously.Verify(That(type).IsNotEqualTo(sameType));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -192,13 +192,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo(sameTyp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot<ClassWithoutAttribute>());
+Synchronously.Verify(That(type).IsNot<ClassWithoutAttribute>());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_type_is_not_equal_to_the_same_type_using_generics_it_fails()
         {
             // Arrange
@@ -206,10 +206,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot<ClassWithoutAt
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNotEqualTo("we want to test the failure {0}").Because("message"));
+Synchronously.Verify(That(type).IsNotEqualTo("we want to test the failure {0}").Because("message"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

@@ -28,7 +28,7 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().BeSealed();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage(exceptionMessage).AsWildcard();
+            await That(act).Throws<XunitException>().WithMessage(exceptionMessage).AsWildcard();
         }
 
         [Fact]
@@ -41,7 +41,7 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().BeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -54,7 +54,7 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().BeSealed();
 
             // Assert
-            await Expect.That(act).Throws<InvalidOperationException>().WithMessage(exceptionMessage).AsWildcard();
+            await That(act).Throws<InvalidOperationException>().WithMessage(exceptionMessage).AsWildcard();
         }
 
         [Fact]
@@ -68,7 +68,7 @@ public partial class TypeAssertionSpecs
                 type.Should().BeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -94,7 +94,7 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().NotBeSealed();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -107,7 +107,7 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().NotBeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -120,7 +120,7 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().NotBeSealed();
 
             // Assert
-            await Expect.That(act).Throws<InvalidOperationException>().WithMessage(exceptionMessage).AsWildcard();
+            await That(act).Throws<InvalidOperationException>().WithMessage(exceptionMessage).AsWildcard();
         }
 
         [Fact]
@@ -134,7 +134,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotBeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

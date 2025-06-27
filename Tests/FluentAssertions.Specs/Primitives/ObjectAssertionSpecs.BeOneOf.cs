@@ -15,10 +15,10 @@ public partial class ObjectAssertionSpecs
             var value = new ClassWithCustomEqualMethod(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new ClassWithCustomEqualMethod(4), new ClassWithCustomEqualMethod(5)));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf(new ClassWithCustomEqualMethod(4), new ClassWithCustomEqualMethod(5)));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -29,10 +29,10 @@ public partial class ObjectAssertionSpecs
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassWithCustomEqualMethod(4), new ClassWithCustomEqualMethod(5)], "because those are the valid values"));
+Synchronously.Verify(That(value).IsOneOf([new ClassWithCustomEqualMethod(4), new ClassWithCustomEqualMethod(5)], "because those are the valid values"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -42,10 +42,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             var value = new ClassWithCustomEqualMethod(4);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new ClassWithCustomEqualMethod(4), new ClassWithCustomEqualMethod(5)));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf(new ClassWithCustomEqualMethod(4), new ClassWithCustomEqualMethod(5)));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -55,7 +55,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             object value = new SomeClass(5);
 
             // Act / Assert
-            await Expect.That(value).IsOneOf([new SomeClass(4), new SomeClass(5)]).Using(new SomeClassEqualityComparer());
+            await That(value).IsOneOf([new SomeClass(4), new SomeClass(5)]).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
@@ -65,7 +65,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             var value = new SomeClass(5);
 
             // Act / Assert
-            await Expect.That(value).IsOneOf([new SomeClass(4), new SomeClass(5)]).Using(new SomeClassEqualityComparer());
+            await That(value).IsOneOf([new SomeClass(4), new SomeClass(5)]).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
@@ -75,10 +75,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             object value = new SomeClass(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new SomeClass(4), new SomeClass(5)).Using(new SomeClassEqualityComparer()).Because("I said so"));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf(new SomeClass(4), new SomeClass(5)).Using(new SomeClassEqualityComparer()).Because("I said so"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -88,10 +88,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             object value = new SomeClass(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([]).Using(new SomeClassEqualityComparer()));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf([]).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -101,10 +101,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             var value = new SomeClass(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new SomeClass(4), new SomeClass(5)]).Using(new SomeClassEqualityComparer()).Because("I said so"));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf([new SomeClass(4), new SomeClass(5)]).Using(new SomeClassEqualityComparer()).Because("I said so"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -114,10 +114,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             var value = new SomeClass(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([]).Using(new SomeClassEqualityComparer()));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf([]).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -127,10 +127,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             var value = new ClassWithCustomEqualMethod(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new SomeClass(4), new SomeClass(5)]).Using(new SomeClassEqualityComparer()).Because("I said so"));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf([new SomeClass(4), new SomeClass(5)]).Using(new SomeClassEqualityComparer()).Because("I said so"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -140,7 +140,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             var value = new SomeClass(3);
 
             // Act / Assert
-            await Expect.That(value).IsOneOf(value);
+            await That(value).IsOneOf(value);
         }
 
         [Fact]
@@ -150,7 +150,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf([new ClassW
             var value = new object();
 
             // Act / Assert
-            await Expect.That(value).IsOneOf([value]).Using(new DumbObjectEqualityComparer());
+            await That(value).IsOneOf([value]).Using(new DumbObjectEqualityComparer());
         }
     }
 }

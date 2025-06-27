@@ -19,7 +19,7 @@ public class PropertyInfoSelectorSpecs
         Action act = () => propertyInfoSelector = new PropertyInfoSelector((Type)null);
 
         // Assert
-        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+        await That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
@@ -32,7 +32,7 @@ public class PropertyInfoSelectorSpecs
         Action act = () => propertyInfoSelector = new PropertyInfoSelector((Type[])null);
 
         // Assert
-        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+        await That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public class PropertyInfoSelectorSpecs
         Action act = () => propertyInfoSelector.Should();
 
         // Assert
-        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+        await That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
@@ -60,7 +60,7 @@ public class PropertyInfoSelectorSpecs
             .Properties();
 
         // Assert
-        await Expect.That(properties).HasCount(2);
+        await That(properties).HasCount(2);
     }
 
     [Fact]
@@ -73,7 +73,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatArePublicOrInternal.ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(2);
+        await That(properties).HasCount(2);
     }
 
     [Fact]
@@ -86,7 +86,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreAbstract.ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(2);
+        await That(properties).HasCount(2);
     }
 
     [Fact]
@@ -99,7 +99,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreNotAbstract.ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(10);
+        await That(properties).HasCount(10);
     }
 
     [Fact]
@@ -112,7 +112,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreStatic.ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(4);
+        await That(properties).HasCount(4);
     }
 
     [Fact]
@@ -125,7 +125,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreNotStatic.ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(8);
+        await That(properties).HasCount(8);
     }
 
     [Fact]
@@ -138,7 +138,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreVirtual.ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(7);
+        await That(properties).HasCount(7);
     }
 
     [Fact]
@@ -151,7 +151,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreNotVirtual.ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(5);
+        await That(properties).HasCount(5);
     }
 
     [Fact]
@@ -164,7 +164,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreDecoratedWith<DummyPropertyAttribute>().ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(2);
+        await That(properties).HasCount(2);
     }
 
     [Fact]
@@ -177,7 +177,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreNotDecoratedWith<DummyPropertyAttribute>().ToArray();
 
         // Assert
-        await Expect.That(properties).IsNotEmpty();
+        await That(properties).IsNotEmpty();
     }
 
     [Fact]
@@ -190,7 +190,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().OfType<string>().ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(8);
+        await That(properties).HasCount(8);
     }
 
     [Fact]
@@ -203,7 +203,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().NotOfType<string>().ToArray();
 
         // Assert
-        await Expect.That(properties).HasCount(4);
+        await That(properties).HasCount(4);
     }
 
     [Fact]
@@ -216,7 +216,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<PropertyInfo> properties = type.Properties().ThatAreDecoratedWith<DummyPropertyAttribute>().ToArray();
 
         // Assert
-        await Expect.That(properties).IsEmpty();
+        await That(properties).IsEmpty();
     }
 
     [Fact]
@@ -259,7 +259,7 @@ public class PropertyInfoSelectorSpecs
             type.Properties().ThatAreNotDecoratedWithOrInherit<DummyPropertyAttribute>().ToArray();
 
         // Assert
-        await Expect.That(properties).IsEmpty();
+        await That(properties).IsEmpty();
     }
 
     [Fact]
@@ -273,7 +273,7 @@ public class PropertyInfoSelectorSpecs
             type.Properties().ThatAreDecoratedWith<DummyPropertyNonInheritableAttributeAttribute>().ToArray();
 
         // Assert
-        await Expect.That(properties).IsEmpty();
+        await That(properties).IsEmpty();
     }
 
     [Fact]
@@ -287,7 +287,7 @@ public class PropertyInfoSelectorSpecs
             .ThatAreDecoratedWithOrInherit<DummyPropertyNonInheritableAttributeAttribute>().ToArray();
 
         // Assert
-        await Expect.That(properties).IsEmpty();
+        await That(properties).IsEmpty();
     }
 
     [Fact]
@@ -330,7 +330,7 @@ public class PropertyInfoSelectorSpecs
         IEnumerable<Type> returnTypes = type.Properties().ReturnTypes().ToArray();
 
         // Assert
-        await Expect.That(returnTypes).IsEqualTo([
+        await That(returnTypes).IsEqualTo([
                 typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string), typeof(string),
                 typeof(string), typeof(int), typeof(int), typeof(int), typeof(int)
             ]);
@@ -365,7 +365,7 @@ public class PropertyInfoSelectorSpecs
             IEnumerable<PropertyInfo> properties = type.Properties().ThatArePublicOrInternal.ToArray();
 
             // Assert
-            await Expect.That(properties).HasCount(3);
+            await That(properties).HasCount(3);
         }
 
         private class TestClassForPublicSetter
@@ -389,7 +389,7 @@ public class PropertyInfoSelectorSpecs
             IEnumerable<PropertyInfo> properties = type.Properties().ThatArePublicOrInternal.ToArray();
 
             // Assert
-            await Expect.That(properties).HasCount(4);
+            await That(properties).HasCount(4);
         }
 
         private class TestClassForPrivateAccessors

@@ -15,184 +15,176 @@ public partial class CollectionAssertionSpecs
     public class BeEmpty
     {
         [Fact]
-        public void When_collection_is_empty_as_expected_it_should_not_throw()
+        public async Task When_collection_is_empty_as_expected_it_should_not_throw()
         {
             // Arrange
             int[] collection = [];
 
             // Act / Assert
-            collection.Should().BeEmpty();
+            await That(collection).IsEmpty();
         }
 
         [Fact]
-        public void When_collection_is_not_empty_unexpectedly_it_should_throw()
+        public async Task When_collection_is_not_empty_unexpectedly_it_should_throw()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should().BeEmpty("that's what we expect");
+            Action act = () => Synchronously.Verify(That(collection).IsEmpty().Because("that's what we expect"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("*to be empty because that's what we expect, but found at least one item*1*");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_with_items_is_not_empty_it_should_succeed()
+        public async Task When_asserting_collection_with_items_is_not_empty_it_should_succeed()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act / Assert
-            collection.Should().NotBeEmpty();
+            await That(collection).IsNotEmpty();
         }
 
         [Fact]
-        public void When_asserting_collection_with_items_is_not_empty_it_should_enumerate_the_collection_only_once()
+        public async Task When_asserting_collection_with_items_is_not_empty_it_should_enumerate_the_collection_only_once()
         {
             // Arrange
             var trackingEnumerable = new TrackingTestEnumerable(1, 2, 3);
 
             // Act
-            trackingEnumerable.Should().NotBeEmpty();
+            await That(trackingEnumerable).IsNotEmpty();
 
             // Assert
-            trackingEnumerable.Enumerator.LoopCount.Should().Be(1);
+            await That(trackingEnumerable.Enumerator.LoopCount).IsEqualTo(1);
         }
 
         [Fact]
-        public void When_asserting_collection_without_items_is_not_empty_it_should_fail()
+        public async Task When_asserting_collection_without_items_is_not_empty_it_should_fail()
         {
             // Arrange
             int[] collection = [];
 
             // Act
-            Action act = () => collection.Should().NotBeEmpty();
+            Action act = () => Synchronously.Verify(That(collection).IsNotEmpty());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_without_items_is_not_empty_it_should_fail_with_descriptive_message_()
+        public async Task When_asserting_collection_without_items_is_not_empty_it_should_fail_with_descriptive_message_()
         {
             // Arrange
             int[] collection = [];
 
             // Act
-            Action act = () => collection.Should().NotBeEmpty("because we want to test the failure {0}", "message");
+            Action act = () => Synchronously.Verify(That(collection).IsNotEmpty().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected collection not to be empty because we want to test the failure message.");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_to_be_empty_but_collection_is_null_it_should_throw()
+        public async Task When_asserting_collection_to_be_empty_but_collection_is_null_it_should_throw()
         {
             // Arrange
             IEnumerable<object> collection = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().BeEmpty("we want to test the failure {0}", "message");
+                await That(collection).IsEmpty().Because($"we want to test the failure {"message"}");
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected collection to be empty *failure message*, but found <null>.");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_to_be_empty_it_should_enumerate_only_once()
+        public async Task When_asserting_collection_to_be_empty_it_should_enumerate_only_once()
         {
             // Arrange
             var collection = new CountingGenericEnumerable<int>([]);
 
             // Act
-            collection.Should().BeEmpty();
+            await That(collection).IsEmpty();
 
             // Assert
-            collection.GetEnumeratorCallCount.Should().Be(1);
+            await That(collection.GetEnumeratorCallCount).IsEqualTo(1);
         }
 
         [Fact]
-        public void When_asserting_non_empty_collection_is_empty_it_should_enumerate_only_once()
+        public async Task When_asserting_non_empty_collection_is_empty_it_should_enumerate_only_once()
         {
             // Arrange
             var collection = new CountingGenericEnumerable<int>([1, 2, 3]);
 
             // Act
-            Action act = () => collection.Should().BeEmpty();
+            Action act = () => Synchronously.Verify(That(collection).IsEmpty());
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("*to be empty, but found at least one item {1}.");
-            collection.GetEnumeratorCallCount.Should().Be(1);
+            await That(act).Throws<XunitException>();
+            await That(collection.GetEnumeratorCallCount).IsEqualTo(1);
         }
 
         [Fact]
-        public void When_asserting_collection_to_not_be_empty_but_collection_is_null_it_should_throw()
+        public async Task When_asserting_collection_to_not_be_empty_but_collection_is_null_it_should_throw()
         {
             // Arrange
             IEnumerable<object> collection = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().NotBeEmpty("we want to test the failure {0}", "message");
+                await That(collection).IsNotEmpty().Because($"we want to test the failure {"message"}");
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected collection not to be empty *failure message*, but found <null>.");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_an_infinite_collection_to_be_empty_it_should_throw_correctly()
+        public async Task When_asserting_an_infinite_collection_to_be_empty_it_should_throw_correctly()
         {
             // Arrange
             var collection = new InfiniteEnumerable();
 
             // Act
-            Action act = () => collection.Should().BeEmpty();
+            Action act = () => Synchronously.Verify(That(collection).IsEmpty());
 
             // Assert
-            act.Should().Throw<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeEmpty
     {
         [Fact]
-        public void When_asserting_collection_to_be_not_empty_but_collection_is_null_it_should_throw()
+        public async Task When_asserting_collection_to_be_not_empty_but_collection_is_null_it_should_throw()
         {
             // Arrange
             int[] collection = null;
 
             // Act
-            Action act = () => collection.Should().NotBeEmpty("because we want to test the behaviour with a null subject");
+            Action act = () => Synchronously.Verify(That(collection).IsNotEmpty().Because("because we want to test the behaviour with a null subject"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection not to be empty because we want to test the behaviour with a null subject, but found <null>.");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_to_be_not_empty_it_should_enumerate_only_once()
+        public async Task When_asserting_collection_to_be_not_empty_it_should_enumerate_only_once()
         {
             // Arrange
             var collection = new CountingGenericEnumerable<int>([42]);
 
             // Act
-            collection.Should().NotBeEmpty();
+            await That(collection).IsNotEmpty();
 
             // Assert
-            collection.GetEnumeratorCallCount.Should().Be(1);
+            await That(collection.GetEnumeratorCallCount).IsEqualTo(1);
         }
     }
 

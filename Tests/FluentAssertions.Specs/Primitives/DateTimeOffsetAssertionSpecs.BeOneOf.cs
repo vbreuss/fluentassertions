@@ -17,10 +17,10 @@ public partial class DateTimeOffsetAssertionSpecs
             var value = new DateTimeOffset(31.December(2016), 1.Hours());
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(value + 1.Days(), value + 4.Hours()));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(value + 1.Days(), value + 4.Hours()));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -30,7 +30,7 @@ public partial class DateTimeOffsetAssertionSpecs
             var value = new DateTimeOffset(31.December(2016), 1.Hours());
 
             // Act / Assert
-            await Expect.That(value).IsOneOf(value, value + 1.Hours());
+            await That(value).IsOneOf(value, value + 1.Hours());
         }
 
         [Fact]
@@ -40,7 +40,7 @@ public partial class DateTimeOffsetAssertionSpecs
             var value = new DateTimeOffset(31.December(2016), 1.Hours());
 
             // Act / Assert
-            await Expect.That(value).IsOneOf(null, value, value + 1.Hours());
+            await That(value).IsOneOf(null, value, value + 1.Hours());
         }
 
         [Fact]
@@ -51,7 +51,7 @@ public partial class DateTimeOffsetAssertionSpecs
             IEnumerable<DateTimeOffset> expected = [value, value + 1.Hours()];
 
             // Act / Assert
-            await Expect.That(value).IsOneOf(expected);
+            await That(value).IsOneOf(expected);
         }
 
         [Fact]
@@ -62,7 +62,7 @@ public partial class DateTimeOffsetAssertionSpecs
             IEnumerable<DateTimeOffset?> expected = [null, value, value + 1.Hours()];
 
             // Act / Assert
-            await Expect.That(value).IsOneOf(expected);
+            await That(value).IsOneOf(expected);
         }
 
         [Fact]
@@ -72,10 +72,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset value = 31.December(2016).WithOffset(1.Hours());
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new[] { value + 1.Days(), value + 2.Days() }).Because("because it's true"));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(new[] { value + 1.Days(), value + 2.Days() }).Because("because it's true"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -85,10 +85,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset value = new(2016, 12, 30, 23, 58, 57, TimeSpan.FromHours(4));
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new DateTimeOffset(2216, 1, 30, 0, 5, 7, TimeSpan.FromHours(2)), new DateTimeOffset(2016, 12, 30, 23, 58, 57, TimeSpan.FromHours(4))));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(new DateTimeOffset(2216, 1, 30, 0, 5, 7, TimeSpan.FromHours(2)), new DateTimeOffset(2016, 12, 30, 23, 58, 57, TimeSpan.FromHours(4))));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -98,10 +98,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset? value = null;
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new DateTimeOffset(2216, 1, 30, 0, 5, 7, TimeSpan.FromHours(1)), new DateTimeOffset(2016, 2, 10, 2, 45, 7, TimeSpan.FromHours(2))));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(new DateTimeOffset(2216, 1, 30, 0, 5, 7, TimeSpan.FromHours(1)), new DateTimeOffset(2016, 2, 10, 2, 45, 7, TimeSpan.FromHours(2))));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -111,10 +111,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset? value = null;
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new DateTimeOffset(2216, 1, 30, 0, 5, 7, TimeSpan.Zero), null));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(new DateTimeOffset(2216, 1, 30, 0, 5, 7, TimeSpan.Zero), null));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
     }
 }

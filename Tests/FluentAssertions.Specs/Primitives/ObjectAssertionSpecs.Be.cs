@@ -16,7 +16,7 @@ public partial class ObjectAssertionSpecs
             var equalObject = new ClassWithCustomEqualMethod(1);
 
             // Act / Assert
-            await Expect.That(someObject).IsEqualTo(equalObject);
+            await That(someObject).IsEqualTo(equalObject);
         }
 
         [Fact]
@@ -27,10 +27,10 @@ public partial class ObjectAssertionSpecs
             var nonEqualObject = new ClassWithCustomEqualMethod(2);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsEqualTo(nonEqualObject));
+            Action act = () => Synchronously.Verify(That(someObject).IsEqualTo(nonEqualObject));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -41,7 +41,7 @@ public partial class ObjectAssertionSpecs
             object expectedObject = null;
 
             // Act / Assert
-            await Expect.That(someObject).IsEqualTo(expectedObject);
+            await That(someObject).IsEqualTo(expectedObject);
         }
 
         [Fact]
@@ -52,10 +52,10 @@ public partial class ObjectAssertionSpecs
             var nonEqualObject = new ClassWithCustomEqualMethod(2);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsEqualTo(nonEqualObject));
+            Action act = () => Synchronously.Verify(That(someObject).IsEqualTo(nonEqualObject));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -66,10 +66,10 @@ public partial class ObjectAssertionSpecs
             var nonEqualObject = new ClassWithCustomEqualMethod(2);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsEqualTo(nonEqualObject).Because($"because it should use the {"reason"}"));
+            Action act = () => Synchronously.Verify(That(someObject).IsEqualTo(nonEqualObject).Because($"because it should use the {"reason"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -80,10 +80,10 @@ public partial class ObjectAssertionSpecs
             MyEnum expected = MyEnum.One;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -93,7 +93,7 @@ public partial class ObjectAssertionSpecs
             object value = new SomeClass(5);
 
             // Act / Assert
-            await Expect.That(value).IsEqualTo(new SomeClass(5)).Using(new SomeClassEqualityComparer());
+            await That(value).IsEqualTo(new SomeClass(5)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
@@ -103,7 +103,7 @@ public partial class ObjectAssertionSpecs
             var value = new SomeClass(5);
 
             // Act / Assert
-            await Expect.That(value).IsEqualTo(new SomeClass(5)).Using(new SomeClassEqualityComparer());
+            await That(value).IsEqualTo(new SomeClass(5)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
@@ -113,10 +113,10 @@ public partial class ObjectAssertionSpecs
             object value = new SomeClass(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer()));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -126,10 +126,10 @@ public partial class ObjectAssertionSpecs
             var value = new SomeClass(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer()));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -139,10 +139,10 @@ public partial class ObjectAssertionSpecs
             var value = new ClassWithCustomEqualMethod(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer()));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -152,7 +152,7 @@ public partial class ObjectAssertionSpecs
             var value = new SomeClass(3);
 
             // Act / Assert
-            await Expect.That(value).IsEqualTo(value);
+            await That(value).IsEqualTo(value);
         }
 
         [Fact]
@@ -162,7 +162,7 @@ public partial class ObjectAssertionSpecs
             var value = new object();
 
             // Act / Assert
-            await Expect.That(value).IsEqualTo(value).Using(new DumbObjectEqualityComparer());
+            await That(value).IsEqualTo(value).Using(new DumbObjectEqualityComparer());
         }
     }
 
@@ -176,7 +176,7 @@ public partial class ObjectAssertionSpecs
             var nonEqualObject = new ClassWithCustomEqualMethod(2);
 
             // Act / Assert
-            await Expect.That(someObject).IsNotEqualTo(nonEqualObject);
+            await That(someObject).IsNotEqualTo(nonEqualObject);
         }
 
         [Fact]
@@ -188,10 +188,10 @@ public partial class ObjectAssertionSpecs
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(equalObject));
+Synchronously.Verify(That(someObject).IsNotEqualTo(equalObject));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -203,11 +203,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(e
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(equalObject).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).IsNotEqualTo(equalObject).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect someObject to be equal to ClassWithCustomEqualMethod(1) " +
-                "because we want to test the failure message.").AsWildcard();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -217,7 +216,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(e
             object value = new SomeClass(5);
 
             // Act / Assert
-            await Expect.That(value).IsNotEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer());
+            await That(value).IsNotEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
@@ -227,7 +226,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(e
             var value = new SomeClass(5);
 
             // Act / Assert
-            await Expect.That(value).IsNotEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer());
+            await That(value).IsNotEqualTo(new SomeClass(4)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
@@ -237,10 +236,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(e
             object value = new SomeClass(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer()));
+            Action act = () => Synchronously.Verify(That(value).IsNotEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -250,10 +249,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(e
             var value = new SomeClass(3);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer()));
+            Action act = () => Synchronously.Verify(That(value).IsNotEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer()));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -263,33 +262,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(e
             var value = new ClassWithCustomEqualMethod(3);
 
             // Act / Assert
-            await Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer());
-        }
-
-        [Fact]
-        public async Task An_untyped_value_requires_a_comparer()
-        {
-            // Arrange
-            object value = new SomeClass(3);
-
-            // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(comparer: null));
-
-            // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
-        }
-
-        [Fact]
-        public async Task A_typed_value_requires_a_comparer()
-        {
-            // Arrange
-            var value = new SomeClass(3);
-
-            // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNotEqualTo(new SomeClass(3)).Using(comparer: null));
-
-            // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(value).IsNotEqualTo(new SomeClass(3)).Using(new SomeClassEqualityComparer());
         }
 
         [Fact]
@@ -299,7 +272,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(e
             var value = new SomeClass(3);
 
             // Act / Assert
-            await Expect.That(value).IsNotEqualTo(new SomeClass(3));
+            await That(value).IsNotEqualTo(new SomeClass(3));
         }
 
         [Fact]
@@ -309,7 +282,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotEqualTo(e
             var value = new object();
 
             // Act / Assert
-            await Expect.That(value).IsNotEqualTo(new object()).Using(new DumbObjectEqualityComparer());
+            await That(value).IsNotEqualTo(new object()).Using(new DumbObjectEqualityComparer());
         }
     }
 

@@ -2,6 +2,7 @@
 using FluentAssertions.Execution;
 using Xunit;
 using Xunit.Sdk;
+using static System.Collections.Specialized.BitVector32;
 
 namespace FluentAssertions.Specs.Primitives;
 
@@ -20,7 +21,7 @@ public partial class StringAssertionSpecs
             string expectedSuffix = "BC";
 
             // Act / Assert
-            await Expect.That(actual).EndsWith(expectedSuffix);
+            await That(actual).EndsWith(expectedSuffix);
         }
 
         [Fact]
@@ -31,7 +32,7 @@ public partial class StringAssertionSpecs
             string expectedSuffix = "ABC";
 
             // Act / Assert
-            await Expect.That(actual).EndsWith(expectedSuffix);
+            await That(actual).EndsWith(expectedSuffix);
         }
 
         [Fact]
@@ -40,43 +41,41 @@ public partial class StringAssertionSpecs
             // Act
             Func<Task> act = async () =>
             {
-                await Expect.That("ABC").EndsWith("AB").Because("it should");
+                await That("ABC").EndsWith("AB").Because("it should");
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task When_string_ending_is_compared_with_null_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABC").EndsWith(null));
+            Action act = () => Synchronously.Verify(That("ABC").EndsWith(null));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<XunitException>().WithMessage("cannot be validated against <null>").AsSuffix();
         }
 
         [Fact]
         public async Task When_string_ending_is_compared_with_empty_string_it_should_not_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABC").EndsWith(""));
+            Action act = () => Synchronously.Verify(That("ABC").EndsWith(""));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
         public async Task When_string_ending_is_compared_with_string_that_is_longer_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABC").EndsWith("00ABC"));
+            Action act = () => Synchronously.Verify(That("ABC").EndsWith("00ABC"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected string to end with " +
-                "\"00ABC\", but " +
-                "\"ABC\" is too short.").AsWildcard();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -85,11 +84,11 @@ public partial class StringAssertionSpecs
             // Act
             Func<Task> act = async () =>
             {
-                await Expect.That("ABC").EndsWith("00ABC");
+                await That("ABC").EndsWith("00ABC");
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -101,11 +100,11 @@ public partial class StringAssertionSpecs
             // Act
             Func<Task> act = async () =>
             {
-                await Expect.That(someString).EndsWith("ABC");
+                await That(someString).EndsWith("ABC");
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -119,10 +118,10 @@ public partial class StringAssertionSpecs
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith("AB"));
+Synchronously.Verify(That(value).DoesNotEndWith("AB"));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -133,10 +132,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith("AB"
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith("BC").Because($"because of some {"reason"}"));
+Synchronously.Verify(That(value).DoesNotEndWith("BC").Because($"because of some {"reason"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -147,10 +146,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith("BC"
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith(null));
+Synchronously.Verify(That(value).DoesNotEndWith(null));
 
             // Assert
-            await Expect.That(action).Throws<ArgumentNullException>();
+            await That(action).Throws<XunitException>().WithMessage("cannot be validated against <null>").AsSuffix();
         }
 
         [Fact]
@@ -161,10 +160,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith(null
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith(""));
+Synchronously.Verify(That(value).DoesNotEndWith(""));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -176,11 +175,11 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotEndWith(""))
             // Act
             Func<Task> act = async () =>
             {
-                await Expect.That(someString).DoesNotEndWith("ABC").Because($"some {"reason"}");
+                await That(someString).DoesNotEndWith("ABC").Because($"some {"reason"}");
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

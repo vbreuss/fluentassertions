@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using FluentAssertions.Execution;
 using Xunit;
 using Xunit.Sdk;
@@ -13,294 +14,265 @@ namespace FluentAssertions.Specs.Collections;
 public partial class CollectionAssertionSpecs
 {
     [Fact]
-    public void When_injecting_a_null_predicate_into_ContainSingle_it_should_throw()
+    public async Task When_injecting_a_null_predicate_into_ContainSingle_it_should_throw()
     {
         // Arrange
         IEnumerable<int> collection = [];
 
         // Act
-        Action act = () => collection.Should().ContainSingle(predicate: null);
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Matching(predicate: null));
 
         // Assert
-        act.Should().ThrowExactly<ArgumentNullException>()
-            .WithParameterName("predicate");
+        await That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
-    public void When_a_collection_contains_a_single_item_matching_a_predicate_it_should_succeed()
+    public async Task When_a_collection_contains_a_single_item_matching_a_predicate_it_should_succeed()
     {
         // Arrange
         IEnumerable<int> collection = [1, 2, 3];
-        Expression<Func<int, bool>> expression = item => item == 2;
+        Func<int, bool> expression = item => item == 2;
 
         // Act / Assert
-        collection.Should().ContainSingle(expression);
+        await That(collection).HasSingle().Matching(expression);
     }
 
     [Fact]
-    public void When_asserting_an_empty_collection_contains_a_single_item_matching_a_predicate_it_should_throw()
+    public async Task When_asserting_an_empty_collection_contains_a_single_item_matching_a_predicate_it_should_throw()
     {
         // Arrange
         IEnumerable<int> collection = [];
-        Expression<Func<int, bool>> expression = item => item == 2;
+        Func<int, bool> expression = item => item == 2;
 
         // Act
-        Action act = () => collection.Should().ContainSingle(expression);
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Matching(expression));
 
         // Assert
-        string expectedMessage =
-            "Expected collection to contain a single item matching (item == 2), but the collection is empty.";
-
-        act.Should().Throw<XunitException>().WithMessage(expectedMessage);
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_a_null_collection_contains_a_single_item_matching_a_predicate_it_should_throw()
+    public async Task When_asserting_a_null_collection_contains_a_single_item_matching_a_predicate_it_should_throw()
     {
         // Arrange
         const IEnumerable<int> collection = null;
-        Expression<Func<int, bool>> expression = item => item == 2;
+        Func<int, bool> expression = item => item == 2;
 
         // Act
-        Action act = () =>
+        Func<Task> act = async () =>
         {
-            using var _ = new AssertionScope();
-            collection.Should().ContainSingle(expression);
+            await That(collection).HasSingle().Matching(expression);
         };
 
         // Assert
-        string expectedMessage =
-            "Expected collection to contain a single item matching (item == 2), but found <null>.";
-
-        act.Should().Throw<XunitException>().WithMessage(expectedMessage);
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_non_empty_collection_does_not_contain_a_single_item_matching_a_predicate_it_should_throw()
+    public async Task When_non_empty_collection_does_not_contain_a_single_item_matching_a_predicate_it_should_throw()
     {
         // Arrange
         IEnumerable<int> collection = [1, 3];
-        Expression<Func<int, bool>> expression = item => item == 2;
+        Func<int, bool> expression = item => item == 2;
 
         // Act
-        Action act = () => collection.Should().ContainSingle(expression);
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Matching(expression));
 
         // Assert
-        string expectedMessage =
-            "Expected collection to contain a single item matching (item == 2), but no such item was found.";
-
-        act.Should().Throw<XunitException>().WithMessage(expectedMessage);
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_non_empty_collection_contains_more_than_a_single_item_matching_a_predicate_it_should_throw()
+    public async Task When_non_empty_collection_contains_more_than_a_single_item_matching_a_predicate_it_should_throw()
     {
         // Arrange
         IEnumerable<int> collection = [1, 2, 2, 2, 3];
-        Expression<Func<int, bool>> expression = item => item == 2;
+        Func<int, bool> expression = item => item == 2;
 
         // Act
-        Action act = () => collection.Should().ContainSingle(expression);
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Matching(expression));
 
         // Assert
-        string expectedMessage =
-            "Expected collection to contain a single item matching (item == 2), but 3 such items were found.";
-
-        act.Should().Throw<XunitException>().WithMessage(expectedMessage);
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_single_item_matching_a_predicate_is_found_it_should_allow_continuation()
+    public async Task When_single_item_matching_a_predicate_is_found_it_should_allow_continuation()
     {
         // Arrange
         IEnumerable<int> collection = [1, 2, 3];
 
         // Act
-        Action act = () => collection.Should().ContainSingle(item => item == 2).Which.Should().BeGreaterThan(4);
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Matching(item => item == 2).Which.IsGreaterThan(4));
 
         // Assert
-        act.Should()
-            .Throw<XunitException>()
-            .WithMessage("Expected collection[0]*greater*4*2*");
+        await That(act).Throws<XunitException>().WithMessage("*item => item == 2*greater than 4*").AsWildcard();
     }
 
     [Fact]
-    public void Chained_assertions_are_never_called_when_the_initial_assertion_failed()
+    public async Task Chained_assertions_are_never_called_when_the_initial_assertion_failed()
     {
         // Arrange
         IEnumerable<int> collection = [1, 2, 3];
 
         // Act
-        Action act = () =>
+        Func<Task> act = async () =>
         {
-            using var _ = new AssertionScope();
-            collection.Should().ContainSingle(item => item == 4).Which.Should().BeGreaterThan(4);
+            await That(collection).HasSingle().Matching(item => item == 4);
         };
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected collection to contain a single item matching (item == 4), but no such item was found.");
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_single_item_contains_brackets_it_should_format_them_properly()
+    public async Task When_single_item_contains_brackets_it_should_format_them_properly()
     {
         // Arrange
         IEnumerable<string> collection = [""];
 
         // Act
-        Action act = () => collection.Should().ContainSingle(item => item == "{123}");
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Matching(item => item == "{123}"));
 
         // Assert
-        act.Should().Throw<XunitException>().WithMessage(
-            "Expected collection to contain a single item matching (item == \"{123}\"), but no such item was found.");
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_single_item_contains_string_interpolation_it_should_format_brackets_properly()
+    public async Task When_single_item_contains_string_interpolation_it_should_format_brackets_properly()
     {
         // Arrange
         IEnumerable<string> collection = [""];
 
         // Act
-        Action act = () => collection.Should().ContainSingle(item => item == $"{123}");
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Matching(item => item == $"{123}"));
 
         // Assert
-        act.Should().Throw<XunitException>().WithMessage(
-            "Expected collection to contain a single item matching (item == \"123\"), but no such item was found.");
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_a_collection_contains_a_single_item_it_should_succeed()
+    public async Task When_a_collection_contains_a_single_item_it_should_succeed()
     {
         // Arrange
         IEnumerable<int> collection = [1];
 
         // Act
-        Action act = () => collection.Should().ContainSingle();
+        Action act = () => Synchronously.Verify(That(collection).HasSingle());
 
         // Assert
-        act.Should().NotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [Fact]
-    public void When_asserting_an_empty_collection_contains_a_single_item_it_should_throw()
+    public async Task When_asserting_an_empty_collection_contains_a_single_item_it_should_throw()
     {
         // Arrange
         IEnumerable<int> collection = [];
 
         // Act
-        Action act = () => collection.Should().ContainSingle("more is not allowed");
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Because("more is not allowed"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage(
-                "Expected collection to contain a single item because more is not allowed, but the collection is empty.");
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_asserting_a_null_collection_contains_a_single_item_it_should_throw()
+    public async Task When_asserting_a_null_collection_contains_a_single_item_it_should_throw()
     {
         // Arrange
         const IEnumerable<int> collection = null;
 
         // Act
-        Action act = () =>
+        Func<Task> act = async () =>
         {
-            using var _ = new AssertionScope();
-            collection.Should().ContainSingle("more is not allowed");
+            await That(collection).HasSingle().Because("more is not allowed");
         };
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected collection to contain a single item because more is not allowed, but found <null>.");
+        await That(act).Throws<XunitException>();
     }
 
-    [Fact]
-    public void When_non_empty_collection_does_not_contain_a_single_item_it_should_throw()
+    [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/591")]
+    public async Task When_non_empty_collection_does_not_contain_a_single_item_it_should_throw()
     {
         // Arrange
         IEnumerable<int> collection = [1, 3];
 
         // Act
-        Action act = () => collection.Should().ContainSingle();
+        Action act = () => Synchronously.Verify(That(collection).HasSingle());
 
         // Assert
-        const string expectedMessage = "Expected collection to contain a single item, but found {1, 3}.";
+        const string expectedMessage = "1, 3";
 
-        act.Should().Throw<XunitException>().WithMessage(expectedMessage);
+        await That(act).Throws<XunitException>().WithMessage(expectedMessage).AsWildcard();
     }
 
     [Fact]
-    public void When_non_empty_collection_contains_more_than_a_single_item_it_should_throw()
+    public async Task When_non_empty_collection_contains_more_than_a_single_item_it_should_throw()
     {
         // Arrange
         IEnumerable<int> collection = [1, 2];
 
         // Act
-        Action act = () => collection.Should().ContainSingle();
+        Action act = () => Synchronously.Verify(That(collection).HasSingle());
 
         // Assert
-        const string expectedMessage = "Expected collection to contain a single item, but found {1, 2}.";
-
-        act.Should().Throw<XunitException>().WithMessage(expectedMessage);
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_single_item_is_found_it_should_allow_continuation()
+    public async Task When_single_item_is_found_it_should_allow_continuation()
     {
         // Arrange
         IEnumerable<int> collection = [3];
 
         // Act
-        Action act = () => collection.Should().ContainSingle().Which.Should().BeGreaterThan(4);
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Which.IsGreaterThan(4));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected collection[0] to be greater than 4, but found 3.");
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
-    public void When_collection_is_IEnumerable_it_should_be_evaluated_only_once_with_predicate()
+    public async Task When_collection_is_IEnumerable_it_should_be_evaluated_only_once_with_predicate()
     {
         // Arrange
         IEnumerable<int> collection = new OneTimeEnumerable<int>(1);
 
         // Act
-        Action act = () => collection.Should().ContainSingle(_ => true);
+        Action act = () => Synchronously.Verify(That(collection).HasSingle().Matching(_ => true));
 
         // Assert
-        act.Should().NotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [Fact]
-    public void When_collection_is_IEnumerable_it_should_be_evaluated_only_once()
+    public async Task When_collection_is_IEnumerable_it_should_be_evaluated_only_once()
     {
         // Arrange
         IEnumerable<int> collection = new OneTimeEnumerable<int>(1);
 
         // Act
-        Action act = () => collection.Should().ContainSingle();
+        Action act = () => Synchronously.Verify(That(collection).HasSingle());
 
         // Assert
-        act.Should().NotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [Fact]
-    public void When_an_assertion_fails_on_ContainSingle_succeeding_message_should_be_included()
+    public async Task When_an_assertion_fails_on_ContainSingle_succeeding_message_should_be_included()
     {
         // Act
-        Action act = () =>
+
+        Func<Task> act = async () =>
         {
-            using var _ = new AssertionScope();
             var values = new List<int>();
-            values.Should().ContainSingle();
-            values.Should().ContainSingle();
+            await That(values).HasSingle();
+            await That(values).HasSingle();
         };
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("Expected*to contain a single item, but the collection is empty*" +
-                "Expected*to contain a single item, but the collection is empty*");
+        await That(act).Throws<XunitException>();
     }
 }

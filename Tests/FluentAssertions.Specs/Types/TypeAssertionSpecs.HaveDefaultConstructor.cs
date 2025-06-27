@@ -26,7 +26,7 @@ public partial class TypeAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.ProtectedInternal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -43,7 +43,7 @@ public partial class TypeAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -65,7 +65,7 @@ public partial class TypeAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -79,7 +79,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected constructor *ClassWithCctorAndNonDefaultConstructor() to exist *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected constructor *ClassWithCctorAndNonDefaultConstructor() to exist *failure message*" +
                     ", but it does not.").AsWildcard();
         }
 
@@ -94,7 +94,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -112,7 +112,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveDefaultConstructor();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -127,7 +127,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -141,7 +141,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -155,7 +155,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveDefaultConstructor();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -169,7 +169,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveDefaultConstructor("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 

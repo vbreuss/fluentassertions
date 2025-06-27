@@ -15,10 +15,10 @@ public partial class NullableNumericAssertionSpecs
             float? value = 3.4F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsLessThanOrEqualTo(float.NaN));
+            Action act = () => Synchronously.Verify(That(value).IsLessThanOrEqualTo(float.NaN));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -28,10 +28,10 @@ public partial class NullableNumericAssertionSpecs
             float? value = float.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsLessThanOrEqualTo(0));
+            Action act = () => Synchronously.Verify(That(value).IsLessThanOrEqualTo(0));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -41,10 +41,10 @@ public partial class NullableNumericAssertionSpecs
             double? value = 3.4;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsLessThanOrEqualTo(double.NaN));
+            Action act = () => Synchronously.Verify(That(value).IsLessThanOrEqualTo(double.NaN));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -54,10 +54,10 @@ public partial class NullableNumericAssertionSpecs
             double? value = double.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsLessThanOrEqualTo(0));
+            Action act = () => Synchronously.Verify(That(value).IsLessThanOrEqualTo(0));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

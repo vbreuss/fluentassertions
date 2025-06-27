@@ -23,7 +23,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeVirtual();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -37,7 +37,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeVirtual("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithNonVirtualPublicMethods.PublicDoNothing" +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithNonVirtualPublicMethods.PublicDoNothing" +
                     " to be virtual because we want to test the error message," +
                     " but it is not virtual.").AsWildcard();
         }
@@ -53,7 +53,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeVirtual("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -70,7 +70,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeVirtual();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -84,7 +84,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeVirtual("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method *ClassWithAllMethodsVirtual.PublicVirtualDoNothing" +
+            await That(act).Throws<XunitException>().WithMessage("Expected method *ClassWithAllMethodsVirtual.PublicVirtualDoNothing" +
                     " not to be virtual because we want to test the error message," +
                     " but it is.").AsWildcard();
         }
@@ -100,7 +100,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeVirtual("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -118,7 +118,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<DummyMethodAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -132,7 +132,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<MethodImplAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -147,7 +147,7 @@ public class MethodInfoAssertionSpecs
                 constructorMethodInfo.Should().BeDecoratedWith<MethodImplAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -162,7 +162,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<MethodImplAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithAllMethodsDecoratedWithDummyAttribute.PublicDoNothing to be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithAllMethodsDecoratedWithDummyAttribute.PublicDoNothing to be decorated with " +
                     "System.Runtime.CompilerServices.MethodImplAttribute, but that attribute was not found.").AsWildcard();
         }
 
@@ -177,7 +177,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<MethodImplAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodWithImplementationAttribute.NoOptions to be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodWithImplementationAttribute.NoOptions to be decorated with " +
                     "System.Runtime.CompilerServices.MethodImplAttribute, but that attribute was not found.").AsWildcard();
         }
 
@@ -192,7 +192,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<MethodImplAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodWithImplementationAttribute.ZeroOptions to be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodWithImplementationAttribute.ZeroOptions to be decorated with " +
                     "System.Runtime.CompilerServices.MethodImplAttribute, but that attribute was not found.").AsWildcard();
         }
 
@@ -207,7 +207,7 @@ public class MethodInfoAssertionSpecs
                 type.Should().BeDecoratedWith<MethodImplAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type FluentAssertions*ClassWithAllMethodsDecoratedWithDummyAttribute to be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected type FluentAssertions*ClassWithAllMethodsDecoratedWithDummyAttribute to be decorated with " +
                     "System.Runtime.CompilerServices.MethodImplAttribute, but the attribute was not found.").AsWildcard();
         }
 
@@ -223,7 +223,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<DummyMethodAttribute>("because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodsThatAreNotDecoratedWithDummyAttribute.PublicDoNothing to be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodsThatAreNotDecoratedWithDummyAttribute.PublicDoNothing to be decorated with " +
                     "FluentAssertions*DummyMethodAttribute because we want to test the error message," +
                     " but that attribute was not found.").AsWildcard();
         }
@@ -239,7 +239,7 @@ public class MethodInfoAssertionSpecs
             Action act = () => methodInfo.Should().BeDecoratedWith<DummyMethodAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -254,7 +254,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<DummyMethodAttribute>(d => d.Filter);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -268,7 +268,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<MethodImplAttribute>(x => x.Value == MethodImplOptions.NoInlining);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -284,7 +284,7 @@ public class MethodInfoAssertionSpecs
                     .BeDecoratedWith<DummyMethodAttribute>(d => !d.Filter, "because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodsThatAreNotDecoratedWithDummyAttribute.PublicDoNothing to be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodsThatAreNotDecoratedWithDummyAttribute.PublicDoNothing to be decorated with " +
                     "FluentAssertions*DummyMethodAttribute because we want to test the error message," +
                     " but that attribute was not found.").AsWildcard();
         }
@@ -300,7 +300,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<MethodImplAttribute>(x => x.Value == MethodImplOptions.AggressiveInlining);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodWithImplementationAttribute.DoNotInlineMe to be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodWithImplementationAttribute.DoNotInlineMe to be decorated with " +
                     "System.Runtime.CompilerServices.MethodImplAttribute, but that attribute was not found.").AsWildcard();
         }
 
@@ -321,7 +321,7 @@ public class MethodInfoAssertionSpecs
                         .BeTrue();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -335,7 +335,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeDecoratedWith<DummyMethodAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -353,7 +353,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeDecoratedWith<DummyMethodAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -368,7 +368,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeDecoratedWith<MethodImplAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -383,7 +383,7 @@ public class MethodInfoAssertionSpecs
                 constructorMethodInfo.Should().NotBeDecoratedWith<MethodImplAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -398,7 +398,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeDecoratedWith<DummyMethodAttribute>("because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithAllMethodsDecoratedWithDummyAttribute.PublicDoNothing to not be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithAllMethodsDecoratedWithDummyAttribute.PublicDoNothing to not be decorated with " +
                     "FluentAssertions*DummyMethodAttribute because we want to test the error message," +
                     " but that attribute was found.").AsWildcard();
         }
@@ -414,7 +414,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeDecoratedWith<MethodImplAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodWithImplementationAttribute.DoNotInlineMe to not be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithMethodWithImplementationAttribute.DoNotInlineMe to not be decorated with " +
                     "System.Runtime.CompilerServices.MethodImplAttribute, but that attribute was found.").AsWildcard();
         }
 
@@ -430,7 +430,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeDecoratedWith<DummyMethodAttribute>(d => !d.Filter);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -444,7 +444,7 @@ public class MethodInfoAssertionSpecs
             Action act = () => methodInfo.Should().NotBeDecoratedWith<DummyMethodAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -460,7 +460,7 @@ public class MethodInfoAssertionSpecs
                     .NotBeDecoratedWith<DummyMethodAttribute>(d => d.Filter, "because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithAllMethodsDecoratedWithDummyAttribute.PublicDoNothing to not be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Void FluentAssertions*ClassWithAllMethodsDecoratedWithDummyAttribute.PublicDoNothing to not be decorated with " +
                     "FluentAssertions*DummyMethodAttribute because we want to test the error message," +
                     " but that attribute was found.").AsWildcard();
         }
@@ -476,7 +476,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeDecoratedWith<DummyMethodAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method to not be decorated with *.DummyMethodAttribute *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected method to not be decorated with *.DummyMethodAttribute *failure message*" +
                     ", but methodInfo is <null>.").AsWildcard();
         }
     }
@@ -494,7 +494,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeAsync();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -508,7 +508,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeAsync("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method Task FluentAssertions*ClassWithNonAsyncMethods.PublicDoNothing" +
+            await That(act).Throws<XunitException>().WithMessage("Expected method Task FluentAssertions*ClassWithNonAsyncMethods.PublicDoNothing" +
                     " to be async because we want to test the error message," +
                     " but it is not.").AsWildcard();
         }
@@ -524,7 +524,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().BeAsync("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -541,7 +541,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeAsync();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -555,7 +555,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeAsync("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("*ClassWithAllMethodsAsync.PublicAsyncDoNothing*" +
+            await That(act).Throws<XunitException>().WithMessage("*ClassWithAllMethodsAsync.PublicAsyncDoNothing*" +
                     "not to be async*because we want to test the error message*").AsWildcard();
         }
 
@@ -570,7 +570,7 @@ public class MethodInfoAssertionSpecs
                 methodInfo.Should().NotBeAsync("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

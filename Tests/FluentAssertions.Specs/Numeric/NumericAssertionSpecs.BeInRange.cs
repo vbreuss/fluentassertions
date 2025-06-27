@@ -18,7 +18,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5, "because that's the valid range");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -31,7 +31,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(3, 5);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -44,7 +44,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(0, 1);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -57,7 +57,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -72,7 +72,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(minimumValue, maximumValue);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -85,7 +85,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -100,7 +100,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().BeInRange(minimumValue, maximumValue);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
     }
 
@@ -116,7 +116,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(4, 5, "because that's the invalid range");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -129,7 +129,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(4, 5);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -142,7 +142,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(0, 1);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -167,7 +167,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(minimumValue, maximumValue);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -192,7 +192,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(minimumValue, maximumValue);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
     }
 }

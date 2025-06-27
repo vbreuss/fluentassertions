@@ -16,7 +16,7 @@ public class DelegateAssertionSpecs
             Action subject = () => throw exception;
 
             // Act / Assert
-            await Expect.That(subject).Throws<Exception>();
+            await That(subject).Throws<Exception>();
         }
     }
 }

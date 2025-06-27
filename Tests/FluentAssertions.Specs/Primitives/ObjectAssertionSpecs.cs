@@ -18,7 +18,7 @@ public partial class ObjectAssertionSpecs
             var someObject = new Exception();
 
             // Act / Assert
-            await Expect.That(someObject).IsExactly<Exception>();
+            await That(someObject).IsExactly<Exception>();
         }
 
         [Fact]
@@ -31,7 +31,7 @@ public partial class ObjectAssertionSpecs
             var action = () => someObject.Should().Equals(null);
 
             // Assert
-            await Expect.That(action).Throws<NotSupportedException>();
+            await That(action).Throws<NotSupportedException>();
         }
     }
 

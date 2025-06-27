@@ -16,10 +16,10 @@ public partial class DateTimeAssertionSpecs
             DateTime expectation = new(2016, 06, 03);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsAfter(expectation));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -30,10 +30,10 @@ public partial class DateTimeAssertionSpecs
             DateTime expectation = new(2016, 06, 05);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -44,10 +44,10 @@ public partial class DateTimeAssertionSpecs
             DateTime expectation = new(2016, 06, 04);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -61,10 +61,10 @@ public partial class DateTimeAssertionSpecs
             DateTime expectation = new(2016, 06, 03);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -75,10 +75,10 @@ public partial class DateTimeAssertionSpecs
             DateTime expectation = new(2016, 06, 05);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotAfter(expectation));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -89,10 +89,10 @@ public partial class DateTimeAssertionSpecs
             DateTime expectation = new(2016, 06, 04);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotAfter(expectation));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 }

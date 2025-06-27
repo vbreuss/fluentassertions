@@ -25,7 +25,7 @@ public partial class ObjectAssertionSpecs
             Action act = () => subject.Should().BeDataContractSerializable();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -38,7 +38,7 @@ public partial class ObjectAssertionSpecs
             Action act = () => subject.Should().BeDataContractSerializable("we need to store it on {0}", "disk");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -55,7 +55,7 @@ public partial class ObjectAssertionSpecs
             Action act = () => subject.Should().BeDataContractSerializable();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -74,7 +74,7 @@ public partial class ObjectAssertionSpecs
                     options => options.Excluding(x => x.Name));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -89,7 +89,7 @@ public partial class ObjectAssertionSpecs
                     options: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 

@@ -17,10 +17,10 @@ public partial class DateTimeOffsetAssertionSpecs
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNotNull());
+Synchronously.Verify(That(nullableDateTime).IsNotNull());
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
     }
 
@@ -36,7 +36,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNotNul
             var action = () => someDateTimeOffset.Should().Equals(null);
 
             // Assert
-            await Expect.That(action).Throws<NotSupportedException>();
+            await That(action).Throws<NotSupportedException>();
         }
     }
 }

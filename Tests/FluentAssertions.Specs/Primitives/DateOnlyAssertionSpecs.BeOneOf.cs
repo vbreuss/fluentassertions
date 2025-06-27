@@ -16,10 +16,10 @@ public partial class DateOnlyAssertionSpecs
             DateOnly value = new(2016, 12, 20);
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(value.AddDays(1), value.AddMonths(-1)));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(value.AddDays(1), value.AddMonths(-1)));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -30,10 +30,10 @@ public partial class DateOnlyAssertionSpecs
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new[] { value.AddDays(1), value.AddDays(2) }).Because("because it's true"));
+Synchronously.Verify(That(value).IsOneOf(new[] { value.AddDays(1), value.AddDays(2) }).Because("because it's true"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -43,7 +43,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new[] { val
             DateOnly value = new(2016, 12, 30);
 
             // Act/Assert
-            await Expect.That(value).IsOneOf(new DateOnly(2216, 1, 30), new DateOnly(2016, 12, 30));
+            await That(value).IsOneOf(new DateOnly(2216, 1, 30), new DateOnly(2016, 12, 30));
         }
 
         [Fact]
@@ -53,10 +53,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new[] { val
             DateOnly? value = null;
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new DateOnly(2216, 1, 30), new DateOnly(1116, 4, 10)));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(new DateOnly(2216, 1, 30), new DateOnly(1116, 4, 10)));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -66,7 +66,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new[] { val
             DateOnly? value = null;
 
             // Act/Assert
-            await Expect.That(value).IsOneOf(new DateOnly(2216, 1, 30), null);
+            await That(value).IsOneOf(new DateOnly(2216, 1, 30), null);
         }
     }
 }

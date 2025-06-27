@@ -21,7 +21,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(dateTime, -1.Ticks());
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -35,7 +35,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(dateTime, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -49,7 +49,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(dateTime, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -63,7 +63,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(dateTime, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -77,7 +77,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(dateTime, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -91,7 +91,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -105,7 +105,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -119,7 +119,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -133,7 +133,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -147,7 +147,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, TimeSpan.FromMilliseconds(35));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -161,7 +161,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 35.Milliseconds());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -175,7 +175,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 35.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -189,7 +189,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 100.Milliseconds());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -203,7 +203,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 100.Milliseconds());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
@@ -220,7 +220,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(dateTime, -1.Ticks());
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -234,7 +234,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(dateTime, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -248,7 +248,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(dateTime, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -262,7 +262,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(dateTime, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -276,7 +276,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(dateTime, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -290,7 +290,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -304,7 +304,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, TimeSpan.FromMilliseconds(20));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -318,7 +318,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -332,7 +332,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -346,7 +346,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -360,7 +360,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 35.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -374,7 +374,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 35.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -388,7 +388,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 100.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -402,7 +402,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 100.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

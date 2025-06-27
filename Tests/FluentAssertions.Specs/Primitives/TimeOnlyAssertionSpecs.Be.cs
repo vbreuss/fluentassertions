@@ -17,7 +17,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly sameTimeOnly = new(15, 06, 04, 146);
 
             // Act/Assert
-            await Expect.That(timeOnly).IsEqualTo(sameTimeOnly);
+            await That(timeOnly).IsEqualTo(sameTimeOnly);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly? sameTimeOnly = new(15, 06, 04, 146);
 
             // Act/Assert
-            await Expect.That(timeOnly).IsEqualTo(sameTimeOnly);
+            await That(timeOnly).IsEqualTo(sameTimeOnly);
         }
 
         [Fact]
@@ -39,7 +39,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly sameTimeOnly = TimeOnly.MinValue;
 
             // Act/Assert
-            await Expect.That(timeOnly).IsEqualTo(sameTimeOnly);
+            await That(timeOnly).IsEqualTo(sameTimeOnly);
         }
 
         [Fact]
@@ -50,7 +50,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly sameTimeOnly = TimeOnly.MaxValue;
 
             // Act/Assert
-            await Expect.That(timeOnly).IsEqualTo(sameTimeOnly);
+            await That(timeOnly).IsEqualTo(sameTimeOnly);
         }
 
         [Fact]
@@ -61,10 +61,10 @@ public partial class TimeOnlyAssertionSpecs
             var otherTimeOnly = new TimeOnly(15, 03, 11);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(timeOnly).IsEqualTo(otherTimeOnly).Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(timeOnly).IsEqualTo(otherTimeOnly).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -75,10 +75,10 @@ public partial class TimeOnlyAssertionSpecs
             var otherTimeOnly = new TimeOnly(15, 03, 10, 175);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(timeOnly).IsEqualTo(otherTimeOnly).Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(timeOnly).IsEqualTo(otherTimeOnly).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -89,7 +89,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly? nullableTimeOnlyB = new TimeOnly(15, 06, 04, 123);
 
             // Act/Assert
-            await Expect.That(nullableTimeOnlyA).IsEqualTo(nullableTimeOnlyB);
+            await That(nullableTimeOnlyA).IsEqualTo(nullableTimeOnlyB);
         }
 
         [Fact]
@@ -100,7 +100,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly? nullableTimeOnlyB = null;
 
             // Act/Assert
-            await Expect.That(nullableTimeOnlyA).IsEqualTo(nullableTimeOnlyB);
+            await That(nullableTimeOnlyA).IsEqualTo(nullableTimeOnlyB);
         }
 
         [Fact]
@@ -112,10 +112,10 @@ public partial class TimeOnlyAssertionSpecs
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnlyA).IsEqualTo(nullableTimeOnlyB));
+Synchronously.Verify(That(nullableTimeOnlyA).IsEqualTo(nullableTimeOnlyB));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -126,10 +126,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnlyA).IsEqual
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnly).IsEqualTo(new TimeOnly(15, 06, 04)).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableTimeOnly).IsEqualTo(new TimeOnly(15, 06, 04)).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -140,7 +140,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnly).IsEqualT
             TimeOnly otherTimeOnly = new(15, 06, 05);
 
             // Act/Assert
-            await Expect.That(timeOnly).IsNotEqualTo(otherTimeOnly);
+            await That(timeOnly).IsNotEqualTo(otherTimeOnly);
         }
     }
 
@@ -154,7 +154,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnly).IsEqualT
             TimeOnly otherTime = new(20, 06, 05);
 
             // Act & Assert
-            await Expect.That(time).IsNotEqualTo(otherTime);
+            await That(time).IsNotEqualTo(otherTime);
         }
 
         [Fact]
@@ -165,7 +165,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnly).IsEqualT
             TimeOnly? otherTime = new(19, 07, 05);
 
             // Act & Assert
-            await Expect.That(time).IsNotEqualTo(otherTime);
+            await That(time).IsNotEqualTo(otherTime);
         }
 
         [Fact]
@@ -177,10 +177,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnly).IsEqualT
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(time).IsNotEqualTo(sameTime).Because($"because we want to test the failure {"message"}"));
+                () => Synchronously.Verify(That(time).IsNotEqualTo(sameTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -192,10 +192,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeOnly).IsEqualT
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(time).IsNotEqualTo(sameTime).Because($"because we want to test the failure {"message"}"));
+                () => Synchronously.Verify(That(time).IsNotEqualTo(sameTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

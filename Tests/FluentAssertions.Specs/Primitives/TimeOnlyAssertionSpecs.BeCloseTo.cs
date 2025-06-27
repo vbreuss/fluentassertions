@@ -22,7 +22,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(time, -1.Ticks());
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -80,7 +80,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -94,7 +94,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -141,7 +141,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 2.Minutes());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -155,7 +155,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 2.Minutes());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -169,7 +169,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().BeCloseTo(nearbyTime, 35.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -187,7 +187,7 @@ public partial class TimeOnlyAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -204,7 +204,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 35.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -222,7 +222,7 @@ public partial class TimeOnlyAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -236,7 +236,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(time, -1.Ticks());
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -250,7 +250,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(time, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -264,7 +264,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(time, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -278,7 +278,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(time, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -292,7 +292,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(time, TimeSpan.FromTicks(1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -306,7 +306,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 20.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -320,7 +320,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, TimeSpan.FromMilliseconds(20));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -357,7 +357,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 35.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -371,7 +371,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 100.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -385,7 +385,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 100.Milliseconds());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -421,7 +421,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 2.Minutes());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -435,7 +435,7 @@ public partial class TimeOnlyAssertionSpecs
             Action act = () => time.Should().NotBeCloseTo(nearbyTime, 2.Minutes());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

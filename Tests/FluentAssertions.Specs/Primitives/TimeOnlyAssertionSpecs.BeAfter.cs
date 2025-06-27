@@ -17,7 +17,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 03, 45);
 
             // Act/Assert
-            await Expect.That(subject).IsAfter(expectation);
+            await That(subject).IsAfter(expectation);
         }
 
         [Fact]
@@ -28,10 +28,10 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 03);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -42,10 +42,10 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 05);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -56,7 +56,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 05);
 
             // Act/Assert
-            await Expect.That(subject).IsNotAfter(expectation);
+            await That(subject).IsNotAfter(expectation);
         }
 
         [Fact]
@@ -67,10 +67,10 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 04, 145);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -81,7 +81,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 04, 123);
 
             // Act/Assert
-            await Expect.That(subject).IsNotAfter(expectation);
+            await That(subject).IsNotAfter(expectation);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06);
 
             // Act/Assert
-            await Expect.That(subject).IsOnOrAfter(expectation);
+            await That(subject).IsOnOrAfter(expectation);
         }
 
         [Fact]
@@ -103,10 +103,10 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 03);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotOnOrAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotOnOrAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -117,7 +117,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 04);
 
             // Act/Assert
-            await Expect.That(subject).IsOnOrAfter(expectation);
+            await That(subject).IsOnOrAfter(expectation);
         }
 
         [Fact]
@@ -128,10 +128,10 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotOnOrAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotOnOrAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -142,10 +142,10 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 05);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsOnOrAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsOnOrAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -156,7 +156,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly expectation = new(15, 06, 05);
 
             // Act/Assert
-            await Expect.That(subject).IsNotOnOrAfter(expectation);
+            await That(subject).IsNotOnOrAfter(expectation);
         }
     }
 }

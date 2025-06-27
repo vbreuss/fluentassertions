@@ -28,7 +28,7 @@ public partial class ObjectAssertionSpecs
             Action act = () => subject.Should().BeXmlSerializable();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -44,7 +44,7 @@ public partial class ObjectAssertionSpecs
             Action act = () => subject.Should().BeXmlSerializable("we need to store it on {0}", "disk");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -61,7 +61,7 @@ public partial class ObjectAssertionSpecs
             Action act = () => subject.Should().BeXmlSerializable();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 

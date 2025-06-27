@@ -30,7 +30,7 @@ namespace FluentAssertions.Specs.Types
             Action act = () => propertyInfoSelector = new TypeSelector((Type)null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -43,7 +43,7 @@ namespace FluentAssertions.Specs.Types
             Action act = () => propertyInfoSelector = new TypeSelector((Type[])null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -56,7 +56,7 @@ namespace FluentAssertions.Specs.Types
             var act = () => propertyInfoSelector.Should();
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -99,7 +99,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatDoNotDeriveFrom<SomeBaseClass>();
 
             // Assert
-            await Expect.That(types).HasCount(12);
+            await That(types).HasCount(12);
         }
 
         [Fact]
@@ -128,7 +128,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = AllTypes.From(assembly).ThatImplement<ISomeInterface>();
 
             // Assert
-            await Expect.That(types).HasCount(2);
+            await That(types).HasCount(2);
         }
 
         [Fact]
@@ -143,7 +143,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatDoNotImplement<ISomeInterface>();
 
             // Assert
-            await Expect.That(types).HasCount(10);
+            await That(types).HasCount(10);
         }
 
         [Fact]
@@ -156,7 +156,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = AllTypes.From(assembly).ThatAreDecoratedWith<SomeAttribute>();
 
             // Assert
-            await Expect.That(types).HasCount(2);
+            await That(types).HasCount(2);
         }
 
         [Fact]
@@ -169,7 +169,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = AllTypes.From(assembly).ThatAreNotDecoratedWith<SomeAttribute>();
 
             // Assert
-            await Expect.That(types).IsNotEmpty();
+            await That(types).IsNotEmpty();
         }
 
         [Fact]
@@ -213,7 +213,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = AllTypes.From(assembly).ThatAreUnderNamespace("Internal.Other.Test");
 
             // Assert
-            await Expect.That(types).HasCount(2);
+            await That(types).HasCount(2);
         }
 
         [Fact]
@@ -228,7 +228,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotUnderNamespace("Internal.Other.Test");
 
             // Assert
-            await Expect.That(types).IsEmpty();
+            await That(types).IsEmpty();
         }
 
         [Fact]
@@ -275,7 +275,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = type.Types().ThatAreDecoratedWith<SomeAttribute>();
 
             // Assert
-            await Expect.That(types).IsEmpty();
+            await That(types).IsEmpty();
         }
 
         [Fact]
@@ -315,7 +315,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = type.Types().ThatAreNotDecoratedWithOrInherit<SomeAttribute>();
 
             // Assert
-            await Expect.That(types).IsEmpty();
+            await That(types).IsEmpty();
         }
 
         [Fact]
@@ -328,7 +328,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = type.Types().ThatAreDecoratedWith<SomeAttribute>();
 
             // Assert
-            await Expect.That(types).IsEmpty();
+            await That(types).IsEmpty();
         }
 
         [Fact]
@@ -341,7 +341,7 @@ namespace FluentAssertions.Specs.Types
             IEnumerable<Type> types = type.Types().ThatAreDecoratedWithOrInherit<SomeAttribute>();
 
             // Assert
-            await Expect.That(types).IsEmpty();
+            await That(types).IsEmpty();
         }
 
         [Fact]
@@ -480,7 +480,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotClasses();
 
             // Assert
-            await Expect.That(types).HasCount(2);
+            await That(types).HasCount(2);
         }
 
         [Fact]
@@ -495,7 +495,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreValueTypes();
 
             // Assert
-            await Expect.That(types).HasCount(3);
+            await That(types).HasCount(3);
         }
 
         [Fact]
@@ -510,7 +510,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotValueTypes();
 
             // Assert
-            await Expect.That(types).HasCount(3);
+            await That(types).HasCount(3);
         }
 
         [Fact]
@@ -542,7 +542,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotAbstract();
 
             // Assert
-            await Expect.That(types).HasCount(2);
+            await That(types).HasCount(2);
         }
 
         [Fact]
@@ -624,7 +624,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatSatisfy(t => t.GetCustomAttribute<SomeAttribute>() is not null);
 
             // Assert
-            await Expect.That(types).HasCount(3);
+            await That(types).HasCount(3);
         }
 
         [Fact]
@@ -635,7 +635,7 @@ namespace FluentAssertions.Specs.Types
                 .ReturnTypes()
                 .UnwrapTaskTypes();
 
-            await Expect.That(types).IsEqualTo([typeof(int), typeof(void), typeof(void), typeof(string), typeof(bool)]);
+            await That(types).IsEqualTo([typeof(int), typeof(void), typeof(void), typeof(string), typeof(bool)]);
         }
 
         [Fact]
@@ -646,7 +646,7 @@ namespace FluentAssertions.Specs.Types
                 .ReturnTypes()
                 .UnwrapEnumerableTypes();
 
-            await Expect.That(types).HasCount(4);
+            await That(types).HasCount(4);
         }
 
         [Fact]
@@ -678,7 +678,7 @@ namespace FluentAssertions.Specs.Types
                 .ThatAreNotInterfaces();
 
             // Assert
-            await Expect.That(types).HasCount(2);
+            await That(types).HasCount(2);
         }
     }
 }

@@ -15,7 +15,7 @@ public partial class NullableNumericAssertionSpecs
             int? nullableInteger = 1;
 
             // Act / Assert
-            await Expect.That(nullableInteger).IsNotNull();
+            await That(nullableInteger).IsNotNull();
         }
 
         [Fact]
@@ -25,10 +25,10 @@ public partial class NullableNumericAssertionSpecs
             int? nullableInteger = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableInteger).IsNotNull());
+            Action act = () => Synchronously.Verify(That(nullableInteger).IsNotNull());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -38,10 +38,10 @@ public partial class NullableNumericAssertionSpecs
             int? nullableInteger = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableInteger).IsNotNull().Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(nullableInteger).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -54,7 +54,7 @@ public partial class NullableNumericAssertionSpecs
             int? nullableInteger = null;
 
             // Act / Assert
-            await Expect.That(nullableInteger).IsNull();
+            await That(nullableInteger).IsNull();
         }
 
         [Fact]
@@ -64,10 +64,10 @@ public partial class NullableNumericAssertionSpecs
             int? nullableInteger = 1;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableInteger).IsNull());
+            Action act = () => Synchronously.Verify(That(nullableInteger).IsNull());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -77,10 +77,10 @@ public partial class NullableNumericAssertionSpecs
             int? nullableInteger = 1;
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableInteger).IsNull().Because($"it was {"not"} expected"));
+            Action action = () => Synchronously.Verify(That(nullableInteger).IsNull().Because($"it was {"not"} expected"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 }

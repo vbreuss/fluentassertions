@@ -24,7 +24,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -40,7 +40,7 @@ public partial class TypeAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Internal, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -95,7 +95,7 @@ public partial class TypeAssertionSpecs
                     CSharpAccessModifier.ProtectedInternal, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -110,7 +110,7 @@ public partial class TypeAssertionSpecs
                     CSharpAccessModifier.ProtectedInternal, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -125,7 +125,7 @@ public partial class TypeAssertionSpecs
                     CSharpAccessModifier.ProtectedInternal, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -140,7 +140,7 @@ public partial class TypeAssertionSpecs
                     CSharpAccessModifier.ProtectedInternal, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -154,7 +154,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier(CSharpAccessModifier.Private);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -169,7 +169,7 @@ public partial class TypeAssertionSpecs
                     "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -183,7 +183,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier(CSharpAccessModifier.Protected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -197,7 +197,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -211,7 +211,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -227,7 +227,7 @@ public partial class TypeAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Internal, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -241,7 +241,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier(CSharpAccessModifier.Internal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -256,7 +256,7 @@ public partial class TypeAssertionSpecs
                     CSharpAccessModifier.ProtectedInternal, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -270,7 +270,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier(CSharpAccessModifier.ProtectedInternal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -284,7 +284,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier(CSharpAccessModifier.Private, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -298,7 +298,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier(CSharpAccessModifier.Public, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -312,7 +312,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveAccessModifier((CSharpAccessModifier)int.MaxValue);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentOutOfRangeException>();
+            await That(act).ThrowsExactly<ArgumentOutOfRangeException>();
         }
     }
 
@@ -329,7 +329,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveAccessModifier(CSharpAccessModifier.Private);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -345,7 +345,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveAccessModifier(CSharpAccessModifier.Public, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -359,7 +359,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveAccessModifier(CSharpAccessModifier.ProtectedInternal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -374,7 +374,7 @@ public partial class TypeAssertionSpecs
                     "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -388,7 +388,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveAccessModifier(CSharpAccessModifier.Protected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -403,7 +403,7 @@ public partial class TypeAssertionSpecs
                     "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -417,7 +417,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveAccessModifier(CSharpAccessModifier.Internal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -431,7 +431,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveAccessModifier(CSharpAccessModifier.Protected);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -445,7 +445,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveAccessModifier(CSharpAccessModifier.Private);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -461,7 +461,7 @@ public partial class TypeAssertionSpecs
                     .NotHaveAccessModifier(CSharpAccessModifier.Public, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -475,7 +475,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveAccessModifier(CSharpAccessModifier.ProtectedInternal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -490,7 +490,7 @@ public partial class TypeAssertionSpecs
                     "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -504,7 +504,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -519,7 +519,7 @@ public partial class TypeAssertionSpecs
                     CSharpAccessModifier.ProtectedInternal, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -534,7 +534,7 @@ public partial class TypeAssertionSpecs
                     "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -548,7 +548,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveAccessModifier((CSharpAccessModifier)int.MaxValue);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentOutOfRangeException>();
+            await That(act).ThrowsExactly<ArgumentOutOfRangeException>();
         }
     }
 }

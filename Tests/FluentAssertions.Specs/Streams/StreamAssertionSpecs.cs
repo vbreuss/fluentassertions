@@ -21,7 +21,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeWritable();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -35,7 +35,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeWritable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -52,7 +52,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -69,7 +69,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWritable();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -83,7 +83,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWritable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -100,7 +100,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -117,7 +117,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeSeekable();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -131,7 +131,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeSeekable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -148,7 +148,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -165,7 +165,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeSeekable();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -179,7 +179,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeSeekable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -196,7 +196,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -213,7 +213,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadable();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -227,7 +227,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -244,7 +244,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -261,7 +261,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadable();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -275,7 +275,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -292,7 +292,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -309,7 +309,7 @@ public class StreamAssertionSpecs
                 stream.Should().HavePosition(10);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -323,7 +323,7 @@ public class StreamAssertionSpecs
                 stream.Should().HavePosition(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -340,7 +340,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -355,7 +355,7 @@ public class StreamAssertionSpecs
                 stream.Should().HavePosition(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the position of stream to be 10* *failure message*, " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the position of stream to be 10* *failure message*, " +
                     "but it failed with*GetPositionExceptionMessage*").AsWildcard();
         }
     }
@@ -373,7 +373,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotHavePosition(10);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -387,7 +387,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotHavePosition(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -404,7 +404,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -419,7 +419,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotHavePosition(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the position of stream not to be 10* *failure message*, " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the position of stream not to be 10* *failure message*, " +
                     "but it failed with*GetPositionExceptionMessage*").AsWildcard();
         }
     }
@@ -445,7 +445,7 @@ public class StreamAssertionSpecs
                 stream.Should().HaveLength(10);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -459,7 +459,7 @@ public class StreamAssertionSpecs
                 stream.Should().HaveLength(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -476,7 +476,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -491,7 +491,7 @@ public class StreamAssertionSpecs
                 stream.Should().HaveLength(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the length of stream to be 10* *failure message*, " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the length of stream to be 10* *failure message*, " +
                     "but it failed with*GetLengthExceptionMessage*").AsWildcard();
         }
     }
@@ -509,7 +509,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotHaveLength(10);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -523,7 +523,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotHaveLength(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -540,7 +540,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -555,7 +555,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotHaveLength(10, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the length of stream not to be 10* *failure message*, " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the length of stream not to be 10* *failure message*, " +
                     "but it failed with*GetLengthExceptionMessage*").AsWildcard();
         }
     }
@@ -581,7 +581,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadOnly();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -595,7 +595,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadOnly("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -609,7 +609,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeReadOnly("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -626,7 +626,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -643,7 +643,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadOnly();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -657,7 +657,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadOnly();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -671,7 +671,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeReadOnly("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -688,7 +688,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -705,7 +705,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeWriteOnly();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -719,7 +719,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeWriteOnly("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -733,7 +733,7 @@ public class StreamAssertionSpecs
                 stream.Should().BeWriteOnly("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -750,7 +750,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -767,7 +767,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWriteOnly();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -781,7 +781,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWriteOnly();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -795,7 +795,7 @@ public class StreamAssertionSpecs
                 stream.Should().NotBeWriteOnly("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -812,7 +812,7 @@ public class StreamAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

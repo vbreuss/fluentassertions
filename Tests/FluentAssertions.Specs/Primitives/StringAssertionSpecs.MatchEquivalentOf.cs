@@ -65,7 +65,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().MatchEquivalentOf("h*earth!", "that's the universal greeting");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected subject to match the equivalent of*\"h*earth!\" " +
+            await That(act).Throws<XunitException>().WithMessage("Expected subject to match the equivalent of*\"h*earth!\" " +
                 "because that's the universal greeting, but*\"hello world!\" does not.").AsWildcard();
         }
 
@@ -79,7 +79,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().MatchEquivalentOf("h*WORLD?");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -92,7 +92,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().MatchEquivalentOf("helloworld!");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -105,7 +105,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().MatchEquivalentOf(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -118,7 +118,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().MatchEquivalentOf(string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
@@ -135,7 +135,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotMatchEquivalentOf(expect, o => o.IgnoringCase());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -149,7 +149,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotMatchEquivalentOf(expect, o => o.IgnoringLeadingWhitespace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -163,7 +163,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotMatchEquivalentOf(expect, o => o.IgnoringTrailingWhitespace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -177,7 +177,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotMatchEquivalentOf(expect, o => o.IgnoringNewlineStyle());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -190,7 +190,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().NotMatchEquivalentOf("*World*");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -203,7 +203,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().NotMatchEquivalentOf("*world*", "because that's illegal");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect subject to match the equivalent of*\"*world*\" because that's illegal, " +
+            await That(act).Throws<XunitException>().WithMessage("Did not expect subject to match the equivalent of*\"*world*\" because that's illegal, " +
                     "but*\"hello WORLD\" matches.").AsWildcard();
         }
 
@@ -217,7 +217,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().NotMatchEquivalentOf("helloworld!");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -230,7 +230,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().NotMatchEquivalentOf(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -243,7 +243,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().NotMatchEquivalentOf(string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
 
         [Fact]

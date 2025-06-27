@@ -18,7 +18,7 @@ public partial class StringAssertionSpecs
             string actual = "";
 
             // Act / Assert
-            await Expect.That(actual).IsEmpty();
+            await That(actual).IsEmpty();
         }
 
         [Fact]
@@ -28,10 +28,10 @@ public partial class StringAssertionSpecs
             string actual = "ABC";
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsEmpty());
+            Action act = () => Synchronously.Verify(That(actual).IsEmpty());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -41,10 +41,10 @@ public partial class StringAssertionSpecs
             string actual = "ABC";
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsEmpty().Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(actual).IsEmpty().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -54,10 +54,10 @@ public partial class StringAssertionSpecs
             string nullString = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullString).IsEmpty().Because($"because strings should never be {"null"}"));
+            Action act = () => Synchronously.Verify(That(nullString).IsEmpty().Because($"because strings should never be {"null"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -70,7 +70,7 @@ public partial class StringAssertionSpecs
             string actual = "ABC";
 
             // Act / Assert
-            await Expect.That(actual).IsNotEmpty();
+            await That(actual).IsNotEmpty();
         }
 
         [Fact]
@@ -80,7 +80,7 @@ public partial class StringAssertionSpecs
             string actual = null;
 
             // Act / Assert
-            await Expect.That(actual).IsNotEmpty();
+            await That(actual).IsNotEmpty();
         }
 
         [Fact]
@@ -90,10 +90,10 @@ public partial class StringAssertionSpecs
             string actual = "";
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsNotEmpty());
+            Action act = () => Synchronously.Verify(That(actual).IsNotEmpty());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -103,10 +103,10 @@ public partial class StringAssertionSpecs
             string actual = "";
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsNotEmpty().Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(actual).IsNotEmpty().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

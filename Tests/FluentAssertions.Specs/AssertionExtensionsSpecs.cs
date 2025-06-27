@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using FluentAssertions.Common;
 using FluentAssertions.Execution;
 using FluentAssertions.Numeric;
@@ -16,7 +17,7 @@ namespace FluentAssertions.Specs;
 public class AssertionExtensionsSpecs
 {
     [Fact]
-    public void Assertions_classes_override_equals()
+    public async Task Assertions_classes_override_equals()
     {
         // Arrange / Act
         var equalsOverloads = AllTypes.From(typeof(FluentAssertions.AssertionExtensions).Assembly)
@@ -28,7 +29,7 @@ public class AssertionExtensionsSpecs
             .ToList();
 
         // Assert
-        equalsOverloads.Should().OnlyContain(e => e.overridesEquals);
+        await That(equalsOverloads).All().Satisfy(e => e.overridesEquals);
     }
 
     private static bool OverridesEquals(Type t)
@@ -70,7 +71,7 @@ public class AssertionExtensionsSpecs
         Action act = () => obj.Equals(null);
 
         // Assert
-        await Expect.That(act).ThrowsExactly<NotSupportedException>();
+        await That(act).ThrowsExactly<NotSupportedException>();
     }
 
     [Theory]
@@ -112,7 +113,7 @@ public class AssertionExtensionsSpecs
         Action act = () => fakeOverload.Invoke(null, [null]);
 
         // Assert
-        await Expect.That(act).ThrowsExactly<TargetInvocationException>();
+        await That(act).ThrowsExactly<TargetInvocationException>();
     }
 
     [Theory]
@@ -120,7 +121,7 @@ public class AssertionExtensionsSpecs
     public async Task Should_methods_returning_reference_or_nullable_type_assertions_are_annotated_with_not_null_attribute(MethodInfo method)
     {
         var notNullAttribute = method.GetParameters().Single().GetCustomAttribute<NotNullAttribute>();
-        await Expect.That(notNullAttribute).IsNotNull();
+        await That(notNullAttribute).IsNotNull();
     }
 
     [Theory]
@@ -128,7 +129,7 @@ public class AssertionExtensionsSpecs
     public async Task Should_methods_not_returning_reference_or_nullable_type_assertions_are_not_annotated_with_not_null_attribute(MethodInfo method)
     {
         var notNullAttribute = method.GetParameters().Single().GetCustomAttribute<NotNullAttribute>();
-        await Expect.That(notNullAttribute).IsNull();
+        await That(notNullAttribute).IsNull();
     }
 
     public static IEnumerable<object[]> GetShouldMethods(bool referenceOrNullableTypes)

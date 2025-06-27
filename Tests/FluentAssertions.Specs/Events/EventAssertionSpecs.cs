@@ -32,7 +32,7 @@ public class EventAssertionSpecs
             Action act = () => monitoredSubject.Should().Raise("NonExistingEvent");
 
             // Assert
-            await Expect.That(act).Throws<InvalidOperationException>();
+            await That(act).Throws<InvalidOperationException>();
         }
 
         [Fact]
@@ -46,7 +46,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().NotRaise("NonExistingEvent");
 
             // Assert
-            await Expect.That(act).Throws<InvalidOperationException>();
+            await That(act).Throws<InvalidOperationException>();
         }
 
         [Fact]
@@ -60,7 +60,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().Raise("PropertyChanged", "{0} should cause the event to get raised", "Foo()");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected object " + Formatter.ToString(subject) +
+            await That(act).Throws<XunitException>().WithMessage("Expected object " + Formatter.ToString(subject) +
                 " to raise event \"PropertyChanged\" because Foo() should cause the event to get raised, but it did not.").AsWildcard();
         }
 
@@ -76,7 +76,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().Raise("PropertyChanged");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -92,7 +92,7 @@ public class EventAssertionSpecs
                 monitor.Should().NotRaise("PropertyChanged", "{0} should cause the event to get raised", "Foo()");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected object " + Formatter.ToString(subject) +
+            await That(act).Throws<XunitException>().WithMessage("Expected object " + Formatter.ToString(subject) +
                     " to not raise event \"PropertyChanged\" because Foo() should cause the event to get raised, but it did.").AsWildcard();
         }
 
@@ -107,7 +107,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().NotRaise("PropertyChanged");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -122,7 +122,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().Raise("PropertyChanged").WithSender(subject);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -137,7 +137,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().Raise("PropertyChanged").WithSender(subject);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -154,7 +154,7 @@ public class EventAssertionSpecs
                 .WithArgs<string>(predicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -171,7 +171,7 @@ public class EventAssertionSpecs
                 .WithArgs<PropertyChangedEventArgs>(args => args.PropertyName == "SomeProperty");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -188,7 +188,7 @@ public class EventAssertionSpecs
                 .WithArgs<CancelEventArgs>(args => args.Cancel);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -205,7 +205,7 @@ public class EventAssertionSpecs
                 .WithArgs<PropertyChangedEventArgs>(args => args.PropertyName == "SomeProperty");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -226,7 +226,7 @@ public class EventAssertionSpecs
                 .ForAll(Action);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -258,7 +258,7 @@ public class EventAssertionSpecs
                 .WithArgs<string>(args => args == "third argument");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -275,7 +275,7 @@ public class EventAssertionSpecs
                 .WithArgs<string>(null, args => args == "third argument");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -292,7 +292,7 @@ public class EventAssertionSpecs
                 .WithArgs<string>(null, null, null, args => args == "fourth argument");
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -310,7 +310,7 @@ public class EventAssertionSpecs
                 .WithArgs<int>(args => args == wrongArgument);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected at least one event with some argument*type*Int32*matches*(args == " + wrongArgument +
+            await That(act).Throws<XunitException>().WithMessage("Expected at least one event with some argument*type*Int32*matches*(args == " + wrongArgument +
                 "), but found none.").AsWildcard();
         }
 
@@ -329,7 +329,7 @@ public class EventAssertionSpecs
                 .WithArgs<string>(null, args => args == wrongArgument);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected at least one event with some arguments*match*\"(args == \"" + wrongArgument +
+            await That(act).Throws<XunitException>().WithMessage("Expected at least one event with some arguments*match*\"(args == \"" + wrongArgument +
                 "\")\", but found none.").AsWildcard();
         }
 
@@ -350,14 +350,14 @@ public class EventAssertionSpecs
                 .Should()
                 .Raise(nameof(observable.PropertyChanged));
 
-            await Expect.That(recording.EventName).IsEqualTo(nameof(observable.PropertyChanged));
-            await Expect.That(recording.EventObject).IsSameAs(observable);
-            await Expect.That(recording.EventHandlerType).IsEqualTo(typeof(PropertyChangedEventHandler));
-            await Expect.That(recording).HasCount(2).Because("because only two property changed events were raised");
+            await That(recording.EventName).IsEqualTo(nameof(observable.PropertyChanged));
+            await That(recording.EventObject).IsSameAs(observable);
+            await That(recording.EventHandlerType).IsEqualTo(typeof(PropertyChangedEventHandler));
+            await That(recording).HasCount(2).Because("because only two property changed events were raised");
         }
 
         [Fact]
-        public void When_a_specific_sender_is_expected_it_should_return_only_relevant_events()
+        public async Task When_a_specific_sender_is_expected_it_should_return_only_relevant_events()
         {
             // Arrange
             var observable = new EventRaisingClass();
@@ -373,11 +373,11 @@ public class EventAssertionSpecs
                 .Raise(nameof(observable.PropertyChanged))
                 .WithSender(observable);
 
-            recording.Should().ContainSingle().Which.Parameters[0].Should().BeSameAs(observable);
+            await Expect.That(recording).HasSingle().Which.IsSameAs(observable);
         }
 
         [Fact]
-        public void When_constraints_are_specified_it_should_filter_the_events_based_on_those_constraints()
+        public async Task When_constraints_are_specified_it_should_filter_the_events_based_on_those_constraints()
         {
             // Arrange
             var observable = new EventRaisingClass();
@@ -394,10 +394,7 @@ public class EventAssertionSpecs
                 .WithSender(observable)
                 .WithArgs<PropertyChangedEventArgs>(args => args.PropertyName == "Boo");
 
-            recording
-                .Should().ContainSingle("because we were expecting a specific property change")
-                .Which.Parameters[^1].Should().BeOfType<PropertyChangedEventArgs>()
-                .Which.PropertyName.Should().Be("Boo");
+            await Expect.That(recording).HasSingle().Which.For(x => x.Parameters[^1], p => p.IsExactly<PropertyChangedEventArgs>().Whose(y => y.PropertyName, it => it.IsEqualTo("Boo"))).Because("because we were expecting a specific property change");
         }
 
         [Fact]
@@ -413,14 +410,14 @@ public class EventAssertionSpecs
             observable.RaiseAllEvents();
 
             // Assert
-            await Expect.That(monitor.OccurredEvents[0].EventName).IsEqualTo(nameof(TestEventRaisingInOrder.InterfaceEvent));
-            await Expect.That(monitor.OccurredEvents[0].Sequence).IsEqualTo(0);
+            await That(monitor.OccurredEvents[0].EventName).IsEqualTo(nameof(TestEventRaisingInOrder.InterfaceEvent));
+            await That(monitor.OccurredEvents[0].Sequence).IsEqualTo(0);
 
-            await Expect.That(monitor.OccurredEvents[1].EventName).IsEqualTo(nameof(TestEventRaisingInOrder.Interface2Event));
-            await Expect.That(monitor.OccurredEvents[1].Sequence).IsEqualTo(1);
+            await That(monitor.OccurredEvents[1].EventName).IsEqualTo(nameof(TestEventRaisingInOrder.Interface2Event));
+            await That(monitor.OccurredEvents[1].Sequence).IsEqualTo(1);
 
-            await Expect.That(monitor.OccurredEvents[2].EventName).IsEqualTo(nameof(TestEventRaisingInOrder.Interface3Event));
-            await Expect.That(monitor.OccurredEvents[2].Sequence).IsEqualTo(2);
+            await That(monitor.OccurredEvents[2].EventName).IsEqualTo(nameof(TestEventRaisingInOrder.Interface3Event));
+            await That(monitor.OccurredEvents[2].Sequence).IsEqualTo(2);
         }
 
         [Fact]
@@ -455,7 +452,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().RaisePropertyChangeFor(x => x.SomeProperty);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -470,7 +467,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().RaisePropertyChangeFor(null);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -484,7 +481,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().RaisePropertyChangeFor(x => x.SomeProperty, "the property was changed");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected object " + Formatter.ToString(subject) +
+            await That(act).Throws<XunitException>().WithMessage("Expected object " + Formatter.ToString(subject) +
                 " to raise event \"PropertyChanged\" for property \"SomeProperty\" because the property was changed, but it did not*").AsWildcard();
         }
 
@@ -503,7 +500,7 @@ public class EventAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected object " + Formatter.ToString(subject) +
+            await That(act).Throws<XunitException>().WithMessage("Expected object " + Formatter.ToString(subject) +
                 " to raise event \"PropertyChanged\" for property <null>, but it did not*").AsWildcard();
         }
 
@@ -521,7 +518,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().RaisePropertyChangeFor(b => b.SomeProperty);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -601,7 +598,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().NotRaisePropertyChangeFor(x => x.SomeProperty, "nothing happened");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect object " + Formatter.ToString(subject) +
+            await That(act).Throws<XunitException>().WithMessage("Did not expect object " + Formatter.ToString(subject) +
                 " to raise the \"PropertyChanged\" event for property \"SomeProperty\" because nothing happened, but it did.").AsWildcard();
         }
 
@@ -617,7 +614,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().NotRaisePropertyChangeFor(x => x.SomeProperty);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -632,7 +629,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().NotRaisePropertyChangeFor(null);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect object " + Formatter.ToString(subject) +
+            await That(act).Throws<XunitException>().WithMessage("Did not expect object " + Formatter.ToString(subject) +
                 " to raise the \"PropertyChanged\" event, but it did.").AsWildcard();
         }
 
@@ -648,7 +645,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().NotRaisePropertyChangeFor(x => x.SomeProperty);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Did not expect object " + Formatter.ToString(subject) +
+            await That(act).Throws<XunitException>().WithMessage("Did not expect object " + Formatter.ToString(subject) +
                 " to raise the \"PropertyChanged\" event for property \"SomeProperty\", but it did.").AsWildcard();
         }
     }
@@ -665,7 +662,7 @@ public class EventAssertionSpecs
             Action act = () => subject.Monitor();
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -679,7 +676,7 @@ public class EventAssertionSpecs
             using var innerScope = eventSource.Monitor();
 
             // Assert
-            await Expect.That((object)innerScope).IsNotSameAs(outerScope);
+            await That((object)innerScope).IsNotSameAs(outerScope);
         }
 
         [Fact]
@@ -694,7 +691,7 @@ public class EventAssertionSpecs
             Action act = () => monitor.Should().RaisePropertyChangeFor(e => func(e));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -708,7 +705,7 @@ public class EventAssertionSpecs
             var exposedMonitor = monitor.Should().Monitor;
 
             // Assert
-            await Expect.That((object)exposedMonitor).IsSameAs(monitor);
+            await That((object)exposedMonitor).IsSameAs(monitor);
         }
     }
 
@@ -907,7 +904,7 @@ public class EventAssertionSpecs
 
             // Act / Assert
             IEventRecording filteredEvents = aMonitor.GetRecordingFor(nameof(A.Event)).WithArgs<B>();
-            await Expect.That(filteredEvents).HasCount(1);
+            await That(filteredEvents).HasCount(1);
         }
 
         [Fact]
@@ -922,7 +919,7 @@ public class EventAssertionSpecs
 
             // Act / Assert
             IEventRecording filteredEvents = aMonitor.GetRecordingFor(nameof(A.Event)).WithArgs<B>();
-            await Expect.That(filteredEvents).HasCount(1);
+            await That(filteredEvents).HasCount(1);
         }
 
         [Fact]
@@ -939,7 +936,7 @@ public class EventAssertionSpecs
             Action act = () => aMonitor.GetRecordingFor(nameof(A.Event)).WithArgs<B>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -955,7 +952,7 @@ public class EventAssertionSpecs
 
             // Act / Assert
             IEventRecording filteredEvents = aMonitor.GetRecordingFor(nameof(A.Event)).WithArgs<B>();
-            await Expect.That(filteredEvents).HasCount(1);
+            await That(filteredEvents).HasCount(1);
         }
 
         [Fact]
@@ -971,7 +968,7 @@ public class EventAssertionSpecs
 
             // Act / Assert
             IEventRecording filteredEvents = aMonitor.GetRecordingFor(nameof(A.Event)).WithArgs<B>(_ => true);
-            await Expect.That(filteredEvents).HasCount(1);
+            await That(filteredEvents).HasCount(1);
         }
 
         [Fact]
@@ -988,7 +985,7 @@ public class EventAssertionSpecs
             Action act = () => aMonitor.GetRecordingFor(nameof(A.Event)).WithArgs<B>(_ => true);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1005,7 +1002,7 @@ public class EventAssertionSpecs
             Action act = () => aMonitor.GetRecordingFor(nameof(A.Event)).WithArgs<B>(_ => true, _ => false);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -1022,7 +1019,7 @@ public class EventAssertionSpecs
             Action act = () => aMonitor.GetRecordingFor(nameof(A.Event)).WithArgs<B>(_ => true, _ => false);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
     }
 
@@ -1097,7 +1094,7 @@ public class EventAssertionSpecs
             classToMonitor.RaiseOkEvent();
 
             //Assert
-            await Expect.That(monitor.MonitoredEvents).HasCount(1);
+            await That(monitor.MonitoredEvents).HasCount(1);
         }
 
         [Fact]
@@ -1112,7 +1109,7 @@ public class EventAssertionSpecs
             classToMonitor.RaiseOkEvent();
 
             //Assert
-            await Expect.That(monitor.MonitoredEvents).IsEmpty();
+            await That(monitor.MonitoredEvents).IsEmpty();
         }
     }
 

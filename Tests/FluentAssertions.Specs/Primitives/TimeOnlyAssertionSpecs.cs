@@ -13,7 +13,7 @@ public partial class TimeOnlyAssertionSpecs
         TimeOnly? timeOnly = new(15, 06, 04);
 
         // Act/Assert
-        await Expect.That(timeOnly).IsNotNull();
+        await That(timeOnly).IsNotNull();
     }
 
     [Fact]
@@ -23,7 +23,7 @@ public partial class TimeOnlyAssertionSpecs
         TimeOnly? timeOnly = new(15, 06, 04);
 
         // Act/Assert
-        await Expect.That(timeOnly).IsNotNull();
+        await That(timeOnly).IsNotNull();
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public partial class TimeOnlyAssertionSpecs
         TimeOnly? timeOnly = null;
 
         // Act/Assert
-        await Expect.That(timeOnly).IsNull();
+        await That(timeOnly).IsNull();
     }
 
     [Fact]
@@ -57,7 +57,7 @@ public partial class TimeOnlyAssertionSpecs
         var act = () => someTimeOnly.Should().Equals(null);
 
         // Assert
-        await Expect.That(act).Throws<NotSupportedException>();
+        await That(act).Throws<NotSupportedException>();
     }
 }
 

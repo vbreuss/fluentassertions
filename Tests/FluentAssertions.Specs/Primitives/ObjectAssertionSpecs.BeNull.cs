@@ -15,7 +15,7 @@ public partial class ObjectAssertionSpecs
             object someObject = null;
 
             // Act / Assert
-            await Expect.That(someObject).IsNull();
+            await That(someObject).IsNull();
         }
 
         [Fact]
@@ -25,10 +25,10 @@ public partial class ObjectAssertionSpecs
             var someObject = new object();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNull());
+            Action act = () => Synchronously.Verify(That(someObject).IsNull());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -38,10 +38,10 @@ public partial class ObjectAssertionSpecs
             var someObject = new object();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNull().Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(someObject).IsNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -54,7 +54,7 @@ public partial class ObjectAssertionSpecs
             var someObject = new object();
 
             // Act / Assert
-            await Expect.That(someObject).IsNotNull();
+            await That(someObject).IsNotNull();
         }
 
         [Fact]
@@ -64,10 +64,10 @@ public partial class ObjectAssertionSpecs
             object someObject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotNull());
+            Action act = () => Synchronously.Verify(That(someObject).IsNotNull());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -77,10 +77,10 @@ public partial class ObjectAssertionSpecs
             object someObject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotNull().Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(someObject).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

@@ -21,7 +21,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().BeVirtual();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -35,7 +35,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().BeVirtual();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -49,7 +49,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().BeVirtual("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected properties" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected properties" +
                     " to be virtual because we want to test the error message," +
                     " but the following properties are not virtual:*" +
                     "ClassWithNonVirtualPublicProperties.PublicNonVirtualProperty*" +
@@ -71,7 +71,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().NotBeVirtual();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -85,7 +85,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().NotBeVirtual();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -99,7 +99,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().NotBeVirtual("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected properties" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected properties" +
                     " not to be virtual because we want to test the error message," +
                     " but the following properties are virtual*" +
                     "*ClassWithAllPropertiesVirtual.PublicVirtualProperty" +
@@ -121,7 +121,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().BeDecoratedWith<DummyPropertyAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -136,7 +136,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().BeDecoratedWith<DummyPropertyAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -151,7 +151,7 @@ public class PropertyInfoSelectorAssertionSpecs
                     .BeDecoratedWith<DummyPropertyAttribute>("because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected properties to be decorated with" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected properties to be decorated with" +
                     " FluentAssertions*DummyPropertyAttribute because we want to test the error message," +
                     " but the following properties are not:*" +
                     "ClassWithPropertiesThatAreNotDecoratedWithDummyAttribute.PublicProperty*" +
@@ -173,7 +173,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().NotBeDecoratedWith<DummyPropertyAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -188,7 +188,7 @@ public class PropertyInfoSelectorAssertionSpecs
                 propertyInfoSelector.Should().NotBeDecoratedWith<DummyPropertyAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -203,7 +203,7 @@ public class PropertyInfoSelectorAssertionSpecs
                     .NotBeDecoratedWith<DummyPropertyAttribute>("because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected properties not to be decorated*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected properties not to be decorated*" +
                     "DummyPropertyAttribute*" +
                     "because we want to test the error message*" +
                     "ClassWithAllPropertiesDecoratedWithDummyAttribute.PublicProperty*" +
@@ -224,7 +224,7 @@ public class PropertyInfoSelectorAssertionSpecs
             Action action = () => propertyInfoSelector.Should().BeWritable("because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Expected all selected properties to have a setter because we want to test the error message, " +
+            await That(action).Throws<XunitException>().WithMessage("Expected all selected properties to have a setter because we want to test the error message, " +
                     "but the following properties do not:*" +
                     "ClassWithReadOnlyProperties.ReadOnlyProperty*" +
                     "ClassWithReadOnlyProperties.ReadOnlyProperty2").AsWildcard();
@@ -240,7 +240,7 @@ public class PropertyInfoSelectorAssertionSpecs
             Action action = () => propertyInfoSelector.Should().BeWritable();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
     }
 
@@ -256,7 +256,7 @@ public class PropertyInfoSelectorAssertionSpecs
             Action action = () => propertyInfoSelector.Should().NotBeWritable("because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Expected selected properties to not have a setter because we want to test the error message, " +
+            await That(action).Throws<XunitException>().WithMessage("Expected selected properties to not have a setter because we want to test the error message, " +
                     "but the following properties do:*" +
                     "ClassWithWritableProperties.ReadWriteProperty*" +
                     "ClassWithWritableProperties.ReadWriteProperty2").AsWildcard();
@@ -272,7 +272,7 @@ public class PropertyInfoSelectorAssertionSpecs
             Action action = () => propertyInfoSelector.Should().NotBeWritable();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
     }
 
@@ -288,7 +288,7 @@ public class PropertyInfoSelectorAssertionSpecs
             var action = () => someObject.Equals(null);
 
             // Assert
-            await Expect.That(action).Throws<NotSupportedException>();
+            await That(action).Throws<NotSupportedException>();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace FluentAssertions.Specs.Xml;
 
 public class XElementFormatterSpecs
 {
-    [Fact]
+    [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
     public async Task When_element_has_attributes_it_should_include_them_in_the_output()
     {
         // Act
@@ -14,10 +14,10 @@ public class XElementFormatterSpecs
         string result = Formatter.ToString(element);
 
         // Assert
-        await Expect.That(result).IsEqualTo(@"<person name=""Martin"" age=""36"" />");
+        await That(result).IsEqualTo(@"<person name=""Martin"" age=""36"" />");
     }
 
-    [Fact]
+    [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
     public async Task When_element_has_child_element_it_should_not_include_them_in_the_output()
     {
         // Act
@@ -30,6 +30,6 @@ public class XElementFormatterSpecs
         string result = Formatter.ToString(element);
 
         // Assert
-        await Expect.That(result).IsEqualTo(@"<person name=""Martin"" age=""36"">…</person>");
+        await That(result).IsEqualTo(@"<person name=""Martin"" age=""36"">…</person>");
     }
 }

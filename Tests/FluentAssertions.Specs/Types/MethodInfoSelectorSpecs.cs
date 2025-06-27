@@ -20,7 +20,7 @@ public class MethodInfoSelectorSpecs
         Action act = () => methodInfoSelector = new MethodInfoSelector((Type)null);
 
         // Assert
-        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+        await That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public class MethodInfoSelectorSpecs
         Action act = () => methodInfoSelector = new MethodInfoSelector((Type[])null);
 
         // Assert
-        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+        await That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
@@ -46,7 +46,7 @@ public class MethodInfoSelectorSpecs
         var act = () => methodInfoSelector.Should();
 
         // Assert
-        await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+        await That(act).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
@@ -61,7 +61,7 @@ public class MethodInfoSelectorSpecs
             .Methods();
 
         // Assert
-        await Expect.That(methods).HasCount(2);
+        await That(methods).HasCount(2);
     }
 
     [Fact]
@@ -76,7 +76,7 @@ public class MethodInfoSelectorSpecs
         // Assert
         const int PublicMethodCount = 2;
         const int InternalMethodCount = 1;
-        await Expect.That(methods).HasCount(PublicMethodCount + InternalMethodCount);
+        await That(methods).HasCount(PublicMethodCount + InternalMethodCount);
     }
 
     [Fact]
@@ -89,7 +89,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreDecoratedWith<DummyMethodAttribute>().ToArray();
 
         // Assert
-        await Expect.That(methods).HasCount(2);
+        await That(methods).HasCount(2);
     }
 
     [Fact]
@@ -102,7 +102,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreNotDecoratedWith<DummyMethodAttribute>().ToArray();
 
         // Assert
-        await Expect.That(methods).IsNotEmpty();
+        await That(methods).IsNotEmpty();
     }
 
     [Fact]
@@ -115,7 +115,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatReturn<string>().ToArray();
 
         // Assert
-        await Expect.That(methods).HasCount(2);
+        await That(methods).HasCount(2);
     }
 
     [Fact]
@@ -128,7 +128,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatDoNotReturn<string>().ToArray();
 
         // Assert
-        await Expect.That(methods).HasCount(5);
+        await That(methods).HasCount(5);
     }
 
     [Fact]
@@ -141,7 +141,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatReturnVoid.ToArray();
 
         // Assert
-        await Expect.That(methods).HasCount(4);
+        await That(methods).HasCount(4);
     }
 
     [Fact]
@@ -154,7 +154,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatDoNotReturnVoid.ToArray();
 
         // Assert
-        await Expect.That(methods).HasCount(3);
+        await That(methods).HasCount(3);
     }
 
     [Fact]
@@ -170,7 +170,7 @@ public class MethodInfoSelectorSpecs
             .ToArray();
 
         // Assert
-        await Expect.That(methods).HasCount(2);
+        await That(methods).HasCount(2);
     }
 
     [Fact]
@@ -183,7 +183,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreDecoratedWith<DummyMethodAttribute>().ToArray();
 
         // Assert
-        await Expect.That(methods).IsEmpty();
+        await That(methods).IsEmpty();
     }
 
     [Fact]
@@ -223,7 +223,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreNotDecoratedWithOrInherit<DummyMethodAttribute>().ToArray();
 
         // Assert
-        await Expect.That(methods).IsEmpty();
+        await That(methods).IsEmpty();
     }
 
     [Fact]
@@ -237,7 +237,7 @@ public class MethodInfoSelectorSpecs
             .ToArray();
 
         // Assert
-        await Expect.That(methods).IsEmpty();
+        await That(methods).IsEmpty();
     }
 
     [Fact]
@@ -251,7 +251,7 @@ public class MethodInfoSelectorSpecs
             type.Methods().ThatAreDecoratedWithOrInherit<DummyMethodNonInheritableAttributeAttribute>().ToArray();
 
         // Assert
-        await Expect.That(methods).IsEmpty();
+        await That(methods).IsEmpty();
     }
 
     [Fact]
@@ -279,7 +279,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreAbstract().ToArray();
 
         // Assert
-        await Expect.That(methods).HasCount(3);
+        await That(methods).HasCount(3);
     }
 
     [Fact]
@@ -292,7 +292,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<MethodInfo> methods = type.Methods().ThatAreNotAbstract().ToArray();
 
         // Assert
-        await Expect.That(methods).HasCount(10);
+        await That(methods).HasCount(10);
     }
 
     [Fact]
@@ -333,7 +333,7 @@ public class MethodInfoSelectorSpecs
         MethodInfo[] methods = type.Methods().ThatAreVirtual().ToArray();
 
         // Assert
-        await Expect.That(methods).IsNotEmpty();
+        await That(methods).IsNotEmpty();
     }
 
     [Fact]
@@ -346,7 +346,7 @@ public class MethodInfoSelectorSpecs
         MethodInfo[] methods = type.Methods().ThatAreNotVirtual().ToArray();
 
         // Assert
-        await Expect.That(methods).IsNotEmpty();
+        await That(methods).IsNotEmpty();
     }
 
     [Fact]
@@ -402,7 +402,7 @@ public class MethodInfoSelectorSpecs
         IEnumerable<Type> returnTypes = type.Methods().ReturnTypes().ToArray();
 
         // Assert
-        await Expect.That(returnTypes).HasCount(3);
+        await That(returnTypes).HasCount(3);
     }
 
     [Fact]
@@ -415,7 +415,7 @@ public class MethodInfoSelectorSpecs
         var action = () => type.Methods().Should().Equals(null);
 
         // Assert
-        await Expect.That(action).Throws<NotSupportedException>();
+        await That(action).Throws<NotSupportedException>();
     }
 }
 

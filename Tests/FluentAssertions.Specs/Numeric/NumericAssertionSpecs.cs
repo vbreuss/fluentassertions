@@ -12,10 +12,10 @@ public partial class NumericAssertionSpecs
         int value = 2;
 
         // Act
-        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsPositive());
+        Action action = () => Synchronously.Verify(That(value).IsPositive());
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Fact]
@@ -28,6 +28,6 @@ public partial class NumericAssertionSpecs
         Action action = () => value.Should().Equals(1);
 
         // Assert
-        await Expect.That(action).Throws<NotSupportedException>();
+        await That(action).Throws<NotSupportedException>();
     }
 }

@@ -12,58 +12,58 @@ public partial class TypeAssertionSpecs
 {
     public class BeAssignableTo
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_its_own_type_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(DummyImplementingClass)).Is<DummyImplementingClass>();
+            await That(typeof(DummyImplementingClass)).Is<DummyImplementingClass>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_its_base_type_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(DummyImplementingClass)).Is<DummyBaseClass>();
+            await That(typeof(DummyImplementingClass)).Is<DummyBaseClass>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_implemented_interface_type_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(DummyImplementingClass)).Is<IDisposable>();
+            await That(typeof(DummyImplementingClass)).Is<IDisposable>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_an_unrelated_type_it_fails()
         {
             // Arrange
             Type someType = typeof(DummyImplementingClass);
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).Is<DateTime>().Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(someType).Is<DateTime>().Because($"we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected someType *.DummyImplementingClass to be assignable to *.DateTime *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected someType *.DummyImplementingClass to be assignable to *.DateTime *failure message*" +
                     ", but it is not.").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_its_own_type_instance_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(DummyImplementingClass)).Is(typeof(DummyImplementingClass));
+            await That(typeof(DummyImplementingClass)).Is(typeof(DummyImplementingClass));
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_its_base_type_instance_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(DummyImplementingClass)).Is(typeof(DummyBaseClass));
+            await That(typeof(DummyImplementingClass)).Is(typeof(DummyBaseClass));
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_an_implemented_interface_type_instance_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(DummyImplementingClass)).Is(typeof(IDisposable));
+            await That(typeof(DummyImplementingClass)).Is(typeof(IDisposable));
         }
 
         [Fact]
@@ -74,34 +74,34 @@ public partial class TypeAssertionSpecs
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).Is(typeof(DateTime)).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(someType).Is(typeof(DateTime)).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_constructed_of_open_generic_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(IDummyInterface<IDummyInterface>)).Is(typeof(IDummyInterface<>));
+            await That(typeof(IDummyInterface<IDummyInterface>)).Is(typeof(IDummyInterface<>));
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_implementation_of_open_generic_interface_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(ClassWithGenericBaseType)).Is(typeof(IDummyInterface<>));
+            await That(typeof(ClassWithGenericBaseType)).Is(typeof(IDummyInterface<>));
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_derived_of_open_generic_class_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(ClassWithGenericBaseType)).Is(typeof(DummyBaseType<>));
+            await That(typeof(ClassWithGenericBaseType)).Is(typeof(DummyBaseType<>));
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_unrelated_to_open_generic_interface_it_fails()
         {
             // Arrange
@@ -109,10 +109,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).Is(typeof(DateTi
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).Is(typeof(IDummyInterface<>)).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(someType).Is(typeof(IDummyInterface<>)).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected someType *.IDummyInterface to be assignable to *.IDummyInterface`1[T] *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected someType *.IDummyInterface to be assignable to *.IDummyInterface`1[T] *failure message*" +
                     ", but it is not.").AsWildcard();
         }
 
@@ -123,17 +123,17 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).Is(typeof(IDummy
             Type someType = typeof(ClassWithAttribute);
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).Is(typeof(DummyBaseType<>)).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(someType).Is(typeof(DummyBaseType<>)).Because($"we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_asserting_an_open_generic_class_is_assignable_to_itself_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(DummyBaseType<>)).Is(typeof(DummyBaseType<>));
+            await That(typeof(DummyBaseType<>)).Is(typeof(DummyBaseType<>));
         }
 
         [Fact]
@@ -144,16 +144,16 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someType).Is(typeof(DummyB
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).Is(null));
+Synchronously.Verify(That(type).Is(null));
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
     public class NotBeAssignableTo
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_its_own_type_and_asserting_not_assignable_it_fails()
         {
             // Arrange
@@ -161,13 +161,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).Is(null));
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot<DummyImplementingClass>().Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsNot<DummyImplementingClass>().Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_its_base_type_and_asserting_not_assignable_it_fails()
         {
             // Arrange
@@ -175,14 +175,14 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot<DummyImplement
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot<DummyBaseClass>().Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsNot<DummyBaseClass>().Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.DummyImplementingClass to not be assignable to *.DummyBaseClass *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.DummyImplementingClass to not be assignable to *.DummyBaseClass *failure message*" +
                     ", but it is.").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_implemented_interface_type_and_asserting_not_assignable_it_fails()
         {
             // Arrange
@@ -190,20 +190,20 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot<DummyBaseClass
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot<IDisposable>().Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsNot<IDisposable>().Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task When_an_unrelated_type_and_asserting_not_assignable_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(DummyImplementingClass)).IsNot<DateTime>();
+            await That(typeof(DummyImplementingClass)).IsNot<DateTime>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_its_own_type_instance_and_asserting_not_assignable_it_fails()
         {
             // Arrange
@@ -211,14 +211,14 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot<IDisposable>()
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(DummyImplementingClass)).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsNot(typeof(DummyImplementingClass)).Because($"we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.DummyImplementingClass to not be assignable to *.DummyImplementingClass *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.DummyImplementingClass to not be assignable to *.DummyImplementingClass *failure message*" +
                     ", but it is.").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_its_base_type_instance_and_asserting_not_assignable_it_fails()
         {
             // Arrange
@@ -226,14 +226,14 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(DummyIm
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(DummyBaseClass)).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsNot(typeof(DummyBaseClass)).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.DummyImplementingClass to not be assignable to *.DummyBaseClass *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.DummyImplementingClass to not be assignable to *.DummyBaseClass *failure message*" +
                     ", but it is.").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_an_implemented_interface_type_instance_and_asserting_not_assignable_it_fails()
         {
             // Arrange
@@ -241,34 +241,34 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(DummyBa
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(IDisposable)).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsNot(typeof(IDisposable)).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task When_an_unrelated_type_instance_and_asserting_not_assignable_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(DummyImplementingClass)).IsNot(typeof(DateTime));
+            await That(typeof(DummyImplementingClass)).IsNot(typeof(DateTime));
         }
 
         [Fact]
         public async Task When_unrelated_to_open_generic_interface_and_asserting_not_assignable_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(ClassWithAttribute)).IsNot(typeof(IDummyInterface<>));
+            await That(typeof(ClassWithAttribute)).IsNot(typeof(IDummyInterface<>));
         }
 
         [Fact]
         public async Task When_unrelated_to_open_generic_class_and_asserting_not_assignable_it_succeeds()
         {
             // Arrange / Act / Assert
-            await Expect.That(typeof(ClassWithAttribute)).IsNot(typeof(DummyBaseType<>));
+            await That(typeof(ClassWithAttribute)).IsNot(typeof(DummyBaseType<>));
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_implementation_of_open_generic_interface_and_asserting_not_assignable_it_fails()
         {
             // Arrange
@@ -276,14 +276,14 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(IDispos
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(IDummyInterface<>)).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsNot(typeof(IDummyInterface<>)).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithGenericBaseType to not be assignable to *.IDummyInterface`1[T] *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithGenericBaseType to not be assignable to *.IDummyInterface`1[T] *failure message*" +
                     ", but it is.").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_derived_from_open_generic_class_and_asserting_not_assignable_it_fails()
         {
             // Arrange
@@ -291,10 +291,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(IDummyI
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(IDummyInterface<>)).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(type).IsNot(typeof(IDummyInterface<>)).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithGenericBaseType to not be assignable to *.IDummyInterface`1[T] *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected type *.ClassWithGenericBaseType to not be assignable to *.IDummyInterface`1[T] *failure message*" +
                     ", but it is.").AsWildcard();
         }
 
@@ -306,10 +306,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(typeof(IDummyI
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(type).IsNot(null));
+                () => Synchronously.Verify(That(type).IsNot(null));
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 }

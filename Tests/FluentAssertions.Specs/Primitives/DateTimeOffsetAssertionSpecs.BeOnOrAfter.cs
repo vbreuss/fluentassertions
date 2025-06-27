@@ -16,10 +16,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset expectation = new(new DateTime(2016, 06, 03), TimeSpan.Zero);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsOnOrAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsOnOrAfter(expectation));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -30,10 +30,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset expectation = new(new DateTime(2016, 06, 04), TimeSpan.Zero);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsOnOrAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsOnOrAfter(expectation));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -44,10 +44,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset expectation = new(new DateTime(2016, 06, 05), TimeSpan.Zero);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsOnOrAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsOnOrAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -61,10 +61,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset expectation = new(new DateTime(2016, 06, 03), TimeSpan.Zero);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotOnOrAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotOnOrAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -75,10 +75,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset expectation = new(new DateTime(2016, 06, 04), TimeSpan.Zero);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotOnOrAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotOnOrAfter(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -89,10 +89,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset expectation = new(new DateTime(2016, 06, 05), TimeSpan.Zero);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotOnOrAfter(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotOnOrAfter(expectation));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 }

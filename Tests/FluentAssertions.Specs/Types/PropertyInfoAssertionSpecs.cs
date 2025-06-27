@@ -22,7 +22,7 @@ public class PropertyInfoAssertionSpecs
             Action act = () => propertyInfo.Should().BeVirtual();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -36,7 +36,7 @@ public class PropertyInfoAssertionSpecs
             Action act = () => propertyInfo.Should().BeVirtual("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected property ClassWithNonVirtualPublicProperties.PublicNonVirtualProperty" +
+            await That(act).Throws<XunitException>().WithMessage("Expected property ClassWithNonVirtualPublicProperties.PublicNonVirtualProperty" +
                     " to be virtual because we want to test the error message," +
                     " but it is not.").AsWildcard();
         }
@@ -52,7 +52,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeVirtual("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -70,7 +70,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().NotBeVirtual();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -84,7 +84,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().NotBeVirtual("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected property *ClassWithAllPropertiesVirtual.PublicVirtualProperty" +
+            await That(act).Throws<XunitException>().WithMessage("Expected property *ClassWithAllPropertiesVirtual.PublicVirtualProperty" +
                     " not to be virtual because we want to test the error message," +
                     " but it is.").AsWildcard();
         }
@@ -100,7 +100,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().NotBeVirtual("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -118,7 +118,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeDecoratedWith<DummyPropertyAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -133,7 +133,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeDecoratedWith<DummyPropertyAttribute>().Which.Value.Should().Be("OtherValue");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -148,7 +148,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeDecoratedWith<DummyPropertyAttribute>().Which.Value.Should().Be("OtherValue");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -163,7 +163,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeDecoratedWith<DummyPropertyAttribute>("because we want to test the error message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected property " +
+            await That(act).Throws<XunitException>().WithMessage("Expected property " +
                     "ClassWithPropertiesThatAreNotDecoratedWithDummyAttribute.PublicProperty to be decorated with " +
                     "FluentAssertions*DummyPropertyAttribute because we want to test the error message, but that attribute was not found.").AsWildcard();
         }
@@ -181,7 +181,7 @@ public class PropertyInfoAssertionSpecs
                     "because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected property ClassWithPropertiesThatAreNotDecoratedWithDummyAttribute.PublicProperty to be decorated with " +
+            await That(act).Throws<XunitException>().WithMessage("Expected property ClassWithPropertiesThatAreNotDecoratedWithDummyAttribute.PublicProperty to be decorated with " +
                     "FluentAssertions*DummyPropertyAttribute because we want to test the error message," +
                     " but that attribute was not found.").AsWildcard();
         }
@@ -197,7 +197,7 @@ public class PropertyInfoAssertionSpecs
             Action act = () => propertyInfo.Should().BeDecoratedWith<DummyPropertyAttribute>(d => d.Value == "Value");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -211,7 +211,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeDecoratedWith<DummyPropertyAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -226,7 +226,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeDecoratedWith((Expression<Func<DummyPropertyAttribute, bool>>)null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -243,7 +243,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().NotBeDecoratedWith<DummyPropertyAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -257,7 +257,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().NotBeDecoratedWith((Expression<Func<DummyPropertyAttribute, bool>>)null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -273,7 +273,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().BeWritable("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -286,7 +286,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().BeWritable("that's required");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -299,7 +299,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().BeWritable("that's required");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -313,7 +313,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeWritable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -329,7 +329,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().BeReadable("that's required");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -342,7 +342,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().BeReadable("that's required");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -355,7 +355,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().BeReadable("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -369,7 +369,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeReadable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -385,7 +385,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotBeWritable("that's required");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -398,7 +398,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotBeWritable("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Did not expect property ClassWithReadOnlyProperties.ReadWriteProperty" +
+            await That(action).Throws<XunitException>().WithMessage("Did not expect property ClassWithReadOnlyProperties.ReadWriteProperty" +
                     " to have a setter because we want to test the error message.").AsWildcard();
         }
 
@@ -412,7 +412,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotBeWritable("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Did not expect property ClassWithProperties.WriteOnlyProperty" +
+            await That(action).Throws<XunitException>().WithMessage("Did not expect property ClassWithProperties.WriteOnlyProperty" +
                     " to have a setter because we want to test the error message.").AsWildcard();
         }
 
@@ -427,7 +427,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().NotBeWritable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -443,7 +443,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotBeReadable("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Did not expect property ClassWithReadOnlyProperties.ReadOnlyProperty " +
+            await That(action).Throws<XunitException>().WithMessage("Did not expect property ClassWithReadOnlyProperties.ReadOnlyProperty " +
                     "to have a getter because we want to test the error message.").AsWildcard();
         }
 
@@ -457,7 +457,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotBeReadable("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Did not expect property ClassWithReadOnlyProperties.ReadWriteProperty " +
+            await That(action).Throws<XunitException>().WithMessage("Did not expect property ClassWithReadOnlyProperties.ReadWriteProperty " +
                     "to have a getter because we want to test the error message.").AsWildcard();
         }
 
@@ -471,7 +471,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotBeReadable("that's required");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -485,7 +485,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().NotBeReadable("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -501,7 +501,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().BeReadable(CSharpAccessModifier.Public, "that's required");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -515,7 +515,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeReadable(CSharpAccessModifier.Public, "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Expected getter of property ClassWithProperties.WritePrivateReadProperty " +
+            await That(action).Throws<XunitException>().WithMessage("Expected getter of property ClassWithProperties.WritePrivateReadProperty " +
                     "to be Public because we want to test the error message, but it is Private*").AsWildcard();
         }
 
@@ -533,7 +533,7 @@ public class PropertyInfoAssertionSpecs
             };
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -547,7 +547,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeReadable(CSharpAccessModifier.Public, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -561,7 +561,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeReadable((CSharpAccessModifier)int.MaxValue);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentOutOfRangeException>();
+            await That(act).ThrowsExactly<ArgumentOutOfRangeException>();
         }
     }
 
@@ -577,7 +577,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().BeWritable(CSharpAccessModifier.Public, "that's required");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -591,7 +591,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeWritable(CSharpAccessModifier.Public, "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Expected setter of property ClassWithProperties.ReadPrivateWriteProperty " +
+            await That(action).Throws<XunitException>().WithMessage("Expected setter of property ClassWithProperties.ReadPrivateWriteProperty " +
                     "to be Public because we want to test the error message, but it is Private.").AsWildcard();
         }
 
@@ -609,7 +609,7 @@ public class PropertyInfoAssertionSpecs
             };
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -623,7 +623,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeWritable(CSharpAccessModifier.Public, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -637,7 +637,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().BeWritable((CSharpAccessModifier)int.MaxValue);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentOutOfRangeException>();
+            await That(act).ThrowsExactly<ArgumentOutOfRangeException>();
         }
     }
 
@@ -653,7 +653,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().Return(typeof(string));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -666,7 +666,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().Return(typeof(int), "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Expected type of property ClassWithProperties.StringProperty" +
+            await That(action).Throws<XunitException>().WithMessage("Expected type of property ClassWithProperties.StringProperty" +
                     " to be System.Int32 because we want to test the error message, but it is System.String.").AsWildcard();
         }
 
@@ -681,7 +681,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().Return(typeof(int), "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -695,7 +695,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().Return(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -711,7 +711,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().Return<string>();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -724,7 +724,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().Return<int>("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Expected type of property ClassWithProperties.StringProperty to be System.Int32 because we want to test the error " +
+            await That(action).Throws<XunitException>().WithMessage("Expected type of property ClassWithProperties.StringProperty to be System.Int32 because we want to test the error " +
                     "message, but it is System.String.").AsWildcard();
         }
     }
@@ -741,7 +741,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotReturn(typeof(int));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -754,7 +754,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotReturn(typeof(string), "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Expected type of property ClassWithProperties.StringProperty" +
+            await That(action).Throws<XunitException>().WithMessage("Expected type of property ClassWithProperties.StringProperty" +
                     " not to be System.String because we want to test the error message, but it is.").AsWildcard();
         }
 
@@ -769,7 +769,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().NotReturn(typeof(int), "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -783,7 +783,7 @@ public class PropertyInfoAssertionSpecs
                 propertyInfo.Should().NotReturn(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -799,7 +799,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotReturn<int>();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -812,7 +812,7 @@ public class PropertyInfoAssertionSpecs
             Action action = () => propertyInfo.Should().NotReturn<string>("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>().WithMessage("Expected type of property ClassWithProperties.StringProperty not to be*String*because we want to test the error " +
+            await That(action).Throws<XunitException>().WithMessage("Expected type of property ClassWithProperties.StringProperty not to be*String*because we want to test the error " +
                     "message, but it is.").AsWildcard();
         }
     }

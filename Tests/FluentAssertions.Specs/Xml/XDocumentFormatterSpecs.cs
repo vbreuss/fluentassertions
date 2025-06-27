@@ -6,7 +6,7 @@ namespace FluentAssertions.Specs.Xml;
 
 public class XDocumentFormatterSpecs
 {
-    [Fact]
+    [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
     public async Task When_element_has_root_element_it_should_include_it_in_the_output()
     {
         // Act
@@ -19,10 +19,10 @@ public class XDocumentFormatterSpecs
         string result = Formatter.ToString(document);
 
         // Assert
-        await Expect.That(result).IsEqualTo("<configuration>…</configuration>");
+        await That(result).IsEqualTo("<configuration>…</configuration>");
     }
 
-    [Fact]
+    [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
     public async Task When_element_has_no_root_element_it_should_include_it_in_the_output()
     {
         // Act
@@ -31,6 +31,6 @@ public class XDocumentFormatterSpecs
         string result = Formatter.ToString(document);
 
         // Assert
-        await Expect.That(result).IsEqualTo("[XML document without root element]");
+        await That(result).IsEqualTo("[XML document without root element]");
     }
 }

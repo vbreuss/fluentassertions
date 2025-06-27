@@ -16,10 +16,10 @@ public partial class DateTimeAssertionSpecs
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNull());
+Synchronously.Verify(That(nullableDateTime).IsNull());
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -30,10 +30,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNull()
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNull());
+Synchronously.Verify(That(nullableDateTime).IsNull());
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 
@@ -46,10 +46,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNull()
             DateTime? nullableDateTime = new DateTime(2016, 06, 04);
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNotNull());
+            Action action = () => Synchronously.Verify(That(nullableDateTime).IsNotNull());
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -59,10 +59,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNull()
             DateTime? nullableDateTime = null;
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsNotNull());
+            Action action = () => Synchronously.Verify(That(nullableDateTime).IsNotNull());
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 }

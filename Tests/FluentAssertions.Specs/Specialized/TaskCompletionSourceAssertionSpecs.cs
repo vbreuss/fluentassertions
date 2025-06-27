@@ -24,7 +24,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -39,7 +39,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -52,7 +52,7 @@ public class TaskCompletionSourceAssertionSpecs
             Func<Task> action = () => subject.Should().CompleteWithinAsync(1.Seconds());
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -68,7 +68,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -84,7 +84,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -100,7 +100,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -115,7 +115,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -128,7 +128,7 @@ public class TaskCompletionSourceAssertionSpecs
             Func<Task> action = () => subject.Should().NotCompleteWithinAsync(1.Seconds(), "test {0}", "testArg");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -141,7 +141,7 @@ public class TaskCompletionSourceAssertionSpecs
             Func<Task> action = () => Task.FromResult(subject.Should().Equals(subject));
 
             // Assert
-            await Expect.That(action).Throws<NotSupportedException>();
+            await That(action).Throws<NotSupportedException>();
         }
 
         [Fact]
@@ -157,7 +157,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -173,7 +173,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
     }
 #endif
@@ -193,7 +193,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         /* TODO VAB
@@ -244,7 +244,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -260,7 +260,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -278,7 +278,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -294,7 +294,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -309,7 +309,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -322,7 +322,7 @@ public class TaskCompletionSourceAssertionSpecs
             Func<Task> action = () => subject.Should().CompleteWithinAsync(1.Seconds());
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -338,7 +338,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -354,7 +354,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -370,7 +370,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -385,7 +385,7 @@ public class TaskCompletionSourceAssertionSpecs
             timer.Complete();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -398,7 +398,7 @@ public class TaskCompletionSourceAssertionSpecs
             Func<Task> action = () => subject.Should().NotCompleteWithinAsync(1.Seconds(), "test {0}", "testArg");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -411,7 +411,7 @@ public class TaskCompletionSourceAssertionSpecs
             Func<Task<bool>> action = () => Task.FromResult(subject.Should().Equals(subject));
 
             // Assert
-            await Expect.That(action).Throws<NotSupportedException>();
+            await That(action).Throws<NotSupportedException>();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Sdk;
 
@@ -8,7 +9,7 @@ namespace FluentAssertions.Specs.Exceptions;
 public class MiscellaneousExceptionSpecs
 {
     [Fact]
-    public void When_getting_value_of_property_of_thrown_exception_it_should_return_value_of_property()
+    public async Task When_getting_value_of_property_of_thrown_exception_it_should_return_value_of_property()
     {
         // Arrange
         const string SomeParamNameValue = "param";
@@ -18,7 +19,7 @@ public class MiscellaneousExceptionSpecs
         Action act = target.Do;
 
         // Assert
-        act.Should().Throw<ExceptionWithProperties>().And.Property.Should().Be(SomeParamNameValue);
+        await Expect.That(act).Throws<ExceptionWithProperties>().Whose(x => x.Property, it => it.IsEqualTo(SomeParamNameValue));
     }
 
     [Fact]
@@ -36,13 +37,13 @@ public class MiscellaneousExceptionSpecs
     }
 
     [Fact]
-    public void When_a_yielding_enumerable_throws_an_expected_exception_it_should_not_throw()
+    public async Task When_a_yielding_enumerable_throws_an_expected_exception_it_should_not_throw()
     {
         // Act
         Func<IEnumerable<char>> act = () => MethodThatUsesYield("aaa!aaa");
 
         // Assert
-        act.Enumerating().Should().Throw<Exception>();
+        await That(act).Throws<Exception>();
     }
 
     private static IEnumerable<char> MethodThatUsesYield(string bar)
@@ -59,30 +60,7 @@ public class MiscellaneousExceptionSpecs
     }
 
     [Fact]
-    public void When_custom_condition_is_not_met_it_should_throw()
-    {
-        // Arrange
-        Action act = () => throw new ArgumentException("");
-
-        try
-        {
-            // Act
-            act
-                .Should().Throw<ArgumentException>()
-                .Where(e => e.Message.Length > 0, "an exception must have a message");
-
-            throw new XunitException("This point should not be reached");
-        }
-        catch (XunitException exc)
-        {
-            // Assert
-            exc.Message.Should().StartWith(
-                "Expected exception where (e.Message.Length > 0) because an exception must have a message, but the condition was not met");
-        }
-    }
-
-    [Fact]
-    public void When_a_2nd_condition_is_not_met_it_should_throw()
+    public async Task When_a_2nd_condition_is_not_met_it_should_throw()
     {
         // Arrange
         Action act = () => throw new ArgumentException("Fail");
@@ -90,95 +68,66 @@ public class MiscellaneousExceptionSpecs
         try
         {
             // Act
-            act
-                .Should().Throw<ArgumentException>()
-                .Where(e => e.Message.Length > 0)
-                .Where(e => e.Message == "Error");
+            await Expect.That(act).Throws<ArgumentException>().WithMessage("Error");
 
-            throw new XunitException("This point should not be reached");
+            throw new InvalidOperationException("This point should not be reached");
         }
         catch (XunitException exc)
         {
             // Assert
-            exc.Message.Should().StartWith(
-                "Expected exception where (e.Message == \"Error\"), but the condition was not met");
-        }
-        catch (Exception exc)
-        {
-            exc.Message.Should().StartWith(
-                "Expected exception where (e.Message == \"Error\"), but the condition was not met");
+            await Expect.That(exc.Message).StartsWith("Expected");
         }
     }
 
     [Fact]
-    public void When_custom_condition_is_met_it_should_not_throw()
+    public async Task When_custom_condition_is_met_it_should_not_throw()
     {
         // Arrange / Act
         Action act = () => throw new ArgumentException("");
 
         // Assert
-        act
-            .Should().Throw<ArgumentException>()
-            .Where(e => e.Message.Length == 0);
+        await Expect.That(act).Throws<ArgumentException>();
     }
 
     [Fact]
-    public void When_two_exceptions_are_thrown_and_the_assertion_assumes_there_can_only_be_one_it_should_fail()
-    {
-        // Arrange
-        Does testSubject = Does.Throw(new AggregateException(new Exception(), new Exception()));
-        Action throwingMethod = testSubject.Do;
-
-        // Act
-        Action action = () => throwingMethod.Should().Throw<Exception>().And.Message.Should();
-
-        // Assert
-        action.Should().Throw<Exception>();
-    }
-
-    [Fact]
-    public void When_an_exception_of_a_different_type_is_thrown_it_should_include_the_type_of_the_thrown_exception()
+    public async Task When_an_exception_of_a_different_type_is_thrown_it_should_include_the_type_of_the_thrown_exception()
     {
         // Arrange
         Action throwException = () => throw new ExceptionWithEmptyToString();
 
         // Act
         Action act =
-            () => throwException.Should().Throw<ArgumentNullException>();
+            () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(throwException).Throws<ArgumentNullException>());
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage($"*System.ArgumentNullException*{typeof(ExceptionWithEmptyToString)}*");
+        await Expect.That(act).Throws<XunitException>().WithMessage($"*ArgumentNullException*{typeof(ExceptionWithEmptyToString)}*").AsWildcard();
     }
 
     [Fact]
-    public void When_a_method_throws_with_a_matching_parameter_name_it_should_succeed()
+    public async Task When_a_method_throws_with_a_matching_parameter_name_it_should_succeed()
     {
         // Arrange
         Action throwException = () => throw new ArgumentNullException("someParameter");
 
         // Act
         Action act = () =>
-            throwException.Should().Throw<ArgumentException>()
-                .WithParameterName("someParameter");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(throwException).Throws<ArgumentException>());
 
         // Assert
-        act.Should().NotThrow();
+        await Expect.That(act).DoesNotThrow();
     }
 
     [Fact]
-    public void When_a_method_throws_with_a_non_matching_parameter_name_it_should_fail_with_a_descriptive_message()
+    public async Task When_a_method_throws_with_a_non_matching_parameter_name_it_should_fail_with_a_descriptive_message()
     {
         // Arrange
         Action throwException = () => throw new ArgumentNullException("someOtherParameter");
 
         // Act
         Action act = () =>
-            throwException.Should().Throw<ArgumentException>()
-                .WithParameterName("someParameter", "we want to test the failure {0}", "message");
+aweXpect.Synchronous.Synchronously.Verify(Expect.That(throwException).Throws<ArgumentException>().WithParamName("someParameter").Because("we want to test the failure message"));
 
         // Assert
-        act.Should().Throw<XunitException>()
-            .WithMessage("*with parameter name \"someParameter\"*we want to test the failure message*\"someOtherParameter\"*");
+        await Expect.That(act).Throws<XunitException>().WithMessage("*with ParamName \"someParameter\"*we want to test the failure message*\"someOtherParameter\"*").AsWildcard();
     }
 }

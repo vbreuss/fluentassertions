@@ -20,7 +20,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().BeInRange(minimumValue, maximumValue);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -33,7 +33,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -48,7 +48,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().BeInRange(minimumValue, maximumValue);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -61,7 +61,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().BeInRange(4, 5);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -79,7 +79,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(minimumValue, maximumValue);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -104,7 +104,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeInRange(minimumValue, maximumValue);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]

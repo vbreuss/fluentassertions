@@ -36,7 +36,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().StartWithEquivalentOf(expect, o => o.Using(comparer));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -101,7 +101,7 @@ public partial class StringAssertionSpecs
             Action act = () => "ABC".Should().StartWithEquivalentOf("bc", "because it should start");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -112,7 +112,7 @@ public partial class StringAssertionSpecs
             Action act = () => "ABCDEFGHI".Should().StartWithEquivalentOf("abcddfghi", "it should {0}", "start");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected string to start with equivalent of " +
+            await That(act).Throws<XunitException>().WithMessage("Expected string to start with equivalent of " +
                 "*\"abcddfghi\" because it should start, but " +
                 "*\"ABCDEFGHI\" differs near \"EFG\" (index 4).").AsWildcard();
         }
@@ -124,7 +124,7 @@ public partial class StringAssertionSpecs
             Action act = () => "ABC".Should().StartWithEquivalentOf(null);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -134,7 +134,7 @@ public partial class StringAssertionSpecs
             Action act = () => "ABC".Should().StartWithEquivalentOf("");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -145,7 +145,7 @@ public partial class StringAssertionSpecs
             Action act = () => "ABC".Should().StartWithEquivalentOf("abcdef");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected string to start with equivalent of " +
+            await That(act).Throws<XunitException>().WithMessage("Expected string to start with equivalent of " +
                 "\"abcdef\", but " +
                 "\"ABC\" is too short.").AsWildcard();
         }
@@ -158,7 +158,7 @@ public partial class StringAssertionSpecs
             Action act = () => someString.Should().StartWithEquivalentOf("AbC");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -188,7 +188,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.Using(comparer));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -202,7 +202,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.IgnoringCase());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -216,7 +216,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.IgnoringLeadingWhitespace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -230,7 +230,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.IgnoringTrailingWhitespace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -244,7 +244,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotStartWithEquivalentOf(expect, o => o.IgnoringNewlineStyle());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -258,7 +258,7 @@ public partial class StringAssertionSpecs
                 value.Should().NotStartWithEquivalentOf("Bc");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -272,7 +272,7 @@ public partial class StringAssertionSpecs
                 value.Should().NotStartWithEquivalentOf("aB", "because of some reason");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -286,7 +286,7 @@ public partial class StringAssertionSpecs
                 value.Should().NotStartWithEquivalentOf(null);
 
             // Assert
-            await Expect.That(action).Throws<ArgumentNullException>();
+            await That(action).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -300,7 +300,7 @@ public partial class StringAssertionSpecs
                 value.Should().NotStartWithEquivalentOf("");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -313,7 +313,7 @@ public partial class StringAssertionSpecs
             Action act = () => someString.Should().NotStartWithEquivalentOf("ABC");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

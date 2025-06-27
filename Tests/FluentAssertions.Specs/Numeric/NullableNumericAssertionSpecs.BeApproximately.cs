@@ -16,10 +16,10 @@ public partial class NullableNumericAssertionSpecs
             double? value = 3.1415927;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.14).Within(-0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.14).Within(-0.1));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -30,10 +30,10 @@ public partial class NullableNumericAssertionSpecs
             double? expected = 3.14;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(-0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(-0.1));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -43,10 +43,10 @@ public partial class NullableNumericAssertionSpecs
             double? value = 3.1415927;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.14).Within(0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.14).Within(0.1));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -57,10 +57,10 @@ public partial class NullableNumericAssertionSpecs
             double? expected = 3.142;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -71,10 +71,10 @@ public partial class NullableNumericAssertionSpecs
             double? expected = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -85,10 +85,10 @@ public partial class NullableNumericAssertionSpecs
             double? expected = 12;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -99,10 +99,10 @@ public partial class NullableNumericAssertionSpecs
             double? expected = 12;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -113,10 +113,10 @@ public partial class NullableNumericAssertionSpecs
             double? expected = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -128,11 +128,11 @@ public partial class NullableNumericAssertionSpecs
             // Act
             Func<Task> act = async () =>
             {
-                await Expect.That(value).IsEqualTo(3.14).Within(0.001);
+                await That(value).IsEqualTo(3.14).Within(0.001);
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -142,10 +142,10 @@ public partial class NullableNumericAssertionSpecs
             double? value = 3.1415927F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(1.0).Within(0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(1.0).Within(0.1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -155,10 +155,10 @@ public partial class NullableNumericAssertionSpecs
             double? value = 3.1415927F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(double.NaN).Within(0.1));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(double.NaN).Within(0.1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -168,10 +168,10 @@ public partial class NullableNumericAssertionSpecs
             float? value = 3.1415927F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.14F).Within(-0.1F));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.14F).Within(-0.1F));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -182,10 +182,10 @@ public partial class NullableNumericAssertionSpecs
             float? expected = 3.14F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(-0.1F));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(-0.1F));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -195,10 +195,10 @@ public partial class NullableNumericAssertionSpecs
             float? value = 3.1415927F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.14F).Within(0.1F));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.14F).Within(0.1F));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -209,10 +209,10 @@ public partial class NullableNumericAssertionSpecs
             float? expected = 3.142f;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1f));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1f));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -223,10 +223,10 @@ public partial class NullableNumericAssertionSpecs
             float? expected = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1f));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1f));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -237,10 +237,10 @@ public partial class NullableNumericAssertionSpecs
             float? expected = 12;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1f));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1f));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -251,10 +251,10 @@ public partial class NullableNumericAssertionSpecs
             float? expected = 12;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1f));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1f));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -265,10 +265,10 @@ public partial class NullableNumericAssertionSpecs
             float? expected = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1f));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1f));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -280,11 +280,11 @@ public partial class NullableNumericAssertionSpecs
             // Act
             Func<Task> act = async () =>
             {
-                await Expect.That(value).IsEqualTo(3.14F).Within(0.001F);
+                await That(value).IsEqualTo(3.14F).Within(0.001F);
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -294,10 +294,10 @@ public partial class NullableNumericAssertionSpecs
             float? value = 3.1415927F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(1.0F).Within(0.1F));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(1.0F).Within(0.1F));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -307,10 +307,10 @@ public partial class NullableNumericAssertionSpecs
             float? value = 3.1415927F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(float.NaN).Within(0.1F));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(float.NaN).Within(0.1F));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -320,10 +320,10 @@ public partial class NullableNumericAssertionSpecs
             decimal? value = 3.1415927m;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.14m).Within(-0.1m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.14m).Within(-0.1m));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -334,10 +334,10 @@ public partial class NullableNumericAssertionSpecs
             decimal? expected = 3.14m;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(-0.1m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(-0.1m));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -347,10 +347,10 @@ public partial class NullableNumericAssertionSpecs
             decimal? value = 3.1415927m;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.14m).Within(0.1m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.14m).Within(0.1m));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -361,10 +361,10 @@ public partial class NullableNumericAssertionSpecs
             decimal? expected = 3.142m;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1m));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -375,10 +375,10 @@ public partial class NullableNumericAssertionSpecs
             decimal? expected = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1m));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -389,10 +389,10 @@ public partial class NullableNumericAssertionSpecs
             decimal? expected = 12;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1m));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -403,10 +403,10 @@ public partial class NullableNumericAssertionSpecs
             decimal? expected = 12;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1m));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -417,10 +417,10 @@ public partial class NullableNumericAssertionSpecs
             decimal? expected = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(expected).Within(0.1m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(expected).Within(0.1m));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -433,11 +433,11 @@ public partial class NullableNumericAssertionSpecs
 
             Func<Task> act = async () =>
             {
-                await Expect.That(value).IsEqualTo(3.14m).Within(0.001m);
+                await That(value).IsEqualTo(3.14m).Within(0.001m);
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -447,10 +447,10 @@ public partial class NullableNumericAssertionSpecs
             decimal? value = 3.1415927m;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(1.0m).Within(0.1m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(1.0m).Within(0.1m));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -466,7 +466,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(3.14, -0.1);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -480,7 +480,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, -0.1);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -493,7 +493,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(1.0, 0.1);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -506,7 +506,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(3.14, 0.001);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -519,7 +519,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(3.14, 0.1);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -533,7 +533,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -547,7 +547,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -561,7 +561,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -575,7 +575,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -589,7 +589,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1F);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -602,7 +602,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(double.NaN, 0.1);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -615,7 +615,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(3.14F, -0.1F);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -629,7 +629,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, -0.1F);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -642,7 +642,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(1.0F, 0.1F);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -655,7 +655,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(3.14F, 0.001F);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -668,7 +668,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(3.14F, 0.1F);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -682,7 +682,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1F);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -696,7 +696,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1F);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -710,7 +710,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1F);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -724,7 +724,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1F);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().Because("Expected*<null>*+/-*0.1F*<null>*");
+            await That(act).Throws<XunitException>().Because("Expected*<null>*+/-*0.1F*<null>*");
         }
 
         [Fact]
@@ -738,7 +738,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1F);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -751,7 +751,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(float.NaN, 0.1F);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -764,7 +764,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(3.14m, -0.1m);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -778,7 +778,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, -0.1m);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+            await That(act).Throws<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -791,7 +791,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(1.0m, 0.1m);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -804,7 +804,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(3.14m, 0.001m);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -817,7 +817,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(3.14m, 0.1m);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -831,7 +831,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1m);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -845,7 +845,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1m);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -859,7 +859,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1m);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -873,7 +873,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1m);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -887,7 +887,7 @@ public partial class NullableNumericAssertionSpecs
             Action act = () => value.Should().NotBeApproximately(expected, 0.1m);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

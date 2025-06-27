@@ -17,7 +17,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly sameDateOnly = new(2016, 06, 04);
 
             // Act/Assert
-            await Expect.That(dateOnly).IsEqualTo(sameDateOnly);
+            await That(dateOnly).IsEqualTo(sameDateOnly);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly? sameDateOnly = new(2016, 06, 04);
 
             // Act/Assert
-            await Expect.That(dateOnly).IsEqualTo(sameDateOnly);
+            await That(dateOnly).IsEqualTo(sameDateOnly);
         }
 
         [Fact]
@@ -39,7 +39,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly sameDateOnly = DateOnly.MinValue;
 
             // Act/Assert
-            await Expect.That(dateOnly).IsEqualTo(sameDateOnly);
+            await That(dateOnly).IsEqualTo(sameDateOnly);
         }
 
         [Fact]
@@ -50,7 +50,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly sameDateOnly = DateOnly.MaxValue;
 
             // Act/Assert
-            await Expect.That(dateOnly).IsEqualTo(sameDateOnly);
+            await That(dateOnly).IsEqualTo(sameDateOnly);
         }
 
         [Fact]
@@ -61,10 +61,10 @@ public partial class DateOnlyAssertionSpecs
             var otherDateOnly = new DateOnly(2012, 03, 11);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateOnly).IsEqualTo(otherDateOnly).Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(dateOnly).IsEqualTo(otherDateOnly).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -75,7 +75,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly? nullableDateOnlyB = new DateOnly(2016, 06, 04);
 
             // Act/Assert
-            await Expect.That(nullableDateOnlyA).IsEqualTo(nullableDateOnlyB);
+            await That(nullableDateOnlyA).IsEqualTo(nullableDateOnlyB);
         }
 
         [Fact]
@@ -86,7 +86,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly? nullableDateOnlyB = null;
 
             // Act/Assert
-            await Expect.That(nullableDateOnlyA).IsEqualTo(nullableDateOnlyB);
+            await That(nullableDateOnlyA).IsEqualTo(nullableDateOnlyB);
         }
 
         [Fact]
@@ -98,10 +98,10 @@ public partial class DateOnlyAssertionSpecs
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateOnlyA).IsEqualTo(nullableDateOnlyB));
+Synchronously.Verify(That(nullableDateOnlyA).IsEqualTo(nullableDateOnlyB));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -112,10 +112,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateOnlyA).IsEqual
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateOnly).IsEqualTo(new DateOnly(2016, 06, 04)).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableDateOnly).IsEqualTo(new DateOnly(2016, 06, 04)).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -126,7 +126,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateOnly).IsEqualT
             DateOnly otherDateOnly = new(2016, 06, 05);
 
             // Act/Assert
-            await Expect.That(dateOnly).IsNotEqualTo(otherDateOnly);
+            await That(dateOnly).IsNotEqualTo(otherDateOnly);
         }
     }
 
@@ -140,7 +140,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateOnly).IsEqualT
             DateOnly otherDate = new(2020, 06, 05);
 
             // Act & Assert
-            await Expect.That(date).IsNotEqualTo(otherDate);
+            await That(date).IsNotEqualTo(otherDate);
         }
 
         [Fact]
@@ -151,7 +151,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateOnly).IsEqualT
             DateOnly? otherDate = new(2020, 07, 05);
 
             // Act & Assert
-            await Expect.That(date).IsNotEqualTo(otherDate);
+            await That(date).IsNotEqualTo(otherDate);
         }
 
         [Fact]
@@ -163,10 +163,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateOnly).IsEqualT
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(date).IsNotEqualTo(sameDate).Because($"because we want to test the failure {"message"}"));
+                () => Synchronously.Verify(That(date).IsNotEqualTo(sameDate).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -178,10 +178,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateOnly).IsEqualT
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(date).IsNotEqualTo(sameDate).Because($"because we want to test the failure {"message"}"));
+                () => Synchronously.Verify(That(date).IsNotEqualTo(sameDate).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

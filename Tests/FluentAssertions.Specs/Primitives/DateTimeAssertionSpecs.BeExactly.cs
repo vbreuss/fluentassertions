@@ -21,7 +21,7 @@ public partial class DateTimeAssertionSpecs
                 () => subject.Should().BeExactly(TimeSpan.FromMinutes(20)).Before(target, "{0} minutes is enough", 20);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -46,7 +46,7 @@ public partial class DateTimeAssertionSpecs
             Action action = () => subject.Should().BeExactly(10.Seconds()).After(expectation);
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -60,7 +60,7 @@ public partial class DateTimeAssertionSpecs
             Action action = () => subject.Should().BeExactly(10.Seconds()).Before(expectation);
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 }

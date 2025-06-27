@@ -13,54 +13,52 @@ public partial class CollectionAssertionSpecs
     public class BeNull
     {
         [Fact]
-        public void When_collection_is_expected_to_be_null_and_it_is_it_should_not_throw()
+        public async Task When_collection_is_expected_to_be_null_and_it_is_it_should_not_throw()
         {
             // Arrange
             IEnumerable<string> someCollection = null;
 
             // Act / Assert
-            someCollection.Should().BeNull();
+            await That(someCollection).IsNull();
         }
 
         [Fact]
-        public void When_collection_is_expected_to_be_null_and_it_isnt_it_should_throw()
+        public async Task When_collection_is_expected_to_be_null_and_it_isnt_it_should_throw()
         {
             // Arrange
             IEnumerable<string> someCollection = new string[0];
 
             // Act
-            Action act = () => someCollection.Should().BeNull("because {0} is valid", "null");
+            Action act = () => Synchronously.Verify(That(someCollection).IsNull().Because($"because {"null"} is valid"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected someCollection to be <null> because null is valid, but found {empty}.");
+            await That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeNull
     {
         [Fact]
-        public void When_collection_is_not_expected_to_be_null_and_it_isnt_it_should_not_throw()
+        public async Task When_collection_is_not_expected_to_be_null_and_it_isnt_it_should_not_throw()
         {
             // Arrange
             IEnumerable<string> someCollection = new string[0];
 
             // Act / Assert
-            someCollection.Should().NotBeNull();
+            await That(someCollection).IsNotNull();
         }
 
         [Fact]
-        public void When_collection_is_not_expected_to_be_null_and_it_is_it_should_throw()
+        public async Task When_collection_is_not_expected_to_be_null_and_it_is_it_should_throw()
         {
             // Arrange
             IEnumerable<string> someCollection = null;
 
             // Act
-            Action act = () => someCollection.Should().NotBeNull("because {0} should not", "someCollection");
+            Action act = () => Synchronously.Verify(That(someCollection).IsNotNull().Because($"because {"someCollection"} should not"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected someCollection not to be <null> because someCollection should not.");
+            await That(act).Throws<XunitException>();
         }
     }
 }

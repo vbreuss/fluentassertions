@@ -19,7 +19,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(expectation);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -33,7 +33,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(expectation);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -47,7 +47,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(expectation);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -61,7 +61,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(expectation);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -89,7 +89,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -103,7 +103,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation).And.Be(subject);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -117,7 +117,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -131,7 +131,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -145,7 +145,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(expectation);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 }

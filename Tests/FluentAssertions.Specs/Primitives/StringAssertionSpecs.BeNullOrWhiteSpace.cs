@@ -19,7 +19,7 @@ public partial class StringAssertionSpecs
         public async Task When_correctly_asserting_null_or_whitespace_it_should_not_throw(string actual)
         {
             // Assert
-            await Expect.That(actual).IsNullOrWhiteSpace();
+            await That(actual).IsNullOrWhiteSpace();
         }
 
         [InlineData("a")]
@@ -28,7 +28,7 @@ public partial class StringAssertionSpecs
         public async Task When_correctly_asserting_not_null_or_whitespace_it_should_not_throw(string actual)
         {
             // Assert
-            await Expect.That(actual).IsNotNullOrWhiteSpace();
+            await That(actual).IsNotNullOrWhiteSpace();
         }
 
         [Fact]
@@ -36,10 +36,10 @@ public partial class StringAssertionSpecs
         {
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(" abc  ").IsNullOrWhiteSpace());
+Synchronously.Verify(That(" abc  ").IsNullOrWhiteSpace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -53,10 +53,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(" abc  ").IsNullOrWhiteSpa
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullString).IsNotNullOrWhiteSpace());
+Synchronously.Verify(That(nullString).IsNotNullOrWhiteSpace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -64,10 +64,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullString).IsNotNullOrWhi
         {
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That("").IsNotNullOrWhiteSpace());
+Synchronously.Verify(That("").IsNotNullOrWhiteSpace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -75,10 +75,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That("").IsNotNullOrWhiteSpace(
         {
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That("   ").IsNotNullOrWhiteSpace());
+Synchronously.Verify(That("   ").IsNotNullOrWhiteSpace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

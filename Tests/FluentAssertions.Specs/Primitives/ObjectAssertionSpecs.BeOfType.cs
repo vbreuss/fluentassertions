@@ -18,10 +18,10 @@ public partial class ObjectAssertionSpecs
             var someObject = new object();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsExactly(null));
+            Action act = () => Synchronously.Verify(That(someObject).IsExactly(null));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -31,10 +31,10 @@ public partial class ObjectAssertionSpecs
             var someObject = new Exception();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsExactly<Exception>());
+            Action act = () => Synchronously.Verify(That(someObject).IsExactly<Exception>());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
         /* TODO VAB
         [Fact]
@@ -110,10 +110,10 @@ public partial class ObjectAssertionSpecs
             var someObject = new object();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsExactly<int>().Because($"because they are {"of different"} {"type"}"));
+            Action act = () => Synchronously.Verify(That(someObject).IsExactly<int>().Because($"because they are {"of different"} {"type"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -123,10 +123,10 @@ public partial class ObjectAssertionSpecs
             object someObject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsExactly<int>());
+            Action act = () => Synchronously.Verify(That(someObject).IsExactly<int>());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -140,12 +140,12 @@ public partial class ObjectAssertionSpecs
 #pragma warning disable 436 // disable the warning on conflicting types, as this is the intention for the spec
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(typeFromOtherAssembly).IsExactly<ClassC>());
+Synchronously.Verify(That(typeFromOtherAssembly).IsExactly<ClassC>());
 
 #pragma warning restore 436
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -155,10 +155,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(typeFromOtherAssembly).IsE
             var someObject = new DummyImplementingClass();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsExactly<DummyBaseClass>());
+            Action act = () => Synchronously.Verify(That(someObject).IsExactly<DummyBaseClass>());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -171,10 +171,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(typeFromOtherAssembly).IsE
             var someObject = new object();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNotExactly(null));
+            Action act = () => Synchronously.Verify(That(someObject).IsNotExactly(null));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         /* TODO VAB

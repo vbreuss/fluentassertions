@@ -23,7 +23,7 @@ public class AssemblyAssertionSpecs
             Action act = () => assemblyB.Should().NotReference(assemblyA);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -38,7 +38,7 @@ public class AssemblyAssertionSpecs
                 .And.NotBeNull();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -52,7 +52,7 @@ public class AssemblyAssertionSpecs
             Action act = () => assemblyA.Should().NotReference(assemblyB);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -66,7 +66,7 @@ public class AssemblyAssertionSpecs
             Action act = () => assemblyA.Should().NotReference(assemblyB, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -79,7 +79,7 @@ public class AssemblyAssertionSpecs
             Action act = () => assemblyA.Should().NotReference(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -96,7 +96,7 @@ public class AssemblyAssertionSpecs
             Action act = () => assemblyA.Should().Reference(assemblyB);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -111,7 +111,7 @@ public class AssemblyAssertionSpecs
                 .And.NotBeNull();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -125,7 +125,7 @@ public class AssemblyAssertionSpecs
             Action act = () => assemblyB.Should().Reference(assemblyA);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -139,7 +139,7 @@ public class AssemblyAssertionSpecs
             Action act = () => assemblyA.Should().Reference(assemblyB, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -152,7 +152,7 @@ public class AssemblyAssertionSpecs
             Action act = () => assemblyA.Should().Reference(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -170,7 +170,7 @@ public class AssemblyAssertionSpecs
                 .Which.Should().BeDecoratedWith<DummyClassAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -185,7 +185,7 @@ public class AssemblyAssertionSpecs
                 .Which.Should().BeDecoratedWith<SerializableAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -199,7 +199,7 @@ public class AssemblyAssertionSpecs
                 "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage($"Expected assembly \"{thisAssembly.FullName}\" " +
+            await That(act).Throws<XunitException>().WithMessage($"Expected assembly \"{thisAssembly.FullName}\" " +
                     "to define type \"FakeNamespace\".\"FakeName\" " +
                     "because we want to test the failure message, but it does not.").AsWildcard();
         }
@@ -216,7 +216,7 @@ public class AssemblyAssertionSpecs
                     "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected assembly to define type *.\"WellKnownClassWithAttribute\" *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected assembly to define type *.\"WellKnownClassWithAttribute\" *failure message*" +
                     ", but thisAssembly is <null>.").AsWildcard();
         }
 
@@ -230,7 +230,7 @@ public class AssemblyAssertionSpecs
             Action act = () => thisAssembly.Should().DefineType(GetType().Namespace, null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -243,7 +243,7 @@ public class AssemblyAssertionSpecs
             Action act = () => thisAssembly.Should().DefineType(GetType().Namespace, string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
@@ -256,10 +256,10 @@ public class AssemblyAssertionSpecs
             Assembly thisAssembly = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(thisAssembly).IsNull());
+            Action act = () => Synchronously.Verify(That(thisAssembly).IsNull());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
@@ -287,7 +287,7 @@ public class AssemblyAssertionSpecs
             Action act = () => signedAssembly.Should().BeUnsigned("this assembly is never shipped");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -300,7 +300,7 @@ public class AssemblyAssertionSpecs
             Action act = () => nullAssembly.Should().BeUnsigned();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -341,7 +341,7 @@ public class AssemblyAssertionSpecs
             Action act = () => unsignedAssembly.Should().BeSignedWithPublicKey("1234", "signing is part of the contract");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -354,7 +354,7 @@ public class AssemblyAssertionSpecs
             Action act = () => signedAssembly.Should().BeSignedWithPublicKey("1234", "signing is part of the contract");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -367,7 +367,7 @@ public class AssemblyAssertionSpecs
             Action act = () => nullAssembly.Should().BeSignedWithPublicKey("1234");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]

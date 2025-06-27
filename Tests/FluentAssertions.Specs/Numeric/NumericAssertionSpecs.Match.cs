@@ -28,7 +28,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().Match(o => o == 0, "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -41,7 +41,7 @@ public partial class NumericAssertionSpecs
             Action act = () => value.Should().Match(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 }

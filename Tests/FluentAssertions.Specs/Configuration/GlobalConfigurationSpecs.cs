@@ -28,7 +28,7 @@ public sealed class GlobalConfigurationSpecs : IDisposable
         );
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     private class NotImplementedTestFramework : ITestFramework

@@ -18,7 +18,7 @@ public class TestFrameworkFactorySpecs
         Action act = () => testFramework.Throw("MyMessage");
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -31,7 +31,7 @@ public class TestFrameworkFactorySpecs
         Action act = () => testFramework.Throw("MyMessage");
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public class TestFrameworkFactorySpecs
         Action act = () => TestFrameworkFactory.GetFramework((TestFramework)42);
 
         // Assert
-        await Expect.That(act).Throws<InvalidOperationException>();
+        await That(act).Throws<InvalidOperationException>();
     }
 
     [Fact]
@@ -50,6 +50,6 @@ public class TestFrameworkFactorySpecs
         // Act
         Action act = () => TestFrameworkFactory.GetFramework(TestFramework.NUnit);
 
-        await Expect.That(act).Throws<InvalidOperationException>();
+        await That(act).Throws<InvalidOperationException>();
     }
 }

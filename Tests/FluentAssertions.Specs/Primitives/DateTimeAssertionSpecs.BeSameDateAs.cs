@@ -18,7 +18,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(new DateTime(2009, 12, 31));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -31,7 +31,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(new DateTime(2009, 12, 31, 11, 15, 11));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -44,7 +44,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(new DateTime(2009, 12, 31));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -57,7 +57,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeSameDateAs(new DateTime(2009, 12, 30));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -73,7 +73,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(new DateTime(2009, 12, 31));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -86,7 +86,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(new DateTime(2009, 12, 31, 11, 15, 11));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -99,7 +99,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(new DateTime(2009, 12, 31));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -112,7 +112,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().NotBeSameDateAs(new DateTime(2009, 12, 30));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 }

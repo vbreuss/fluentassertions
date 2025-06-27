@@ -14,7 +14,7 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act / Assert
-        await Expect.That(nullableTimeSpan).IsNotNull();
+        await That(nullableTimeSpan).IsNotNull();
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act / Assert
-        await Expect.That(nullableTimeSpan).IsNotNull();
+        await That(nullableTimeSpan).IsNotNull();
     }
 
     [Fact]
@@ -34,10 +34,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNotNull());
+        Action act = () => Synchronously.Verify(That(nullableTimeSpan).IsNotNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -47,10 +47,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNotNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableTimeSpan).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -60,10 +60,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNotNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableTimeSpan).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -73,7 +73,7 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = null;
 
         // Act / Assert
-        await Expect.That(nullableTimeSpan).IsNull();
+        await That(nullableTimeSpan).IsNull();
     }
 
     [Fact]
@@ -83,7 +83,7 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = null;
 
         // Act / Assert
-        await Expect.That(nullableTimeSpan).IsNull();
+        await That(nullableTimeSpan).IsNull();
     }
 
     [Fact]
@@ -93,10 +93,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNull());
+        Action act = () => Synchronously.Verify(That(nullableTimeSpan).IsNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -106,10 +106,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNull());
+        Action act = () => Synchronously.Verify(That(nullableTimeSpan).IsNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -119,10 +119,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableTimeSpan).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -132,10 +132,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpan).IsNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableTimeSpan).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -146,10 +146,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpanB = 2.Seconds();
 
         // Act
-        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB));
+        Action action = () => Synchronously.Verify(That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB));
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -162,10 +162,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         // Act
         Action action =
             () =>
-            aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB).Because($"because we want to test the failure {"message"}"));
+            Synchronously.Verify(That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -176,10 +176,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpanB = null;
 
         // Act
-        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB));
+        Action action = () => Synchronously.Verify(That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB));
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Fact]
@@ -190,10 +190,10 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpanB = default(TimeSpan);
 
         // Act
-        Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB));
+        Action action = () => Synchronously.Verify(That(nullableTimeSpanA).IsEqualTo(nullableTimeSpanB));
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Fact]
@@ -203,6 +203,6 @@ public class NullableSimpleTimeSpanAssertionSpecs
         TimeSpan? nullableTimeSpan = default(TimeSpan);
 
         // Act / Assert
-        await Expect.That(nullableTimeSpan).IsNotNull();
+        await That(nullableTimeSpan).IsNotNull();
     }
 }

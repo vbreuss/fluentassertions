@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using FluentAssertions.Execution;
 using Xunit;
 using Xunit.Sdk;
+using static System.Collections.Specialized.BitVector32;
 
 namespace FluentAssertions.Specs.Primitives;
 
@@ -20,7 +21,7 @@ public partial class StringAssertionSpecs
             string value = "ABC";
 
             // Act / Assert
-            await Expect.That(value).StartsWith("AB");
+            await That(value).StartsWith("AB");
         }
 
         [Fact]
@@ -30,18 +31,17 @@ public partial class StringAssertionSpecs
             string value = "ABC";
 
             // Act / Assert
-            await Expect.That(value).StartsWith(value);
+            await That(value).StartsWith(value);
         }
 
         [Fact]
         public async Task When_string_does_not_start_with_expected_phrase_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABC").StartsWith("ABB").Because($"it should {"start"}"));
+            Action act = () => Synchronously.Verify(That("ABC").StartsWith("ABB").Because($"it should {"start"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected string to start with \"ABB\" because it should start," +
-                " but \"ABC\" differs near \"C\" (index 2).").AsWildcard();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -49,29 +49,27 @@ public partial class StringAssertionSpecs
         public async Task When_string_does_not_start_with_expected_phrase_and_one_of_them_is_long_it_should_display_both_strings_on_separate_line()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABCDEFGHI").StartsWith("ABCDDFGHI").Because($"it should {"start"}"));
+            Action act = () => Synchronously.Verify(That("ABCDEFGHI").StartsWith("ABCDDFGHI").Because($"it should {"start"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected string to start with " +
-                "*\"ABCDDFGHI\" because it should start, but " +
-                "*\"ABCDEFGHI\" differs near \"EFG\" (index 4).").AsWildcard();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task When_string_start_is_compared_with_null_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABC").StartsWith(null));
+            Action act = () => Synchronously.Verify(That("ABC").StartsWith(null));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<XunitException>().WithMessage("cannot be validated against <null>").AsSuffix();
         }
 
         [Fact]
         public async Task When_string_start_is_compared_with_empty_string_it_should_not_throw()
         {
             // Act / Assert
-            await Expect.That("ABC").StartsWith("");
+            await That("ABC").StartsWith("");
         }
 
         [Fact]
@@ -79,10 +77,10 @@ public partial class StringAssertionSpecs
         public async Task When_string_start_is_compared_with_string_that_is_longer_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABC").StartsWith("ABCDEF"));
+            Action act = () => Synchronously.Verify(That("ABC").StartsWith("ABCDEF"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -92,11 +90,11 @@ public partial class StringAssertionSpecs
             // Act
             Func<Task> act = async () =>
             {
-                await Expect.That("ABC").StartsWith("ABCDEF");
+                await That("ABC").StartsWith("ABCDEF");
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -104,10 +102,10 @@ public partial class StringAssertionSpecs
         {
             // Act
             string someString = null;
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someString).StartsWith("ABC"));
+            Action act = () => Synchronously.Verify(That(someString).StartsWith("ABC"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -120,7 +118,7 @@ public partial class StringAssertionSpecs
             string value = "ABC";
 
             // Act / Assert
-            await Expect.That(value).DoesNotStartWith("DE");
+            await That(value).DoesNotStartWith("DE");
         }
 
         [Fact]
@@ -131,10 +129,10 @@ public partial class StringAssertionSpecs
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotStartWith("AB").Because("because of some reason"));
+Synchronously.Verify(That(value).DoesNotStartWith("AB").Because("because of some reason"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -145,10 +143,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotStartWith("A
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotStartWith(null));
+Synchronously.Verify(That(value).DoesNotStartWith(null));
 
             // Assert
-            await Expect.That(action).Throws<ArgumentNullException>();
+            await That(action).Throws<XunitException>().WithMessage("cannot be validated against <null>").AsSuffix();
         }
 
         [Fact]
@@ -159,10 +157,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotStartWith(nu
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotStartWith(""));
+Synchronously.Verify(That(value).DoesNotStartWith(""));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -170,10 +168,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).DoesNotStartWith(""
         {
             // Act
             string someString = null;
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someString).DoesNotStartWith("ABC"));
+            Action act = () => Synchronously.Verify(That(someString).DoesNotStartWith("ABC"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

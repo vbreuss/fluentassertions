@@ -48,7 +48,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(sbyte.MinValue, sbyte.MaxValue, 1)]
@@ -73,7 +73,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -88,7 +88,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -102,7 +102,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(short.MinValue, short.MinValue, 0)]
@@ -145,7 +145,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(short.MinValue, short.MaxValue, 1)]
@@ -170,7 +170,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -185,7 +185,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -199,7 +199,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(int.MinValue, int.MinValue, 0)]
@@ -241,7 +241,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(int.MinValue, int.MaxValue, 1)]
@@ -265,7 +265,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -280,7 +280,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -294,7 +294,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(long.MinValue, long.MinValue, 0)]
@@ -383,7 +383,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(long.MinValue, long.MaxValue, 1)]
@@ -415,7 +415,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -430,7 +430,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -444,7 +444,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 0, 0)]
@@ -471,7 +471,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 1, 0)]
@@ -485,7 +485,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -500,7 +500,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -514,7 +514,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 0, 0)]
@@ -542,7 +542,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 1, 0)]
@@ -557,7 +557,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -572,7 +572,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -586,7 +586,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 0, 0)]
@@ -613,7 +613,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 1, 0)]
@@ -628,7 +628,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -643,7 +643,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -657,7 +657,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 0, 0)]
@@ -685,7 +685,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 1, 0)]
@@ -700,7 +700,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -715,7 +715,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -729,7 +729,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
@@ -757,7 +757,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(sbyte.MinValue, sbyte.MinValue, 0)]
@@ -799,7 +799,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -814,7 +814,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -828,7 +828,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(short.MinValue, short.MaxValue, 1)]
@@ -853,7 +853,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(short.MinValue, short.MinValue, 0)]
@@ -896,7 +896,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -911,7 +911,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -925,7 +925,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(int.MinValue, int.MaxValue, 1)]
@@ -950,7 +950,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(int.MinValue, int.MinValue, 0)]
@@ -992,7 +992,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1007,7 +1007,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1021,7 +1021,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(long.MinValue, long.MaxValue, 1)]
@@ -1053,7 +1053,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(long.MinValue, long.MinValue, 0)]
@@ -1142,7 +1142,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1157,7 +1157,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1171,7 +1171,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 1, 0)]
@@ -1186,7 +1186,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 0, 0)]
@@ -1213,7 +1213,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1228,7 +1228,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1242,7 +1242,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 1, 0)]
@@ -1257,7 +1257,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 0, 0)]
@@ -1285,7 +1285,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1300,7 +1300,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1314,7 +1314,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 1, 0)]
@@ -1329,7 +1329,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 0, 0)]
@@ -1356,7 +1356,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1371,7 +1371,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1385,7 +1385,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 1, 0)]
@@ -1400,7 +1400,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [InlineData(0, 0, 0)]
@@ -1428,7 +1428,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(distantValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1443,7 +1443,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeCloseTo(nearbyValue, delta);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -1457,7 +1457,7 @@ public partial class NumericAssertionSpecs
                 .And.Be(actual);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 }

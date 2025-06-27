@@ -21,7 +21,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().BeVirtual();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -35,7 +35,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().BeVirtual();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -49,7 +49,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().BeVirtual("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods" +
                     " to be virtual because we want to test the error message," +
                     " but the following methods are not virtual:*" +
                     "Void FluentAssertions*ClassWithNonVirtualPublicMethods.PublicDoNothing*" +
@@ -71,7 +71,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().NotBeVirtual();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -85,7 +85,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().NotBeVirtual();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -99,7 +99,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().NotBeVirtual("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods" +
                     " not to be virtual because we want to test the error message," +
                     " but the following methods are virtual" +
                     "*ClassWithAllMethodsVirtual.PublicVirtualDoNothing" +
@@ -121,7 +121,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().BeDecoratedWith<DummyMethodAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -135,7 +135,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().BeDecoratedWith<DummyMethodAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -151,7 +151,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().BeDecoratedWith<DummyMethodAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -165,7 +165,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().BeDecoratedWith<DummyMethodAttribute>("because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods to be decorated with" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods to be decorated with" +
                     " FluentAssertions*DummyMethodAttribute because we want to test the error message," +
                     " but the following methods are not:*" +
                     "Void FluentAssertions*ClassWithMethodsThatAreNotDecoratedWithDummyAttribute.PublicDoNothing*" +
@@ -187,7 +187,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().NotBeDecoratedWith<DummyMethodAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -201,7 +201,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().NotBeDecoratedWith<DummyMethodAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -217,7 +217,7 @@ public class MethodInfoSelectorAssertionSpecs
                 methodSelector.Should().NotBeDecoratedWith<DummyMethodAttribute>();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -231,7 +231,7 @@ public class MethodInfoSelectorAssertionSpecs
                     .NotBeDecoratedWith<DummyMethodAttribute>("because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods to not be decorated*DummyMethodAttribute*because we want to test the error message" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods to not be decorated*DummyMethodAttribute*because we want to test the error message" +
                     "*ClassWithAllMethodsDecoratedWithDummyAttribute.PublicDoNothing*" +
                     "*ClassWithAllMethodsDecoratedWithDummyAttribute.PublicDoNothingWithSameAttributeTwice*" +
                     "*ClassWithAllMethodsDecoratedWithDummyAttribute.ProtectedDoNothing*" +
@@ -241,7 +241,7 @@ public class MethodInfoSelectorAssertionSpecs
 
     public class Be
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_all_methods_have_specified_accessor_it_should_succeed()
         {
             // Arrange
@@ -249,13 +249,13 @@ public class MethodInfoSelectorAssertionSpecs
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsEqualTo(CSharpAccessModifier.Public));
+Synchronously.Verify(That(methodSelector).IsEqualTo(CSharpAccessModifier.Public));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_not_all_methods_have_specified_accessor_it_should_throw()
         {
             // Arrange
@@ -263,17 +263,17 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsEqualTo(
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsEqualTo(CSharpAccessModifier.Public));
+Synchronously.Verify(That(methodSelector).IsEqualTo(CSharpAccessModifier.Public));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods to be Public" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods to be Public" +
                     ", but the following methods are not:*" +
                     "Void FluentAssertions*ClassWithNonPublicMethods.PublicDoNothing*" +
                     "Void FluentAssertions*ClassWithNonPublicMethods.DoNothingWithParameter*" +
                     "Void FluentAssertions*ClassWithNonPublicMethods.DoNothingWithAnotherParameter").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_not_all_methods_have_specified_accessor_it_should_throw_with_descriptive_message()
         {
             // Arrange
@@ -281,10 +281,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsEqualTo(
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsEqualTo(CSharpAccessModifier.Public).Because($"we want to test the error {"message"}"));
+Synchronously.Verify(That(methodSelector).IsEqualTo(CSharpAccessModifier.Public).Because($"we want to test the error {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods to be Public" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods to be Public" +
                     " because we want to test the error message" +
                     ", but the following methods are not:*" +
                     "Void FluentAssertions*ClassWithNonPublicMethods.PublicDoNothing*" +
@@ -303,13 +303,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsEqualTo(
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsNotEqualTo(CSharpAccessModifier.Public));
+Synchronously.Verify(That(methodSelector).IsNotEqualTo(CSharpAccessModifier.Public));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_any_method_have_specified_accessor_it_should_throw()
         {
             // Arrange
@@ -317,15 +317,15 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsNotEqual
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsNotEqualTo(CSharpAccessModifier.Public));
+Synchronously.Verify(That(methodSelector).IsNotEqualTo(CSharpAccessModifier.Public));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods to not be Public" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods to not be Public" +
                     ", but the following methods are:*" +
                     "Void FluentAssertions*ClassWithPublicMethods.PublicDoNothing*").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect.Reflection/issues/28")]
         public async Task When_any_method_have_specified_accessor_it_should_throw_with_descriptive_message()
         {
             // Arrange
@@ -333,10 +333,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsNotEqual
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsNotEqualTo(CSharpAccessModifier.Public).Because($"we want to test the error {"message"}"));
+Synchronously.Verify(That(methodSelector).IsNotEqualTo(CSharpAccessModifier.Public).Because($"we want to test the error {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods to not be Public" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods to not be Public" +
                     " because we want to test the error message" +
                     ", but the following methods are:*" +
                     "Void FluentAssertions*ClassWithPublicMethods.PublicDoNothing*").AsWildcard();
@@ -355,7 +355,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsNotEqual
             Action act = () => methodSelector.Should().BeAsync();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -368,7 +368,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsNotEqual
             Action act = () => methodSelector.Should().BeAsync("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods" +
                     " to be async because we want to test the error message," +
                     " but the following methods are not:" + Environment.NewLine +
                     "Task FluentAssertions.Specs.Types.ClassWithNonAsyncMethods.PublicDoNothing" + Environment.NewLine +
@@ -389,7 +389,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsNotEqual
             Action act = () => methodSelector.Should().NotBeAsync();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -402,7 +402,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(methodSelector).IsNotEqual
             Action act = () => methodSelector.Should().NotBeAsync("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all selected methods" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all selected methods" +
                     " not to be async because we want to test the error message," +
                     " but the following methods are:" + Environment.NewLine +
                     "Task FluentAssertions.Specs.Types.ClassWithAllMethodsAsync.PublicAsyncDoNothing" + Environment.NewLine +

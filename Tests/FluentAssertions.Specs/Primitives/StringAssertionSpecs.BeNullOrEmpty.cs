@@ -18,7 +18,7 @@ public partial class StringAssertionSpecs
             string str = null;
 
             // Act / Assert
-            await Expect.That(str).IsNullOrEmpty();
+            await That(str).IsNullOrEmpty();
         }
 
         [Fact]
@@ -28,7 +28,7 @@ public partial class StringAssertionSpecs
             string str = "";
 
             // Act / Assert
-            await Expect.That(str).IsNullOrEmpty();
+            await That(str).IsNullOrEmpty();
         }
 
         [Fact]
@@ -38,10 +38,10 @@ public partial class StringAssertionSpecs
             string str = "hello";
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(str).IsNullOrEmpty().Because($"it was not initialized {"yet"}"));
+            Action act = () => Synchronously.Verify(That(str).IsNullOrEmpty().Because($"it was not initialized {"yet"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -54,7 +54,7 @@ public partial class StringAssertionSpecs
             string str = "Hello World";
 
             // Act / Assert
-            await Expect.That(str).IsNotNullOrEmpty();
+            await That(str).IsNotNullOrEmpty();
         }
 
         [Fact]
@@ -64,10 +64,10 @@ public partial class StringAssertionSpecs
             string str = "";
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(str).IsNotNullOrEmpty().Because($"a valid string is expected for {"str"}"));
+            Action act = () => Synchronously.Verify(That(str).IsNotNullOrEmpty().Because($"a valid string is expected for {"str"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -77,10 +77,10 @@ public partial class StringAssertionSpecs
             string str = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(str).IsNotNullOrEmpty().Because($"a valid string is expected for {"str"}"));
+            Action act = () => Synchronously.Verify(That(str).IsNotNullOrEmpty().Because($"a valid string is expected for {"str"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

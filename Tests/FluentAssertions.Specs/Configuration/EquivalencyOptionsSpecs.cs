@@ -20,7 +20,7 @@ public class EquivalencyOptionsSpecs
         var action = () => AssertionConfiguration.Current.Equivalency.Modify(configureOptions: null);
 
         // Assert
-        await Expect.That(action).ThrowsExactly<ArgumentNullException>();
+        await That(action).ThrowsExactly<ArgumentNullException>();
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public class EquivalencyOptionsSpecs
         };
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Collection("ConfigurationSpecs")]
@@ -211,7 +211,7 @@ public class EquivalencyOptionsSpecs
             // Assert
             var addedStep = Plan.LastOrDefault(s => s is MyEquivalencyStep);
 
-            await Expect.That(Plan).StartsWith(addedStep);
+            await That(Plan).StartsWith(addedStep);
         }
 
         [Fact]
@@ -262,7 +262,7 @@ public class EquivalencyOptionsSpecs
 
             // Assert
             var subjectStep = Plan.LastOrDefault(s => s is MyEquivalencyStep);
-            await Expect.That(Plan).EndsWith(subjectStep);
+            await That(Plan).EndsWith(subjectStep);
         }
 
         [Fact]
@@ -272,7 +272,7 @@ public class EquivalencyOptionsSpecs
             Plan.Remove<SimpleEqualityEquivalencyStep>();
 
             // Assert
-            await Expect.That(Plan).DoesNotContain(s => s is SimpleEqualityEquivalencyStep);
+            await That(Plan).DoesNotContain(s => s is SimpleEqualityEquivalencyStep);
         }
 
         [Fact]
@@ -282,7 +282,7 @@ public class EquivalencyOptionsSpecs
             var action = () => Plan.Remove<MyEquivalencyStep>();
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         private class MyEquivalencyStep : IEquivalencyStep

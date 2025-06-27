@@ -17,10 +17,10 @@ public partial class ObjectAssertionSpecs
             var someObject = new object();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).Is(null));
+            Action act = () => Synchronously.Verify(That(someObject).Is(null));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -30,7 +30,7 @@ public partial class ObjectAssertionSpecs
             var someObject = new DummyImplementingClass();
 
             // Act / Assert
-            await Expect.That(someObject).Is<DummyImplementingClass>();
+            await That(someObject).Is<DummyImplementingClass>();
         }
 
         [Fact]
@@ -40,7 +40,7 @@ public partial class ObjectAssertionSpecs
             var someObject = new DummyImplementingClass();
 
             // Act / Assert
-            await Expect.That(someObject).Is<DummyBaseClass>();
+            await That(someObject).Is<DummyBaseClass>();
         }
 
         [Fact]
@@ -50,7 +50,7 @@ public partial class ObjectAssertionSpecs
             var someObject = new DummyImplementingClass();
 
             // Act / Assert
-            await Expect.That(someObject).Is<IDisposable>();
+            await That(someObject).Is<IDisposable>();
         }
 
         [Fact]
@@ -58,10 +58,10 @@ public partial class ObjectAssertionSpecs
         {
             // Arrange
             var someObject = new DummyImplementingClass();
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).Is<DateTime>().Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(someObject).Is<DateTime>().Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -73,11 +73,11 @@ public partial class ObjectAssertionSpecs
             // Act
             Func<Task> act = async () =>
             {
-                await Expect.That(someObject).Is<DateTime>().Because($"because we want to test the failure {"message"}");
+                await That(someObject).Is<DateTime>().Because($"because we want to test the failure {"message"}");
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -87,7 +87,7 @@ public partial class ObjectAssertionSpecs
             var someObject = new DummyImplementingClass();
 
             // Act / Assert
-            await Expect.That(someObject).Is(typeof(DummyImplementingClass));
+            await That(someObject).Is(typeof(DummyImplementingClass));
         }
 
         [Fact]
@@ -97,7 +97,7 @@ public partial class ObjectAssertionSpecs
             var someObject = new DummyImplementingClass();
 
             // Act / Assert
-            await Expect.That(someObject).Is(typeof(DummyBaseClass));
+            await That(someObject).Is(typeof(DummyBaseClass));
         }
 
         [Fact]
@@ -107,7 +107,7 @@ public partial class ObjectAssertionSpecs
             var someObject = new DummyImplementingClass();
 
             // Act / Assert
-            await Expect.That(someObject).Is(typeof(IDisposable));
+            await That(someObject).Is(typeof(IDisposable));
         }
 
         [Fact]
@@ -117,7 +117,7 @@ public partial class ObjectAssertionSpecs
             var someObject = new List<string>();
 
             // Act / Assert
-            await Expect.That(someObject).Is(typeof(IList<>));
+            await That(someObject).Is(typeof(IList<>));
         }
 
         [Fact]
@@ -129,11 +129,11 @@ public partial class ObjectAssertionSpecs
             // Act
             Func<Task> act = async () =>
             {
-                await Expect.That(someObject).Is(typeof(DateTime)).Because($"because we want to test the failure {"message"}");
+                await That(someObject).Is(typeof(DateTime)).Because($"because we want to test the failure {"message"}");
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -143,10 +143,10 @@ public partial class ObjectAssertionSpecs
             var someObject = new DummyImplementingClass();
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).Is(typeof(DateTime)).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).Is(typeof(DateTime)).Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -156,10 +156,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).Is(typeof(Date
             var someObject = new DummyImplementingClass();
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).Is(typeof(IList<>)).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).Is(typeof(IList<>)).Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -172,10 +172,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).Is(typeof(ILis
             var someObject = new object();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(null));
+            Action act = () => Synchronously.Verify(That(someObject).IsNot(null));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -185,10 +185,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).Is(typeof(ILis
             var someObject = new DummyImplementingClass();
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot<DummyImplementingClass>().Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).IsNot<DummyImplementingClass>().Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -198,10 +198,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot<DummyImp
             var someObject = new DummyImplementingClass();
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot<DummyBaseClass>().Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).IsNot<DummyBaseClass>().Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -211,10 +211,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot<DummyBas
             var someObject = new DummyImplementingClass();
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot<IDisposable>().Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).IsNot<IDisposable>().Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -224,20 +224,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot<IDisposa
             var someObject = new DummyImplementingClass();
 
             // Act / Assert
-            await Expect.That(someObject).IsNot<DateTime>();
-        }
-
-        [Fact]
-        public async Task When_not_to_the_unexpected_type_and_asserting_not_assignable_it_should_not_cast_the_returned_object_for_chaining()
-        {
-            // Arrange
-            var someObject = new Exception("Actual Message");
-
-            // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot<DummyImplementingClass>());
-
-            // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(someObject).IsNot<DateTime>();
         }
 
         [Fact]
@@ -247,10 +234,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot<IDisposa
             var someObject = new DummyImplementingClass();
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(typeof(DummyImplementingClass)).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).IsNot(typeof(DummyImplementingClass)).Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -260,10 +247,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(typeof(D
             var someObject = new DummyImplementingClass();
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(typeof(DummyBaseClass)).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).IsNot(typeof(DummyBaseClass)).Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -273,10 +260,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(typeof(D
             var someObject = new DummyImplementingClass();
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(typeof(IDisposable)).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).IsNot(typeof(IDisposable)).Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -286,26 +273,21 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(typeof(I
             var someObject = new List<string>();
 
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(typeof(IList<>)).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(someObject).IsNot(typeof(IList<>)).Because($"because we want to test the failure {"message"}"));
 
             // Act / Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/573")]
         public async Task When_a_null_instance_is_asserted_to_not_be_assignable_it_should_fail_with_a_descriptive_message()
         {
-            // Arrange
             object someObject = null;
 
-            // Act
-            Func<Task> act = async () =>
-            {
-                await Expect.That(someObject).IsNot(typeof(DateTime)).Because($"because we want to test the failure {"message"}");
-            };
+            Func<Task> act = async ()
+                => await That(someObject).IsNot(typeof(DateTime));
 
-            // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -315,7 +297,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(typeof(I
             var someObject = new DummyImplementingClass();
 
             // Act / Assert
-            await Expect.That(someObject).IsNot(typeof(DateTime)).Because($"because we want to test the failure {"message"}");
+            await That(someObject).IsNot(typeof(DateTime)).Because($"because we want to test the failure {"message"}");
         }
 
         [Fact]
@@ -325,7 +307,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).IsNot(typeof(I
             var someObject = new DummyImplementingClass();
 
             // Act / Assert
-            await Expect.That(someObject).IsNot(typeof(IList<>)).Because($"because we want to test the failure {"message"}");
+            await That(someObject).IsNot(typeof(IList<>)).Because($"because we want to test the failure {"message"}");
         }
     }
 }

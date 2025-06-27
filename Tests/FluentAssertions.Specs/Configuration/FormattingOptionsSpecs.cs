@@ -19,9 +19,9 @@ public sealed class FormattingOptionsSpecs : IDisposable
         AssertionConfiguration.Current.Formatting.MaxDepth = 123;
         AssertionConfiguration.Current.Formatting.MaxLines = 33;
 
-        await Expect.That(AssertionScope.Current.FormattingOptions.UseLineBreaks).IsTrue();
-        await Expect.That(AssertionScope.Current.FormattingOptions.MaxDepth).IsEqualTo(123);
-        await Expect.That(AssertionScope.Current.FormattingOptions.MaxLines).IsEqualTo(33);
+        await That(AssertionScope.Current.FormattingOptions.UseLineBreaks).IsTrue();
+        await That(AssertionScope.Current.FormattingOptions.MaxDepth).IsEqualTo(123);
+        await That(AssertionScope.Current.FormattingOptions.MaxLines).IsEqualTo(33);
     }
 
     [Fact]
@@ -39,7 +39,7 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        await Expect.That(result).IsEqualTo("Property = SomeValue").Because("it should use my custom formatter");
+        await That(result).IsEqualTo("Property = SomeValue").Because("it should use my custom formatter");
     }
 
     [Fact]
@@ -57,7 +57,7 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        await Expect.That(result).IsEqualTo("Property = SomeValue").Because("it should use my custom formatter");
+        await That(result).IsEqualTo("Property = SomeValue").Because("it should use my custom formatter");
     }
 
     [Fact]
@@ -75,7 +75,7 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        await Expect.That(result).IsEqualTo("Property is SomeValue").Because("it should use my custom formatter");
+        await That(result).IsEqualTo("Property is SomeValue").Because("it should use my custom formatter");
     }
 
     [Fact]
@@ -93,7 +93,7 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        await Expect.That(result).IsEqualTo("Property is SomeValue").Because("it should use my custom formatter");
+        await That(result).IsEqualTo("Property is SomeValue").Because("it should use my custom formatter");
     }
 
     [Fact]
@@ -111,7 +111,7 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        await Expect.That(result).IsEqualTo(subject.ToString());
+        await That(result).IsEqualTo(subject.ToString());
     }
 
     [Fact]
@@ -129,7 +129,7 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        await Expect.That(result).IsEqualTo(subject.ToString());
+        await That(result).IsEqualTo(subject.ToString());
     }
 
     [Fact]
@@ -147,7 +147,7 @@ public sealed class FormattingOptionsSpecs : IDisposable
         string result = Formatter.ToString(subject);
 
         // Assert
-        await Expect.That(result).IsEqualTo(subject.ToString());
+        await That(result).IsEqualTo(subject.ToString());
     }
 
     public class SomeClassWithCustomFormatter

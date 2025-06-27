@@ -15,10 +15,10 @@ public partial class NumericAssertionSpecs
             int value = 3;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(4, 5));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf(4, 5));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -28,10 +28,10 @@ public partial class NumericAssertionSpecs
             int value = 3;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(4, 5).Because("because those are the valid values"));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf(4, 5).Because("because those are the valid values"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -41,10 +41,10 @@ public partial class NumericAssertionSpecs
             int value = 4;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(4, 5));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf(4, 5));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -54,10 +54,10 @@ public partial class NumericAssertionSpecs
             int? value = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(0, 1));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf(0, 1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -67,7 +67,7 @@ public partial class NumericAssertionSpecs
             float value = float.NaN;
 
             // Act / Assert
-            await Expect.That(value).IsOneOf(float.NaN, 4.5F);
+            await That(value).IsOneOf(float.NaN, 4.5F);
         }
 
         [Fact]
@@ -77,10 +77,10 @@ public partial class NumericAssertionSpecs
             float value = float.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(1.5F, 4.5F));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf(1.5F, 4.5F));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -90,7 +90,7 @@ public partial class NumericAssertionSpecs
             double value = double.NaN;
 
             // Act / Assert
-            await Expect.That(value).IsOneOf(double.NaN, 4.5F);
+            await That(value).IsOneOf(double.NaN, 4.5F);
         }
 
         [Fact]
@@ -100,10 +100,10 @@ public partial class NumericAssertionSpecs
             double value = double.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(1.5D, 4.5D));
+            Action act = () => Synchronously.Verify(That(value).IsOneOf(1.5D, 4.5D));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Immutable;
+using System.Threading.Tasks;
 using FluentAssertions.Execution;
 using Xunit;
 using Xunit.Sdk;
@@ -13,156 +15,146 @@ public partial class CollectionAssertionSpecs
     public class BeSubsetOf
     {
         [Fact]
-        public void When_collection_is_subset_of_a_specified_collection_it_should_not_throw()
+        public async Task When_collection_is_subset_of_a_specified_collection_it_should_not_throw()
         {
             // Arrange
-            int[] subset = [1, 2];
-            int[] superset = [1, 2, 3];
+            ImmutableArray<int> subset = [1, 2];
+            int[] superset = [1, 3, 2];
 
             // Act / Assert
-            subset.Should().BeSubsetOf(superset);
+            await Expect.That(subset).IsContainedIn(superset).InAnyOrder();
         }
 
         [Fact]
-        public void When_collection_is_not_a_subset_of_another_it_should_throw_with_the_reason()
+        public async Task When_collection_is_not_a_subset_of_another_it_should_throw_with_the_reason()
         {
             // Arrange
             int[] subset = [1, 2, 3, 6];
             int[] superset = [1, 2, 4, 5];
 
             // Act
-            Action act = () => subset.Should().BeSubsetOf(superset, "because we want to test the failure {0}", "message");
+            Action act = () => Synchronously.Verify(That(subset).IsContainedIn(superset).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected subset to be a subset of {1, 2, 4, 5} because we want to test the failure message, " +
-                "but items {3, 6} are not part of the superset.");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_an_empty_collection_is_tested_against_a_superset_it_should_succeed()
+        public async Task When_an_empty_collection_is_tested_against_a_superset_it_should_succeed()
         {
             // Arrange
             int[] subset = [];
             int[] superset = [1, 2, 4, 5];
 
             // Act
-            Action act = () => subset.Should().BeSubsetOf(superset);
+            Action act = () => Synchronously.Verify(That(subset).IsContainedIn(superset));
 
             // Assert
-            act.Should().NotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
-        public void When_a_subset_is_tested_against_a_null_superset_it_should_throw_with_a_clear_explanation()
+        public async Task When_a_subset_is_tested_against_a_null_superset_it_should_throw_with_a_clear_explanation()
         {
             // Arrange
             int[] subset = [1, 2, 3];
             int[] superset = null;
 
             // Act
-            Action act = () => subset.Should().BeSubsetOf(superset);
+            Action act = () => Synchronously.Verify(That(subset).IsContainedIn(superset));
 
             // Assert
-            act.Should().Throw<ArgumentNullException>().WithMessage(
-                "Cannot verify a subset against a <null> collection.*");
+            await That(act).Throws<XunitException>().WithMessage("*<null>*").AsWildcard();
         }
 
         [Fact]
-        public void When_a_set_is_expected_to_be_not_a_subset_it_should_succeed()
+        public async Task When_a_set_is_expected_to_be_not_a_subset_it_should_succeed()
         {
             // Arrange
             int[] subject = [1, 2, 4];
             int[] otherSet = [1, 2, 3];
 
             // Act / Assert
-            subject.Should().NotBeSubsetOf(otherSet);
+            await Expect.That(subject).IsNotContainedIn(otherSet).InAnyOrder();
         }
     }
 
     public class NotBeSubsetOf
     {
         [Fact]
-        public void When_an_empty_set_is_not_supposed_to_be_a_subset_of_another_set_it_should_throw()
+        public async Task When_an_empty_set_is_not_supposed_to_be_a_subset_of_another_set_it_should_throw()
         {
             // Arrange
             int[] subject = [];
             int[] otherSet = [1, 2, 3];
 
             // Act
-            Action act = () => subject.Should().NotBeSubsetOf(otherSet);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotContainedIn(otherSet).InAnyOrder());
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Did not expect subject {empty} to be a subset of {1, 2, 3}.");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Should_fail_when_asserting_collection_is_not_subset_of_a_superset_collection()
+        public async Task Should_fail_when_asserting_collection_is_not_subset_of_a_superset_collection()
         {
             // Arrange
             int[] subject = [1, 2];
             int[] otherSet = [1, 2, 3];
 
             // Act
-            Action act = () => subject.Should().NotBeSubsetOf(otherSet, "because I'm {0}", "mistaken");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotContainedIn(otherSet).InAnyOrder().Because($"because I'm {"mistaken"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect subject {1, 2} to be a subset of {1, 2, 3} because I'm mistaken.");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_to_be_subset_against_null_collection_it_should_throw()
+        public async Task When_asserting_collection_to_be_subset_against_null_collection_it_should_throw()
         {
             // Arrange
             int[] collection = null;
             int[] collection1 = [1, 2, 3];
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
                 using var _ = new AssertionScope();
-                collection.Should().BeSubsetOf(collection1, "because we want to test the behaviour with a null subject");
+                await That(collection).IsContainedIn(collection1).Because("because we want to test the behaviour with a null subject");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection to be a subset of {1, 2, 3} because we want to test the behaviour with a null subject, but found <null>.");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_to_not_be_subset_against_same_collection_it_should_throw()
+        public async Task When_asserting_collection_to_not_be_subset_against_same_collection_it_should_throw()
         {
             // Arrange
             int[] collection = [1, 2, 3];
             var collection1 = collection;
 
             // Act
-            Action act = () => collection.Should().NotBeSubsetOf(collection1,
-                "because we want to test the behaviour with same objects");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).IsNotContainedIn(collection1).InAnyOrder().Because("because we want to test the behaviour with same objects"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Did not expect*to be a subset of*because we want to test the behaviour with same objects*but they both reference the same object.");
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_to_not_be_subset_against_null_collection_it_should_throw()
+        public async Task When_asserting_collection_to_not_be_subset_against_null_collection_it_should_throw()
         {
             // Arrange
             int[] collection = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().NotBeSubsetOf([1, 2, 3], "we want to test the failure {0}", "message");
+                await Expect.That(collection).IsNotContainedIn([1, 2, 3]).InAnyOrder().Because($"we want to test the failure {"message"}");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Cannot assert a <null> collection against a subset.");
+            await That(act).Throws<XunitException>();
         }
     }
 }

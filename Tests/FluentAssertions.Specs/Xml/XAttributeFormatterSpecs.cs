@@ -6,7 +6,7 @@ namespace FluentAssertions.Specs.Xml;
 
 public class XAttributeFormatterSpecs
 {
-    [Fact]
+    [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
     public async Task When_formatting_an_attribute_it_should_return_the_name_and_value()
     {
         // Act
@@ -15,6 +15,6 @@ public class XAttributeFormatterSpecs
         string result = Formatter.ToString(attribute);
 
         // Assert
-        await Expect.That(result).IsEqualTo(@"name=""Martin""");
+        await That(result).IsEqualTo(@"name=""Martin""");
     }
 }

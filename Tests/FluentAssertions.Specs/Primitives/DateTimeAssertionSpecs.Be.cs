@@ -17,10 +17,10 @@ public partial class DateTimeAssertionSpecs
             DateTime sameDateTime = new(2016, 06, 04);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -31,10 +31,10 @@ public partial class DateTimeAssertionSpecs
             DateTime? sameDateTime = 4.June(2016);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -45,10 +45,10 @@ public partial class DateTimeAssertionSpecs
             DateTime sameDateTime = DateTime.MinValue;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -59,10 +59,10 @@ public partial class DateTimeAssertionSpecs
             DateTime sameDateTime = DateTime.MaxValue;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -73,10 +73,10 @@ public partial class DateTimeAssertionSpecs
             var otherDateTime = new DateTime(2012, 03, 11);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -87,10 +87,10 @@ public partial class DateTimeAssertionSpecs
             DateTime? otherDateTime = 11.March(2012);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -102,10 +102,10 @@ public partial class DateTimeAssertionSpecs
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
+Synchronously.Verify(That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -117,10 +117,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqual
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualTo(normalDateTime));
+Synchronously.Verify(That(nullableDateTime).IsEqualTo(normalDateTime));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -132,10 +132,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTimeA).IsEqualTo(dateTimeB));
+Synchronously.Verify(That(dateTimeA).IsEqualTo(dateTimeB));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -147,10 +147,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTimeA).IsEqualTo(dateT
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
+Synchronously.Verify(That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -162,10 +162,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqual
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
+Synchronously.Verify(That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -176,10 +176,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqual
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualTo(new DateTime(2016, 06, 04)).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableDateTime).IsEqualTo(new DateTime(2016, 06, 04)).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 
@@ -193,10 +193,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
             DateTime otherDateTime = new(2016, 06, 05);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(otherDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsNotEqualTo(otherDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -207,10 +207,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
             DateTime? otherDateTime = 5.June(2016);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(otherDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsNotEqualTo(otherDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -222,10 +222,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
+                () => Synchronously.Verify(That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -237,10 +237,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
+                () => Synchronously.Verify(That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

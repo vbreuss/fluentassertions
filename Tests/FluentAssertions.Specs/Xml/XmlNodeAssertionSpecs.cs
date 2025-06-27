@@ -9,7 +9,7 @@ public class XmlNodeAssertionSpecs
 {
     public class BeSameAs
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_the_same_as_the_same_xml_node_it_should_succeed()
         {
             // Arrange
@@ -17,13 +17,13 @@ public class XmlNodeAssertionSpecs
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(doc).IsSameAs(doc));
+Synchronously.Verify(That(doc).IsSameAs(doc));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_same_as_a_different_xml_node_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -34,13 +34,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(doc).IsSameAs(doc));
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsSameAs(otherNode).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsSameAs(otherNode).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_same_as_a_different_xml_node_it_should_fail_with_descriptive_message_and_truncate_xml()
         {
             // Arrange
@@ -51,13 +51,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsSameAs(othe
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsSameAs(otherNode).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsSameAs(otherNode).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_the_equality_of_an_xml_node_but_is_null_it_should_throw_appropriately()
         {
             // Arrange
@@ -66,16 +66,16 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsSameAs(othe
             expected.LoadXml("<xml/>");
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsSameAs(expected));
+            Action act = () => Synchronously.Verify(That(theDocument).IsSameAs(expected));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
     public class BeNull
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_null_and_it_is_it_should_succeed()
         {
             // Arrange
@@ -83,13 +83,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsSameAs(othe
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(node).IsNull());
+Synchronously.Verify(That(node).IsNull());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_null_but_it_is_not_it_should_fail()
         {
             // Arrange
@@ -98,13 +98,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(node).IsNull());
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(xmlDoc).IsNull());
+Synchronously.Verify(That(xmlDoc).IsNull());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_null_but_it_is_not_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -113,17 +113,17 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(xmlDoc).IsNull());
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsNull().Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theDocument to be <null> because we want to test the failure message," +
+            await That(act).Throws<XunitException>().WithMessage("Expected theDocument to be <null> because we want to test the failure message," +
                     " but found <xml />.").AsWildcard();
         }
     }
 
     public class NotBeNull
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_a_non_null_xml_node_is_not_null_it_should_succeed()
         {
             // Arrange
@@ -132,13 +132,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsNull().Beca
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(xmlDoc).IsNotNull());
+Synchronously.Verify(That(xmlDoc).IsNotNull());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_a_null_xml_node_is_not_null_it_should_fail()
         {
             // Arrange
@@ -146,13 +146,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(xmlDoc).IsNotNull());
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(xmlDoc).IsNotNull());
+Synchronously.Verify(That(xmlDoc).IsNotNull());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_a_null_xml_node_is_not_null_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -160,16 +160,16 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(xmlDoc).IsNotNull());
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsNotNull().Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
     public class BeEquivalentTo
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_the_same_xml_node_it_should_succeed()
         {
             // Arrange
@@ -177,13 +177,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsNotNull().B
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(doc).IsEqualTo(doc));
+Synchronously.Verify(That(doc).IsEqualTo(doc));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_a_different_xml_node_with_other_contents_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -194,13 +194,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(doc).IsEqualTo(doc));
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_a_different_xml_node_with_same_contents_it_should_succeed()
         {
             // Arrange
@@ -213,13 +213,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_assertion_an_xml_node_is_equivalent_to_a_different_xml_node_with_different_namespace_prefix_it_should_succeed()
         {
             // Arrange
@@ -230,13 +230,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expecte
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_a_different_xml_node_which_differs_only_on_unused_namespace_declaration_it_should_succeed()
         {
             // Arrange
@@ -247,13 +247,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expecte
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_a_different_XmlDocument_which_differs_on_a_child_element_name_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -264,13 +264,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expecte
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_a_different_xml_node_which_differs_on_a_child_element_namespace_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -281,13 +281,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_which_contains_an_unexpected_node_type_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -298,13 +298,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_which_contains_extra_elements_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -315,13 +315,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_which_lacks_elements_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -332,13 +332,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_which_lacks_attributes_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -349,13 +349,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_which_has_extra_attributes_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -366,13 +366,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_which_has_different_attribute_values_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -383,13 +383,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_which_has_attribute_with_different_namespace_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -400,13 +400,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_which_has_different_text_contents_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -417,13 +417,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_with_different_comments_it_should_succeed()
         {
             // Arrange
@@ -433,13 +433,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
             expected.LoadXml("<xml><a/><!--Comment--></xml>");
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_to_different_xml_node_with_different_insignificant_whitespace_it_should_succeed()
         {
             // Arrange
@@ -452,13 +452,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
             expected.LoadXml("<xml>\n<a>   \n   <b/></a>\r\n</xml>");
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_that_contains_an_unsupported_node_it_should_throw_a_descriptive_message()
         {
             // Arrange
@@ -466,13 +466,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
             theDocument.LoadXml("<xml><![CDATA[Text]]></xml>");
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(theDocument));
+            Action act = () => Synchronously.Verify(That(theDocument).IsEqualTo(theDocument));
 
             // Assert
-            await Expect.That(act).Throws<NotSupportedException>();
+            await That(act).Throws<NotSupportedException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_equivalent_that_isnt_it_should_include_the_right_location_in_the_descriptive_message()
         {
             // Arrange
@@ -482,16 +482,16 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
             expected.LoadXml("<xml><a/><b c=\"e\"/></xml>");
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(theDocument).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
     public class NotBeEquivalentTo
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_not_equivalent_to_som_other_xml_node_it_should_succeed()
         {
             // Arrange
@@ -502,13 +502,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsEqualTo(exp
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotEqualTo(unexpected));
+Synchronously.Verify(That(subject).IsNotEqualTo(unexpected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_an_xml_node_is_not_equivalent_to_same_xml_node_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -517,10 +517,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotEqualTo(unex
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(theDocument).IsNotEqualTo(theDocument).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(theDocument).IsNotEqualTo(theDocument).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

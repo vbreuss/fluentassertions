@@ -16,7 +16,7 @@ public class BooleanAssertionSpecs
             bool boolean = true;
 
             // Act / Assert
-            await Expect.That(boolean).IsTrue();
+            await That(boolean).IsTrue();
         }
 
         [Fact]
@@ -26,10 +26,10 @@ public class BooleanAssertionSpecs
             bool boolean = false;
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(boolean).IsTrue());
+            Action action = () => Synchronously.Verify(That(boolean).IsTrue());
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -37,10 +37,10 @@ public class BooleanAssertionSpecs
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsTrue().Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(false).IsTrue().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 
@@ -51,10 +51,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsTrue().Because($"
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsFalse());
+Synchronously.Verify(That(false).IsFalse());
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -62,10 +62,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsFalse());
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsFalse());
+Synchronously.Verify(That(true).IsFalse());
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -73,10 +73,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsFalse());
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsFalse().Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(true).IsFalse().Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 
@@ -87,10 +87,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsFalse().Because($"
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsEqualTo(false));
+Synchronously.Verify(That(false).IsEqualTo(false));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -98,10 +98,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsEqualTo(false));
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsEqualTo(true));
+Synchronously.Verify(That(false).IsEqualTo(true));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -109,10 +109,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsEqualTo(true));
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsEqualTo(true).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(false).IsEqualTo(true).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 
@@ -123,10 +123,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(false).IsEqualTo(true).Bec
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsNotEqualTo(false));
+Synchronously.Verify(That(true).IsNotEqualTo(false));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -134,10 +134,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsNotEqualTo(false))
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsNotEqualTo(true));
+Synchronously.Verify(That(true).IsNotEqualTo(true));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -145,10 +145,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsNotEqualTo(true));
         {
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsNotEqualTo(true).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(true).IsNotEqualTo(true).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 
@@ -161,7 +161,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsNotEqualTo(true).B
         public async Task Antecedent_implies_consequent(bool? antecedent, bool consequent)
         {
             // Act / Assert
-            await Expect.That(antecedent).Implies(consequent);
+            await That(antecedent).Implies(consequent);
         }
 
         [Theory]
@@ -171,10 +171,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(true).IsNotEqualTo(true).B
         public async Task Antecedent_does_not_imply_consequent(bool? antecedent, bool consequent)
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(antecedent).Implies(consequent).Because($"because we want to test the {"failure"}"));
+            Action act = () => Synchronously.Verify(That(antecedent).Implies(consequent).Because($"because we want to test the {"failure"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

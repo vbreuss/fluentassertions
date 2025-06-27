@@ -14,7 +14,7 @@ public partial class DateOnlyAssertionSpecs
         DateOnly? dateOnly = new(2016, 06, 04);
 
         // Act/Assert
-        await Expect.That(dateOnly).IsNotNull();
+        await That(dateOnly).IsNotNull();
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public partial class DateOnlyAssertionSpecs
         DateOnly? dateOnly = new(2016, 06, 04);
 
         // Act/Assert
-        await Expect.That(dateOnly).IsNotNull();
+        await That(dateOnly).IsNotNull();
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public partial class DateOnlyAssertionSpecs
         DateOnly? dateOnly = null;
 
         // Act/Assert
-        await Expect.That(dateOnly).IsNull();
+        await That(dateOnly).IsNull();
     }
 
     [Fact]
@@ -45,7 +45,7 @@ public partial class DateOnlyAssertionSpecs
         DateOnly? nullableDateOnly = new(2016, 06, 04);
 
         // Act/Assert
-        await Expect.That(nullableDateOnly).IsNotNull();
+        await That(nullableDateOnly).IsNotNull();
     }
 
     [Fact]
@@ -58,7 +58,7 @@ public partial class DateOnlyAssertionSpecs
         Action action = () => someDateOnly.Should().Equals(someDateOnly);
 
         // Assert
-        await Expect.That(action).Throws<NotSupportedException>();
+        await That(action).Throws<NotSupportedException>();
     }
 }
 

@@ -16,10 +16,10 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly value = new(15, 12, 20);
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(value.AddHours(1), value.AddMinutes(-1)));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(value.AddHours(1), value.AddMinutes(-1)));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -29,7 +29,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly value = new(15, 12, 30);
 
             // Act/Assert
-            await Expect.That(value).IsOneOf(new TimeOnly(4, 1, 30), new TimeOnly(15, 12, 30));
+            await That(value).IsOneOf(new TimeOnly(4, 1, 30), new TimeOnly(15, 12, 30));
         }
 
         [Fact]
@@ -39,10 +39,10 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly? value = null;
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(new TimeOnly(15, 1, 30), new TimeOnly(5, 4, 10, 123)));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(new TimeOnly(15, 1, 30), new TimeOnly(5, 4, 10, 123)));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -52,7 +52,7 @@ public partial class TimeOnlyAssertionSpecs
             TimeOnly? value = null;
 
             // Act/Assert
-            await Expect.That(value).IsOneOf(new TimeOnly(15, 1, 30), null);
+            await That(value).IsOneOf(new TimeOnly(15, 1, 30), null);
         }
     }
 }

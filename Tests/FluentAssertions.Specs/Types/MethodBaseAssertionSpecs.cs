@@ -21,7 +21,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().Return(typeof(int));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -35,7 +35,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().Return(typeof(string), "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the return type of method IntMethod to be System.String because we want to test the " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the return type of method IntMethod to be System.String because we want to test the " +
                     "error message, but it is \"System.Int32\".").AsWildcard();
         }
 
@@ -50,7 +50,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().Return(typeof(string), "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the return type of method VoidMethod to be System.String because we want to test the " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the return type of method VoidMethod to be System.String because we want to test the " +
                     "error message, but it is \"System.Void\".").AsWildcard();
         }
 
@@ -65,7 +65,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().Return(typeof(string), "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -79,7 +79,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().Return(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -96,7 +96,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturn(typeof(string));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -110,7 +110,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturn(typeof(int), "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the return type of*IntMethod*not to be System.Int32*because we want to test the " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the return type of*IntMethod*not to be System.Int32*because we want to test the " +
                     "error message, but it is.").AsWildcard();
         }
 
@@ -125,7 +125,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturn(typeof(string), "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -139,7 +139,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturn(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -156,7 +156,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().Return<int>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -170,7 +170,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().Return<string>("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the return type of method IntMethod to be System.String because we want to test the " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the return type of method IntMethod to be System.String because we want to test the " +
                     "error message, but it is \"System.Int32\".").AsWildcard();
         }
 
@@ -185,7 +185,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().Return<string>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -202,7 +202,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturn<string>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -216,7 +216,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturn<int>("we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the return type of*IntMethod*not to be System.Int32*because we want to test the " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the return type of*IntMethod*not to be System.Int32*because we want to test the " +
                     "error message, but it is.").AsWildcard();
         }
 
@@ -231,7 +231,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturn<string>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -248,7 +248,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().ReturnVoid();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -262,7 +262,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().ReturnVoid("because we want to test the error message {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the return type of method IntMethod to be void because we want to test the error message " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the return type of method IntMethod to be void because we want to test the error message " +
                     "message, but it is \"System.Int32\".").AsWildcard();
         }
 
@@ -277,7 +277,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().ReturnVoid("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -294,7 +294,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturnVoid();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -308,7 +308,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturnVoid("because we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -322,7 +322,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotReturnVoid("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -339,7 +339,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().HaveAccessModifier(CSharpAccessModifier.Private);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -353,7 +353,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().HaveAccessModifier(CSharpAccessModifier.PrivateProtected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -368,7 +368,7 @@ public class MethodBaseAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Protected, "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method TestClass.PrivateMethod to be Protected because we want to test the error message, but it is " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method TestClass.PrivateMethod to be Protected because we want to test the error message, but it is " +
                     "Private.").AsWildcard();
         }
 
@@ -385,7 +385,7 @@ public class MethodBaseAssertionSpecs
                 setMethod.Should().HaveAccessModifier(CSharpAccessModifier.Protected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -403,7 +403,7 @@ public class MethodBaseAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Public, "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method TestClass.set_ProtectedSetProperty to be Public because we want to test the error message, but it" +
+            await That(act).Throws<XunitException>().WithMessage("Expected method TestClass.set_ProtectedSetProperty to be Public because we want to test the error message, but it" +
                     " is Protected.").AsWildcard();
         }
 
@@ -420,7 +420,7 @@ public class MethodBaseAssertionSpecs
                 getMethod.Should().HaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -438,7 +438,7 @@ public class MethodBaseAssertionSpecs
                     .HaveAccessModifier(CSharpAccessModifier.Internal, "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method TestClass.get_PublicGetProperty to be Internal because we want to test the error message, but it" +
+            await That(act).Throws<XunitException>().WithMessage("Expected method TestClass.get_PublicGetProperty to be Internal because we want to test the error message, but it" +
                     " is Public.").AsWildcard();
         }
 
@@ -453,7 +453,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().HaveAccessModifier(CSharpAccessModifier.Internal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -468,7 +468,7 @@ public class MethodBaseAssertionSpecs
                     " error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method TestClass.InternalMethod to be ProtectedInternal because we want to test the error message, but" +
+            await That(act).Throws<XunitException>().WithMessage("Expected method TestClass.InternalMethod to be ProtectedInternal because we want to test the error message, but" +
                     " it is Internal.").AsWildcard();
         }
 
@@ -483,7 +483,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().HaveAccessModifier(CSharpAccessModifier.ProtectedInternal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -497,7 +497,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().HaveAccessModifier(CSharpAccessModifier.Private, "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected method TestClass.ProtectedInternalMethod to be Private because we want to test the error message, but it is " +
+            await That(act).Throws<XunitException>().WithMessage("Expected method TestClass.ProtectedInternalMethod to be Private because we want to test the error message, but it is " +
                     "ProtectedInternal.").AsWildcard();
         }
 
@@ -512,7 +512,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().HaveAccessModifier(CSharpAccessModifier.Public, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -526,7 +526,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().HaveAccessModifier((CSharpAccessModifier)int.MaxValue);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentOutOfRangeException>();
+            await That(act).ThrowsExactly<ArgumentOutOfRangeException>();
         }
     }
 
@@ -543,7 +543,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotHaveAccessModifier(CSharpAccessModifier.Protected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -557,7 +557,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotHaveAccessModifier(CSharpAccessModifier.PrivateProtected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -572,7 +572,7 @@ public class MethodBaseAssertionSpecs
                     .NotHaveAccessModifier(CSharpAccessModifier.Private, "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -587,7 +587,7 @@ public class MethodBaseAssertionSpecs
                 setMethod.Should().NotHaveAccessModifier(CSharpAccessModifier.Internal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -604,7 +604,7 @@ public class MethodBaseAssertionSpecs
                     .NotHaveAccessModifier(CSharpAccessModifier.Protected, "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -619,7 +619,7 @@ public class MethodBaseAssertionSpecs
                 getMethod.Should().NotHaveAccessModifier(CSharpAccessModifier.Private);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -634,7 +634,7 @@ public class MethodBaseAssertionSpecs
                 setMethod.Should().NotHaveAccessModifier(CSharpAccessModifier.Private);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -651,7 +651,7 @@ public class MethodBaseAssertionSpecs
                     .NotHaveAccessModifier(CSharpAccessModifier.Public, "we want to test the error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -665,7 +665,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotHaveAccessModifier(CSharpAccessModifier.ProtectedInternal);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -680,7 +680,7 @@ public class MethodBaseAssertionSpecs
                     " error {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -694,7 +694,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotHaveAccessModifier(CSharpAccessModifier.Public);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -709,7 +709,7 @@ public class MethodBaseAssertionSpecs
                     "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -724,7 +724,7 @@ public class MethodBaseAssertionSpecs
                     CSharpAccessModifier.Public, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -738,7 +738,7 @@ public class MethodBaseAssertionSpecs
                 methodInfo.Should().NotHaveAccessModifier((CSharpAccessModifier)int.MaxValue);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentOutOfRangeException>();
+            await That(act).ThrowsExactly<ArgumentOutOfRangeException>();
         }
     }
 }

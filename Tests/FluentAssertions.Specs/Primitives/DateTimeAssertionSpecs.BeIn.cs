@@ -20,7 +20,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeIn(DateTimeKind.Local);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -33,7 +33,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeIn(DateTimeKind.Utc);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -46,7 +46,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().BeIn(DateTimeKind.Utc);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -72,7 +72,7 @@ public partial class DateTimeAssertionSpecs
             Action act = () => subject.Should().NotBeIn(DateTimeKind.Local);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -89,7 +89,7 @@ public partial class DateTimeAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

@@ -15,7 +15,7 @@ public class ActionAssertionSpecs
             Action subject = () => throw exception;
 
             // Act / Assert
-            await Expect.That(subject).Throws<Exception>();
+            await That(subject).Throws<Exception>();
         }
     }
 
@@ -28,7 +28,7 @@ public class ActionAssertionSpecs
             Action subject = () => { };
 
             // Act / Assert
-            await Expect.That(subject).DoesNotThrow();
+            await That(subject).DoesNotThrow();
         }
     }
 }

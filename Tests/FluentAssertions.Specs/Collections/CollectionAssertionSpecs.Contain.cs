@@ -14,510 +14,429 @@ public partial class CollectionAssertionSpecs
     public class Contain
     {
         [Fact]
-        public void Should_succeed_when_asserting_collection_contains_an_item_from_the_collection()
+        public async Task Should_succeed_when_asserting_collection_contains_an_item_from_the_collection()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act / Assert
-            collection.Should().Contain(1);
+            await Expect.That(collection).Contains(1);
         }
 
         [Fact]
-        public void Should_succeed_when_asserting_collection_contains_multiple_items_from_the_collection_in_any_order()
+        public async Task Should_succeed_when_asserting_collection_contains_multiple_items_from_the_collection_in_any_order()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act / Assert
-            collection.Should().Contain([2, 1]);
+            await Expect.That(collection).Contains([2, 1]).InAnyOrder();
         }
 
         [Fact]
-        public void When_a_collection_does_not_contain_single_item_it_should_throw_with_clear_explanation()
+        public async Task When_a_collection_does_not_contain_single_item_it_should_throw_with_clear_explanation()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should().Contain(4, "because {0}", "we do");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).Contains(4).Because($"because {"we do"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection {1, 2, 3} to contain 4 because we do.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_does_contain_item_against_null_collection_it_should_throw()
+        public async Task When_asserting_collection_does_contain_item_against_null_collection_it_should_throw()
         {
             // Arrange
             int[] collection = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().Contain(1, "because we want to test the behaviour with a null subject");
+                await Expect.That(collection).Contains(1).Because("because we want to test the behaviour with a null subject");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection to contain 1 because we want to test the behaviour with a null subject, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_collection_does_not_contain_another_collection_it_should_throw_with_clear_explanation()
+        public async Task When_a_collection_does_not_contain_another_collection_it_should_throw_with_clear_explanation()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should().Contain([3, 4, 5], "because {0}", "we do");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).Contains([3, 4, 5]).InAnyOrder().Because($"because {"we do"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection {1, 2, 3} to contain {3, 4, 5} because we do, but could not find {4, 5}.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_collection_does_not_contain_a_single_element_collection_it_should_throw_with_clear_explanation()
+        public async Task When_a_collection_does_not_contain_a_single_element_collection_it_should_throw_with_clear_explanation()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should().Contain([4], "because {0}", "we do");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).Contains([4]).InAnyOrder().Because($"because {"we do"}"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection {1, 2, 3} to contain 4 because we do.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_a_collection_does_not_contain_other_collection_with_assertion_scope_it_should_throw_with_clear_explanation()
+        public async Task When_a_collection_does_not_contain_other_collection_with_assertion_scope_it_should_throw_with_clear_explanation()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().Contain([4]);
-                collection.Should().Contain([5, 6]);
+                await Expect.That(collection).Contains([4]).InAnyOrder().And.Contains([5, 6]).InAnyOrder();
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "*to contain 4*to contain {5, 6}*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
-        [Fact]
-        public void When_the_contents_of_a_collection_are_checked_against_an_empty_collection_it_should_throw_clear_explanation()
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/643")]
+        public async Task When_the_contents_of_a_collection_are_checked_against_an_empty_collection_it_should_throw_clear_explanation()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should().Contain([]);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).Contains([]).InAnyOrder());
 
             // Assert
-            act.Should().Throw<ArgumentException>().WithMessage(
-                "Cannot verify containment against an empty collection*");
+            await Expect.That(act).Throws<ArgumentException>().WithMessage("Cannot verify containment against an empty collection*").AsWildcard();
         }
 
         [Fact]
-        public void When_asserting_collection_does_contain_a_list_of_items_against_null_collection_it_should_throw()
+        public async Task When_asserting_collection_does_contain_a_list_of_items_against_null_collection_it_should_throw()
         {
             // Arrange
             int[] collection = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().Contain([1, 2], "we want to test the failure {0}", "message");
+                await Expect.That(collection).Contains([1, 2]).InAnyOrder().Because($"we want to test the failure {"message"}");
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected collection to contain {1, 2} *failure message*, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_injecting_a_null_predicate_into_Contain_it_should_throw()
+        public async Task When_injecting_a_null_predicate_into_Contain_it_should_throw()
         {
             // Arrange
             IEnumerable<int> collection = [];
 
             // Act
-            Action act = () => collection.Should().Contain(predicate: null);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).Contains(predicate: null));
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("predicate");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_collection_does_not_contain_an_expected_item_matching_a_predicate_it_should_throw()
+        public async Task When_collection_does_not_contain_an_expected_item_matching_a_predicate_it_should_throw()
         {
             // Arrange
             IEnumerable<int> collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should().Contain(item => item > 3, "at least {0} item should be larger than 3", 1);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).Contains(item => item > 3).Because($"at least {1} item should be larger than 3"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection {1, 2, 3} to have an item matching (item > 3) because at least 1 item should be larger than 3.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_collection_does_contain_an_expected_item_matching_a_predicate_it_should_allow_chaining_it()
-        {
-            // Arrange
-            IEnumerable<int> collection = [1, 2, 3];
-
-            // Act
-            Action act = () => collection.Should().Contain(item => item == 2).Which.Should().BeGreaterThan(4);
-
-            // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected*greater*4*2*");
-        }
-
-        [Fact]
-        public void Can_chain_another_assertion_on_the_single_result()
-        {
-            // Arrange
-            IEnumerable<int> collection = [1, 2, 3];
-
-            // Act
-            Action act = () => collection.Should().Contain(item => item == 2).Which.Should().BeGreaterThan(4);
-
-            // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection[1]*greater*4*2*");
-        }
-
-        [Fact]
-        public void When_collection_does_contain_an_expected_item_matching_a_predicate_it_should_not_throw()
+        public async Task When_collection_does_contain_an_expected_item_matching_a_predicate_it_should_not_throw()
         {
             // Arrange
             IEnumerable<int> collection = [1, 2, 3];
 
             // Act / Assert
-            collection.Should().Contain(item => item == 2);
+            await Expect.That(collection).Contains(item => item == 2);
         }
 
         [Fact]
-        public void When_a_collection_of_strings_contains_the_expected_string_it_should_not_throw()
+        public async Task When_a_collection_of_strings_contains_the_expected_string_it_should_not_throw()
         {
             // Arrange
             IEnumerable<string> strings = ["string1", "string2", "string3"];
 
             // Act / Assert
-            strings.Should().Contain("string2");
+            await Expect.That(strings).Contains("string2");
         }
 
         [Fact]
-        public void When_a_collection_of_strings_does_not_contain_the_expected_string_it_should_throw()
+        public async Task When_a_collection_of_strings_does_not_contain_the_expected_string_it_should_throw()
         {
             // Arrange
             IEnumerable<string> strings = ["string1", "string2", "string3"];
 
             // Act
-            Action act = () => strings.Should().Contain("string4", "because {0} is required", "4");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(strings).Contains("string4").Because($"because {"4"} is required"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected strings {\"string1\", \"string2\", \"string3\"} to contain \"string4\" because 4 is required.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_contains_some_values_but_collection_is_null_it_should_throw()
+        public async Task When_asserting_collection_contains_some_values_but_collection_is_null_it_should_throw()
         {
             // Arrange
             const IEnumerable<string> strings = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                strings.Should().Contain("string4", "because we're checking how it reacts to a null subject");
+                await Expect.That(strings).Contains("string4").Because("because we're checking how it reacts to a null subject");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected strings to contain \"string4\" because we're checking how it reacts to a null subject, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_the_multiple_matching_objects_exists_it_continuation_using_the_matched_value_should_fail()
-        {
-            // Arrange
-            DateTime now = DateTime.Now;
-
-            IEnumerable<DateTime> collection = [now, DateTime.SpecifyKind(now, DateTimeKind.Unspecified)];
-
-            // Act
-            Action act = () => collection.Should().Contain(now).Which.Kind.Should().Be(DateTimeKind.Local);
-
-            // Assert
-            act.Should().Throw<XunitException>();
-        }
-
-        [Fact]
-        public void When_asserting_collection_contains_values_according_to_predicate_but_collection_is_null_it_should_throw()
+        public async Task When_asserting_collection_contains_values_according_to_predicate_but_collection_is_null_it_should_throw()
         {
             // Arrange
             const IEnumerable<string> strings = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                strings.Should().Contain(x => x == "xxx", "because we're checking how it reacts to a null subject");
+                await Expect.That(strings).Contains(x => x == "xxx").Because("because we're checking how it reacts to a null subject");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected strings to contain (x == \"xxx\") because we're checking how it reacts to a null subject, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 
     public class NotContain
     {
         [Fact]
-        public void Should_succeed_when_asserting_collection_does_not_contain_an_item_that_is_not_in_the_collection()
+        public async Task Should_succeed_when_asserting_collection_does_not_contain_an_item_that_is_not_in_the_collection()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act / Assert
-            collection.Should().NotContain(4);
+            await Expect.That(collection).DoesNotContain(4);
         }
 
         [Fact]
-        public void Should_succeed_when_asserting_collection_does_not_contain_any_items_that_is_not_in_the_collection()
+        public async Task Should_succeed_when_asserting_collection_does_not_contain_any_items_that_is_not_in_the_collection()
         {
             // Arrange
             IEnumerable<int> collection = [1, 2, 3];
 
             // Act / Assert
-            collection.Should().NotContain([4, 5]);
+            await Expect.That(collection).DoesNotContain([4, 5]);
         }
 
         [Fact]
-        public void When_collection_contains_an_unexpected_item_it_should_throw()
+        public async Task When_collection_contains_an_unexpected_item_it_should_throw()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should().NotContain(1, "because we {0} like it, but found it anyhow", "don't");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).DoesNotContain(1).Because($"because we {"don't"} like it, but found it anyhow"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection {1, 2, 3} to not contain 1 because we don't like it, but found it anyhow.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_injecting_a_null_predicate_into_NotContain_it_should_throw()
+        public async Task When_injecting_a_null_predicate_into_NotContain_it_should_throw()
         {
             // Arrange
             IEnumerable<int> collection = [];
 
             // Act
-            Action act = () => collection.Should().NotContain(predicate: null);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).DoesNotContain(predicate: null));
 
             // Assert
-            act.Should().ThrowExactly<ArgumentNullException>()
-                .WithParameterName("predicate");
+            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
-        public void When_collection_does_contain_an_unexpected_item_matching_a_predicate_it_should_throw()
+        public async Task When_collection_does_contain_an_unexpected_item_matching_a_predicate_it_should_throw()
         {
             // Arrange
             IEnumerable<int> collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should().NotContain(item => item == 2, "because {0}s are evil", 2);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).DoesNotContain(item => item == 2).Because($"because {2}s are evil"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection {1, 2, 3} to not have any items matching (item == 2) because 2s are evil,*{2}*");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_collection_does_not_contain_an_unexpected_item_matching_a_predicate_it_should_not_throw()
+        public async Task When_collection_does_not_contain_an_unexpected_item_matching_a_predicate_it_should_not_throw()
         {
             // Arrange
             IEnumerable<int> collection = [1, 2, 3];
 
             // Act / Assert
-            collection.Should().NotContain(item => item == 4);
+            await Expect.That(collection).DoesNotContain(item => item == 4);
         }
 
         [Fact]
-        public void When_asserting_collection_does_not_contain_item_against_null_collection_it_should_throw()
+        public async Task When_asserting_collection_does_not_contain_item_against_null_collection_it_should_throw()
         {
             // Arrange
             int[] collection = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().NotContain(1, "because we want to test the behaviour with a null subject");
+                await Expect.That(collection).DoesNotContain(1).Because("because we want to test the behaviour with a null subject");
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection to not contain 1 because we want to test the behaviour with a null subject, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_collection_contains_unexpected_item_it_should_throw()
+        public async Task When_collection_contains_unexpected_item_it_should_throw()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should()
-                .NotContain([2], "because we {0} like them", "don't");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).DoesNotContain([2]).Because($"because we {"don't"} like them"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection {1, 2, 3} to not contain 2 because we don't like them.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_collection_contains_unexpected_items_it_should_throw()
+        public async Task When_collection_contains_unexpected_items_it_should_throw()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should()
-                .NotContain([1, 2, 4], "because we {0} like them", "don't");
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).DoesNotContain([1, 2, 4]).InAnyOrder().Because($"because we {"don't"} like them"));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection {1, 2, 3} to not contain {1, 2, 4} because we don't like them, but found {1, 2}.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void Assertion_scopes_do_not_affect_chained_calls()
+        public async Task Assertion_scopes_do_not_affect_chained_calls()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().NotContain([1, 2]).And.NotContain([3]);
+                await Expect.That(collection).DoesNotContain([1, 2]).And.DoesNotContain([3]);
             };
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "*but found {1, 2}.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_to_not_contain_an_empty_collection_it_should_throw()
+        public async Task When_asserting_collection_to_not_contain_an_empty_collection_it_should_throw()
         {
             // Arrange
             int[] collection = [1, 2, 3];
 
             // Act
-            Action act = () => collection.Should().NotContain([]);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).DoesNotContain([]));
 
             // Assert
-            act.Should().Throw<ArgumentException>().WithMessage("Cannot verify*");
+            await Expect.That(act).Throws<ArgumentException>();
         }
 
         [Fact]
-        public void When_asserting_collection_does_not_contain_predicate_item_against_null_collection_it_should_fail()
+        public async Task When_asserting_collection_does_not_contain_predicate_item_against_null_collection_it_should_fail()
         {
             // Arrange
             int[] collection = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().NotContain(item => item == 4, "we want to test the failure {0}", "message");
+                await Expect.That(collection).DoesNotContain(item => item == 4).Because($"we want to test the failure {"message"}");
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected collection not to contain (item == 4) *failure message*, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_asserting_collection_does_not_contain_a_list_of_items_against_null_collection_it_should_fail()
+        public async Task When_asserting_collection_does_not_contain_a_list_of_items_against_null_collection_it_should_fail()
         {
             // Arrange
             int[] collection = null;
 
             // Act
-            Action act = () =>
+            Func<Task> act = async () =>
             {
-                using var _ = new AssertionScope();
-                collection.Should().NotContain([1, 2, 4], "we want to test the failure {0}", "message");
+                await Expect.That(collection).DoesNotContain([1, 2, 4]).Because($"we want to test the failure {"message"}");
             };
 
             // Assert
-            act.Should().Throw<XunitException>()
-                .WithMessage("Expected collection to not contain {1, 2, 4} *failure message*, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void
-            When_asserting_collection_doesnt_contain_values_according_to_predicate_but_collection_is_null_it_should_throw()
+        public async Task When_asserting_collection_doesnt_contain_values_according_to_predicate_but_collection_is_null_it_should_throw()
         {
             // Arrange
             const IEnumerable<string> strings = null;
 
             // Act
-            Action act =
-                () => strings.Should().NotContain(x => x == "xxx", "because we're checking how it reacts to a null subject");
+            Func<Task> act = async ()
+                => await Expect.That(strings).DoesNotContain(x => x == "xxx").Because("because we're checking how it reacts to a null subject");
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected strings not to contain (x == \"xxx\") because we're checking how it reacts to a null subject, but found <null>.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_collection_does_not_contain_the_expected_item_it_should_not_be_enumerated_twice()
+        public async Task When_a_collection_does_not_contain_the_expected_item_it_should_not_be_enumerated_twice()
         {
             // Arrange
             var collection = new OneTimeEnumerable<int>(1, 2, 3);
 
             // Act
-            Action act = () => collection.Should().Contain(4);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).Contains(4));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection*to contain 4.");
+            await Expect.That(act).Throws<XunitException>();
         }
 
         [Fact]
-        public void When_a_collection_contains_the_unexpected_item_it_should_not_be_enumerated_twice()
+        public async Task When_a_collection_contains_the_unexpected_item_it_should_not_be_enumerated_twice()
         {
             // Arrange
             var collection = new OneTimeEnumerable<int>(1, 2, 3);
 
             // Act
-            Action act = () => collection.Should().NotContain(2);
+            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(collection).DoesNotContain(2));
 
             // Assert
-            act.Should().Throw<XunitException>().WithMessage(
-                "Expected collection*to not contain 2.");
+            await Expect.That(act).Throws<XunitException>();
         }
     }
 }

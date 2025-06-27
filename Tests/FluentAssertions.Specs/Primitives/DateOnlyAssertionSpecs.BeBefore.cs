@@ -17,7 +17,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly subject = new(2016, 06, 04);
 
             // Act/Assert
-            await Expect.That(subject).IsNotBefore(expected);
+            await That(subject).IsNotBefore(expected);
         }
 
         [Fact]
@@ -28,10 +28,10 @@ public partial class DateOnlyAssertionSpecs
             DateOnly subject = new(2016, 06, 04);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsBefore(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsBefore(expected));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -42,7 +42,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly subject = new(2016, 06, 04);
 
             // Act/Assert
-            await Expect.That(subject).IsNotBefore(expected);
+            await That(subject).IsNotBefore(expected);
         }
 
         [Fact]
@@ -53,7 +53,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly expectation = new(2016, 06, 05);
 
             // Act/Assert
-            await Expect.That(subject).IsOnOrBefore(expectation);
+            await That(subject).IsOnOrBefore(expectation);
         }
 
         [Fact]
@@ -64,10 +64,10 @@ public partial class DateOnlyAssertionSpecs
             DateOnly expectation = new(2016, 06, 05);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotOnOrBefore(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotOnOrBefore(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -78,7 +78,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly expectation = new(2016, 06, 04);
 
             // Act/Assert
-            await Expect.That(subject).IsOnOrBefore(expectation);
+            await That(subject).IsOnOrBefore(expectation);
         }
 
         [Fact]
@@ -89,10 +89,10 @@ public partial class DateOnlyAssertionSpecs
             DateOnly expectation = new(2016, 06, 04);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotOnOrBefore(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsNotOnOrBefore(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -103,10 +103,10 @@ public partial class DateOnlyAssertionSpecs
             DateOnly expectation = new(2016, 06, 03);
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsOnOrBefore(expectation));
+            Action act = () => Synchronously.Verify(That(subject).IsOnOrBefore(expectation));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -117,7 +117,7 @@ public partial class DateOnlyAssertionSpecs
             DateOnly expectation = new(2016, 06, 03);
 
             // Act/Assert
-            await Expect.That(subject).IsNotOnOrBefore(expectation);
+            await That(subject).IsNotOnOrBefore(expectation);
         }
     }
 }

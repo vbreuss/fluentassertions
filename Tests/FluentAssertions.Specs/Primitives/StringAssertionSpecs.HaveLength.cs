@@ -36,7 +36,7 @@ public partial class StringAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -53,7 +53,7 @@ public partial class StringAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

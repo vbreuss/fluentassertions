@@ -23,7 +23,7 @@ public class TypeExtensionsSpecs
         bool result = type1.IsSameOrInherits(type2);
 
         // Assert
-        await Expect.That(result).IsTrue();
+        await That(result).IsTrue();
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class TypeExtensionsSpecs
         bool result = type1.IsSameOrInherits(type2);
 
         // Assert
-        await Expect.That(result).IsTrue();
+        await That(result).IsTrue();
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public class TypeExtensionsSpecs
         bool result = type1.IsSameOrInherits(type2);
 
         // Assert
-        await Expect.That(result).IsFalse();
+        await That(result).IsFalse();
     }
 
     [Fact]
@@ -65,7 +65,7 @@ public class TypeExtensionsSpecs
         bool result = type1.IsSameOrInherits(type2);
 
         // Assert
-        await Expect.That(result).IsFalse();
+        await That(result).IsFalse();
     }
 
     [Fact]
@@ -79,7 +79,7 @@ public class TypeExtensionsSpecs
         MethodInfo result = type1.GetExplicitConversionOperator(type1, type2);
 
         // Assert
-        await Expect.That(result).IsNull();
+        await That(result).IsNull();
     }
 
     [Fact]
@@ -93,7 +93,7 @@ public class TypeExtensionsSpecs
         MethodInfo result = type1.GetImplicitConversionOperator(type1, type2);
 
         // Assert
-        await Expect.That(result).IsNull();
+        await That(result).IsNull();
     }
 
     [Fact]
@@ -109,7 +109,7 @@ public class TypeExtensionsSpecs
         MethodInfo result = GetFakeConversionOperator(type, name, bindingAttr, returnType);
 
         // Assert
-        await Expect.That(result).IsNotNull();
+        await That(result).IsNotNull();
     }
 
     [Fact]
@@ -125,7 +125,7 @@ public class TypeExtensionsSpecs
         MethodInfo result = GetFakeConversionOperator(type, name, bindingAttr, returnType);
 
         // Assert
-        await Expect.That(result).IsNotNull();
+        await That(result).IsNotNull();
     }
 
     [Theory]

@@ -16,10 +16,10 @@ public partial class NumericAssertionSpecs
             int smallerValue = 1;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsGreaterThanOrEqualTo(smallerValue));
+            Action act = () => Synchronously.Verify(That(value).IsGreaterThanOrEqualTo(smallerValue));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -30,10 +30,10 @@ public partial class NumericAssertionSpecs
             int sameValue = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsGreaterThanOrEqualTo(sameValue));
+            Action act = () => Synchronously.Verify(That(value).IsGreaterThanOrEqualTo(sameValue));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -44,10 +44,10 @@ public partial class NumericAssertionSpecs
             int greaterValue = 3;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsGreaterThanOrEqualTo(greaterValue));
+            Action act = () => Synchronously.Verify(That(value).IsGreaterThanOrEqualTo(greaterValue));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -59,10 +59,10 @@ public partial class NumericAssertionSpecs
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsGreaterThanOrEqualTo(greaterValue).Because($"because we want to test the failure {"message"}"));
+                () => Synchronously.Verify(That(value).IsGreaterThanOrEqualTo(greaterValue).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -72,50 +72,50 @@ public partial class NumericAssertionSpecs
             int? value = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsGreaterThanOrEqualTo(0));
+            Action act = () => Synchronously.Verify(That(value).IsGreaterThanOrEqualTo(0));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task NaN_is_never_greater_than_or_equal_to_another_float()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(float.NaN).IsGreaterThanOrEqualTo(0));
+            Action act = () => Synchronously.Verify(That(float.NaN).IsGreaterThanOrEqualTo(0));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task A_float_cannot_be_greater_than_or_equal_to_NaN()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(3.4F).IsGreaterThanOrEqualTo(float.NaN));
+            Action act = () => Synchronously.Verify(That(3.4F).IsGreaterThanOrEqualTo(float.NaN));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task NaN_is_never_greater_or_equal_to_another_double()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(double.NaN).IsGreaterThanOrEqualTo(0));
+            Action act = () => Synchronously.Verify(That(double.NaN).IsGreaterThanOrEqualTo(0));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task A_double_can_never_be_greater_or_equal_to_NaN()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(3.4D).IsGreaterThanOrEqualTo(double.NaN));
+            Action act = () => Synchronously.Verify(That(3.4D).IsGreaterThanOrEqualTo(double.NaN));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -126,7 +126,7 @@ public partial class NumericAssertionSpecs
             int smallerValue = 1;
 
             // Act / Assert
-            await Expect.That(value).IsGreaterThanOrEqualTo(smallerValue);
+            await That(value).IsGreaterThanOrEqualTo(smallerValue);
         }
     }
 }

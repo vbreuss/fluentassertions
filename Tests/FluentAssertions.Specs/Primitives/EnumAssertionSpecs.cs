@@ -29,7 +29,7 @@ public class EnumAssertionSpecs
             TestEnum someObject = TestEnum.One | TestEnum.Two;
 
             // Act / Assert
-            await Expect.That(someObject).HasFlag(TestEnum.One);
+            await That(someObject).HasFlag(TestEnum.One);
         }
 
         [Fact]
@@ -39,10 +39,10 @@ public class EnumAssertionSpecs
             TestEnum? someObject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).HasFlag(TestEnum.Three));
+            Action act = () => Synchronously.Verify(That(someObject).HasFlag(TestEnum.Three));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -52,10 +52,10 @@ public class EnumAssertionSpecs
             TestEnum someObject = TestEnum.One | TestEnum.Two;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).HasFlag(TestEnum.Three).Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(someObject).HasFlag(TestEnum.Three).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -68,7 +68,7 @@ public class EnumAssertionSpecs
             TestEnum someObject = TestEnum.One | TestEnum.Two;
 
             // Act / Assert
-            await Expect.That(someObject).DoesNotHaveFlag(TestEnum.Three);
+            await That(someObject).DoesNotHaveFlag(TestEnum.Three);
         }
 
         [Fact]
@@ -78,10 +78,10 @@ public class EnumAssertionSpecs
             TestEnum someObject = TestEnum.One | TestEnum.Two;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).DoesNotHaveFlag(TestEnum.Two).Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(someObject).DoesNotHaveFlag(TestEnum.Two).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -91,10 +91,10 @@ public class EnumAssertionSpecs
             TestEnum? someObject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).DoesNotHaveFlag(TestEnum.Three));
+            Action act = () => Synchronously.Verify(That(someObject).DoesNotHaveFlag(TestEnum.Three));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
@@ -125,10 +125,10 @@ public class EnumAssertionSpecs
             MyEnum expected = MyEnum.One;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Theory]
@@ -137,10 +137,10 @@ public class EnumAssertionSpecs
         public async Task When_nullable_enums_are_equal_it_should_succeed(MyEnum? subject, MyEnum? expected)
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -151,10 +151,10 @@ public class EnumAssertionSpecs
             MyEnum expected = MyEnum.Two;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -165,10 +165,10 @@ public class EnumAssertionSpecs
             MyEnum expected = MyEnum.Two;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -178,10 +178,10 @@ public class EnumAssertionSpecs
         public async Task When_nullable_enums_are_equal_it_should_throw(MyEnum? subject, MyEnum? expected)
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -195,10 +195,10 @@ public class EnumAssertionSpecs
             MyEnum expected = MyEnum.Two;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsNotEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -209,10 +209,10 @@ public class EnumAssertionSpecs
             MyEnum expected = MyEnum.Two;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsNotEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Theory]
@@ -222,10 +222,10 @@ public class EnumAssertionSpecs
         public async Task When_nullable_enums_are_unequal_it_should_succeed(MyEnum? subject, MyEnum? expected)
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsNotEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -236,10 +236,10 @@ public class EnumAssertionSpecs
             MyEnum expected = MyEnum.One;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotEqualTo(expected).Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(subject).IsNotEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -248,10 +248,10 @@ public class EnumAssertionSpecs
         public async Task When_nullable_enums_are_unequal_it_should_throw(MyEnum? subject, MyEnum? expected)
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotEqualTo(expected).Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(subject).IsNotEqualTo(expected).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -270,7 +270,7 @@ public class EnumAssertionSpecs
             TestEnum someObject = TestEnum.One;
 
             // Act / Assert
-            await Expect.That(someObject).HasValue(1);
+            await That(someObject).HasValue(1);
         }
 
         [Fact]
@@ -280,10 +280,10 @@ public class EnumAssertionSpecs
             TestEnum? someObject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).HasValue(3));
+            Action act = () => Synchronously.Verify(That(someObject).HasValue(3));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -293,10 +293,10 @@ public class EnumAssertionSpecs
             TestEnum someObject = TestEnum.One;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).HasValue(3).Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(someObject).HasValue(3).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -306,10 +306,10 @@ public class EnumAssertionSpecs
             MyEnum? subject = MyEnum.One;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotNull());
+            Action act = () => Synchronously.Verify(That(subject).IsNotNull());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -319,10 +319,10 @@ public class EnumAssertionSpecs
             MyEnum? subject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotNull().Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(subject).IsNotNull().Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -335,7 +335,7 @@ public class EnumAssertionSpecs
             TestEnum someObject = TestEnum.One;
 
             // Act / Assert
-            await Expect.That(someObject).DoesNotHaveValue(3);
+            await That(someObject).DoesNotHaveValue(3);
         }
 
         [Fact]
@@ -345,10 +345,10 @@ public class EnumAssertionSpecs
             TestEnum someObject = TestEnum.One;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).DoesNotHaveValue(1).Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(someObject).DoesNotHaveValue(1).Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -358,10 +358,10 @@ public class EnumAssertionSpecs
             TestEnum? someObject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someObject).DoesNotHaveValue(3));
+            Action act = () => Synchronously.Verify(That(someObject).DoesNotHaveValue(3));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -371,10 +371,10 @@ public class EnumAssertionSpecs
             MyEnum? subject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNull());
+            Action act = () => Synchronously.Verify(That(subject).IsNull());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -384,10 +384,10 @@ public class EnumAssertionSpecs
             MyEnum? subject = MyEnum.One;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNull().Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(subject).IsNull().Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -404,7 +404,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().HaveSameValueAs(expected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -418,7 +418,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().HaveSameValueAs(expected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -432,7 +432,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().HaveSameValueAs(expected, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -444,7 +444,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().HaveSameValueAs(expected, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -461,7 +461,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().NotHaveSameValueAs(expected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Theory]
@@ -473,7 +473,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().NotHaveSameValueAs(expected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -487,7 +487,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().NotHaveSameValueAs(expected, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -501,7 +501,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().NotHaveSameValueAs(expected, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -524,7 +524,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().HaveSameNameAs(expected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -538,7 +538,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().HaveSameNameAs(expected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -552,7 +552,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().HaveSameNameAs(expected, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Theory]
@@ -564,7 +564,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().HaveSameNameAs(expected, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -581,7 +581,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().NotHaveSameNameAs(expected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Theory]
@@ -593,7 +593,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().NotHaveSameNameAs(expected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -607,7 +607,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().NotHaveSameNameAs(expected, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -621,7 +621,7 @@ public class EnumAssertionSpecs
             Action act = () => subject.Should().NotHaveSameNameAs(expected, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -640,10 +640,10 @@ public class EnumAssertionSpecs
             MyEnum? subject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNull());
+            Action act = () => Synchronously.Verify(That(subject).IsNull());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -653,10 +653,10 @@ public class EnumAssertionSpecs
             MyEnum? subject = MyEnum.One;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNull().Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(subject).IsNull().Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -669,10 +669,10 @@ public class EnumAssertionSpecs
             MyEnum? subject = MyEnum.One;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotNull());
+            Action act = () => Synchronously.Verify(That(subject).IsNotNull());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -682,10 +682,10 @@ public class EnumAssertionSpecs
             MyEnum? subject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotNull().Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(subject).IsNotNull().Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -711,7 +711,7 @@ public class EnumAssertionSpecs
             Action act = () => flags.Should().Match(x => x == BindingFlags.Static, "that's what we need");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -721,7 +721,7 @@ public class EnumAssertionSpecs
             Action act = () => BindingFlags.Public.Should().Match(null);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
     }
 
@@ -734,7 +734,7 @@ public class EnumAssertionSpecs
             BindingFlags flags = BindingFlags.Public;
 
             // Act / Assert
-            await Expect.That(flags).IsOneOf(BindingFlags.Public, BindingFlags.ExactBinding);
+            await That(flags).IsOneOf(BindingFlags.Public, BindingFlags.ExactBinding);
         }
 
         [Fact]
@@ -745,9 +745,9 @@ public class EnumAssertionSpecs
 
             // Act / Assert
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf(BindingFlags.Public, BindingFlags.ExactBinding).Because("that's what we need"));
+Synchronously.Verify(That(flags).IsOneOf(BindingFlags.Public, BindingFlags.ExactBinding).Because("that's what we need"));
 
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -757,9 +757,9 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf(BindingFlag
             BindingFlags flags = BindingFlags.DeclaredOnly;
 
             // Act / Assert
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf());
+            Action act = () => Synchronously.Verify(That(flags).IsOneOf());
 
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -772,7 +772,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf(BindingFlag
             var dayOfWeek = DayOfWeek.Monday;
 
             // Act / Assert
-            await Expect.That(dayOfWeek).IsDefined();
+            await That(dayOfWeek).IsDefined();
         }
 
         [Fact]
@@ -782,10 +782,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf(BindingFlag
             var dayOfWeek = (DayOfWeek)999;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dayOfWeek).IsDefined().Because($"we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(dayOfWeek).IsDefined().Because($"we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -795,10 +795,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf(BindingFlag
             MyEnum? subject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsDefined());
+            Action act = () => Synchronously.Verify(That(subject).IsDefined());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -811,7 +811,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf(BindingFlag
             var dayOfWeek = (DayOfWeek)999;
 
             // Act / Assert
-            await Expect.That(dayOfWeek).IsNotDefined();
+            await That(dayOfWeek).IsNotDefined();
         }
 
         [Fact]
@@ -821,10 +821,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf(BindingFlag
             var dayOfWeek = DayOfWeek.Monday;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dayOfWeek).IsNotDefined());
+            Action act = () => Synchronously.Verify(That(dayOfWeek).IsNotDefined());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -834,10 +834,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf(BindingFlag
             MyEnum? subject = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotDefined());
+            Action act = () => Synchronously.Verify(That(subject).IsNotDefined());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -853,7 +853,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(flags).IsOneOf(BindingFlag
             var action = () => subject.Should().Equals(null);
 
             // Assert
-            await Expect.That(action).Throws<NotSupportedException>();
+            await That(action).Throws<NotSupportedException>();
         }
     }
 }

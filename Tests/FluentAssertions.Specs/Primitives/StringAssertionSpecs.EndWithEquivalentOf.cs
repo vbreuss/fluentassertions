@@ -36,7 +36,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().EndWithEquivalentOf(expect, o => o.Using(comparer));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -112,7 +112,7 @@ public partial class StringAssertionSpecs
             Action act = () => "ABC".Should().EndWithEquivalentOf("ab", "because it should end");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -122,7 +122,7 @@ public partial class StringAssertionSpecs
             Action act = () => "ABC".Should().EndWithEquivalentOf(null);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -132,7 +132,7 @@ public partial class StringAssertionSpecs
             Action act = () => "ABC".Should().EndWithEquivalentOf("");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -142,7 +142,7 @@ public partial class StringAssertionSpecs
             Action act = () => "ABC".Should().EndWithEquivalentOf("00abc");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected string to end with equivalent of " +
+            await That(act).Throws<XunitException>().WithMessage("Expected string to end with equivalent of " +
                 "\"00abc\", but " +
                 "\"ABC\" is too short.").AsWildcard();
         }
@@ -161,7 +161,7 @@ public partial class StringAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -191,7 +191,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotEndWithEquivalentOf(expect, o => o.Using(comparer));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -205,7 +205,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotEndWithEquivalentOf(expect, o => o.IgnoringCase());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -219,7 +219,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotEndWithEquivalentOf(expect, o => o.IgnoringLeadingWhitespace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -233,7 +233,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotEndWithEquivalentOf(expect, o => o.IgnoringTrailingWhitespace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -247,7 +247,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotEndWithEquivalentOf(expect, o => o.IgnoringNewlineStyle());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -261,7 +261,7 @@ public partial class StringAssertionSpecs
                 value.Should().NotEndWithEquivalentOf("aB");
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -275,7 +275,7 @@ public partial class StringAssertionSpecs
                 value.Should().NotEndWithEquivalentOf("Bc", "because of some {0}", "reason");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -289,7 +289,7 @@ public partial class StringAssertionSpecs
                 value.Should().NotEndWithEquivalentOf(null);
 
             // Assert
-            await Expect.That(action).Throws<ArgumentNullException>();
+            await That(action).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -303,7 +303,7 @@ public partial class StringAssertionSpecs
                 value.Should().NotEndWithEquivalentOf("");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -320,7 +320,7 @@ public partial class StringAssertionSpecs
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

@@ -101,6 +101,6 @@ public class OccurrenceConstraintSpecs
             .FailWith($"Expected occurrence to be {constraint.Mode} {constraint.ExpectedCount}, but it was {occurrences}");
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 }

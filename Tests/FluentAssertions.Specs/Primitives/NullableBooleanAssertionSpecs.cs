@@ -14,7 +14,7 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = true;
 
         // Act / Assert
-        await Expect.That(nullableBoolean).IsNotNull();
+        await That(nullableBoolean).IsNotNull();
     }
 
     [Fact]
@@ -24,7 +24,7 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = true;
 
         // Act / Assert
-        await Expect.That(nullableBoolean).IsNotNull();
+        await That(nullableBoolean).IsNotNull();
     }
 
     [Fact]
@@ -34,10 +34,10 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotNull());
+        Action act = () => Synchronously.Verify(That(nullableBoolean).IsNotNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -47,10 +47,10 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotNull());
+        Action act = () => Synchronously.Verify(That(nullableBoolean).IsNotNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -60,10 +60,10 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableBoolean).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -73,10 +73,10 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableBoolean).IsNotNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -86,7 +86,7 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = null;
 
         // Act / Assert
-        await Expect.That(nullableBoolean).IsNull();
+        await That(nullableBoolean).IsNull();
     }
 
     [Fact]
@@ -96,7 +96,7 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = null;
 
         // Act / Assert
-        await Expect.That(nullableBoolean).IsNull();
+        await That(nullableBoolean).IsNull();
     }
 
     [Fact]
@@ -106,10 +106,10 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = true;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNull());
+        Action act = () => Synchronously.Verify(That(nullableBoolean).IsNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -119,10 +119,10 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = true;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNull());
+        Action act = () => Synchronously.Verify(That(nullableBoolean).IsNull());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -132,10 +132,10 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = true;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableBoolean).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -145,10 +145,10 @@ public class NullableBooleanAssertionSpecs
         bool? nullableBoolean = true;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNull().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullableBoolean).IsNull().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -159,10 +159,10 @@ public class NullableBooleanAssertionSpecs
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsFalse().Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableBoolean).IsFalse().Because($"we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -173,10 +173,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsFalse()
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsTrue().Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableBoolean).IsTrue().Because($"we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -188,10 +188,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsTrue().
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsEqualTo(differentNullableBoolean).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableBoolean).IsEqualTo(differentNullableBoolean).Because($"we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -203,10 +203,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsEqualTo
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotEqualTo(differentNullableBoolean).Because($"we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableBoolean).IsNotEqualTo(differentNullableBoolean).Because($"we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -218,10 +218,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotEqua
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsEqualTo(otherNullableBoolean));
+Synchronously.Verify(That(nullableBoolean).IsEqualTo(otherNullableBoolean));
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Fact]
@@ -233,10 +233,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsEqualTo
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotEqualTo(otherNullableBoolean));
+Synchronously.Verify(That(nullableBoolean).IsNotEqualTo(otherNullableBoolean));
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Fact]
@@ -247,10 +247,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableBoolean).IsNotEqua
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(trueBoolean).IsNotFalse());
+Synchronously.Verify(That(trueBoolean).IsNotFalse());
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Fact]
@@ -261,10 +261,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(trueBoolean).IsNotFalse())
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullValue).IsNotFalse());
+Synchronously.Verify(That(nullValue).IsNotFalse());
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Fact]
@@ -275,10 +275,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullValue).IsNotFalse());
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(falseBoolean).IsNotFalse().Because("we want to test the failure message"));
+Synchronously.Verify(That(falseBoolean).IsNotFalse().Because("we want to test the failure message"));
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -289,10 +289,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(falseBoolean).IsNotFalse()
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(trueBoolean).IsNotTrue());
+Synchronously.Verify(That(trueBoolean).IsNotTrue());
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Fact]
@@ -303,10 +303,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(trueBoolean).IsNotTrue());
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullValue).IsNotTrue());
+Synchronously.Verify(That(nullValue).IsNotTrue());
 
         // Assert
-        await Expect.That(action).DoesNotThrow();
+        await That(action).DoesNotThrow();
     }
 
     [Fact]
@@ -317,10 +317,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullValue).IsNotTrue());
 
         // Act
         Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(falseBoolean).IsNotTrue().Because("we want to test the failure message"));
+Synchronously.Verify(That(falseBoolean).IsNotTrue().Because("we want to test the failure message"));
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -330,6 +330,6 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(falseBoolean).IsNotTrue().
         bool? nullableBoolean = true;
 
         // Act / Assert
-        await Expect.That(nullableBoolean).IsNotNull();
+        await That(nullableBoolean).IsNotNull();
     }
 }

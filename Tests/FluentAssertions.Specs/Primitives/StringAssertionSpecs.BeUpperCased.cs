@@ -41,7 +41,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().BeUpperCased();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -74,7 +74,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().BeUpperCased("because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -87,7 +87,7 @@ public partial class StringAssertionSpecs
             Action act = () => nullString.Should().BeUpperCased("because strings should never be {0}", "null");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -133,7 +133,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotBeUpperCased();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -156,7 +156,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotBeUpperCased();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -179,7 +179,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotBeUpperCased("because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

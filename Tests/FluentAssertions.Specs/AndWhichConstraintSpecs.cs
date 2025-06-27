@@ -18,6 +18,6 @@ public class AndWhichConstraintSpecs
         Action act = () => _ = continuation.Which;
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 }

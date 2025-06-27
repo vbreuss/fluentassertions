@@ -27,7 +27,7 @@ public partial class TypeAssertionSpecs
                     .And.BeReadable(CSharpAccessModifier.Protected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -42,7 +42,7 @@ public partial class TypeAssertionSpecs
                 .Which.Should().NotBeWritable();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().Because("Expected property PrivateWriteProtectedReadProperty not to have a setter.");
+            await That(act).Throws<XunitException>().Because("Expected property PrivateWriteProtectedReadProperty not to have a setter.");
         }
 
         [Fact]
@@ -56,7 +56,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveProperty(typeof(string), "PublicProperty", "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -71,7 +71,7 @@ public partial class TypeAssertionSpecs
                     .HaveProperty(typeof(int), "PrivateWriteProtectedReadProperty", "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected property PrivateWriteProtectedReadProperty " +
+            await That(act).Throws<XunitException>().WithMessage("Expected property PrivateWriteProtectedReadProperty " +
                     "to be of type System.Int32 because we want to test the failure message, but it is not.").AsWildcard();
         }
 
@@ -86,7 +86,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveProperty(typeof(string), "PublicProperty", "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -100,7 +100,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveProperty(null, "PublicProperty");
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -114,7 +114,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveProperty(typeof(string), null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -128,7 +128,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveProperty(typeof(string), string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
@@ -149,7 +149,7 @@ public partial class TypeAssertionSpecs
                     .And.BeReadable(CSharpAccessModifier.Protected);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -163,7 +163,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveProperty<string>(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -177,7 +177,7 @@ public partial class TypeAssertionSpecs
                 type.Should().HaveProperty<string>(string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
@@ -193,7 +193,7 @@ public partial class TypeAssertionSpecs
             Action act = () => type.Should().NotHaveProperty("Property");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -207,7 +207,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveProperty("PrivateWriteProtectedReadProperty", "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -221,7 +221,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveProperty("PublicProperty", "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -235,7 +235,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveProperty(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -249,7 +249,7 @@ public partial class TypeAssertionSpecs
                 type.Should().NotHaveProperty(string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
     }
 }

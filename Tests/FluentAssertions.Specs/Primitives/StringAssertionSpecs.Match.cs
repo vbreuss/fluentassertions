@@ -21,7 +21,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().Match("h*earth!", "that's the universal greeting");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -34,7 +34,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().Match("h*world?");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -47,7 +47,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().Match(@"What\? Are you deaf\?");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -60,7 +60,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().Match("*World*");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -73,7 +73,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().Match(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -86,7 +86,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().Match("*");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -99,7 +99,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().Match(string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
     }
 
@@ -115,7 +115,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().NotMatch("*World*");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -128,7 +128,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().NotMatch("*world*", "because that's illegal");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -141,7 +141,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().NotMatch(null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -154,7 +154,7 @@ public partial class StringAssertionSpecs
             Action act = () => subject.Should().NotMatch(string.Empty);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentException>();
+            await That(act).ThrowsExactly<ArgumentException>();
         }
     }
 }

@@ -23,7 +23,7 @@ public class StringComparisonSpecs
 #pragma warning restore CA1309
 
         // Assert
-        await Expect.That(ordinal).IsNotEqualTo(currentCulture).Because("Turkish distinguishes between a dotted and a non-dotted 'i'");
+        await That(ordinal).IsNotEqualTo(currentCulture).Because("Turkish distinguishes between a dotted and a non-dotted 'i'");
     }
 
     [CulturedTheory("tr-TR")]
@@ -37,18 +37,17 @@ public class StringComparisonSpecs
 #pragma warning restore CA1309
 
         // Assert
-        await Expect.That(ordinal).IsNotEqualTo(currentCulture).Because("These two symbols happened to be culturewise identical on both ICU (net5.0, linux, macOS) and NLS (netfx and netcoreapp on windows)");
+        await That(ordinal).IsNotEqualTo(currentCulture).Because("These two symbols happened to be culturewise identical on both ICU (net5.0, linux, macOS) and NLS (netfx and netcoreapp on windows)");
     }
 
-    [CulturedTheory("tr-TR")]
-    [MemberData(nameof(EquivalencyData))]
+    [CulturedTheory("tr-TR", Skip = "https://github.com/aweXpect/aweXpect/issues/571")]
+    [InlineData("i", "I")]
     public async Task When_comparing_strings_for_equivalency_it_should_ignore_culture(string subject, string expected)
     {
-        // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEquivalentTo(expected));
+        Func<Task> Action = async ()
+            => await That(subject).IsEquivalentTo(expected);
 
-        // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(Action).DoesNotThrow();
     }
 
     [CulturedTheory("tr-TR")]
@@ -56,10 +55,10 @@ public class StringComparisonSpecs
     public async Task When_comparing_strings_for_equality_it_should_ignore_culture(string subject, string expected)
     {
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+        Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -67,10 +66,10 @@ public class StringComparisonSpecs
     public async Task When_comparing_strings_for_having_prefix_it_should_ignore_culture(string subject, string expected)
     {
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).StartsWith(expected));
+        Action act = () => Synchronously.Verify(That(subject).StartsWith(expected));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -78,10 +77,10 @@ public class StringComparisonSpecs
     public async Task When_comparing_strings_for_not_having_prefix_it_should_ignore_culture(string subject, string expected)
     {
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).DoesNotStartWith(expected));
+        Action act = () => Synchronously.Verify(That(subject).DoesNotStartWith(expected));
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [CulturedTheory("tr-TR")]
@@ -92,7 +91,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().StartWithEquivalentOf(expected);
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [CulturedTheory("tr-TR")]
@@ -103,7 +102,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().NotStartWithEquivalentOf(expected);
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -111,10 +110,10 @@ public class StringComparisonSpecs
     public async Task When_comparing_strings_for_having_suffix_it_should_ignore_culture(string subject, string expected)
     {
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).EndsWith(expected));
+        Action act = () => Synchronously.Verify(That(subject).EndsWith(expected));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -122,10 +121,10 @@ public class StringComparisonSpecs
     public async Task When_comparing_strings_for_not_having_suffix_it_should_ignore_culture(string subject, string expected)
     {
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).DoesNotEndWith(expected));
+        Action act = () => Synchronously.Verify(That(subject).DoesNotEndWith(expected));
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [CulturedTheory("tr-TR")]
@@ -136,7 +135,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().EndWithEquivalentOf(expected);
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [CulturedTheory("tr-TR")]
@@ -147,7 +146,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().NotEndWithEquivalentOf(expected);
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -158,7 +157,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().ContainEquivalentOf(expected);
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [CulturedTheory("tr-TR")]
@@ -169,7 +168,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().NotContainEquivalentOf(expected);
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -177,10 +176,10 @@ public class StringComparisonSpecs
     public async Task When_comparing_strings_for_containing_equal_it_should_ignore_culture(string subject, string expected)
     {
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).Contains(expected));
+        Action act = () => Synchronously.Verify(That(subject).Contains(expected));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -191,7 +190,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().ContainAll(expected);
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -202,7 +201,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().ContainAny(expected);
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -210,10 +209,10 @@ public class StringComparisonSpecs
     public async Task When_comparing_strings_for_containing_one_equal_it_should_ignore_culture(string subject, string expected)
     {
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).Contains(expected).Exactly(1));
+        Action act = () => Synchronously.Verify(That(subject).Contains(expected).Exactly(1));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]
@@ -224,7 +223,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().ContainEquivalentOf(expected, Exactly.Once());
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [CulturedTheory("tr-TR")]
@@ -232,10 +231,10 @@ public class StringComparisonSpecs
     public async Task When_comparing_strings_for_not_containing_equal_it_should_ignore_culture(string subject, string expected)
     {
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).DoesNotContain(expected));
+        Action act = () => Synchronously.Verify(That(subject).DoesNotContain(expected));
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [CulturedTheory("tr-TR")]
@@ -246,7 +245,7 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().NotContainAll(expected);
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [CulturedTheory("tr-TR")]
@@ -257,17 +256,17 @@ public class StringComparisonSpecs
         Action act = () => subject.Should().NotContainAny(expected);
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [CulturedFact("tr-TR")]
     public async Task When_formatting_reason_arguments_it_should_ignore_culture()
     {
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(1).IsEqualTo(2).Because($"{1.234}"));
+        Action act = () => Synchronously.Verify(That(1).IsEqualTo(2).Because($"{1.234}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedFact("tr-TR")]
@@ -316,7 +315,7 @@ public class StringComparisonSpecs
         Action act = () => strategy.ThrowIfAny(context);
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [CulturedTheory("tr-TR")]

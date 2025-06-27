@@ -33,7 +33,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -46,7 +46,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -85,7 +85,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -98,7 +98,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -138,7 +138,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -151,7 +151,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -191,7 +191,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -204,7 +204,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().BeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -246,7 +246,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -259,7 +259,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -298,7 +298,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -311,7 +311,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -351,7 +351,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -364,7 +364,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -404,7 +404,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -417,7 +417,7 @@ public partial class NumericAssertionSpecs
             Action act = () => actual.Should().NotBeNaN();
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]

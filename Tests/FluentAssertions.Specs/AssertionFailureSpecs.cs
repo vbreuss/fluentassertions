@@ -20,7 +20,7 @@ public class AssertionFailureSpecs
             assertions.AssertFail("because {0} should always fail.", AssertionsTestSubClassName);
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -34,7 +34,7 @@ public class AssertionFailureSpecs
             assertions.AssertFail("{0} should always fail.", AssertionsTestSubClassName);
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class AssertionFailureSpecs
             assertions.AssertFail("\r\nbecause {0} should always fail.", AssertionsTestSubClassName);
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public class AssertionFailureSpecs
             assertions.AssertFail("\r\n{0} should always fail.", AssertionsTestSubClassName);
 
         // Assert
-        await Expect.That(action).Throws<XunitException>();
+        await That(action).Throws<XunitException>();
     }
 
     internal class AssertionsTestSubClass

@@ -16,7 +16,7 @@ public partial class NumericAssertionSpecs
             int sameValue = 1;
 
             // Act
-            await Expect.That(value).IsEqualTo(sameValue);
+            await That(value).IsEqualTo(sameValue);
         }
 
         [Fact]
@@ -27,10 +27,10 @@ public partial class NumericAssertionSpecs
             int differentValue = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(differentValue).Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(differentValue).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -41,7 +41,7 @@ public partial class NumericAssertionSpecs
             int? nullableValue = 2;
 
             // Act
-            await Expect.That(value).IsEqualTo(nullableValue);
+            await That(value).IsEqualTo(nullableValue);
         }
 
         [Fact]
@@ -52,10 +52,10 @@ public partial class NumericAssertionSpecs
             int? nullableValue = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(nullableValue));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(nullableValue));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -65,10 +65,10 @@ public partial class NumericAssertionSpecs
             int? value = 2;
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That((int?)null).IsEqualTo(value));
+            Action action = () => Synchronously.Verify(That((int?)null).IsEqualTo(value));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [InlineData(0, 0)]
@@ -77,7 +77,7 @@ public partial class NumericAssertionSpecs
         public async Task A_nullable_value_is_equal_to_the_same_nullable_value(int? subject, int? expected)
         {
             // Act / Assert
-            await Expect.That(subject).IsEqualTo(expected);
+            await That(subject).IsEqualTo(expected);
         }
 
         [InlineData(0, 1)]
@@ -87,10 +87,10 @@ public partial class NumericAssertionSpecs
         public async Task A_nullable_value_is_not_equal_to_another_nullable_value(int? subject, int? expected)
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -101,10 +101,10 @@ public partial class NumericAssertionSpecs
             int expected = 1;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsEqualTo(expected));
+            Action act = () => Synchronously.Verify(That(subject).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -114,10 +114,10 @@ public partial class NumericAssertionSpecs
             float value = 3.5F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.4F).Because("we want to test the error message"));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.4F).Because("we want to test the error message"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -127,10 +127,10 @@ public partial class NumericAssertionSpecs
             float value = 3.5F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.5F));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.5F));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -140,10 +140,10 @@ public partial class NumericAssertionSpecs
             float? value = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.5F));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.5F));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -153,10 +153,10 @@ public partial class NumericAssertionSpecs
             double value = 3.5;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.4).Because("we want to test the error message"));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.4).Because("we want to test the error message"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -166,10 +166,10 @@ public partial class NumericAssertionSpecs
             double value = 3.5;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.5));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.5));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -179,10 +179,10 @@ public partial class NumericAssertionSpecs
             double? value = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.5));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.5));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -192,10 +192,10 @@ public partial class NumericAssertionSpecs
             decimal value = 3.5m;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.4m).Because("we want to test the error message"));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.4m).Because("we want to test the error message"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -205,10 +205,10 @@ public partial class NumericAssertionSpecs
             decimal value = 3.5m;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.5m));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.5m));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -219,10 +219,10 @@ public partial class NumericAssertionSpecs
             decimal someValue = 3.5m;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(someValue));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(someValue));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -232,10 +232,10 @@ public partial class NumericAssertionSpecs
             float value = float.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.4F));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.4F));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -245,7 +245,7 @@ public partial class NumericAssertionSpecs
             float value = float.NaN;
 
             // Act
-            await Expect.That(value).IsEqualTo(float.NaN);
+            await That(value).IsEqualTo(float.NaN);
         }
 
         [Fact]
@@ -255,10 +255,10 @@ public partial class NumericAssertionSpecs
             double value = double.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.4D));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.4D));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -268,7 +268,7 @@ public partial class NumericAssertionSpecs
             double value = double.NaN;
 
             // Act
-            await Expect.That(value).IsEqualTo(double.NaN);
+            await That(value).IsEqualTo(double.NaN);
         }
     }
 
@@ -280,7 +280,7 @@ public partial class NumericAssertionSpecs
         public async Task A_nullable_value_is_not_equal_to_another_value(int? subject, int unexpected)
         {
             // Act
-            await Expect.That(subject).IsNotEqualTo(unexpected);
+            await That(subject).IsNotEqualTo(unexpected);
         }
 
         [Fact]
@@ -291,10 +291,10 @@ public partial class NumericAssertionSpecs
             int sameValue = 1;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsNotEqualTo(sameValue).Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(value).IsNotEqualTo(sameValue).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [InlineData(null, null)]
@@ -303,10 +303,10 @@ public partial class NumericAssertionSpecs
         public async Task A_nullable_value_is_not_different_from_the_same_value(int? subject, int? unexpected)
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(subject).IsNotEqualTo(unexpected));
+            Action act = () => Synchronously.Verify(That(subject).IsNotEqualTo(unexpected));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [InlineData(0, 1)]
@@ -316,7 +316,7 @@ public partial class NumericAssertionSpecs
         public async Task A_nullable_value_is_different_from_another_value(int? subject, int? unexpected)
         {
             // Act / Assert
-            await Expect.That(subject).IsNotEqualTo(unexpected);
+            await That(subject).IsNotEqualTo(unexpected);
         }
     }
 
@@ -329,10 +329,10 @@ public partial class NumericAssertionSpecs
             byte value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -342,10 +342,10 @@ public partial class NumericAssertionSpecs
             sbyte value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -355,10 +355,10 @@ public partial class NumericAssertionSpecs
             short value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -368,10 +368,10 @@ public partial class NumericAssertionSpecs
             ushort value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -381,10 +381,10 @@ public partial class NumericAssertionSpecs
             uint value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -394,10 +394,10 @@ public partial class NumericAssertionSpecs
             long value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -407,10 +407,10 @@ public partial class NumericAssertionSpecs
             ulong value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
@@ -423,10 +423,10 @@ public partial class NumericAssertionSpecs
             byte? value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -436,10 +436,10 @@ public partial class NumericAssertionSpecs
             sbyte? value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -449,10 +449,10 @@ public partial class NumericAssertionSpecs
             short? value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -462,10 +462,10 @@ public partial class NumericAssertionSpecs
             ushort? value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -475,10 +475,10 @@ public partial class NumericAssertionSpecs
             uint? value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -488,10 +488,10 @@ public partial class NumericAssertionSpecs
             long? value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -501,10 +501,10 @@ public partial class NumericAssertionSpecs
             ulong? value = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(2));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 }

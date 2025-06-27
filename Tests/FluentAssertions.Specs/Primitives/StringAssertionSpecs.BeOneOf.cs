@@ -18,10 +18,10 @@ public partial class StringAssertionSpecs
             string value = "abc";
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf("def", "xyz"));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf("def", "xyz"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -31,10 +31,10 @@ public partial class StringAssertionSpecs
             string value = "abc";
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf(["def", "xyz"], "because those are the valid values"));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf(["def", "xyz"], "because those are the valid values"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -44,10 +44,10 @@ public partial class StringAssertionSpecs
             string value = "abc";
 
             // Act
-            Action action = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsOneOf("abc", "def", "xyz"));
+            Action action = () => Synchronously.Verify(That(value).IsOneOf("abc", "def", "xyz"));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
     }
 }

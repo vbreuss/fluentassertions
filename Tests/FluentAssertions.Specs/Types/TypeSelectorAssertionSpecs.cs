@@ -39,7 +39,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().BeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -72,7 +72,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().NotBeSealed("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -92,7 +92,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().BeDecoratedWith<DummyClassAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -111,7 +111,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().BeDecoratedWith<DummyClassAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to be decorated with *.DummyClassAttribute *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to be decorated with *.DummyClassAttribute *failure message*" +
                     ", but the attribute was not found on the following types:" +
                     "*\"*.ClassWithoutAttribute*.OtherClassWithoutAttribute\".").AsWildcard();
         }
@@ -127,7 +127,7 @@ public class TypeSelectorAssertionSpecs
                 .BeDecoratedWith<DummyClassAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -148,7 +148,7 @@ public class TypeSelectorAssertionSpecs
                         a => a.Name == "Expected" && a.IsEnabled, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to be decorated with *.DummyClassAttribute that matches " +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to be decorated with *.DummyClassAttribute that matches " +
                     "(a.Name == \"Expected\") * a.IsEnabled *failure message*, but no matching attribute was found on " +
                     "the following types:*\"*.ClassWithoutAttribute*.OtherClassWithoutAttribute\".").AsWildcard();
         }
@@ -170,7 +170,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().BeDecoratedWithOrInherit<DummyClassAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -189,7 +189,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().BeDecoratedWithOrInherit<DummyClassAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to be decorated with or inherit *.DummyClassAttribute *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to be decorated with or inherit *.DummyClassAttribute *failure message*" +
                     ", but the attribute was not found on the following types:" +
                     "*\"*.ClassWithoutAttribute*.OtherClassWithoutAttribute\".").AsWildcard();
         }
@@ -205,7 +205,7 @@ public class TypeSelectorAssertionSpecs
                 .BeDecoratedWithOrInherit<DummyClassAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -227,7 +227,7 @@ public class TypeSelectorAssertionSpecs
                         a => a.Name == "Expected" && a.IsEnabled, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to be decorated with or inherit *.DummyClassAttribute that matches " +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to be decorated with or inherit *.DummyClassAttribute that matches " +
                     "(a.Name == \"Expected\")*a.IsEnabled *failure message*, but no matching attribute was found " +
                     "on the following types:*\"*.ClassWithoutAttribute*.OtherClassWithoutAttribute\".").AsWildcard();
         }
@@ -250,7 +250,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().NotBeDecoratedWith<DummyClassAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -268,7 +268,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().NotBeDecoratedWith<DummyClassAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to not be decorated *.DummyClassAttribute *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to not be decorated *.DummyClassAttribute *failure message*" +
                     ", but the attribute was found on the following types:*\"*.ClassWithAttribute\".").AsWildcard();
         }
 
@@ -283,7 +283,7 @@ public class TypeSelectorAssertionSpecs
                 .NotBeDecoratedWith<DummyClassAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
 
         [Fact]
@@ -303,7 +303,7 @@ public class TypeSelectorAssertionSpecs
                         a => a.Name == "Expected" && a.IsEnabled, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to not be decorated with *.DummyClassAttribute that matches " +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to not be decorated with *.DummyClassAttribute that matches " +
                     "(a.Name == \"Expected\") * a.IsEnabled *failure message*, but a matching attribute was found " +
                     "on the following types:*\"*.ClassWithAttribute\".").AsWildcard();
         }
@@ -326,7 +326,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().NotBeDecoratedWithOrInherit<DummyClassAttribute>();
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -344,7 +344,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().NotBeDecoratedWithOrInherit<DummyClassAttribute>("we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to not be decorated with or inherit *.DummyClassAttribute *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to not be decorated with or inherit *.DummyClassAttribute *failure message*" +
                     ", but the attribute was found on the following types:*\"*.ClassWithInheritedAttribute\".").AsWildcard();
         }
 
@@ -360,7 +360,7 @@ public class TypeSelectorAssertionSpecs
                     a => a.Name == "Expected" && a.IsEnabled, "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to not be decorated with or inherit *.DummyClassAttribute that matches " +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to not be decorated with or inherit *.DummyClassAttribute that matches " +
                     "(a.Name == \"Expected\") * a.IsEnabled *failure message*, but a matching attribute was found " +
                     "on the following types:*\"*.ClassWithInheritedAttribute\".").AsWildcard();
         }
@@ -376,7 +376,7 @@ public class TypeSelectorAssertionSpecs
                 .NotBeDecoratedWithOrInherit<DummyClassAttribute>(a => a.Name == "Expected" && a.IsEnabled);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -390,7 +390,7 @@ public class TypeSelectorAssertionSpecs
                 .NotBeDecoratedWithOrInherit<DummyClassAttribute>(isMatchingAttributePredicate: null);
 
             // Assert
-            await Expect.That(act).ThrowsExactly<ArgumentNullException>();
+            await That(act).ThrowsExactly<ArgumentNullException>();
         }
     }
 
@@ -406,7 +406,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().BeInNamespace(nameof(DummyNamespace));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -425,7 +425,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().BeInNamespace(nameof(DummyNamespace), "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to be in namespace \"DummyNamespace\" *failure message*, but the following types " +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to be in namespace \"DummyNamespace\" *failure message*, but the following types " +
                     "are in a different namespace:*\"*.ClassNotInDummyNamespace*.OtherClassNotInDummyNamespace\".").AsWildcard();
         }
 
@@ -439,7 +439,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().BeInNamespace(null);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -452,7 +452,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().BeInNamespace(nameof(DummyNamespace));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to be in namespace \"DummyNamespace\", but the following types " +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to be in namespace \"DummyNamespace\", but the following types " +
                     "are in a different namespace:*\"ClassInGlobalNamespace\".").AsWildcard();
         }
 
@@ -471,7 +471,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().BeInNamespace(null);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected all types to be in namespace <null>, but the following types are in a different namespace:" +
+            await That(act).Throws<XunitException>().WithMessage("Expected all types to be in namespace <null>, but the following types are in a different namespace:" +
                     "*\"*.ClassInDummyNamespace*.ClassNotInDummyNamespace*.OtherClassNotInDummyNamespace\".").AsWildcard();
         }
     }
@@ -489,7 +489,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().NotBeInNamespace($"{nameof(DummyNamespace)}.{nameof(DummyNamespace.InnerDummyNamespace)}");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -502,7 +502,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().NotBeInNamespace(nameof(DummyNamespace));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -521,7 +521,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().NotBeInNamespace(nameof(DummyNamespace), "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected no types to be in namespace \"DummyNamespace\" *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected no types to be in namespace \"DummyNamespace\" *failure message*" +
                     ", but the following types are in the namespace:*\"DummyNamespace.ClassInDummyNamespace\".").AsWildcard();
         }
     }
@@ -538,7 +538,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().BeUnderNamespace(nameof(DummyNamespace));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -552,7 +552,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().BeUnderNamespace($"{nameof(DummyNamespace)}.{nameof(DummyNamespace.InnerDummyNamespace)}");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -565,7 +565,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().BeUnderNamespace(nameof(DummyNamespace));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -578,7 +578,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().BeUnderNamespace(null);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -596,7 +596,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().BeUnderNamespace(null);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -610,7 +610,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().BeUnderNamespace(nameof(DummyNamespace), "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to start with \"DummyNamespace\" *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to start with \"DummyNamespace\" *failure message*" +
                     ", but the namespaces of the following types do not start with it:*\"*.ClassInDummyNamespaceTwo\".").AsWildcard();
         }
 
@@ -629,7 +629,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().BeUnderNamespace($"{nameof(DummyNamespace)}.{nameof(DummyNamespace.InnerDummyNamespace)}");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to start with \"DummyNamespace.InnerDummyNamespace\"" +
+            await That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to start with \"DummyNamespace.InnerDummyNamespace\"" +
                     ", but the namespaces of the following types do not start with it:*\"*.ClassInDummyNamespace\".").AsWildcard();
         }
     }
@@ -652,7 +652,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().NotBeUnderNamespace($"{nameof(DummyNamespace)}.{nameof(DummyNamespace.InnerDummyNamespace)}");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -666,7 +666,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().NotBeUnderNamespace(nameof(DummyNamespace), "we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with \"DummyNamespace\" *failure message*" +
+            await That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with \"DummyNamespace\" *failure message*" +
                     ", but the namespaces of the following types start with it:*\"*.ClassInDummyNamespace\".").AsWildcard();
         }
 
@@ -681,7 +681,7 @@ public class TypeSelectorAssertionSpecs
                 types.Should().NotBeUnderNamespace($"{nameof(DummyNamespace)}.{nameof(DummyNamespace.InnerDummyNamespace)}");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with \"DummyNamespace.InnerDummyNamespace\"" +
+            await That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with \"DummyNamespace.InnerDummyNamespace\"" +
                     ", but the namespaces of the following types start with it:*\"*.ClassInInnerDummyNamespace\".").AsWildcard();
         }
 
@@ -695,7 +695,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().NotBeUnderNamespace(nameof(DummyNamespace));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with \"DummyNamespace\"" +
+            await That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with \"DummyNamespace\"" +
                     ", but the namespaces of the following types start with it:*\"*.ClassInInnerDummyNamespace\".").AsWildcard();
         }
 
@@ -709,7 +709,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().NotBeUnderNamespace(null);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with <null>" +
+            await That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with <null>" +
                     ", but the namespaces of the following types start with it:*\"ClassInGlobalNamespace\".").AsWildcard();
         }
 
@@ -728,7 +728,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().NotBeUnderNamespace(null);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with <null>, but the namespaces of the following types " +
+            await That(act).Throws<XunitException>().WithMessage("Expected the namespaces of all types to not start with <null>, but the namespaces of the following types " +
                     "start with it:*\"*.ClassInDummyNamespace*.ClassNotInDummyNamespace*.OtherClassNotInDummyNamespace\".").AsWildcard();
         }
 
@@ -742,7 +742,7 @@ public class TypeSelectorAssertionSpecs
             Action act = () => types.Should().NotBeUnderNamespace(nameof(DummyNamespace));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
@@ -761,7 +761,7 @@ public class TypeSelectorAssertionSpecs
             var action = () => types.Should().Equals(null);
 
             // Assert
-            await Expect.That(action).Throws<NotSupportedException>();
+            await That(action).Throws<NotSupportedException>();
         }
     }
 }

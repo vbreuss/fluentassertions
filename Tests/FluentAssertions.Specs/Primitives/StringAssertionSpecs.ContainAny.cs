@@ -18,7 +18,7 @@ public partial class StringAssertionSpecs
             Action act = () => "a".Should().ContainAny(null);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -28,7 +28,7 @@ public partial class StringAssertionSpecs
             Action act = () => "a".Should().ContainAny();
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -44,7 +44,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAny(red, green, yellow);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -60,7 +60,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAny(red, blue, green);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -77,7 +77,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAny(blue, purple);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -94,7 +94,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAny(redUpperCase, greenWithWhitespace);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -111,7 +111,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().ContainAny([blue, purple], "some {0} reason", "special");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -124,7 +124,7 @@ public partial class StringAssertionSpecs
             Action act = () => "a".Should().NotContainAny(null);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -134,7 +134,7 @@ public partial class StringAssertionSpecs
             Action act = () => "a".Should().NotContainAny();
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -150,7 +150,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAny(red, green, yellow);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -167,7 +167,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAny(red, purple, green);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -183,7 +183,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAny([red], "some {0} reason", "special");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -200,7 +200,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAny(redUpperCase, greenWithWhitespace);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -217,7 +217,7 @@ public partial class StringAssertionSpecs
             Action act = () => testString.Should().NotContainAny(yellow, purple);
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 }

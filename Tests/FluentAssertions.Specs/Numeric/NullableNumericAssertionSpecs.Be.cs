@@ -16,7 +16,7 @@ public partial class NullableNumericAssertionSpecs
             int? nullableIntegerB = 1;
 
             // Act / Assert
-            await Expect.That(nullableIntegerA).IsEqualTo(nullableIntegerB);
+            await That(nullableIntegerA).IsEqualTo(nullableIntegerB);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ public partial class NullableNumericAssertionSpecs
             int? nullableIntegerB = null;
 
             // Act / Assert
-            await Expect.That(nullableIntegerA).IsEqualTo(nullableIntegerB);
+            await That(nullableIntegerA).IsEqualTo(nullableIntegerB);
         }
 
         [Fact]
@@ -38,10 +38,10 @@ public partial class NullableNumericAssertionSpecs
             int? nullableIntegerB = 2;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableIntegerA).IsEqualTo(nullableIntegerB));
+            Action act = () => Synchronously.Verify(That(nullableIntegerA).IsEqualTo(nullableIntegerB));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -53,10 +53,10 @@ public partial class NullableNumericAssertionSpecs
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableIntegerA).IsEqualTo(nullableIntegerB).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableIntegerA).IsEqualTo(nullableIntegerB).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -66,10 +66,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableIntegerA).IsEqualT
             float? value = float.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.4F));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.4F));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -79,7 +79,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableIntegerA).IsEqualT
             float? value = float.NaN;
 
             // Act
-            await Expect.That(value).IsEqualTo(float.NaN);
+            await That(value).IsEqualTo(float.NaN);
         }
 
         [Fact]
@@ -89,10 +89,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableIntegerA).IsEqualT
             double? value = double.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsEqualTo(3.4D));
+            Action act = () => Synchronously.Verify(That(value).IsEqualTo(3.4D));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -102,7 +102,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableIntegerA).IsEqualT
             double? value = double.NaN;
 
             // Act
-            await Expect.That(value).IsEqualTo(double.NaN);
+            await That(value).IsEqualTo(double.NaN);
         }
     }
 }

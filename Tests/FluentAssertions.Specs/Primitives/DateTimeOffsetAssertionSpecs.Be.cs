@@ -18,10 +18,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset sameDateTime = new DateTime(2016, 06, 04).ToDateTimeOffset();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -32,10 +32,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset? sameDateTime = 4.June(2016).ToDateTimeOffset();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -46,10 +46,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset sameDateTime = DateTimeOffset.MinValue;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -60,10 +60,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset sameDateTime = DateTimeOffset.MaxValue;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(sameDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(sameDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -74,10 +74,10 @@ public partial class DateTimeOffsetAssertionSpecs
             var otherDateTime = 11.March(2012).WithOffset(1.Hours());
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -88,10 +88,10 @@ public partial class DateTimeOffsetAssertionSpecs
             DateTimeOffset? otherDateTime = 11.March(2012).WithOffset(1.Hours());
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(dateTime).IsEqualTo(otherDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -103,10 +103,10 @@ public partial class DateTimeOffsetAssertionSpecs
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
+Synchronously.Verify(That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
 
             // Assert
-            await Expect.That(action).DoesNotThrow();
+            await That(action).DoesNotThrow();
         }
 
         [Fact]
@@ -117,7 +117,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqual
             DateTimeOffset? nullableDateTimeB = null;
 
             // Act / Assert
-            await Expect.That(nullableDateTimeA).IsEqualTo(nullableDateTimeB);
+            await That(nullableDateTimeA).IsEqualTo(nullableDateTimeB);
         }
 
         [Fact]
@@ -129,10 +129,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqual
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
+Synchronously.Verify(That(nullableDateTimeA).IsEqualTo(nullableDateTimeB));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -144,10 +144,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTimeA).IsEqual
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualTo(expectation).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableDateTime).IsEqualTo(expectation).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -159,10 +159,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
 
             // Act
             Action action = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualTo(expectation).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullableDateTime).IsEqualTo(expectation).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -176,7 +176,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
             var dateWithSixHourOffset = new DateTimeOffset(specificDate - 6.Hours(), -6.Hours());
 
             // Act / Assert
-            await Expect.That(dateWithFiveHourOffset).IsEqualTo(dateWithSixHourOffset);
+            await That(dateWithFiveHourOffset).IsEqualTo(dateWithSixHourOffset);
         }
     }
 
@@ -190,10 +190,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
             DateTimeOffset otherDateTime = new DateTime(2016, 06, 05).ToDateTimeOffset();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(otherDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsNotEqualTo(otherDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -204,10 +204,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
             DateTimeOffset? otherDateTime = 5.June(2016).ToDateTimeOffset();
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(otherDateTime));
+            Action act = () => Synchronously.Verify(That(dateTime).IsNotEqualTo(otherDateTime));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -219,10 +219,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
+                () => Synchronously.Verify(That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -234,10 +234,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
 
             // Act
             Action act =
-                () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
+                () => Synchronously.Verify(That(dateTime).IsNotEqualTo(sameDateTime).Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -250,7 +250,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullableDateTime).IsEqualT
             var dateWithOneHourOffset = new DateTimeOffset(specificDate, 1.Hours());
 
             // Act / Assert
-            await Expect.That(dateWithZeroHourOffset).IsNotEqualTo(dateWithOneHourOffset);
+            await That(dateWithZeroHourOffset).IsNotEqualTo(dateWithOneHourOffset);
         }
     }
 }

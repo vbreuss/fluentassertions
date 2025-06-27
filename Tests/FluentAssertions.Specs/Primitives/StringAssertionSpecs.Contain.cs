@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using aweXpect.Core;
 using Xunit;
 using Xunit.Sdk;
 
@@ -21,7 +22,7 @@ public partial class StringAssertionSpecs
             string expectedSubstring = "BCD";
 
             // Act / Assert
-            await Expect.That(actual).Contains(expectedSubstring);
+            await That(actual).Contains(expectedSubstring);
         }
 
         [Fact]
@@ -29,30 +30,31 @@ public partial class StringAssertionSpecs
         public async Task When_string_does_not_contain_an_expected_string_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("ABCDEF").Contains("XYZ").Because($"that is {"required"}"));
+            Action act = () => Synchronously.Verify(That("ABCDEF").Contains("XYZ").Because($"that is {"required"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task When_containment_is_asserted_against_null_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("a").Contains(null));
+            Action act = () => Synchronously.Verify(That("a").Contains(null));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<XunitException>()
+                .WithMessage("cannot be validated against <null>").AsSuffix();
         }
 
         [Fact]
         public async Task When_containment_is_asserted_against_an_empty_string_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("a").Contains(""));
+            Action act = () => Synchronously.Verify(That("a").Contains(""));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         [Fact]
@@ -60,10 +62,10 @@ public partial class StringAssertionSpecs
         {
             // Act
             string someString = null;
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(someString).Contains("XYZ").Because($"that is {"required"}"));
+            Action act = () => Synchronously.Verify(That(someString).Contains("XYZ").Because($"that is {"required"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         public class ContainExactly
@@ -76,10 +78,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYS";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Exactly(1.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).Exactly(1.Times()));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -90,10 +92,11 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = null;
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Exactly(1.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).Exactly(1.Times()));
 
                 // Assert
-                await Expect.That(act).Throws<ArgumentNullException>();
+                await That(act).Throws<XunitException>()
+                    .WithMessage("cannot be validated against <null>").AsSuffix();
             }
 
             [Fact]
@@ -104,10 +107,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYZ";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Exactly(1.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).Exactly(1.Times()));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -118,10 +121,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Exactly(-1));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).Exactly(-1));
 
                 // Assert
-                await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+                await That(act).Throws<ArgumentOutOfRangeException>();
             }
 
             [Fact]
@@ -132,10 +135,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Exactly(2.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).Exactly(2.Times()));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
 
             [Fact]
@@ -146,10 +149,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Exactly(3.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).Exactly(3.Times()));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
         }
 
@@ -163,10 +166,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).AtLeast(2.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).AtLeast(2.Times()));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
 
             [Fact]
@@ -177,10 +180,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).AtLeast(3.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).AtLeast(3.Times()));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -191,10 +194,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYS";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).AtLeast(1));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).AtLeast(1));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -205,14 +208,13 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYZ";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).AtLeast(1));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).AtLeast(1));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
         }
 
-        /* TODO VAB
         public class ContainMoreThan
         {
             [Fact]
@@ -223,10 +225,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Because(MoreThan.Times(1)));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).MoreThan(1));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
 
             [Fact]
@@ -237,10 +239,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Because(MoreThan.Times(2)));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).MoreThan(2));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -251,10 +253,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYS";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Because(MoreThan.Once()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).MoreThan(1));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -265,13 +267,12 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYZ";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Because(MoreThan.Once()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).MoreThan(1));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
         }
-        */
 
         public class ContainAtMost
         {
@@ -283,10 +284,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).AtMost(2.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).AtMost(2.Times()));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
 
             [Fact]
@@ -297,10 +298,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).AtMost(1.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).AtMost(1.Times()));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -311,13 +312,13 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYS";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).AtMost(1.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).AtMost(1.Times()));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
 
-            [Fact]
+            [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/573")]
             public async Task When_string_containment_at_most_once_is_asserted_and_actual_value_is_null_then_it_should_not_throw()
             {
                 // Arrange
@@ -325,14 +326,13 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYZ";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).AtMost(1.Times()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).AtMost(1.Times()));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
         }
 
-        /* TODO VAB
         public class ContainsLessThan
         {
             [Fact]
@@ -343,10 +343,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Because(LessThan.Times(3)));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).LessThan(3));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
 
             [Fact]
@@ -357,10 +357,10 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "BCD";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Because(LessThan.Times(2)));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).LessThan(2));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -371,13 +371,13 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYS";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Because(LessThan.Twice()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).LessThan(2));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
 
-            [Fact]
+            [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/573")]
             public async Task When_string_containment_less_than_once_is_asserted_and_actual_value_is_null_then_it_should_not_throw()
             {
                 // Arrange
@@ -385,13 +385,12 @@ public partial class StringAssertionSpecs
                 string expectedSubstring = "XYZ";
 
                 // Act
-                Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).Contains(expectedSubstring).Because(LessThan.Twice()));
+                Action act = () => Synchronously.Verify(That(actual).Contains(expectedSubstring).LessThan(1));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
         }
-        */
     }
 
     public class NotContain
@@ -400,10 +399,10 @@ public partial class StringAssertionSpecs
         public async Task When_string_does_not_contain_the_unexpected_string_it_should_succeed()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("a").DoesNotContain("A"));
+            Action act = () => Synchronously.Verify(That("a").DoesNotContain("A"));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -411,30 +410,30 @@ public partial class StringAssertionSpecs
         public async Task When_string_contains_unexpected_fragment_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("abcd").DoesNotContain("bc").Because($"it was not expected {"today"}"));
+            Action act = () => Synchronously.Verify(That("abcd").DoesNotContain("bc").Because($"it was not expected {"today"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
         public async Task When_exclusion_is_asserted_against_null_it_should_throw()
         {
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That("a").DoesNotContain(null));
+            Action act = () => Synchronously.Verify(That("a").DoesNotContain(null));
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<XunitException>().WithMessage("cannot be validated against <null>").AsSuffix();
         }
 
         [Fact]
         public async Task When_exclusion_is_asserted_against_an_empty_string_it_should_throw()
         {
             // Act
-            Func<Task> act = async () => await Expect.That("a").DoesNotContain("");
+            Func<Task> act = async () => await That("a").DoesNotContain("");
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
     }
 }

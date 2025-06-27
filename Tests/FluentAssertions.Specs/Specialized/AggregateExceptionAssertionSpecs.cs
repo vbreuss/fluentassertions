@@ -35,10 +35,10 @@ public class AggregateExceptionAssertionSpecs
         };
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(throwingOperation).Throws<ArgumentNullException>());
+        Action act = () => Synchronously.Verify(That(throwingOperation).Throws<ArgumentNullException>());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -53,9 +53,9 @@ public class AggregateExceptionAssertionSpecs
         };
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(throwingOperation).DoesNotThrow());
+        Action act = () => Synchronously.Verify(That(throwingOperation).DoesNotThrow());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 }

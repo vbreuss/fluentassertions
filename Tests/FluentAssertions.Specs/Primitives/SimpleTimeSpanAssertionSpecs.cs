@@ -16,7 +16,7 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan timeSpan = 1.Seconds();
 
         // Act / Assert
-        await Expect.That(timeSpan).IsPositive();
+        await That(timeSpan).IsPositive();
     }
 
     [Fact]
@@ -26,10 +26,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan negatedTimeSpan = 1.Seconds().Negate();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(negatedTimeSpan).IsPositive());
+        Action act = () => Synchronously.Verify(That(negatedTimeSpan).IsPositive());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -39,10 +39,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan negatedTimeSpan = 0.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(negatedTimeSpan).IsPositive());
+        Action act = () => Synchronously.Verify(That(negatedTimeSpan).IsPositive());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -52,10 +52,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan? nullTimeSpan = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsPositive().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullTimeSpan).IsPositive().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -65,10 +65,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan timeSpan = 1.Seconds().Negate();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(timeSpan).IsPositive().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(timeSpan).IsPositive().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan timeSpan = 1.Seconds().Negate();
 
         // Act / Assert
-        await Expect.That(timeSpan).IsNegative();
+        await That(timeSpan).IsNegative();
     }
 
     [Fact]
@@ -88,10 +88,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan actual = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsNegative());
+        Action act = () => Synchronously.Verify(That(actual).IsNegative());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -101,10 +101,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan actual = 0.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsNegative());
+        Action act = () => Synchronously.Verify(That(actual).IsNegative());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -114,10 +114,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan? nullTimeSpan = null;
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsNegative().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullTimeSpan).IsNegative().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -127,10 +127,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan timeSpan = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(timeSpan).IsNegative().Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(timeSpan).IsNegative().Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -141,7 +141,7 @@ public class SimpleTimeSpanAssertionSpecs
         var expected = TimeSpan.FromSeconds(1);
 
         // Act / Assert
-        await Expect.That(actual).IsEqualTo(expected);
+        await That(actual).IsEqualTo(expected);
     }
 
     [Fact]
@@ -152,10 +152,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan expected = 2.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsEqualTo(expected));
+        Action act = () => Synchronously.Verify(That(actual).IsEqualTo(expected));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -169,7 +169,7 @@ public class SimpleTimeSpanAssertionSpecs
         Action act = () => subject.Be(expected);
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -180,10 +180,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan expected = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsEqualTo(expected).Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullTimeSpan).IsEqualTo(expected).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -193,10 +193,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan timeSpan = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(timeSpan).IsEqualTo(2.Seconds()).Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(timeSpan).IsEqualTo(2.Seconds()).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -207,7 +207,7 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan unexpected = 2.Seconds();
 
         // Act / Assert
-        await Expect.That(actual).IsNotEqualTo(unexpected);
+        await That(actual).IsNotEqualTo(unexpected);
     }
 
     [Fact]
@@ -218,7 +218,7 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan expected = 1.Seconds();
 
         // Act / Assert
-        await Expect.That(nullTimeSpan).IsNotEqualTo(expected);
+        await That(nullTimeSpan).IsNotEqualTo(expected);
     }
 
     [Fact]
@@ -228,10 +228,10 @@ public class SimpleTimeSpanAssertionSpecs
         var oneSecond = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(oneSecond).IsNotEqualTo(oneSecond));
+        Action act = () => Synchronously.Verify(That(oneSecond).IsNotEqualTo(oneSecond));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -241,10 +241,10 @@ public class SimpleTimeSpanAssertionSpecs
         var oneSecond = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(oneSecond).IsNotEqualTo(oneSecond).Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(oneSecond).IsNotEqualTo(oneSecond).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -255,7 +255,7 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan smaller = 1.Seconds();
 
         // Act / Assert
-        await Expect.That(actual).IsGreaterThan(smaller);
+        await That(actual).IsGreaterThan(smaller);
     }
 
     [Fact]
@@ -266,10 +266,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan expected = 2.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThan(expected));
+        Action act = () => Synchronously.Verify(That(actual).IsGreaterThan(expected));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -280,10 +280,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan expected = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsGreaterThan(expected).Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullTimeSpan).IsGreaterThan(expected).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -293,10 +293,10 @@ public class SimpleTimeSpanAssertionSpecs
         var twoSeconds = 2.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(twoSeconds).IsGreaterThan(twoSeconds));
+        Action act = () => Synchronously.Verify(That(twoSeconds).IsGreaterThan(twoSeconds));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -306,10 +306,10 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan actual = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThan(2.Seconds()).Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(actual).IsGreaterThan(2.Seconds()).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -320,7 +320,7 @@ public class SimpleTimeSpanAssertionSpecs
         TimeSpan smaller = 1.Seconds();
 
         // Act / Assert
-        await Expect.That(actual).IsGreaterThanOrEqualTo(smaller);
+        await That(actual).IsGreaterThanOrEqualTo(smaller);
     }
 
     [Fact]
@@ -332,10 +332,10 @@ public class SimpleTimeSpanAssertionSpecs
 
         // Act
         Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsGreaterThanOrEqualTo(expected).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullTimeSpan).IsGreaterThanOrEqualTo(expected).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -345,7 +345,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsGreaterTha
         var twoSeconds = 2.Seconds();
 
         // Act / Assert
-        await Expect.That(twoSeconds).IsGreaterThanOrEqualTo(twoSeconds);
+        await That(twoSeconds).IsGreaterThanOrEqualTo(twoSeconds);
     }
 
     [Fact]
@@ -355,7 +355,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsGreaterTha
         var twoSeconds = 2.Seconds();
 
         // Act / Assert
-        await Expect.That(twoSeconds).IsGreaterThanOrEqualTo(twoSeconds);
+        await That(twoSeconds).IsGreaterThanOrEqualTo(twoSeconds);
     }
 
     [Fact]
@@ -366,10 +366,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsGreaterTha
         TimeSpan expected = 2.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqualTo(expected));
+        Action act = () => Synchronously.Verify(That(actual).IsGreaterThanOrEqualTo(expected));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -380,10 +380,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsGreaterTha
 
         // Act
         Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqualTo(2.Seconds()).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(actual).IsGreaterThanOrEqualTo(2.Seconds()).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -394,7 +394,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqu
         TimeSpan greater = 2.Seconds();
 
         // Act / Assert
-        await Expect.That(actual).IsLessThan(greater);
+        await That(actual).IsLessThan(greater);
     }
 
     [Fact]
@@ -405,10 +405,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqu
         TimeSpan expected = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsLessThan(expected));
+        Action act = () => Synchronously.Verify(That(actual).IsLessThan(expected));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -419,10 +419,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqu
         TimeSpan expected = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThan(expected).Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(nullTimeSpan).IsLessThan(expected).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -432,10 +432,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqu
         var twoSeconds = 2.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(twoSeconds).IsLessThan(twoSeconds));
+        Action act = () => Synchronously.Verify(That(twoSeconds).IsLessThan(twoSeconds));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -445,10 +445,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqu
         TimeSpan actual = 2.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsLessThan(1.Seconds()).Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(actual).IsLessThan(1.Seconds()).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -459,7 +459,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqu
         TimeSpan greater = 2.Seconds();
 
         // Act / Assert
-        await Expect.That(actual).IsLessThanOrEqualTo(greater);
+        await That(actual).IsLessThanOrEqualTo(greater);
     }
 
     [Fact]
@@ -470,7 +470,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqu
         TimeSpan greater = 2.Seconds();
 
         // Act / Assert
-        await Expect.That(actual).IsLessThanOrEqualTo(greater);
+        await That(actual).IsLessThanOrEqualTo(greater);
     }
 
     [Fact]
@@ -482,10 +482,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsGreaterThanOrEqu
 
         // Act
         Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOrEqualTo(expected).Because($"because we want to test the failure {"message"}"));
+Synchronously.Verify(That(nullTimeSpan).IsLessThanOrEqualTo(expected).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -495,7 +495,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         var twoSeconds = 2.Seconds();
 
         // Act / Assert
-        await Expect.That(twoSeconds).IsLessThanOrEqualTo(twoSeconds);
+        await That(twoSeconds).IsLessThanOrEqualTo(twoSeconds);
     }
 
     [Fact]
@@ -506,10 +506,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         TimeSpan expected = 1.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsLessThanOrEqualTo(expected));
+        Action act = () => Synchronously.Verify(That(actual).IsLessThanOrEqualTo(expected));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -519,10 +519,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         TimeSpan actual = 2.Seconds();
 
         // Act
-        Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(actual).IsLessThanOrEqualTo(1.Seconds()).Because($"because we want to test the failure {"message"}"));
+        Action act = () => Synchronously.Verify(That(actual).IsLessThanOrEqualTo(1.Seconds()).Because($"because we want to test the failure {"message"}"));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -535,7 +535,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => someTimeSpan.Should().Equals(someTimeSpan);
 
         // Assert
-        await Expect.That(act).Throws<NotSupportedException>();
+        await That(act).Throws<NotSupportedException>();
     }
 
     #region Be Close To
@@ -551,7 +551,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().BeCloseTo(nearbyTime, -1.Ticks());
 
         // Assert
-        await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+        await That(act).Throws<ArgumentOutOfRangeException>();
     }
 
     [Fact]
@@ -565,7 +565,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds());
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [Fact]
@@ -579,7 +579,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds());
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [Fact]
@@ -593,7 +593,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds(), "we want to test the error message");
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -607,7 +607,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().BeCloseTo(nearbyTime, 20.Milliseconds(), "we want to test the error message");
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -621,7 +621,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().BeCloseTo(nearbyTime, 35.Milliseconds());
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [Fact]
@@ -635,7 +635,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().BeCloseTo(nearbyTime, 35.Milliseconds());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -650,7 +650,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
             time.Should().BeCloseTo(nearbyTime, TimeSpan.FromMilliseconds(20), "we want to test the error message");
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     #endregion
@@ -668,7 +668,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().NotBeCloseTo(nearbyTime, -1.Ticks());
 
         // Assert
-        await Expect.That(act).Throws<ArgumentOutOfRangeException>();
+        await That(act).Throws<ArgumentOutOfRangeException>();
     }
 
     [Fact]
@@ -682,7 +682,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().NotBeCloseTo(nearbyTime, 20.Milliseconds());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -696,7 +696,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().NotBeCloseTo(nearbyTime, 20.Milliseconds());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -710,7 +710,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().NotBeCloseTo(nearbyTime, TimeSpan.FromMilliseconds(20));
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -724,7 +724,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().NotBeCloseTo(nearbyTime, 20.Milliseconds());
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [Fact]
@@ -738,7 +738,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().NotBeCloseTo(nearbyTime, 20.Milliseconds());
 
         // Assert
-        await Expect.That(act).DoesNotThrow();
+        await That(act).DoesNotThrow();
     }
 
     [Fact]
@@ -752,7 +752,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().NotBeCloseTo(nearbyTime, 35.Milliseconds());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     [Fact]
@@ -766,7 +766,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(nullTimeSpan).IsLessThanOr
         Action act = () => time.Should().NotBeCloseTo(nearbyTime, 35.Milliseconds());
 
         // Assert
-        await Expect.That(act).Throws<XunitException>();
+        await That(act).Throws<XunitException>();
     }
 
     #endregion

@@ -43,7 +43,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => dateTime.Should().BeExactly(otherDateTime, "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -57,7 +57,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => dateTime.Should().BeExactly(otherDateTime, "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -94,7 +94,7 @@ public partial class DateTimeOffsetAssertionSpecs
                 nullableDateTimeA.Should().BeExactly(nullableDateTimeB);
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -109,7 +109,7 @@ public partial class DateTimeOffsetAssertionSpecs
                 nullableDateTime.Should().BeExactly(expectation, "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 
@@ -149,7 +149,7 @@ public partial class DateTimeOffsetAssertionSpecs
                 () => dateTime.Should().NotBeExactly(sameDateTime, "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -164,7 +164,7 @@ public partial class DateTimeOffsetAssertionSpecs
                 () => dateTime.Should().NotBeExactly(sameDateTime, "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -179,7 +179,7 @@ public partial class DateTimeOffsetAssertionSpecs
                 () => subject.Should().BeExactly(TimeSpan.FromMinutes(20)).Before(target, "{0} minutes is enough", 20);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -204,7 +204,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action action = () => subject.Should().BeExactly(10.Seconds()).After(expectation);
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Fact]
@@ -218,7 +218,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action action = () => subject.Should().BeExactly(10.Seconds()).Before(expectation);
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 }

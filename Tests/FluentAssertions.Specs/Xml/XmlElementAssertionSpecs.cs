@@ -10,7 +10,7 @@ public class XmlElementAssertionSpecs
 {
     public class BeEquivalent
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_is_equivalent_to_another_xml_element_with_same_contents_it_should_succeed()
         {
             // This test is basically just a check that the BeEquivalent method
@@ -27,16 +27,16 @@ public class XmlElementAssertionSpecs
 
             // Act
             Action act = () =>
-aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expected));
+Synchronously.Verify(That(element).IsEqualTo(expected));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
     public class HaveInnerText
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_a_specific_inner_text_and_it_does_it_should_succeed()
         {
             // Arrange
@@ -49,10 +49,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveInnerText("grega");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_a_specific_inner_text_but_it_has_a_different_inner_text_it_should_throw()
         {
             // Arrange
@@ -65,10 +65,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveInnerText("stamac");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_a_specific_inner_text_but_it_has_a_different_inner_text_it_should_throw_with_descriptive_message()
         {
             // Arrange
@@ -81,13 +81,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 theElement.Should().HaveInnerText("stamac", "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
     public class HaveAttribute
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_specific_value_and_it_does_it_should_succeed()
         {
             // Arrange
@@ -100,10 +100,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveAttribute("name", "martin");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_specific_value_but_attribute_does_not_exist_it_should_fail()
         {
             // Arrange
@@ -116,10 +116,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveAttribute("age", "36");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_specific_value_but_attribute_does_not_exist_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -132,12 +132,12 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 theElement.Should().HaveAttribute("age", "36", "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have attribute \"age\" with value \"36\"" +
+            await That(act).Throws<XunitException>().WithMessage("Expected theElement to have attribute \"age\" with value \"36\"" +
                     " because we want to test the failure message" +
                     ", but found no such attribute in <user name=\"martin\"*").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_specific_value_but_attribute_has_different_value_it_should_fail()
         {
             // Arrange
@@ -150,10 +150,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveAttribute("name", "dennis");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_specific_value_but_attribute_has_different_value_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -166,7 +166,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 theElement.Should().HaveAttribute("name", "dennis", "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected attribute \"name\" in theElement to have value \"dennis\"" +
+            await That(act).Throws<XunitException>().WithMessage("Expected attribute \"name\" in theElement to have value \"dennis\"" +
                     " because we want to test the failure message" +
                     ", but found \"martin\".").AsWildcard();
         }
@@ -174,7 +174,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
 
     public class HaveAttributeWithNamespace
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_ns_and_specific_value_and_it_does_it_should_succeed()
         {
             // Arrange
@@ -187,10 +187,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveAttributeWithNamespace("name", "http://www.example.com/2012/test", "martin");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_ns_and_specific_value_but_attribute_does_not_exist_it_should_fail()
         {
             // Arrange
@@ -203,10 +203,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveAttributeWithNamespace("age", "http://www.example.com/2012/test", "36");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_ns_and_specific_value_but_attribute_does_not_exist_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -223,12 +223,12 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
             };
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have attribute \"{http://www.example.com/2012/test}age\" with value \"36\"" +
+            await That(act).Throws<XunitException>().WithMessage("Expected theElement to have attribute \"{http://www.example.com/2012/test}age\" with value \"36\"" +
                     " because we want to test the failure message" +
                     ", but found no such attribute in <user xmlns:a=\"http:…").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_ns_and_specific_value_but_attribute_has_different_value_it_should_fail()
         {
             // Arrange
@@ -241,10 +241,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveAttributeWithNamespace("name", "http://www.example.com/2012/test", "dennis");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_attribute_with_ns_and_specific_value_but_attribute_has_different_value_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -258,7 +258,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                     "because we want to test the failure {0}", "message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected attribute \"{http://www.example.com/2012/test}name\" in theElement to have value \"dennis\"" +
+            await That(act).Throws<XunitException>().WithMessage("Expected attribute \"{http://www.example.com/2012/test}name\" in theElement to have value \"dennis\"" +
                     " because we want to test the failure message" +
                     ", but found \"martin\".").AsWildcard();
         }
@@ -266,7 +266,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
 
     public class HaveElement
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_child_element_and_it_does_it_should_succeed()
         {
             // Arrange
@@ -286,10 +286,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveElement("child");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_child_element_but_it_does_not_it_should_fail()
         {
             // Arrange
@@ -309,10 +309,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveElement("unknown");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_child_element_but_it_does_not_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -332,12 +332,12 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 theElement.Should().HaveElement("unknown", "because we want to test the failure message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have child element \"unknown\""
+            await That(act).Throws<XunitException>().WithMessage("Expected theElement to have child element \"unknown\""
                 + " because we want to test the failure message"
                 + ", but no such child element was found.").AsWildcard();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_child_element_it_should_return_the_matched_element_in_the_which_property()
         {
             // Arrange
@@ -356,12 +356,12 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
             var matchedElement = element.Should().HaveElement("child").Subject;
 
             // Assert
-            await Expect.That(matchedElement).IsExactly<XmlElement>();
+            await That(matchedElement).IsExactly<XmlElement>();
 
-            await Expect.That(matchedElement.Name).IsEqualTo("child");
+            await That(matchedElement.Name).IsEqualTo("child");
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_with_ns_has_child_element_and_it_does_it_should_succeed()
         {
             // Arrange
@@ -381,10 +381,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveElement("child");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_child_element_and_it_does_with_ns_it_should_succeed2()
         {
             // Arrange
@@ -404,13 +404,13 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveElement("child");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
     public class HaveElementWithNamespace
     {
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_child_element_with_ns_and_it_does_it_should_succeed()
         {
             // Arrange
@@ -430,10 +430,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveElementWithNamespace("child", "http://www.example.com/2012/test");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_child_element_with_ns_but_it_does_not_it_should_fail()
         {
             // Arrange
@@ -453,10 +453,10 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                 element.Should().HaveElementWithNamespace("unknown", "http://www.example.com/2012/test");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
-        [Fact]
+        [Fact(Skip = "https://github.com/aweXpect/aweXpect/issues/575")]
         public async Task When_asserting_xml_element_has_child_element_with_ns_but_it_does_not_it_should_fail_with_descriptive_message()
         {
             // Arrange
@@ -477,7 +477,7 @@ aweXpect.Synchronous.Synchronously.Verify(Expect.That(element).IsEqualTo(expecte
                     "because we want to test the failure message");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>().WithMessage("Expected theElement to have child element \"{{http://www.example.com/2012/test}}unknown\""
+            await That(act).Throws<XunitException>().WithMessage("Expected theElement to have child element \"{{http://www.example.com/2012/test}}unknown\""
                 + " because we want to test the failure message"
                 + ", but no such child element was found.").AsWildcard();
         }

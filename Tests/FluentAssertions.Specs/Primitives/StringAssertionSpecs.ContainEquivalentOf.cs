@@ -35,7 +35,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expect, o => o.Using(comparer));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -99,7 +99,7 @@ public partial class StringAssertionSpecs
                 "a".Should().ContainEquivalentOf("aa");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -110,7 +110,7 @@ public partial class StringAssertionSpecs
                 "a".Should().ContainEquivalentOf(null);
 
             // Assert
-            await Expect.That(act).Throws<ArgumentNullException>();
+            await That(act).Throws<ArgumentNullException>();
         }
 
         [Fact]
@@ -121,7 +121,7 @@ public partial class StringAssertionSpecs
                 "a".Should().ContainEquivalentOf("");
 
             // Assert
-            await Expect.That(act).Throws<ArgumentException>();
+            await That(act).Throws<ArgumentException>();
         }
 
         public class ContainEquivalentOfExactly
@@ -137,7 +137,7 @@ public partial class StringAssertionSpecs
                 Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, Exactly.Once());
 
                 // Assert
-                await Expect.That(act).Throws<ArgumentNullException>();
+                await That(act).Throws<ArgumentNullException>();
             }
 
             [Fact]
@@ -152,7 +152,7 @@ public partial class StringAssertionSpecs
                     actual.Should().ContainEquivalentOf(expectedSubstring, Exactly.Once(), "that is {0}", "required");
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -166,7 +166,7 @@ public partial class StringAssertionSpecs
                 Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, Exactly.Times(2));
 
                 // Assert
-                await Expect.That(act).DoesNotThrow();
+                await That(act).DoesNotThrow();
             }
 
             [Fact]
@@ -180,7 +180,7 @@ public partial class StringAssertionSpecs
                 Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, Exactly.Times(3));
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -194,7 +194,7 @@ public partial class StringAssertionSpecs
                 Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, Exactly.Once());
 
                 // Assert
-                await Expect.That(act).Throws<XunitException>();
+                await That(act).Throws<XunitException>();
             }
 
             [Fact]
@@ -208,7 +208,7 @@ public partial class StringAssertionSpecs
                 Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, Exactly.Once());
 
                 // Assert
-                await Expect.That(act).Throws<ArgumentException>();
+                await That(act).Throws<ArgumentException>();
             }
         }
     }
@@ -226,7 +226,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, AtLeast.Times(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -240,7 +240,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, AtLeast.Times(3));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -254,7 +254,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, AtLeast.Once());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -268,7 +268,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, AtLeast.Once());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -285,7 +285,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, MoreThan.Times(1));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -299,7 +299,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, MoreThan.Times(2));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -313,7 +313,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, MoreThan.Once());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -327,7 +327,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, MoreThan.Once());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 
@@ -344,7 +344,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, AtMost.Times(2));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -358,7 +358,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, AtMost.Times(1));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -372,7 +372,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, AtMost.Once());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -386,7 +386,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, AtMost.Once());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
@@ -403,7 +403,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, LessThan.Times(3));
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -417,7 +417,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, LessThan.Times(2));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -431,7 +431,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, LessThan.Twice());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -445,7 +445,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().ContainEquivalentOf(expectedSubstring, LessThan.Twice());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 
@@ -475,7 +475,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotContainEquivalentOf(expect, o => o.Using(comparer));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -489,7 +489,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotContainEquivalentOf(expect, o => o.IgnoringCase());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -503,7 +503,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotContainEquivalentOf(expect, o => o.IgnoringLeadingWhitespace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -517,7 +517,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotContainEquivalentOf(expect, o => o.IgnoringTrailingWhitespace());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -531,7 +531,7 @@ public partial class StringAssertionSpecs
             Action act = () => actual.Should().NotContainEquivalentOf(expect, o => o.IgnoringNewlineStyle());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -542,7 +542,7 @@ public partial class StringAssertionSpecs
                 "a".Should().NotContainEquivalentOf(null);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -553,7 +553,7 @@ public partial class StringAssertionSpecs
                 "a".Should().NotContainEquivalentOf("");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -564,7 +564,7 @@ public partial class StringAssertionSpecs
                 "Hello, world!".Should().NotContainEquivalentOf(", worLD!");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -575,7 +575,7 @@ public partial class StringAssertionSpecs
                 "aAa".Should().NotContainEquivalentOf("aa ");
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
     }
 }

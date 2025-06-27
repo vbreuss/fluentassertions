@@ -15,7 +15,7 @@ public partial class StringAssertionSpecs
         string prefix = "AB";
 
         // Act / Assert
-        await Expect.That(actual).StartsWith(prefix);
+        await That(actual).StartsWith(prefix);
     }
 
     private sealed class AlwaysMatchingEqualityComparer : IEqualityComparer<string>

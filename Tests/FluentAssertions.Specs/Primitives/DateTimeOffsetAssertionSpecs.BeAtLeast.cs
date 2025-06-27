@@ -20,7 +20,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action act = () => subject.Should().BeAtLeast(TimeSpan.FromDays(1)).Before(target, "we like {0}", "that");
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -48,7 +48,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action action = () => subject.Should().BeAtLeast(10.Seconds()).After(expectation);
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
 
         [Theory]
@@ -65,7 +65,7 @@ public partial class DateTimeOffsetAssertionSpecs
             Action action = () => subject.Should().BeAtLeast(10.Seconds()).Before(expectation);
 
             // Assert
-            await Expect.That(action).Throws<XunitException>();
+            await That(action).Throws<XunitException>();
         }
     }
 }

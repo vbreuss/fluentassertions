@@ -31,7 +31,7 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().NotHaveDay(expectation);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -45,7 +45,7 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().HaveDay(expectation);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -70,7 +70,7 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().HaveDay(expectation);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -84,7 +84,7 @@ public partial class DateOnlyAssertionSpecs
             Action act = () => subject.Should().NotHaveDay(expectation);
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }

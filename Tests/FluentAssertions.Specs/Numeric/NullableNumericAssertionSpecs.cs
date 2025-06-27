@@ -11,6 +11,6 @@ public partial class NullableNumericAssertionSpecs
         int? nullableInteger = 1;
 
         // Act / Assert
-        await Expect.That(nullableInteger).IsNotNull();
+        await That(nullableInteger).IsNotNull();
     }
 }

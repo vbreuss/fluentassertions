@@ -15,10 +15,10 @@ public partial class NumericAssertionSpecs
             float value = 1F;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsPositive());
+            Action act = () => Synchronously.Verify(That(value).IsPositive());
 
             // Assert
-            await Expect.That(act).DoesNotThrow();
+            await That(act).DoesNotThrow();
         }
 
         [Fact]
@@ -28,10 +28,10 @@ public partial class NumericAssertionSpecs
             double value = -1D;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsPositive());
+            Action act = () => Synchronously.Verify(That(value).IsPositive());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -41,10 +41,10 @@ public partial class NumericAssertionSpecs
             int value = 0;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsPositive());
+            Action act = () => Synchronously.Verify(That(value).IsPositive());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -54,10 +54,10 @@ public partial class NumericAssertionSpecs
             float value = float.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsPositive());
+            Action act = () => Synchronously.Verify(That(value).IsPositive());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -67,10 +67,10 @@ public partial class NumericAssertionSpecs
             double value = double.NaN;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsPositive());
+            Action act = () => Synchronously.Verify(That(value).IsPositive());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -80,10 +80,10 @@ public partial class NumericAssertionSpecs
             int value = -1;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsPositive().Because($"because we want to test the failure {"message"}"));
+            Action act = () => Synchronously.Verify(That(value).IsPositive().Because($"because we want to test the failure {"message"}"));
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
 
         [Fact]
@@ -93,10 +93,10 @@ public partial class NumericAssertionSpecs
             int? value = null;
 
             // Act
-            Action act = () => aweXpect.Synchronous.Synchronously.Verify(Expect.That(value).IsPositive());
+            Action act = () => Synchronously.Verify(That(value).IsPositive());
 
             // Assert
-            await Expect.That(act).Throws<XunitException>();
+            await That(act).Throws<XunitException>();
         }
     }
 }
